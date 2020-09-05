@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.hudi.tech","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1.简介java的其中一个核心的特点就是经由内置的垃圾回收机制（GC）下的自动化内存管理。GC默默地处理着内存分配和释放工作因此能够处理大部分内存泄露问题。虽然GC能够有效地处理一大部分内存，但他不保证能够处理所有的内存泄露情况。GC十分智能，但并不完美。即使是在谨慎的程序员所开发的应用程序下内存泄露依旧会悄悄出现。 2.什么是内存泄露内存泄露是指一种情况：当存在对象在堆中不再被使用，但是垃圾回收">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解java中的内存泄露">
+<meta property="og:url" content="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/jvm/%E7%90%86%E8%A7%A3Java%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/index.html">
+<meta property="og:site_name" content="木刻的鱼儿的博客">
+<meta property="og:description" content="1.简介java的其中一个核心的特点就是经由内置的垃圾回收机制（GC）下的自动化内存管理。GC默默地处理着内存分配和释放工作因此能够处理大部分内存泄露问题。虽然GC能够有效地处理一大部分内存，但他不保证能够处理所有的内存泄露情况。GC十分智能，但并不完美。即使是在谨慎的程序员所开发的应用程序下内存泄露依旧会悄悄出现。 2.什么是内存泄露内存泄露是指一种情况：当存在对象在堆中不再被使用，但是垃圾回收">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-16T13:37:01.000Z">
+<meta property="article:modified_time" content="2020-09-05T09:10:18.000Z">
+<meta property="article:author" content="不登山峰，不显平地">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="内存泄露">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/jvm/%E7%90%86%E8%A7%A3Java%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>理解java中的内存泄露 | 木刻的鱼儿的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木刻的鱼儿的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/jvm/%E7%90%86%E8%A7%A3Java%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          理解java中的内存泄露
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-16 21:37:01" itemprop="dateCreated datePublished" datetime="2019-03-16T21:37:01+08:00">2019-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><p>java的其中一个核心的特点就是经由内置的垃圾回收机制（GC）下的自动化内存管理。GC默默地处理着内存分配和释放工作因此能够处理大部分内存泄露问题。虽然GC能够有效地处理一大部分内存，但他不保证能够处理所有的内存泄露情况。GC十分智能，但并不完美。即使是在谨慎的程序员所开发的应用程序下内存泄露依旧会悄悄出现。</p>
+<h1 id="2-什么是内存泄露"><a href="#2-什么是内存泄露" class="headerlink" title="2.什么是内存泄露"></a>2.什么是内存泄露</h1><p>内存泄露是指一种情况：当存在对象在堆中不再被使用，但是垃圾回收器无法从内存中移除它们，并且因此变得不可被维护。<br>内存泄漏十分不好因为它锁住了部分内存资源并且逐渐降低系统的性能。如果无法处理它，应用程序最终会耗尽所有资源最终产生一个致命的错误–<code>java.lang.OutOfMemoryError</code><br>有两种不同类型的对象存在于堆内存中（被引用的、未被引用的）。被引用的对象是指那些在应用程序中仍然被主动使用的；未被引用的对象是指那些不在被使用的。<br>垃圾回收器会定期清除未被引用对象，但从来都不收集那些仍然被引用的对象。这就是内存泄漏发生的其中一个原因。</p>
+<h2 id="2-1-内存泄露的症状"><a href="#2-1-内存泄露的症状" class="headerlink" title="2.1.内存泄露的症状"></a>2.1.内存泄露的症状</h2><ul>
+<li>当应用程序持续长时间运行导致服务器性能的严重下降</li>
+<li>应用程序中的堆异常 <em>OutOfMemoryError</em></li>
+<li>自发以及奇怪的程序崩溃</li>
+<li>程序偶然耗尽连接对象</li>
+</ul>
+<h1 id="3-java中内存泄露的类型"><a href="#3-java中内存泄露的类型" class="headerlink" title="3.java中内存泄露的类型"></a>3.java中内存泄露的类型</h1><h2 id="3-1-静态字段导致内存泄露"><a href="#3-1-静态字段导致内存泄露" class="headerlink" title="3.1.静态字段导致内存泄露"></a>3.1.静态字段导致内存泄露</h2><p>在java中，静态字段的声明周期和运行的应用程序的整个声明周期相匹配（除非类加载有资格进行垃圾回收），大量使用静态字段可能导致内存泄露。</p>
+<h3 id="3-1-1-怎么预防这种情况发生呢？"><a href="#3-1-1-怎么预防这种情况发生呢？" class="headerlink" title="3.1.1.怎么预防这种情况发生呢？"></a>3.1.1.怎么预防这种情况发生呢？</h3><ul>
+<li>尽量减低static变量的使用</li>
+<li>使用单例模式时，使用延迟加载而非立即加载。</li>
+</ul>
+<h2 id="3-2-未关闭资源导致的内存泄露"><a href="#3-2-未关闭资源导致的内存泄露" class="headerlink" title="3.2.未关闭资源导致的内存泄露"></a>3.2.未关闭资源导致的内存泄露</h2><p>当我们产生新的连接或者开启流的时候，JVM 会为它们分配内存，像数据库连接、输入流或者会话对象等等。忘记关闭流能导致内存被锁，从而它们也无法被回收。这甚至会出现在那些阻止程序执行关闭资源的语句的异常中。不论哪种情况，资源产生的连接都会消耗掉内存，并且如果不处理它，会降低性能和导致<em>OutOfMemoryError。</em></p>
+<h3 id="3-2-1-怎么预防这种情况发生呢？"><a href="#3-2-1-怎么预防这种情况发生呢？" class="headerlink" title="3.2.1.怎么预防这种情况发生呢？"></a>3.2.1.怎么预防这种情况发生呢？</h3><ul>
+<li>始终使用finally块来关闭资源</li>
+<li>关闭资源的代码块（包括finally块）自身不能带有异常</li>
+<li>当使用java7或更高版本，可以使用try-with-resources语法</li>
+</ul>
+<h2 id="3-3-不当的equals-和hashCode-实现"><a href="#3-3-不当的equals-和hashCode-实现" class="headerlink" title="3.3.不当的equals()和hashCode()实现"></a>3.3.不当的equals()和hashCode()实现</h2><p>但是由于我们没有正确地定义 <em>equals()</em> 方法，重复的对象会堆积起来并且增加内存消耗。<br>另外一个使用像 Hibernate 这样的 ORM 框架的例子中，它使用 <em>equals()</em> 和 <em>hashCode()</em> 方法分析对象并将它们保存在缓存中。如果这些方法不被重写发生内存泄漏的几率会变得非常大。</p>
+<h3 id="3-3-1-怎么预防这种情况发生呢？"><a href="#3-3-1-怎么预防这种情况发生呢？" class="headerlink" title="3.3.1.怎么预防这种情况发生呢？"></a>3.3.1.怎么预防这种情况发生呢？</h3><ul>
+<li>根据经验，在定义新实体的时候，总是要重写 <em>equals()</em> 和 <em>hashCode()</em> 方法</li>
+<li>仅仅重写还不够，还需要以最佳的方式来处理它们</li>
+</ul>
+<h2 id="3-4-引用外部类的内部类"><a href="#3-4-引用外部类的内部类" class="headerlink" title="3.4.引用外部类的内部类"></a>3.4.引用外部类的内部类</h2><p>这种情况发生在非静态内部类（匿名类）中，对于初始化，这些内部类总是需要一个封闭类的实例。默认情况下，每个非静态内部类都有对其包含类的隐式引用。如果我们在程序当中使用这种内部类对象，即使包含类对象超出了作用域，它仍然不会被回收。</p>
+<h3 id="3-4-1-怎么预防这种情况发生呢？"><a href="#3-4-1-怎么预防这种情况发生呢？" class="headerlink" title="3.4.1.怎么预防这种情况发生呢？"></a>3.4.1.怎么预防这种情况发生呢？</h3><ul>
+<li>如果内部类不需要访问包含的类的成员，考虑将它定义为静态类。</li>
+</ul>
+<h2 id="3-5-finalize-方法导致的内存泄露"><a href="#3-5-finalize-方法导致的内存泄露" class="headerlink" title="3.5.finalize()方法导致的内存泄露"></a>3.5.finalize()方法导致的内存泄露</h2><p>每当类中的finalize()方法被重写，那么该对象不会马上被回收。相反，它们将会延后被GC放到队列当中序列化。如果编写的 <em>finalize()</em> 并非最优并且如果序列化队列跟不上 GC 的速度的话，那么，应用程序迟早会发生 <em>OutOfMemoryError</em> 异常。</p>
+<h3 id="3-5-1-怎么预防这种情况发生呢？"><a href="#3-5-1-怎么预防这种情况发生呢？" class="headerlink" title="3.5.1.怎么预防这种情况发生呢？"></a>3.5.1.怎么预防这种情况发生呢？</h3><ul>
+<li>我们应该尽量避免序列化</li>
+</ul>
+<h2 id="3-6-字符串"><a href="#3-6-字符串" class="headerlink" title="3.6.字符串"></a>3.6.字符串</h2><p>Java 字符串池发生了重大变化，当它在 Java7 中从 PermGen 转移到  HeapSpace 时所发生的。但是对于在版本6及以下运行的程序，我们在处理大字符串时应该更加注意。<br>如果我们读取一个巨大的字符串对象，并且调用 intern() 方法，它就会进入到位于 PermGen （永久内存）的字符串池中，而只要我们的应用程序运行，它就会一直呆在那里。</p>
+<h3 id="3-6-1-怎么预防这种情况发生呢？"><a href="#3-6-1-怎么预防这种情况发生呢？" class="headerlink" title="3.6.1.怎么预防这种情况发生呢？"></a>3.6.1.怎么预防这种情况发生呢？</h3><ul>
+<li>预防的最简单的方法就是升级到最新的java版本，因为字符串池是从java7开始移动到HeapSpace的</li>
+<li>如果需要处理大字符串，增加PermGen空间的大小，以避免任何潜在的*OutOfMemoryError异常</li>
+</ul>
+<h2 id="3-7-使用ThreadLocals"><a href="#3-7-使用ThreadLocals" class="headerlink" title="3.7.使用ThreadLocals"></a>3.7.使用ThreadLocals</h2><p><em>ThreadLocals</em> 是一种结构，它使我们能够将状态隔离到特定的线程中，从而实现线程安全。当使用这种结构，每个线程都会持有其 <em>ThreadLocal</em> 变量副本的隐式引用，并且维护它们自身的副本，而不是在活动状态的线程当中跨线程共享资源。尽管它有其优点，但是 <em>ThreadLocal</em> 的使用是受争议的。因为如果使用不恰当，它会导致内存泄漏。</p>
+<h3 id="3-7-1-ThreadLocals导致的内存泄露"><a href="#3-7-1-ThreadLocals导致的内存泄露" class="headerlink" title="3.7.1.ThreadLocals导致的内存泄露"></a>3.7.1.ThreadLocals导致的内存泄露</h3><p>一旦持有的线程不再活动，<em>ThreadLocals</em>  应当被回收。但问题就出在当 <em>ThreadLocals</em>  被使用在现在流行的应用服务器上。现在的应用服务器是使用线程池去处理请求而并非创建新的线程来处理（例如 Apache Tomcat 的 <em>Executor</em>）此外，它们还使用单独的类加载器。由于应用服务器的线程池使用线程重用的概念来工作，因此它们从来都不会被回收 — 相反，它们被重用来服务于另一个新的请求。现在，如果任何类创建了一个 <em>ThreadLocals</em> 而并没有显式地删除掉它，那么即使在web应用程序停止后，对象的副本仍然保留在工作线程当中，从而使得对象没有被回收。</p>
+<h3 id="3-7-2-怎么预防这种情况发生呢？"><a href="#3-7-2-怎么预防这种情况发生呢？" class="headerlink" title="3.7.2.怎么预防这种情况发生呢？"></a>3.7.2.怎么预防这种情况发生呢？</h3><ul>
+<li>当ThreadLocals不再使用时，清理它们是一个很好的实践——ThreadLocals提供remove方法，这个方法将删除该变量中的当前线程。</li>
+<li>千万不要使用**<em>ThreadLocal.set(null)****</em> 来清除** — 它实际上并没有做清除工作，而是会查找与当前线程关联的 <em>Map</em> 映射，并将键-值对分别设置为当前线程和null。</li>
+<li>最好将 <em>ThreadLocal</em> 视为一个需要在 <em>finally</em> 块中关闭的资源，以确保它始终处于关闭状态，即使在异常情况下也需要如此。</li>
+</ul>
+<h1 id="4-处理内存泄露的其他策略"><a href="#4-处理内存泄露的其他策略" class="headerlink" title="4.处理内存泄露的其他策略"></a>4.处理内存泄露的其他策略</h1><h2 id="4-1-使用剖析工具"><a href="#4-1-使用剖析工具" class="headerlink" title="4.1.使用剖析工具"></a>4.1.使用剖析工具</h2><p>Java 分析工具是通过应用程序监视和诊断内存泄漏的工具。它分析应用程序内部发生的事情 — 例如内存是怎么分配的。<br><strong>通过分析器，我们能够比较不同的方法和找到使用资源的最优方法。</strong><br>在第三节中我们使用 VisualVM。除此之外还有 Mission Control，JProfiler，YourKit，Java VisualVM，Netbeans Profiler 等等。</p>
+<h2 id="4-2-Verbose-Garbage-Collection"><a href="#4-2-Verbose-Garbage-Collection" class="headerlink" title="4.2.Verbose Garbage Collection"></a>4.2.Verbose Garbage Collection</h2><p>通过使用 Verbose Garbage Collection，我们可以跟踪 GC 的详细轨迹，为了开启它，我们需要在 JVM 配置中添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-verbose:gc</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-3-使用引用对象避免内存泄露"><a href="#4-3-使用引用对象避免内存泄露" class="headerlink" title="4.3.使用引用对象避免内存泄露"></a>4.3.使用引用对象避免内存泄露</h2><p>我们也可以使用java.lang.ref包中内置的引用对象来处理内存泄露。使用 <em>java.lang.ref</em> 包，而并不会直接引用对象，使用对对象的特殊引用使得它们容易被回收。设计出的引用队列也让我们了解到垃圾回收的执行操作。</p>
+<h2 id="4-4-Eclipse的内存泄露报告"><a href="#4-4-Eclipse的内存泄露报告" class="headerlink" title="4.4.Eclipse的内存泄露报告"></a>4.4.Eclipse的内存泄露报告</h2><p>当遇到明显的内存泄漏情况时，Eclipse 都会显示警告和错误。</p>
+<h2 id="4-5-Benchmarking"><a href="#4-5-Benchmarking" class="headerlink" title="4.5.Benchmarking"></a>4.5.Benchmarking</h2><p>我们通过 Benchmarking 来度量和分析 Java 代码的性能。通过这种方法，我们可以比较对同一个任务的不同种做法之间的性能。这可以帮助我们选择更好的方法去运行，也可以节约内存消耗。</p>
+<h2 id="4-6-代码review"><a href="#4-6-代码review" class="headerlink" title="4.6.代码review"></a>4.6.代码review</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2/" rel="tag"># 内存泄露</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/Spring%E7%B3%BB%E5%88%97%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev" title="spring系列的基础知识">
+      <i class="fa fa-chevron-left"></i> spring系列的基础知识
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/%E4%BA%8B%E5%8A%A1/%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/" rel="next" title="数据一致性">
+      数据一致性 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1.简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="nav-number">2.</span> <span class="nav-text">2.什么是内存泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E7%9A%84%E7%97%87%E7%8A%B6"><span class="nav-number">2.1.</span> <span class="nav-text">2.1.内存泄露的症状</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-java%E4%B8%AD%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">3.java中内存泄露的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E9%9D%99%E6%80%81%E5%AD%97%E6%AE%B5%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="nav-number">3.1.</span> <span class="nav-text">3.1.静态字段导致内存泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-%E6%80%8E%E4%B9%88%E9%A2%84%E9%98%B2%E8%BF%99%E7%A7%8D%E6%83%85%E5%86%B5%E5%8F%91%E7%94%9F%E5%91%A2%EF%BC%9F"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1.怎么预防这种情况发生呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E6%9C%AA%E5%85%B3%E9%97%AD%E8%B5%84%E6%BA%90%E5%AF%BC%E8%87%B4%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="nav-number">3.2.</span> <span class="nav-text">3.2.未关闭资源导致的内存泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-%E6%80%8E%E4%B9%88%E9%A2%84%E9%98%B2%E8%BF%99%E7%A7%8D%E6%83%85%E5%86%B5%E5%8F%91%E7%94%9F%E5%91%A2%EF%BC%9F"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1.怎么预防这种情况发生呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E4%B8%8D%E5%BD%93%E7%9A%84equals-%E5%92%8ChashCode-%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.3.</span> <span class="nav-text">3.3.不当的equals()和hashCode()实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-%E6%80%8E%E4%B9%88%E9%A2%84%E9%98%B2%E8%BF%99%E7%A7%8D%E6%83%85%E5%86%B5%E5%8F%91%E7%94%9F%E5%91%A2%EF%BC%9F"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.3.1.怎么预防这种情况发生呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E5%BC%95%E7%94%A8%E5%A4%96%E9%83%A8%E7%B1%BB%E7%9A%84%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">3.4.</span> <span class="nav-text">3.4.引用外部类的内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-%E6%80%8E%E4%B9%88%E9%A2%84%E9%98%B2%E8%BF%99%E7%A7%8D%E6%83%85%E5%86%B5%E5%8F%91%E7%94%9F%E5%91%A2%EF%BC%9F"><span class="nav-number">3.4.1.</span> <span class="nav-text">3.4.1.怎么预防这种情况发生呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-finalize-%E6%96%B9%E6%B3%95%E5%AF%BC%E8%87%B4%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="nav-number">3.5.</span> <span class="nav-text">3.5.finalize()方法导致的内存泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-1-%E6%80%8E%E4%B9%88%E9%A2%84%E9%98%B2%E8%BF%99%E7%A7%8D%E6%83%85%E5%86%B5%E5%8F%91%E7%94%9F%E5%91%A2%EF%BC%9F"><span class="nav-number">3.5.1.</span> <span class="nav-text">3.5.1.怎么预防这种情况发生呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">3.6.</span> <span class="nav-text">3.6.字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-1-%E6%80%8E%E4%B9%88%E9%A2%84%E9%98%B2%E8%BF%99%E7%A7%8D%E6%83%85%E5%86%B5%E5%8F%91%E7%94%9F%E5%91%A2%EF%BC%9F"><span class="nav-number">3.6.1.</span> <span class="nav-text">3.6.1.怎么预防这种情况发生呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-%E4%BD%BF%E7%94%A8ThreadLocals"><span class="nav-number">3.7.</span> <span class="nav-text">3.7.使用ThreadLocals</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-1-ThreadLocals%E5%AF%BC%E8%87%B4%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="nav-number">3.7.1.</span> <span class="nav-text">3.7.1.ThreadLocals导致的内存泄露</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-2-%E6%80%8E%E4%B9%88%E9%A2%84%E9%98%B2%E8%BF%99%E7%A7%8D%E6%83%85%E5%86%B5%E5%8F%91%E7%94%9F%E5%91%A2%EF%BC%9F"><span class="nav-number">3.7.2.</span> <span class="nav-text">3.7.2.怎么预防这种情况发生呢？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%A4%84%E7%90%86%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E7%9A%84%E5%85%B6%E4%BB%96%E7%AD%96%E7%95%A5"><span class="nav-number">4.</span> <span class="nav-text">4.处理内存泄露的其他策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E4%BD%BF%E7%94%A8%E5%89%96%E6%9E%90%E5%B7%A5%E5%85%B7"><span class="nav-number">4.1.</span> <span class="nav-text">4.1.使用剖析工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Verbose-Garbage-Collection"><span class="nav-number">4.2.</span> <span class="nav-text">4.2.Verbose Garbage Collection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E4%BD%BF%E7%94%A8%E5%BC%95%E7%94%A8%E5%AF%B9%E8%B1%A1%E9%81%BF%E5%85%8D%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="nav-number">4.3.</span> <span class="nav-text">4.3.使用引用对象避免内存泄露</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-Eclipse%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E6%8A%A5%E5%91%8A"><span class="nav-number">4.4.</span> <span class="nav-text">4.4.Eclipse的内存泄露报告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-Benchmarking"><span class="nav-number">4.5.</span> <span class="nav-text">4.5.Benchmarking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-%E4%BB%A3%E7%A0%81review"><span class="nav-number">4.6.</span> <span class="nav-text">4.6.代码review</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">不登山峰，不显平地</p>
+  <div class="site-description" itemprop="description">木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lark-coder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lark-coder" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不登山峰，不显平地</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">711k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:47</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

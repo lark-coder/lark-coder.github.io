@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.hudi.tech","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1.assert和Assert的联系和区别assert是java的关键字，于jdk1.4的时候引入，可以通过assert进行断言。Assert是spring-core包中的静态类，也是用于断言 1.1. assertassert关键字语法很简单，有两种用法：  assert &lt;boolean表达式&gt;如果&lt;boolean表达式&gt;为true，则程序继续执行。如果为false，则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Assert的好处">
+<meta property="og:url" content="http://www.hudi.tech/2019/08/27/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/%E4%BD%BF%E7%94%A8Assert%E7%9A%84%E5%A5%BD%E5%A4%84/index.html">
+<meta property="og:site_name" content="木刻的鱼儿的博客">
+<meta property="og:description" content="1.assert和Assert的联系和区别assert是java的关键字，于jdk1.4的时候引入，可以通过assert进行断言。Assert是spring-core包中的静态类，也是用于断言 1.1. assertassert关键字语法很简单，有两种用法：  assert &lt;boolean表达式&gt;如果&lt;boolean表达式&gt;为true，则程序继续执行。如果为false，则">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-05T09:10:18.002Z">
+<meta property="article:author" content="不登山峰，不显平地">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="spring">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.hudi.tech/2019/08/27/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/%E4%BD%BF%E7%94%A8Assert%E7%9A%84%E5%A5%BD%E5%A4%84/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>使用Assert的好处 | 木刻的鱼儿的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木刻的鱼儿的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/08/27/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/%E4%BD%BF%E7%94%A8Assert%E7%9A%84%E5%A5%BD%E5%A4%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用Assert的好处
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-27 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-27T00:00:00+08:00">2019-08-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-assert和Assert的联系和区别"><a href="#1-assert和Assert的联系和区别" class="headerlink" title="1.assert和Assert的联系和区别"></a>1.assert和Assert的联系和区别</h1><p>assert是java的关键字，于jdk1.4的时候引入，可以通过assert进行断言。<br/><br>Assert是spring-core包中的静态类，也是用于断言</p>
+<h2 id="1-1-assert"><a href="#1-1-assert" class="headerlink" title="1.1. assert"></a>1.1. assert</h2><p>assert关键字语法很简单，有两种用法：<br/></p>
+<ul>
+<li><p>assert &lt;boolean表达式&gt;<br/><br>如果&lt;boolean表达式&gt;为true，则程序继续执行。<br/><br>如果为false，则程序抛出AssertionError，并终止执行。</p>
+</li>
+<li><p>assert &lt;boolean表达式&gt; : &lt;错误信息表达式&gt;<br/><br>如果&lt;boolean表达式&gt;为true，则程序继续执行。<br/><br>如果为false，则程序抛出java.lang.AssertionError，并输入&lt;错误信息表达式&gt;。</p>
+</li>
+<li><p>示例<br/><br>assert StringUtils.isNotEmpty(User.getName()) : “用户名字为空错误”;</p>
+</li>
+<li><p>使用要求<br/><br>如果使用assert断言，则必须在启动的时候用java -ea xxx.jar，必须添加<code>-ea</code>启动断言配置，否则断言默认是不执行的</p>
+</li>
+</ul>
+<h2 id="1-2-Assert"><a href="#1-2-Assert" class="headerlink" title="1.2 Assert"></a>1.2 Assert</h2><p>Assert也用于断言，是基于assert的思想实现的一个静态类。<br/></p>
+<ul>
+<li><p>Assert.isTrue(&lt;boolean表达式&gt;);<br>如果&lt;boolean表达式&gt;为true，则程序继续执行。<br/><br>如果为false，则程序抛出java.lang.AssertionError，并输入&lt;错误信息表达式&gt;。</p>
+</li>
+<li><p>Assert.notEmpty(&lt;boolean表达式&gt;, &lt;错误信息表达式&gt;);<br>如果&lt;boolean表达式&gt;不为空，则程序继续执行。<br/><br>如果为空，则程序抛出java.lang.IllegalArgumentException，并输入message&lt;错误信息表达式&gt;。</p>
+</li>
+<li><p>示例：<br>Assert.notEmpty(User.getName(), “用户名字为空错误”);</p>
+</li>
+</ul>
+<h2 id="1-3-综述"><a href="#1-3-综述" class="headerlink" title="1.3 综述"></a>1.3 综述</h2><p>根据以上的特性：</p>
+<ol>
+<li>assert使用需要修改启动命令，Assert不需要其他任何操作</li>
+<li>Assert抛出的是异常，assert抛出的是错误；</li>
+<li>Assert支持非空，为真等等（自己查看该类的方法）很多常用的断言，使用方便</li>
+<li>使用Assert能够减少代码量，减少单测case（极大方便单测），具体参考下面说明<h1 id="2-使用Assert的其他优点"><a href="#2-使用Assert的其他优点" class="headerlink" title="2.使用Assert的其他优点"></a>2.使用Assert的其他优点</h1>以插入用户为例，如果用户姓名为空，则报错<h2 id="2-1-不使用Assert断言"><a href="#2-1-不使用Assert断言" class="headerlink" title="2.1.不使用Assert断言"></a>2.1.不使用Assert断言</h2></li>
+</ol>
+<ul>
+<li><p>业务代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertUser</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (StringUtils.isEmpty(user.getName()))&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RunTimeException(<span class="string">&quot;用户姓名为空！&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    UserDao.insert(User);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单测代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//case1</span></span><br><span class="line">User user = <span class="keyword">new</span> User();</span><br><span class="line">UserService.insertUser(user);</span><br><span class="line">thrown.expectMessage(<span class="string">&quot;用户姓名为空！&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//case2</span></span><br><span class="line">User user = <span class="keyword">new</span> User();</span><br><span class="line">user.serName(<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">UserService.insertUser(user);</span><br><span class="line">Mockito.verify(UserService).insertUser(user);</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-使用Assert断言"><a href="#2-2-使用Assert断言" class="headerlink" title="2.2.使用Assert断言"></a>2.2.使用Assert断言</h2></li>
+<li><p>业务代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertUser</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">    Assert.notEmpty(user.getName(),<span class="string">&quot;用户姓名为空！&quot;</span>)</span><br><span class="line">    UserDao.insert(User);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单测代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//case1</span></span><br><span class="line"><span class="comment">//case1不必要再写单测了，Assert所在行的代码肯定会执行的</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//case2</span></span><br><span class="line">User user = <span class="keyword">new</span> User();</span><br><span class="line">user.serName(<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">UserService.insertUser(user);</span><br><span class="line">Mockito.verify(UserService).insertUser(user);</span><br></pre></td></tr></table></figure>
+<h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2></li>
+</ul>
+<ol>
+<li>使用Assert能够避免很多if else嵌套</li>
+<li>使用Assert能够减少业务代码</li>
+<li>使用Assert能够减少代码单测case，从而减少代码单测代码量，还能提高代码单测覆盖率</li>
+</ol>
+<h1 id="其他代码优化项"><a href="#其他代码优化项" class="headerlink" title="其他代码优化项"></a>其他代码优化项</h1><ol>
+<li>使用三元运算符，也能减少if else，还能提高单测覆盖率</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/spring/" rel="tag"># spring</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/08/25/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%B0%8F%E4%BA%8C%E9%BB%91%E7%BB%93%E5%A9%9A%E3%80%8B_%E8%B5%B5%E6%A0%91%E7%90%86/" rel="prev" title="《小二黑结婚》_赵树理">
+      <i class="fa fa-chevron-left"></i> 《小二黑结婚》_赵树理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/08/27/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%88%91%E4%B8%8D%E3%80%8B_%E5%A4%A7%E5%86%B0/" rel="next" title="《我不》_大冰">
+      《我不》_大冰 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-assert%E5%92%8CAssert%E7%9A%84%E8%81%94%E7%B3%BB%E5%92%8C%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">1.assert和Assert的联系和区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-assert"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. assert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Assert"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Assert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E7%BB%BC%E8%BF%B0"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 综述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8Assert%E7%9A%84%E5%85%B6%E4%BB%96%E4%BC%98%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">2.使用Assert的其他优点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E4%B8%8D%E4%BD%BF%E7%94%A8Assert%E6%96%AD%E8%A8%80"><span class="nav-number">2.1.</span> <span class="nav-text">2.1.不使用Assert断言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E4%BD%BF%E7%94%A8Assert%E6%96%AD%E8%A8%80"><span class="nav-number">2.2.</span> <span class="nav-text">2.2.使用Assert断言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%BC%E8%BF%B0"><span class="nav-number">2.3.</span> <span class="nav-text">综述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">其他代码优化项</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">不登山峰，不显平地</p>
+  <div class="site-description" itemprop="description">木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lark-coder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lark-coder" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不登山峰，不显平地</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">711k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:47</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.hudi.tech","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="java多线程多线程是在同一个程序内部并行执行，因此会对相同的内存空间进行并发读写操作。 多线程的优点 资源利用率更好 程序设计在某些情况下更简单 程序响应更快。多线程的缺点 设计更加复杂 上下文切换（当CPU从执行一个线程切换到另一个线程的euihz，它需要先存储当前线程的本地的数据、程序指针等，然后载入另一个线程的本地数据、程序指针等，最后才开始执行。CPU会在一个上下文中执行一个线程，然后切">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java多线程">
+<meta property="og:url" content="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.html">
+<meta property="og:site_name" content="木刻的鱼儿的博客">
+<meta property="og:description" content="java多线程多线程是在同一个程序内部并行执行，因此会对相同的内存空间进行并发读写操作。 多线程的优点 资源利用率更好 程序设计在某些情况下更简单 程序响应更快。多线程的缺点 设计更加复杂 上下文切换（当CPU从执行一个线程切换到另一个线程的euihz，它需要先存储当前线程的本地的数据、程序指针等，然后载入另一个线程的本地数据、程序指针等，最后才开始执行。CPU会在一个上下文中执行一个线程，然后切">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-05T09:10:18.003Z">
+<meta property="article:author" content="不登山峰，不显平地">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="多线程">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>java多线程 | 木刻的鱼儿的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木刻的鱼儿的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java多线程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="java多线程"><a href="#java多线程" class="headerlink" title="java多线程"></a>java多线程</h1><p>多线程是在同一个程序内部并行执行，因此会对相同的内存空间进行并发读写操作。</p>
+<h2 id="多线程的优点"><a href="#多线程的优点" class="headerlink" title="多线程的优点"></a>多线程的优点</h2><ul>
+<li>资源利用率更好</li>
+<li>程序设计在某些情况下更简单</li>
+<li>程序响应更快。<h2 id="多线程的缺点"><a href="#多线程的缺点" class="headerlink" title="多线程的缺点"></a>多线程的缺点</h2></li>
+<li>设计更加复杂</li>
+<li>上下文切换（当CPU从执行一个线程切换到另一个线程的euihz，它需要先存储当前线程的本地的数据、程序指针等，然后载入另一个线程的本地数据、程序指针等，最后才开始执行。CPU会在一个上下文中执行一个线程，然后切换到另外一个上下文中执行另外一个线程）的开销</li>
+<li>增加资源消耗<h2 id="java线程的几种创建方式"><a href="#java线程的几种创建方式" class="headerlink" title="java线程的几种创建方式"></a>java线程的几种创建方式</h2>java的线程类也是一个Object类，他的实例都继承自java.lang.Thread或其子类。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread thread = <span class="keyword">new</span> Thrad();</span><br><span class="line">thread.start();</span><br></pre></td></tr></table></figure>
+执行该线程可以调用start()方法。<h3 id="编写线程运行时执行的代码有三种方式"><a href="#编写线程运行时执行的代码有三种方式" class="headerlink" title="编写线程运行时执行的代码有三种方式:"></a>编写线程运行时执行的代码有三种方式:</h3></li>
+<li>一种是创建Thread子类的一个实例，并重写run()方法。<br>创建Thread子类的一个实例并重写Run方法，Run方法会在调用start()方法之后被执行。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;MyThread running!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过如下方式创建并运行Thread子类。</span></span><br><span class="line">MyThread myThread = <span class="keyword">new</span> MyThread(<span class="string">&quot;Thread子类实现的线程&quot;</span>);</span><br><span class="line">myThread.start();</span><br></pre></td></tr></table></figure>
+一旦线程启动start方法之后就会立即返回，而不会等待到run方法执行完毕才返回，就好像run方法是在另外一个cpu上执行一样。当run方法执行后，就行打印字符串MyThread running!。</li>
+</ul>
+<p><strong>也可以创建一个Thread的匿名子类：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Thread thread = <span class="keyword">new</span> Thread(<span class="string">&quot;Thread子类实现的线程&quot;</span>)&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;MyThread running!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">thread.start();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>一种是创建类的时候实现Runnable接口<br>这种编写执行代码的方式是新建了一个实现了java.lang.Runnable接口的类的实例，实例中的方法可以被线程调用。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> MyRunnable implements Runnable&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;MyRunnable running!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//为了能够使先线程能够执行run方法，需要在Thread类的构造函数中传入MyRunnable的实例对象。</span></span><br><span class="line">Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> MyRunnable()，<span class="string">&quot;Thread Name Runnable接口实现的线程&quot;</span>);</span><br><span class="line">thread.start();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>也可以通过创建一个实现了Runnable接口的匿名类</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Runnable myRunnable = <span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;MyRunnable running!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Thread thread = <span class="keyword">new</span> Thread(myRunnable,<span class="string">&quot;Thread Name Runnable接口实现的线程&quot;</span>);</span><br><span class="line">thread.start();</span><br></pre></td></tr></table></figure>
+<p>当执行thread类中的run方法时，会首先判断target是否存在，存在则执行target中的run方法，也就是实现了Runnable接口并重写了run方法的类中的run方法。由于多态的存在，子类可以重写Thread类中的run方法，此时执行的就是子类中的run方法。</p>
+<ul>
+<li>还有一种时使用Callable和Future接口创建线程。具体时创建Callable接口的实现类，并实现call方法。并使用FutureTask类来包装Callable实现类的对象，且以此FutureTask对象作为Thread对象的target来创建线程。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Callable&lt;Integer&gt; myCallable = <span class="keyword">new</span> MyCallable(); <span class="comment">// 创建MyCallable对象</span></span><br><span class="line">        FutureTask&lt;Integer&gt; ft = <span class="keyword">new</span> FutureTask&lt;Integer&gt;(myCallable); <span class="comment">//使用FutureTask来包装MyCallable对象</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">&quot; &quot;</span> + i);</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">30</span>) &#123;</span><br><span class="line">                Thread thread = <span class="keyword">new</span> Thread(ft); <span class="comment">//FutureTask对象作为Thread对象的target创建新的线程</span></span><br><span class="line">                thread.start(); <span class="comment">//线程进入到就绪状态</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;主线程for循环执行完毕..&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> sum = ft.get(); <span class="comment">//取得新创建的新线程中的call()方法返回的结果</span></span><br><span class="line">            System.out.println(<span class="string">&quot;sum = &quot;</span> + sum);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCallable</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 与run()方法不同的是，call()方法具有返回值</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">&quot; &quot;</span> + i);</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="创建子类是通过继承Thread类还是实现Runnable接口呢？"><a href="#创建子类是通过继承Thread类还是实现Runnable接口呢？" class="headerlink" title="创建子类是通过继承Thread类还是实现Runnable接口呢？"></a>创建子类是通过继承Thread类还是实现Runnable接口呢？</h3><p>这两种方式都能够满足需求，但是Runnable接口能够通过线程池来进行有限的管理，如果线程池满了，新的线程就会排队等候执行，直到线程池空闲池出来为止。<br>我们在实际应用的时候需要同时实现Runnable接口和Thrad子类两种实现方式，实现了Thread子类的实例可以执行多个实现了Runnable接口的线程。最典型的应用就是线程池。</p>
+<h3 id="线程名"><a href="#线程名" class="headerlink" title="线程名"></a>线程名</h3><p>每个线程都有自己的名称，可以通过对线程进行命名，便于区分。<br><strong>多线程实例，并打印自己的线程名字。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(Thread.currentThread().getName());</span><br><span class="line">    <span class="keyword">int</span> i =<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;<span class="number">100</span>)&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(i+<span class="string">&quot;&quot;</span>)&#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">                System.out.println(getName()+<span class="string">&quot; is running!&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    i++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="竟态条件与临界区"><a href="#竟态条件与临界区" class="headerlink" title="竟态条件与临界区"></a>竟态条件与临界区</h1><p>在同一个程序中运行多个线程本身并不会导致问题，问题在于多个线程访问了相同的资源，例如，统一内存区（变量，数组或对象）、系统（数据库，Wev services）或文件。实际上，这些问题只有在一个或多个线程向这些资源进行写操作才有可能发生。如果资源没有发生变化，多个线程读取相同的资源也是安全的。<br>当两个线程同时竞争同一个资源的时候，如果对资源的访问顺序敏感，就称存在竟态条件。导致竟态条件发生的代码区称为临界区。</p>
+<h1 id="线程安全与共享资源"><a href="#线程安全与共享资源" class="headerlink" title="线程安全与共享资源"></a>线程安全与共享资源</h1><p>允许被多个线程同时执行的代码称作线程安全的代码，线程安全的代码不包含竟态条件，当多个线程同时更新共享资源时会引发竟态条件。</p>
+<h2 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h2><p>局部变量存储在线程自己的线程栈当中，也就是说，局部变量永远不回被多个线程共享，所以基础类型的局部变量是线程安全的。</p>
+<h2 id="局部的对象引用"><a href="#局部的对象引用" class="headerlink" title="局部的对象引用"></a>局部的对象引用</h2><p>对象的局部引用和基础类型的局部变量不太一样。尽管引用本身没有被共享，但是引用所指的对象并没有存储在线程的栈内。所有的对象都存储在共享堆中。如果在某个方法中创建的对象不能逃逸出改方法，那么它就是线程安全的。</p>
+<h2 id="对象成员"><a href="#对象成员" class="headerlink" title="对象成员"></a>对象成员</h2><p>对象成员存储在堆上。如果两个线程同时更新同一个对象的同一个成员，那么代码就不是线程安全的。</p>
+<h2 id="线程控制逃逸规则"><a href="#线程控制逃逸规则" class="headerlink" title="线程控制逃逸规则"></a>线程控制逃逸规则</h2><p>线程逃逸规则可以帮助判断代码中的某些资源的访问是否是线程安全的。</p>
+<blockquote>
+<p>如果一个资源的创建，使用，销毁都在同一个线程内完成，且永远不回脱离该线程的控制，则该资源的使用就是线程安全的。<br>资源可以是对象、数组、文件、数据库链接、套接字等。倨傲中无需主动销毁对象，所以销毁是指不再有引用指向对象。<br>即使对象本身线程安全，但如果该对象中包含其他资源（文件、数据库链接），整个应用也许就不再是线程安全的了。</p>
+</blockquote>
+<h2 id="线程安全及不可变性"><a href="#线程安全及不可变性" class="headerlink" title="线程安全及不可变性"></a>线程安全及不可变性</h2><p>当多个线程同时访问同一个资源，并且其中的一个或者多个线程对这个资源进行了写操作。才会产生竟态条件。多个线程同时读同一个资源不回产生竟态条件。<br>我们可以通过创建不可变的共享对象来保证对象在线程之间共享时不回被修改，从而实现线程安全。</p>
+<h2 id="引用不是线程安全的"><a href="#引用不是线程安全的" class="headerlink" title="引用不是线程安全的"></a>引用不是线程安全的</h2><p>即使一个对象是线程安全的不可变对象，指向这个对象的引用也可能不是线程安全的。</p>
+<h1 id="java同步块"><a href="#java同步块" class="headerlink" title="java同步块"></a>java同步块</h1><p>java同步块（synchronized block）用来标记方法或者代码快时同步的，java同步块用来避免竞争。</p>
+<ul>
+<li><strong>java同步关键字</strong><br>java中的同步块用synchronized标记，同步块在java中是同步在某个对象上。所有同步在一个对象上的同步块同时只能被一个线程进入并行操作。所有的其他等待进入该同步块的线程将被阻塞，直到执行该同步块中的线程退出。<br>共有四种不同的同步块<ul>
+<li>实例方法</li>
+<li>静态方法</li>
+<li>实例方法中的同步块</li>
+<li>静态方法中的同步块</li>
+</ul>
+</li>
+<li><strong>实例方法同步</strong><br>在方法中声明同步（synchronized）关键字。java实例方法同步是同步在拥有该方法的对象上。这样。每个实例其方法同步都同步在不同的对象上，即该方法所属的实例。只有一个线程能够责打实例方法同步块中运行。如果由多个实例存在，那么一个线程一次可以在一个实例同步块中执行操作。一个实例一个线程。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>,count +=value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>静态方法同步</strong><br>静态方法的同步是指同步在该方法所在的类对象上。因为在java虚拟机中一个类只能对应一个类对象，所以同时只允许一个线程执行同一个类中的静态方法。<br>对于不同类中的静态方法，一个线程可以执行每个类中的静态方法而无需等待，不管类中的那个静态同步方法被调用，一个类只能由一个线程同时执行。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>,count +=value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>实例方法中同步块</strong><br>有时不需要同步整个方法，而是同步方法中的一部分。java中可以实现对这一部分进行同步。<br>java同步块构造器用括号将对象括起来。在下例中，使用了this，即为调用add方法的实例对象。在同步构造器中用括号括起来的对象叫做监视器对象。下面代码使用对象器对象同步，同步实例方法使用调用方法的实例作为监视器对象。<br>一次只有一个线程能够在同步于同一个监视器对象的java方法内执行。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.count+=value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+下面两个例子都同步在的他们所调用的实例对象上，因此这两个同步的效果是等效的。每次只有一个线程能够在两个代码块中任意一个方法中执行。<br>如果第二个同步块不是同步在this实例对象上，那么两个方法可以被线程同时执行。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        log.writeln();</span><br><span class="line">        log.writeln();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(<span class="keyword">this</span>)&#123;</span><br><span class="line">        log.writeln();</span><br><span class="line">        log.writeln();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>静态方法中同步块</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        log.writeln();</span><br><span class="line">        log.writeln();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(MyClass.class)&#123;</span><br><span class="line">        log.writeln();</span><br><span class="line">        log.writeln();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+静态方法中的同步代码块不允许同时被线程访问。如果第二个同步块不是同步在MyClass.class这个对象上。那这两个方法可以同时被线程访问。</li>
+</ul>
+<h1 id="线程间的通信"><a href="#线程间的通信" class="headerlink" title="线程间的通信"></a>线程间的通信</h1><p>线程通信的目标是使线程间能够互相发送信号。另一方面，线程通信使线程能够等待其他线程的信号。</p>
+<ul>
+<li>通过共享对象通信</li>
+<li>忙等待</li>
+<li>wait(),notify(),notifyAll();</li>
+<li>丢失的信号</li>
+<li>假唤醒</li>
+<li>多线程等待相同信号</li>
+<li>不要对常量字符串或全局对象调用wait();<h1 id="java线程中的五种状态"><a href="#java线程中的五种状态" class="headerlink" title="java线程中的五种状态"></a>java线程中的五种状态</h1></li>
+<li><strong>新建状态（New）</strong><br>当线程对象创建之后，线程就进入了新建状态。</li>
+<li><strong>就绪状态（Runnable）</strong><br>当调用线程对象的start方法，线程就进入了就绪状态。处于就绪状态的线程，只能说明此线程做好了准备，随时等待被CPU调度执行，并不是说调用start方法之后线程会立即执行。<br>就绪状态是进入到运行状态的唯一入口，也就是说，线程要想进入到运行状态执行，必须首先处于就绪状态中。</li>
+<li><strong>运行状态（Running）</strong><br>当CPU开始调度处于就绪状态的线程时，此线程才得以真正执行，即进入到运行状态。</li>
+<li><strong>阻塞状态（Blocked）</strong><br>处于运行状态的线程由于某种原因，暂时放弃对CPU的使用权，停止执行，此时进入阻塞状态，知道其进入就绪状态，才有机会再次被CPU调用以进入到运行状态。根据阻塞产生的原因不同，阻塞状态可以分为三种：<ul>
+<li>等待阻塞：运行状态中的线程执行wait方法，使本线程进入到等待阻塞状态。</li>
+<li>同步阻塞：线程在获取synchronized同步锁失败之后（因为锁被其他线程占用），它会进入同步阻塞状态。</li>
+<li>其他阻塞：通过调用线程的sleep或join或发出了I/O请求时，线程会进入到阻塞状态。当sleep状态超时，join等待线程终止或超时，或者IO处理异常时，线程重新转入就绪状态。</li>
+</ul>
+</li>
+<li><strong>死亡状态（Dead）</strong><br>线程执行完了或者因为异常退出了run方法，该线程结束生命周期。</li>
+</ul>
+<h1 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h1><p>利用Future来异步获取多线程的返回结果，Futuer接口是java标准API的一部分，在java.util.concurrent包中。Futuer接口是java线程的Future模式的实现，可以用来进行异步计算。有了future就可以实现三段式编程了</p>
+<ul>
+<li>启动多线程任务</li>
+<li>处理其他事</li>
+<li>收集多线程的处理结果<br>通过三段式编程实现了非阻塞的任务调用。这样的话会存在一个问题，就是异步获取处理结果。在获取结果的时候需要通过future的isdone方法来判断是否有结果，并通过get()函数来阻塞式获取执行结果。<br>只是这种方式的话就不能实时跟踪其他线程的结果状态了，所以在使用的时候需要将isdone方法和get方法配合使用。</li>
+</ul>
+<p>callable一般配合ExecutorService来使用，在ExecuterService方法中声明了若干个submit方法的重载版本</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;T&gt;<span class="function">Future&lt;T&gt; <span class="title">submit</span><span class="params">(callable&lt;T&gt; task)</span></span>;</span><br><span class="line">&lt;T&gt;<span class="function">Future&lt;T&gt; <span class="title">submit</span><span class="params">(runnable&lt;T&gt; task,T result)</span></span>;</span><br><span class="line">Future&lt;?&gt; submit(runnable&lt;T&gt; task);</span><br></pre></td></tr></table></figure>
+<p>Future就是对于具体的Runnable或者Callable任务的执行结果进行取消、查询是否完成、获取结果。必要时可以通过get方法获取执行结果，该方法会阻塞直到任务返回结果。<br>Future接口中有5个方法</p>
+<ul>
+<li>cancel方法：用来取消任务，如果取消任务成功则返回true，如果取消任务失败则返回false。参数mayInterruptIfrunning表示是否允许取消正在执行却没有执行完毕的任务，如果设置为true，则表示可以取消正在执行的任务。如果任务已经完成，则无论mayInterruptIfrunning是否设置何值，该方法肯定返回false。即如果取消已经完成的任务会返回false；如果任务正在执行，若mayInterruptIfRunning设置为true，则返回true，若mayInterruptIfRunning设置为false，则返回false；如果任务还没有执行，则无论mayInterruptIfRunning为true还是false，肯定返回true。</li>
+<li>isCancelled方法表示任务是否被取消成功，如果在任务正常完成之前被取消成功，则返回true。</li>
+<li>isDone方法表示任务是否已经完成，若完成则返回true。</li>
+<li>get()方法表示用来获取执行结果，这个方法或产生阻塞，会一直等到任务执行完毕才返回；</li>
+<li>get(long timeOut,timeUnit unit)用来获取执行结果，如果在指定时间内还没有获取结果，就直接返回null。<br>根据Future的方法可以直到Futuere提供了三种主要的功能：</li>
+<li>判断任务是否完成</li>
+<li>能够中断任务</li>
+<li>能够获取任务执行结果<br>但是Future只是一个接口，所以无法直接通过创建对象的方式进行调用，这就需要FutureTask。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag"># 多线程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java%E7%BA%BF%E7%A8%8B%E6%B1%A0/" rel="prev" title="java线程池">
+      <i class="fa fa-chevron-left"></i> java线程池
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/String/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="next" title="String、StringBuffer、StringBuilder的区别">
+      String、StringBuffer、StringBuilder的区别 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">java多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">多线程的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">多线程的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%87%A0%E7%A7%8D%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">java线程的几种创建方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E6%97%B6%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81%E6%9C%89%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.1.</span> <span class="nav-text">编写线程运行时执行的代码有三种方式:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AD%90%E7%B1%BB%E6%98%AF%E9%80%9A%E8%BF%87%E7%BB%A7%E6%89%BFThread%E7%B1%BB%E8%BF%98%E6%98%AF%E5%AE%9E%E7%8E%B0Runnable%E6%8E%A5%E5%8F%A3%E5%91%A2%EF%BC%9F"><span class="nav-number">1.3.2.</span> <span class="nav-text">创建子类是通过继承Thread类还是实现Runnable接口呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%90%8D"><span class="nav-number">1.3.3.</span> <span class="nav-text">线程名</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AB%9F%E6%80%81%E6%9D%A1%E4%BB%B6%E4%B8%8E%E4%B8%B4%E7%95%8C%E5%8C%BA"><span class="nav-number">2.</span> <span class="nav-text">竟态条件与临界区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B8%8E%E5%85%B1%E4%BA%AB%E8%B5%84%E6%BA%90"><span class="nav-number">3.</span> <span class="nav-text">线程安全与共享资源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="nav-number">3.1.</span> <span class="nav-text">局部变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">局部的对象引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98"><span class="nav-number">3.3.</span> <span class="nav-text">对象成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%8E%A7%E5%88%B6%E9%80%83%E9%80%B8%E8%A7%84%E5%88%99"><span class="nav-number">3.4.</span> <span class="nav-text">线程控制逃逸规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E5%8F%8A%E4%B8%8D%E5%8F%AF%E5%8F%98%E6%80%A7"><span class="nav-number">3.5.</span> <span class="nav-text">线程安全及不可变性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E4%B8%8D%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84"><span class="nav-number">3.6.</span> <span class="nav-text">引用不是线程安全的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E5%90%8C%E6%AD%A5%E5%9D%97"><span class="nav-number">4.</span> <span class="nav-text">java同步块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="nav-number">5.</span> <span class="nav-text">线程间的通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E7%BA%BF%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BA%94%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="nav-number">6.</span> <span class="nav-text">java线程中的五种状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Future"><span class="nav-number">7.</span> <span class="nav-text">Future</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">不登山峰，不显平地</p>
+  <div class="site-description" itemprop="description">木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lark-coder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lark-coder" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不登山峰，不显平地</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">711k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:47</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

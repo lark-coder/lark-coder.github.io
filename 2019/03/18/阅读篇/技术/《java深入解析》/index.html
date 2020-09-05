@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.hudi.tech","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="摘录《基础概念》 float类型在Java中占用 节，long类型在 中占用 节，为什么float类型的取值范围比long类型的取值范围还大？ 使用“+”可以连接两个字符串（String对象），那么，是怎样进行连接的？ 构造器是否创建了对象？该怎样来证明这一点？ 如果没有在类中显示声明构造器，则编译器会自动生成一个无参的构造器，那么编译器为什么要自动生成这个无参的构造器呢？有什么作用？ i++与+">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《java深入解析》">
+<meta property="og:url" content="http://www.hudi.tech/2019/03/18/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8Ajava%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E3%80%8B/index.html">
+<meta property="og:site_name" content="木刻的鱼儿的博客">
+<meta property="og:description" content="摘录《基础概念》 float类型在Java中占用 节，long类型在 中占用 节，为什么float类型的取值范围比long类型的取值范围还大？ 使用“+”可以连接两个字符串（String对象），那么，是怎样进行连接的？ 构造器是否创建了对象？该怎样来证明这一点？ 如果没有在类中显示声明构造器，则编译器会自动生成一个无参的构造器，那么编译器为什么要自动生成这个无参的构造器呢？有什么作用？ i++与+">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-05T09:10:18.049Z">
+<meta property="article:author" content="不登山峰，不显平地">
+<meta property="article:tag" content="阅读">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.hudi.tech/2019/03/18/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8Ajava%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E3%80%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>《java深入解析》 | 木刻的鱼儿的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木刻的鱼儿的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8Ajava%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E3%80%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《java深入解析》
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-18 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-18T00:00:00+08:00">2019-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h2 id="《基础概念》"><a href="#《基础概念》" class="headerlink" title="《基础概念》"></a>《基础概念》</h2><ul>
+<li>float类型在Java中占用 节，long类型在 中占用 节，为什么float类型的取值范围比long类型的取值范围还大？</li>
+<li>使用“+”可以连接两个字符串（String对象），那么，是怎样进行连接的？</li>
+<li>构造器是否创建了对象？该怎样来证明这一点？</li>
+<li>如果没有在类中显示声明构造器，则编译器会自动生成一个无参的构造器，那么编译器为什么要自动生成这个无参的构造器呢？有什么作用？</li>
+<li>i++与++i到底有什么不同？仅仅是先加与后加的区别吗？</li>
+<li>移位运算： ＜＜ ，会首先进行 % 的求余运算吗？如果是这样，那么 ＜＜ − 结果是多少呢？</li>
+<li>如果重写了equals方法，为什么还要重写hashCode方法？如果没有重写hashCode方法，会有什么问题？</li>
+<li>从JDK ，switch语句可以支持String类型，那么在底层是如何实现的？</li>
+<li>静态方法是否可以重写？方法重写与方法隐藏有什么不同？</li>
+<li>为什么不能在静态方法中使用this？this指代的是当前对象，但是，这个所谓的“当前对象”到底在哪里？</li>
+<li>在Java中，类型会在什么时间、什么条件下由JVM加载？加载后一定会初始化吗？</li>
+<li>比起C / C++中的枚举，Java中的枚举有什么不同（优势）？枚举是怎样实现的？</li>
+<li>为什么要为String对象建立常量池？String常量池有什么好处？</li>
+<li>每个基本数据类型都对应一个包装类型，这些包装类型有什么用？</li>
+<li>内部成员类是如何绑定外围类对象的？</li>
+</ul>
+<h3 id="《关键字》"><a href="#《关键字》" class="headerlink" title="《关键字》"></a>《关键字》</h3><ul>
+<li>Java语言仍将goto定义为一个关键字，用来限制程序员将goto作为一个标识符来使用，由于是一个从不使用的关键字，故也称为“保留字”。</li>
+<li>与goto类似，Java语言也将const定义为关键字，但是却没有任何语法应用，也就是保留字。使用const来作为标识符也是不允许的。</li>
+<li>在Java语言中，这 符号是 字面常量（也称直接量）。其中，true与false是布尔类型的字面常量，null是引用类型的字面常量。这些就好比“abc”是String类型的字面常量，而数值“ 是int类型的字面常量一样。而不是java的关键字。尽管true、false、null不是关键字，但是，也不能将其作为标识符使用，否则同样会产生编译错误。从这一点来说，这 字面常量与关键字的表现是相似的。</li>
+</ul>
+<h3 id="《标识符》"><a href="#《标识符》" class="headerlink" title="《标识符》"></a>《标识符》</h3><ul>
+<li>普遍意义上的Java标识符的定义规则如下。<ul>
+<li>标识符由字母、数字、货币符号（￥、$等）、连接符号（_等）组成。（这里的字母为Unicode字符集，而不再局限于传统的* 个英文字母。）</li>
+<li>标识符的首字符可以是字母、货币符号与连接符号，但不能是数字。</li>
+<li>标识符不能与Java中的关键字相同。</li>
+<li>标识符不能和Java中预定义的字面常量名称相同（true、false、null）。</li>
+</ul>
+</li>
+<li>真实的标识符的规则<ul>
+<li>标识符的首字符所对应的代码点必须使得Character类的isJavaIdentifierStart方法返回值为true，后续字符所对应的代码点（如果存在后续字符的话）必须使得Character类的isJavaIdentifierPart方法返回值为true。</li>
+<li>标识符不能与Java中的关键字相同。</li>
+<li>标识符不能和Java中预定义的字面常量名称相同（true、false、null）。</li>
+<li>标识符的长度必须在系统所支持的范围内（这点是Java虚拟机要求的）。</li>
+</ul>
+</li>
+<li>在Java语言规范中，标识符的长度是任意的。但是，在Java虚拟机规范中，标识符是有长度限制的。在class文件中，代表标识符的常量字符串存储在CONSTANT_Utf info表中，而该表使用两个字节（length项）来表示字符串的长度，由于length是无符号类型，因此最大长度为 即 这也就是标识符的最大长度。但是，这个最大长度仅限于除了空字符null以外的ASCII字符（‘\u ’～‘\u * ’），如果标识符中含有这个范围以外的字符，最大长度将会减少。</li>
+<li>总结<ul>
+<li>在Java语言中，标识符是区分大小写的，仅当两个标识符的Unicode字符序列完全相同时，这两个标识符才是相同的。</li>
+<li>标识符的首字符所对应的代码点必须使得Character类的isJavaIdentifierStart方法返回值为true，后续字符（如果存在后续字符的话）所对应的代码点必须使得 Character类的isJavaIdentifierPart方法返回值为true。并且不能与关键字、布尔字面常量（true、false）和引用字面常量（null）相同。</li>
+<li>应该避免在标识符中使用“$”，尽管“$”可以在标识符中使用，但可能会与编译器的命名相冲突。</li>
+<li>当标识符的所有字符都是除了null之外的ASCII字符时，其最大长度可以达到 * 如果超过了这个长度，编译器将产生错误信息。</li>
+</ul>
+</li>
+</ul>
+<h3 id="《特殊字符》"><a href="#《特殊字符》" class="headerlink" title="《特殊字符》"></a>《特殊字符》</h3><ul>
+<li>注意转义序列符、八进制转义、Unicode转义的使用。Unicode转义的处理时期要早于转义序列符与八进制转义。</li>
+<li>Unicode转义处理时期是在编译器将程序解析成各种符号前就进行的。如果\u后没有接* 十六进制数字，将会产生编译错误，就算在注释中也不例外。</li>
+<li>增补字符使用两个代码单元（一个代理对）来表示。因此，所有增补字符都不能使用char类型的常量来表示。</li>
+<li>增补字符代理对的值区间为U+D U+DFFF，该区间没有分配字符。利用这个特征，程序就可以来区分一个char类型的字符到底是单个字符还是一个增补字符的代理字符。</li>
+</ul>
+<h3 id="《类型转换》"><a href="#《类型转换》" class="headerlink" title="《类型转换》"></a>《类型转换》</h3><ul>
+<li>当byte、char或者short类型（或者为三者的混合）参与运算时，结果为int类型，而并非与较高的类型相同。</li>
+<li>从byte类型到char类型的转换比较特殊，称为扩展收缩转换。这是因为，从byte类型到char类型的转换需要经过两个步骤。<ul>
+<li>将byte通过扩展转换，转换成int类型。</li>
+<li>再将int类型通过收缩转换，转换成char类型。</li>
+</ul>
+</li>
+</ul>
+<h3 id="《浮点类型》"><a href="#《浮点类型》" class="headerlink" title="《浮点类型》"></a>《浮点类型》</h3><ul>
+<li>大多数的浮点类型，在计算机中只是近似地存储其值，而不像整型那样准确地存储。故使用浮点类型做比较时需要格外的留意，稍有不慎，结果往往会事与愿违。</li>
+<li>二进制所能表示的两个相邻的浮点值间存在一定的间隙，浮点值越大，这个间隙也会越大。当浮点值大到一定程度时，如果对浮点值的改变很小（对30000000加1），就不足以使浮点值发生改变，这就好比大海蒸发了一滴水，但还是大海，几乎没有变化。</li>
+<li>因为float类型可以保留7～8个有效数字，而double类型可以保留15～16个有效数字，因而当int类型或long类型数值的有效数字多于float或double类型的最大有效数字时，该值的一些最低有效位就会丢失，从而造成精度丢失。这时，就会采用IEEE754最近舍入模式，提取与该整型值最接近的浮点值。</li>
+<li>理解浮点类型数据的不精确性。十进制表示的浮点值只有很小一部分可以使用二进制准确存储，大多数存储的都是近似值。</li>
+<li>留意浮点类型，在使用浮点类型做比较运算时需要格外小心。另外，在数量级相差很大的浮点数据间做加减运算可能也无法得到预期的结果。</li>
+<li>从整型转换为浮点类型时，如果整型数据的值过大（小），就可能损失一些最低有效位，从而造成数值的不准确性。</li>
+</ul>
+<h3 id="《for循环》"><a href="#《for循环》" class="headerlink" title="《for循环》"></a>《for循环》</h3><ul>
+<li>加强型for循环具有一定的局限性。主要表现为如下几点。<ol>
+<li>只能对元素进行顺序的访问。</li>
+<li>只能访问数组（集合）中的所有元素。</li>
+<li>在循环中没有当前的索引，无法对指定元素进行操作。</li>
+</ol>
+</li>
+<li>加强型for循环只是在基本for循环的基础上做了一层简单的“包装”而已，其底层也是通过基本for循环来实现的。</li>
+</ul>
+<h2 id="《运算符与表达式》"><a href="#《运算符与表达式》" class="headerlink" title="《运算符与表达式》"></a>《运算符与表达式》</h2><h3 id="《i-j该怎么运算？》"><a href="#《i-j该怎么运算？》" class="headerlink" title="《i+++j该怎么运算？》"></a>《i+++j该怎么运算？》</h3><ul>
+<li>编译器的贪心规则，也就是说，在分析符号的时候，编译器会尽可能多地结合有效的符号。</li>
+<li>编译器在分析字符时，会尽可能多地结合有效字符。并且“过度”地贪心，而不管这种结合方式是否符合语法规则。</li>
+</ul>
+<h3 id="《-i与i-的差别》"><a href="#《-i与i-的差别》" class="headerlink" title="《++i与i++的差别》"></a>《++i与i++的差别》</h3><ul>
+<li>前置 ++ 与后置 ++ 都是先将变量的值加1，而不是前置 ++ 先加1然后运算，而后置++ 先运算后加1。</li>
+<li>从程序上说，后置 ++ 先将变量赋值给一个临时变量，然后将变量的值加1，接下来使用那个临时变量参与运算。</li>
+</ul>
+<h3 id="《相除与求余》"><a href="#《相除与求余》" class="headerlink" title="《相除与求余》"></a>《相除与求余》</h3><ul>
+<li>当除数为0时，浮点运算不会产生ArithmeticException异常。</li>
+</ul>
+<ol>
+<li>两个操作数（被除数和除数）只要有一个为NaN，结果（商）就是NaN。</li>
+<li>当两个操作数都为Infinity或者都为0时（不论符号正负），结果（商）为NaN。</li>
+<li>当结果（商）不是NaN时，商的符号与被除数和除数的符号有关，当二者符号相同时，符号为正；当二者符号不同时，符号为负。</li>
+<li>有穷数除以Infinity，商为0（商的符号根据第3点）。</li>
+<li>Infinity除以有穷数，商为Infinity（商的符号根据第3点）。</li>
+<li>有穷数或Infinity除以0，商为Infinity（商的符号根据第3点）。</li>
+<li>0除以有穷数或Infinity，商为0（商的符号根据第3点）。</li>
+<li>两个操作数（被除数和除数）只要有一个为NaN，结果（余数）就是NaN。</li>
+<li>如果被除数为Infinity（不论符号正负），结果（余数）为NaN。</li>
+<li>如果除数为0（不论符号正负），结果（余数）为NaN。</li>
+<li>如果结果不是NaN，结果（余数）的符号与被除数的符号相同。</li>
+<li>如果被除数为0（不论符号正负），除数不是0（不论符号正负）与NaN，结果（余数）等于被除数。</li>
+<li>如果被除数为有穷数（不论符号正负），除数为Infinity（不论符号正负），结果（余数）等于被除数。</li>
+<li>如果被除数与除数为有穷正数或有穷负数，结果（余数）为有穷数，符号与被除数的符号相同。</li>
+</ol>
+<ul>
+<li>在整型中，+0与−0没有任何的区别，但是在浮点类型中，尽管+0与−0在数值上是相等的，使用“==”运算符，结果也为true，不过二者还是有一定差别的。这个差别可以表现在以下几点。</li>
+</ul>
+<ol>
+<li>当+0与−0参与浮点类型的相关运算（例如相除与求余运算）时，可以产生不同的结果（符号的差别）。</li>
+<li>+0与−0在浮点类型变量存储中，符号位是不同的。</li>
+<li>Java类库中的某些类也是把浮点类型的+0与−0视为完全不同的两个数值来处理的。</li>
+</ol>
+<h3 id="《移位运算》"><a href="#《移位运算》" class="headerlink" title="《移位运算》"></a>《移位运算》</h3><h3 id="《条件运算符》"><a href="#《条件运算符》" class="headerlink" title="《条件运算符》"></a>《条件运算符》</h3><h3 id="《运算顺序》"><a href="#《运算顺序》" class="headerlink" title="《运算顺序》"></a>《运算顺序》</h3><ul>
+<li>在Java语言中，操作数的计算顺序是从左向右的，即使运算符是从右向左结合的也是如此。</li>
+<li>与C / C++等语言不同，Java的运算结果受硬件环境的影响很小，计算方式也是确定的。<h3 id="《变量交换》"><a href="#《变量交换》" class="headerlink" title="《变量交换》"></a>《变量交换》</h3></li>
+<li>如果一个变量x异或另外一个变量y两次，结果为x。通过这一点，可以实现交换变量的值。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">v.x = v.x ^ v.y;</span><br><span class="line">v.y = v.x ^ v.y;</span><br><span class="line">v.x = v.x ^ v.y;</span><br><span class="line"><span class="keyword">int</span> z = v.x + v.y;</span><br><span class="line">v.y = z – v.y;</span><br><span class="line">v.x = z - v.y;</span><br></pre></td></tr></table></figure></li>
+<li>当两个数之和很大（小）时，虽然发生了溢出，不过最后还是阴差阳错地得到了正确的结果。尽管结果正确，这种相加的方式还不算十分可取。</li>
+</ul>
+<h3 id="《switch类型》"><a href="#《switch类型》" class="headerlink" title="《switch类型》"></a>《switch类型》</h3><ul>
+<li>对于枚举类型，首先会在内部生成一个匿名类，该匿名类含有一个int[]类型的静态final成员变量，数组的长度为枚举常量的个数，数组元素的值为枚举常量的序数（ordinal方法返回的值）。然后通过该数组元素的值来进行选择。</li>
+<li>当switch表达式是String类型的时候，会将switch语句拆分成两个switch语句来处理，第1个switch语句根据对象的哈希码来对一个临时变量赋值，第2个switch语句根据该变量的值来匹配case表达式的值。</li>
+</ul>
+<h2 id="《string类》"><a href="#《string类》" class="headerlink" title="《string类》"></a>《string类》</h2><h3 id="《＋怎么连接字符串》"><a href="#《＋怎么连接字符串》" class="headerlink" title="《＋怎么连接字符串》"></a>《＋怎么连接字符串》</h3><ul>
+<li>在Oracle JDK1.7中，当使用“+”对字符串进行连接时，会创建一个临时的StringBuilder对象，该对象调用append方法负责字符串的连接操作，然后再调用StringBuilder类的toString方法转换成String对象。</li>
+<li>在Eclipse平台上，如果“+”左边的操作数是基本数据类型（第15行）或者是String类型（第8、19行）时，是按照如下方式处理的（以第8行为例）：System.out.println((new StringBuilder(String.valueOf(s1))).append(s2).toString())。StringBuilder使用第1个操作数（s1）作为构造器的参数。之所以要调用String类的valueOf方法，那是因为这样可以保证将s1转换成String类型，当“+”左边的操作数是基本数据类型的时候，这样做是有意义的。当操作数的类型不是String类型或基本数据类型时，Eclipse编译器处理的方式与Oracle JDK1.7的编译器相同。</li>
+<li>当使用运算符“+”连接字符串时，如果两个操作数都是编译时常量，则在编译时期就会计算出该字符串的值，而不会在运行的时候创建StringBuilder对象。</li>
+</ul>
+<h3 id="《不可修改的string》"><a href="#《不可修改的string》" class="headerlink" title="《不可修改的string》"></a>《不可修改的string》</h3><ul>
+<li>因为String类是final类型的，我们无法继承该类。并且，其所有的成员变量都是私有（private）的，并且没有提供修改私有成员变量的公有（public）方法，再者，关于对String对象的操作都没有修改当前对象，而是新创建一个对象。</li>
+<li>String的所有数据成员都是私有的，并且没有提供修改数据成员的方法，Stirng内部使用一个char类型的数组来维护字符序列。关于所有对字符序列的操作都是在一个新创建的String对象上面进行的，而不是在该对象本身维护的数组上进行的，因此，当对String对象调用某些方法时，例如substring方法，如果返回值不等于自身，该方法就会新创建一个String对象，该对象为截取后的结果，而不是在原String对象上进行。</li>
+<li>String类是非可变类，其对象一旦创建，就不可修改。</li>
+<li>String类那些看似修改字符序列的方法实际上都是返回新创建的String对象，而不是修改自身对象。</li>
+<li>由于String对象是不可改变的，因此其具有线程安全性，可以自由地实现共享。</li>
+</ul>
+<h3 id="《String字符最大长度》"><a href="#《String字符最大长度》" class="headerlink" title="《String字符最大长度》"></a>《String字符最大长度》</h3><ul>
+<li>在指定数组长度的时候，可以使用byte、short、char、int类型，而不能够使用long类型。这也就是说，数组的最大长度就是int类型的最大值，即0x7fffffff，十进制就是2147483647，同理，这也就是String所能容纳的最大字符数量。而且，获得String对象长度的length方法返回值是int类型的，而不是long类型的，也是因为这个原因。</li>
+<li>计算一下，一个char类型占用2字节，2147483647个char类型就是4294967294字节，这接近于4GB大小。</li>
+</ul>
+<h3 id="《追寻String字面常量的“极限”》"><a href="#《追寻String字面常量的“极限”》" class="headerlink" title="《追寻String字面常量的“极限”》"></a>《追寻String字面常量的“极限”》</h3><ul>
+<li>String字面常量的最大长度与String在内存中的最大长度是不一样的，后者的最大长度为int类型的最大值，即2147483647，而前者根据字符（字符Unicode值）的不同，最大长度也不同，最大长度为65534（可手动修改class文件，令输出结果为65535）。</li>
+<li>String字面常量的最大长度是由CONSTANT_Utf8_info表来决定的，该长度在编译时确定，如果超过了CONSTANT_Utf8_info表bytes数组所能表示的上限，就会产生编译错误。</li>
+</ul>
+<h3 id="《equals方法与“-”的区别》"><a href="#《equals方法与“-”的区别》" class="headerlink" title="《equals方法与“==”的区别》"></a>《equals方法与“==”的区别》</h3><ul>
+<li>在Object类中，equals方法实现如下：public boolean equals(Object obj) {return (this == obj);}从而可知，在Object类中，equals方法与“==”运算符是完全等价的，而我们编写的Box类继承了Object类中的equals方法，因此，Box类中equals方法与“==”是等价的，也就是比较的是对象的地址，而非对象的内容。对于String类，之所以该类可以比较对象的内容，那是因为String类重写了equals方法，使该方法比较的是字符序列（也就是我们通常所说的内容），而非对象的地址。而对于StringBuilder与StringBuffer两个类，与Box类相同，没有重写equals方法，故不同的对象，equals方法返回值为false。</li>
+<li>重写equals方法的规则:<ol>
+<li>自反性。对于任何非null的引用值x，x.equals(x)应返回true。</li>
+<li>对称性。对于任何非null的引用值x与y，当且仅当：y.equals(x)返回true时，x.equals(y)才应返回true。</li>
+<li>传递性。对于任何非null的引用值x、y与z，如果x.equals(y)返回true，并且y.equals(z)返回true，那么x.equals(z)也应返回true。</li>
+<li>一致性。对于任何非空引用值x与y，假设对象上equals比较中的信息没有被修改，则多次调用x.equals(y)始终返回true或始终返回false。</li>
+<li>对于任何非空引用值x，x.equals(null)应返回false。</li>
+</ol>
+</li>
+<li>当box（Box类的对象）与pencilBox（PencilBox类的对象）比较时（第23行），由于所有的PencilBox都是Box，并且batch的值相等，因此equals方法返回true。反过来，当pencilBox与box比较时，由于Box并不是PencilBox，因此第13行if语句的条件表达式值为false，结果equals方法返回false。因此，在PencilBox类的equals方法中，如果obj不是PencilBox类的对象，则不能直接返回false，还要继续判断obj是不是PencilBox的父类（即Box类）对象，如果是，应该继续使用父类的equals方法比较才行。</li>
+<li>pb1、box与pb2都是同一批次的（批次为1），因此box与pb1，box与pb2都是相等的，但是，pb1与pb2却是不相等的。equals方法违背了传递性。</li>
+<li>出现这种情况的根本原因在于以下两点。<ol>
+<li>父类与子类进行混合相等比较。</li>
+<li>子类中声明了新的成员变量，并且在子类equals方法中使用新增成员变量作为对象是否相等的判断条件。</li>
+</ol>
+</li>
+<li>关于hashCode方法有以下几点规定。<ol>
+<li>在Java应用程序执行期间，如果在对象equals方法比较中所用的信息没有被修改，那么在同一对象上多次调用hashCode方法时，必须一致地返回相同的整数。但如果多次执行同一个应用时，不要求该整数必须相同。</li>
+<li>如果两个对象通过调用equals方法是相等的，那么这两个对象调用hashCode方法必须返回相同的整数。</li>
+<li>如果两个对象通过调用equals方法是不相等的，不要求这两个对象调用hashCode方法必须返回不同的整数。但是，程序员应该意识到对不同的对象产生不同的哈希码值可以提高哈希表的性能。</li>
+</ol>
+</li>
+</ul>
+<h3 id="《从字面常量到String常量池》"><a href="#《从字面常量到String常量池》" class="headerlink" title="《从字面常量到String常量池》"></a>《从字面常量到String常量池》</h3><ul>
+<li>在String类中，存在一个专门的区域，用于存储String字面常量，这个区域称为常量池。常量池由String类进行私有维护。</li>
+<li>对于s1与s2而言，二者都是使用new创建的，每使用一次new就会在堆中创建一个String对象，故s1与s2是两个不同的String对象，其地址肯定是不同的。但是对于s3与s4来说，为什么地址是相同的呢？这就是String常量池在发挥作用。因为String是非可变类，其对象一经创建，便不能修改，也由于这个特性，String对象可以自由地由多个线程所共享，而不必担心会遭到意外的修改。</li>
+<li>不只是字面常量，常量池也会加入String常量表达式。那么，究竟满足什么条件才算是String常量表达式呢？很简单，就是编译的时候可以确定其值的String类型的表达式。例如：String s = “a” + “b” + “c”;</li>
+<li>编译器的原则就是：能在编译期间计算的，就不会留到运行时再去计算。</li>
+<li>当需要将某个String对象加入常量池中时，就可以调用intern方法来完成，这个操作也称作拘留字符串。前面提到，系统会自动将String字面常量与String常量表达式的字符串值加入常量池中，这也是通过调用intern方法来实现的。</li>
+<li>当String对象调用intern方法时，如果常量池中已经含有该对象（通过equals方法来判断），则返回常量池中的String对象。如果不存在，则将该对象加入常量池中，并返回该对象。</li>
+<li>String类维护一块特殊的区域，称为常量池。因为String对象是不可改变的，因此没有必要创建两个相同的String对象。只需将String对象加入常量池，在需要的时候取出，这样即可实现String对象的共享。</li>
+<li>在程序中出现String编译时常量（String字面常量与String常量表达式）时，会自动调用intern方法，如果常量池中含有相等的String对象，则直接返回常量池中的对象，否则将对象加入常量池中并返回该对象。</li>
+<li>对于运行时创建的String对象（非String编译时常量），会分配到堆中，系统不会自动调用intern方法拘留该对象，不过我们依然可以自行调用该对象的intern方法对该对象进行拘留。</li>
+</ul>
+<h2 id="《方法、构造器、变量》"><a href="#《方法、构造器、变量》" class="headerlink" title="《方法、构造器、变量》"></a>《方法、构造器、变量》</h2><h3 id="《main方法很“特殊”吗？》"><a href="#《main方法很“特殊”吗？》" class="headerlink" title="《main方法很“特殊”吗？》"></a>《main方法很“特殊”吗？》</h3><ul>
+<li>main方法是公有的（public）、静态的（static），返回类型为void，这样声明的原因如下。<ul>
+<li>public：main方法作为应用程序的入口，该方法是在程序启动时由Java虚拟机调用的，所以应声明为public。</li>
+<li>static：如果不是静态的方法，就需要通过对象来访问。而当Java程序运行，虚拟机调用main方法的时候，没有必要创建含有main方法类的对象。例如，类A中声明了main方法，当运行类A的时候，虚拟机直接调用类A的main方法，而没有必要创建A的对象，然后通过对象调用main方法。</li>
+<li>void：main方法在退出时，并没有给系统返回退出代码，而是在需要时使用System.exit(int status)方法来返回，所以返回类型为void。</li>
+<li>String[] args：该字符串数组用来在运行时接收用户输入的参数，具体长度取决于用户输入参数的个数，如果用户没有输入参数，那么args数组长度为0（并非为null）。</li>
+</ul>
+</li>
+<li>作为应用程序入口的main方法也是可以重载的。但是java虚拟机是严格按照main方法的格式查找类的，如果找不到就会抛出异常。</li>
+<li>main方法也可以被其他方法调用；main方法也是可以由子类所继承的；如果子类继承了父类的main方法，并且在子类中重写声明新的main方法，也可以隐藏父类的main方法，这个表现与隐藏其他方法是一样的；main方法也可以像其他方法一样抛出异常。</li>
+</ul>
+<h3 id="《方法重载》"><a href="#《方法重载》" class="headerlink" title="《方法重载》"></a>《方法重载》</h3><ul>
+<li>方法重载区分的信息就是方法形式参数对应的类型与个数，当重载方法形式参数对应的类型或个数不同，或者二者都不相同时，就可以区分调用的是哪个方法。</li>
+<li>下面的元素不能够用来区分重载方法，因为这些元素提供的信息不够充分。<ol>
+<li>形式参数的名称。</li>
+<li>方法的返回类型。</li>
+<li>方法的异常列表。</li>
+<li>参数化类型。</li>
+</ol>
+</li>
+<li>当实参类型与方法的形参类型不一致时，首先不考虑自动拆箱与装箱，也不考虑可变参数类型，选择实参类型可赋值给形参类型的方法，如果这样的方法多于一个，选择形参类型最明确的那个方法调用。如果不存在这样的方法，则考虑自动拆箱与装箱，即将实参进行适当的拆箱或装箱，然后去匹配对应的方法。如果依然不存在，则最后考虑形参类型为可变参数类型的方法。</li>
+</ul>
+<h3 id="《方法重写的条件》"><a href="#《方法重写的条件》" class="headerlink" title="《方法重写的条件》"></a>《方法重写的条件》</h3><ul>
+<li>如果子类Sub的某个方法mSub重写了父类Super的某个方法mSuper，则需要满足以下几点。<ol>
+<li>mSub与mSuper都是实例方法。<br>父类与子类的方法必须都是实例方法，如果其中一个是静态方法，将会产生编译错误，如果两个方法都是静态方法，则不是方法重写，而是方法隐藏。</li>
+<li>mSub的签名是mSuper的子签名。<br>可以在子类中使用非泛型化的方法重写父类中泛型化的方法，但反过来是不允许的，即不能在子类中使用泛型化的方法重写父类中非泛型化的方法。</li>
+<li>mSub的返回类型是mSuper返回类型的可替换类型。</li>
+<li>mSub的访问权限不能低于mSuper的访问权限。</li>
+<li>mSub不能比mSuper抛出更多的受检异常。</li>
+<li>子类Sub继承了父类的mSub方法。</li>
+</ol>
+</li>
+<li>子类方法的访问权限不允许低于父类方法的访问权限。这是因为，面向对象的编程有一个特征，凡是父类可以做的事，子类也都可以做。</li>
+</ul>
+<h3 id="《方法与成员变量》"><a href="#《方法与成员变量》" class="headerlink" title="《方法与成员变量》"></a>《方法与成员变量》</h3><ul>
+<li>如果子类Sub的某个方法mSub隐藏了父类Super的某个方法mSuper，则需要满足以下几点。<ol>
+<li>Sub与mSuper都是静态方法。</li>
+<li>mSub的签名是mSuper的子签名。</li>
+<li>mSub的返回类型是mSuper返回类型的可替换类型。</li>
+<li>mSub的访问权限不能低于mSuper的访问权限。</li>
+<li>mSub不能比mSuper抛出更多的受检异常。</li>
+</ol>
+</li>
+<li>如果子类Sub的某个成员变量fSub隐藏了父类Super的某个成员变量fSuper，则需要满足以下几点。<ol>
+<li>fSub与fSuper具有相同的名称。</li>
+<li>子类继承了父类的fSub成员变量。</li>
+</ol>
+</li>
+<li>对于重写而言，是根据运行时引用所指向对象的实际类型来调用相关类的方法。例如第41行，引用s所指向对象的实际类型为OverrideAndHidden，而子类OverrideAndHidden又重写了mInstance方法，因此在运行时调用子类的mInstance方法。对于隐藏，则是根据引用的静态类型（编译时类型）来决定调用相关类的成员。例如，引用s的类型为父类的类型（SuperOverrideAndHidden），见程序第40行与第42行，因此会调用父类的成员变量s与方法mStatic。</li>
+</ul>
+<h3 id="《执行初始化的构造器》"><a href="#《执行初始化的构造器》" class="headerlink" title="《执行初始化的构造器》"></a>《执行初始化的构造器》</h3><ul>
+<li>对构造器，也称构造方法，用来初始化类的实例成员变量，在使用new关键字创建对象的时候，由系统自动调用。构造器必须与类名相同，并且没有返回值，在外观上与类中声明的方法相似，例如，也可以具备形式参数、类型变量、异常列表等。然而，构造器不是方法，也不是类的成员。</li>
+<li>对构造器不是方法。方法既可以在其声明的类中调用，也可以在类外调用（假设满足一定的访问权限），而构造器通常在使用new关键字创建对象的时候，由系统自动调用，如果显示调用构造器，则必须在同类或子类的另一个构造器中，使用this或super关键字调用，方法则是类或对象的引用（静态方法或实例方法），通过方法名称调用。</li>
+<li>对如果显式地使用this或super调用构造器，则this或super语句必须是构造器中的第1条语句，否则就会产生编译错误。由此可知，this与super只能有一个出现在同一个构造器中，正所谓一山不能容二虎，如果两个同时出现，则必有一个不能出现在构造器的第1条语句中，因此就会产生编译错误。</li>
+<li>对类的成员可以由子类继承（如果访问权限满足的话），但是构造器不能由子类继承，即使构造器声明为public也是如此。其实，构造器就是在创建对象的时候，用来初始化实例成员变量的，子类可以有自己的成员变量，也有自己的初始化方法，继承父类的构造器没有意义。</li>
+<li>对然而，虽然构造器不会由子类继承，但是在子类的构造器中，如果第1条语句没有使用this来调用另外一个构造器，则会使用如下的语句隐式调用父类无参的构造器：super();</li>
+<li>对此时，如果父类中没有无参的构造器，就会发生编译错误。</li>
+<li>对先创建对象，然后才调用构造器的。</li>
+<li>对那究竟是谁创建了对象呢？答案是，new运算符。在程序运行时，是new运算符在堆上开辟一定的空间，然后执行对象的初始化（其中包括调用构造器），当对象创建成功时，也是new运算符将对象的起始地址返回给应用程序（并非是构造器返回的）。实际上，构造器的作用是在对象创建的时候进行类中实例成员的初始化，而绝非是创建对象。构造器也没有返回值。</li>
+</ul>
+<h3 id="《成员变量的初始化》"><a href="#《成员变量的初始化》" class="headerlink" title="《成员变量的初始化》"></a>《成员变量的初始化》</h3><ul>
+<li>实例变量可以使用以下3种方式来初始化。<ol>
+<li>在声明处初始化。</li>
+<li>在实例初始化块中初始化。</li>
+<li>在构造器中初始化。</li>
+</ol>
+</li>
+<li>静态变量可以使用以下两种方式来初始化。<ol>
+<li>在声明处初始化。</li>
+<li>在静态初始化块中初始化。</li>
+</ol>
+</li>
+<li>相对于实例变量，静态变量的继承更加容易出错。因为实例变量是基于对象的，每个对象都在堆上分配单独的空间来存放实例变量，不同对象之间的实例变量互不干扰。而静态变量是基于类的，由类的所有对象所共享。如果子类继承了父类的静态变量（没有隐藏），则该静态变量还由所有子类（包括所有子类的对象）所共享。</li>
+<li>如果类的静态变量不是private类型的，通常也应该同时将其声明为final，以免发生上面所述的现象。</li>
+</ul>
+<h3 id="《初始化顺序与向前引用》"><a href="#《初始化顺序与向前引用》" class="headerlink" title="《初始化顺序与向前引用》"></a>《初始化顺序与向前引用》</h3><ul>
+<li>静态初始化（静态变量与静态初始化块）虽然没有在类的最前面声明，但还是先于实例初始化（实例变量、实例初始化块与构造器）而执行，并且只执行一次。而每次创建对象的时候都会执行实例初始化。</li>
+<li>类的初始化执行完毕，就会执行main方法，创建类的对象，使用new在堆中为对象分配空间，这时所有的实例变量都置为默认值，然后执行实例初始化。</li>
+<li>对于3种实例初始化方式，首先会按类中声明的顺序执行实例变量声明处初始化与实例初始化块，然后执行构造器。</li>
+<li>当通过其他类的成员进行初始化时，在引用的那个点上执行引用类的相关初始化。</li>
+</ul>
+<h2 id="《类与接口》"><a href="#《类与接口》" class="headerlink" title="《类与接口》"></a>《类与接口》</h2><h3 id="《基本数据类型与包装类》"><a href="#《基本数据类型与包装类》" class="headerlink" title="《基本数据类型与包装类》"></a>《基本数据类型与包装类》</h3><h3 id="《数组》"><a href="#《数组》" class="headerlink" title="《数组》"></a>《数组》</h3><ul>
+<li>数组，就是具有相同类型（或兼容类型）元素的集合。相对于集合类来说，数组在使用上相对简单，并且有着更快的运行速度。数组中的元素是有序的，可以通过下标来访问。数组是定长的，一经创建就不可改变其长度。</li>
+<li>数组的public成员变量并没有length，这个变量在数组中是隐式存在的。</li>
+</ul>
+<h3 id="《接口类型》"><a href="#《接口类型》" class="headerlink" title="《接口类型》"></a>《接口类型》</h3><ul>
+<li>接口，是一种完全抽象的设计，没有任何实现。接口有以下3个特征：<ol>
+<li>所有的成员变量都是public、static、final类型。</li>
+<li>所有的方法都是public、abstract类型。</li>
+<li>所有的嵌套类型（类或接口）都是public、static类型。</li>
+<li>即使以上3点没有显式的声明也是如此。</li>
+</ol>
+</li>
+<li>如果两个接口中声明了相同名称的变量，当一个类实现了这两个接口，或者子接口多重继承这两个接口，则对该同名变量访问的时候，必须使用限定名称，使用简单名称就会引发编译错误。</li>
+<li>总结<ul>
+<li>接口中所有的变量都是public、static、final类型，所有方法都是public、abstract类型，所有的内部类（包括枚举）与内部接口都是public、static类型。</li>
+<li>如果接口中没有声明任何方法，也默认存在9个方法，这9个方法与Object类中的9个public方法相对应。</li>
+<li>接口是完全抽象的设计，不能实例化。使用new方式创建的接口类型，实际上是创建了一个匿名类，该匿名类实现了接口类型。</li>
+<li>接口允许多重继承。接口重写与隐藏的规则与类是一样的。</li>
+<li>如果两个接口声明了相同名称的变量x，则当某接口同时继承这两个接口，或者某类同时实现这两个接口时，通过简单名称访问x会产生编译错误。</li>
+<li>如果两个接口中声明了相同名称的方法m，并且两个m方法没有构成重载，则当某接口能够同时继承这两个接口，或者某类能够同时实现这两个接口时，必须存在一种方法签名，使得该签名同时为两个m方法签名的子签名，并且在方法的返回类型上，必须存在一种类型，使得该类型同时为两个m方法返回类型的可替换类型。</li>
+</ul>
+</li>
+</ul>
+<h3 id="《嵌套类型》"><a href="#《嵌套类型》" class="headerlink" title="《嵌套类型》"></a>《嵌套类型》</h3><ul>
+<li>类型是可以嵌套声明的，即在类或接口的内部还可以声明类或接口。根据嵌套类型声明方式，可以将嵌套的类型分为静态成员类（静态嵌套类）、内部类（非静态嵌套类）与嵌套接口。同时，内部类还可以分为内部成员类、本地内部类与匿名内部类。嵌套类型主要的作用，是将逻辑相关的类联系在一起，同时也可控制对外的访问权限。不同的嵌套类型，其性质与表现也有所不同。</li>
+<li>当创建内部类对象（调用内部类的构造器）时，需要将外围类的对象（作为参数）传递给内部类的构造器，用来将内部类对象绑定到外围类对象。</li>
+</ul>
+<h3 id="《枚举》"><a href="#《枚举》" class="headerlink" title="《枚举》"></a>《枚举》</h3><ul>
+<li>在Java程序中，枚举是类，枚举常量是类的对象，并且在枚举类外无法创建枚举的对象，这就可以保证枚举的类型安全性。相对于C / C++语言中的枚举，或者相对于JDK1.5之前使用类或接口常量的实现方式，有着很大的优越性。</li>
+<li>所有的枚举类都继承java.lang.Enum，并且所有的枚举类都声明为final。每个枚举常量都声明为public、static与final。但是，我们不能显式地继承Enum类。</li>
+<li>枚举类的实例初始化中不能访问静态变量，但是，编译时常量的静态变量除外。</li>
+</ul>
+<h3 id="《加载、链接与初始化》"><a href="#《加载、链接与初始化》" class="headerlink" title="《加载、链接与初始化》"></a>《加载、链接与初始化》</h3><ul>
+<li>Java程序源文件编译后，都会生成.class文件（每个类型生成一个）。虚拟机以二进制的形式读入.class文件，并解析这个.class文件的结构，然后创建该类型的Class对象，这就是类的加载。</li>
+</ul>
+<h3 id="《类型及其成员的选择》"><a href="#《类型及其成员的选择》" class="headerlink" title="《类型及其成员的选择》"></a>《类型及其成员的选择》</h3><ul>
+<li>理解类型的遮蔽，当前类型会遮蔽明确导入的类型、本包中的同名类型与按需导入的类型。而明确导入的类型会遮蔽本包中的同名类型与按需导入的类型。本包中的类型会遮蔽按需导入的类型。</li>
+<li>理解变量的遮蔽与隐藏。子类会隐藏父类的成员变量。局部变量（或方法与构造器的参数）会遮蔽成员变量、明确静态导入的变量与按需静态导入的变量。成员变量会遮蔽明确静态导入的变量与按需静态导入的变量。明确静态导入的变量会遮蔽按需静态导入的变量。</li>
+<li>理解方法的遮蔽与隐藏（重写）。子类会隐藏（重写）父类的方法。类中的方法会遮蔽明确静态导入的方法与按需静态导入的方法。明确静态导入的方法会遮蔽按需静态导入的方法。</li>
+<li>理解模糊的概念。当一个名称可能解析为变量名、类型名或包名时，变量名优先于类型名与包名，而类型名优先于包名。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%98%85%E8%AF%BB/" rel="tag"># 阅读</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/17/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%A6%BB%E5%A6%BE%E6%88%90%E7%BE%A4%E3%80%8B_%E8%8B%8F%E7%AB%A5/" rel="prev" title="《妻妾成群》_苏童">
+      <i class="fa fa-chevron-left"></i> 《妻妾成群》_苏童
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/" rel="next" title="达梦数据库特殊语法">
+      达梦数据库特殊语法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%91%98%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">摘录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8A%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E3%80%8B"><span class="nav-number">1.1.</span> <span class="nav-text">《基础概念》</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%85%B3%E9%94%AE%E5%AD%97%E3%80%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">《关键字》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%A0%87%E8%AF%86%E7%AC%A6%E3%80%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">《标识符》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%E3%80%8B"><span class="nav-number">1.1.3.</span> <span class="nav-text">《特殊字符》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E3%80%8B"><span class="nav-number">1.1.4.</span> <span class="nav-text">《类型转换》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%B5%AE%E7%82%B9%E7%B1%BB%E5%9E%8B%E3%80%8B"><span class="nav-number">1.1.5.</span> <span class="nav-text">《浮点类型》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8Afor%E5%BE%AA%E7%8E%AF%E3%80%8B"><span class="nav-number">1.1.6.</span> <span class="nav-text">《for循环》</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8A%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%8B"><span class="nav-number">1.2.</span> <span class="nav-text">《运算符与表达式》</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8Ai-j%E8%AF%A5%E6%80%8E%E4%B9%88%E8%BF%90%E7%AE%97%EF%BC%9F%E3%80%8B"><span class="nav-number">1.2.1.</span> <span class="nav-text">《i+++j该怎么运算？》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A-i%E4%B8%8Ei-%E7%9A%84%E5%B7%AE%E5%88%AB%E3%80%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">《++i与i++的差别》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E7%9B%B8%E9%99%A4%E4%B8%8E%E6%B1%82%E4%BD%99%E3%80%8B"><span class="nav-number">1.2.3.</span> <span class="nav-text">《相除与求余》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E3%80%8B"><span class="nav-number">1.2.4.</span> <span class="nav-text">《移位运算》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6%E3%80%8B"><span class="nav-number">1.2.5.</span> <span class="nav-text">《条件运算符》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E8%BF%90%E7%AE%97%E9%A1%BA%E5%BA%8F%E3%80%8B"><span class="nav-number">1.2.6.</span> <span class="nav-text">《运算顺序》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%8F%98%E9%87%8F%E4%BA%A4%E6%8D%A2%E3%80%8B"><span class="nav-number">1.2.7.</span> <span class="nav-text">《变量交换》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8Aswitch%E7%B1%BB%E5%9E%8B%E3%80%8B"><span class="nav-number">1.2.8.</span> <span class="nav-text">《switch类型》</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8Astring%E7%B1%BB%E3%80%8B"><span class="nav-number">1.3.</span> <span class="nav-text">《string类》</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%EF%BC%8B%E6%80%8E%E4%B9%88%E8%BF%9E%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">《＋怎么连接字符串》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E4%B8%8D%E5%8F%AF%E4%BF%AE%E6%94%B9%E7%9A%84string%E3%80%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">《不可修改的string》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8AString%E5%AD%97%E7%AC%A6%E6%9C%80%E5%A4%A7%E9%95%BF%E5%BA%A6%E3%80%8B"><span class="nav-number">1.3.3.</span> <span class="nav-text">《String字符最大长度》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E8%BF%BD%E5%AF%BBString%E5%AD%97%E9%9D%A2%E5%B8%B8%E9%87%8F%E7%9A%84%E2%80%9C%E6%9E%81%E9%99%90%E2%80%9D%E3%80%8B"><span class="nav-number">1.3.4.</span> <span class="nav-text">《追寻String字面常量的“极限”》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8Aequals%E6%96%B9%E6%B3%95%E4%B8%8E%E2%80%9C-%E2%80%9D%E7%9A%84%E5%8C%BA%E5%88%AB%E3%80%8B"><span class="nav-number">1.3.5.</span> <span class="nav-text">《equals方法与“&#x3D;&#x3D;”的区别》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E4%BB%8E%E5%AD%97%E9%9D%A2%E5%B8%B8%E9%87%8F%E5%88%B0String%E5%B8%B8%E9%87%8F%E6%B1%A0%E3%80%8B"><span class="nav-number">1.3.6.</span> <span class="nav-text">《从字面常量到String常量池》</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8A%E6%96%B9%E6%B3%95%E3%80%81%E6%9E%84%E9%80%A0%E5%99%A8%E3%80%81%E5%8F%98%E9%87%8F%E3%80%8B"><span class="nav-number">1.4.</span> <span class="nav-text">《方法、构造器、变量》</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8Amain%E6%96%B9%E6%B3%95%E5%BE%88%E2%80%9C%E7%89%B9%E6%AE%8A%E2%80%9D%E5%90%97%EF%BC%9F%E3%80%8B"><span class="nav-number">1.4.1.</span> <span class="nav-text">《main方法很“特殊”吗？》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD%E3%80%8B"><span class="nav-number">1.4.2.</span> <span class="nav-text">《方法重载》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E7%9A%84%E6%9D%A1%E4%BB%B6%E3%80%8B"><span class="nav-number">1.4.3.</span> <span class="nav-text">《方法重写的条件》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%96%B9%E6%B3%95%E4%B8%8E%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E3%80%8B"><span class="nav-number">1.4.4.</span> <span class="nav-text">《方法与成员变量》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%89%A7%E8%A1%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E7%9A%84%E6%9E%84%E9%80%A0%E5%99%A8%E3%80%8B"><span class="nav-number">1.4.5.</span> <span class="nav-text">《执行初始化的构造器》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E3%80%8B"><span class="nav-number">1.4.6.</span> <span class="nav-text">《成员变量的初始化》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%E4%B8%8E%E5%90%91%E5%89%8D%E5%BC%95%E7%94%A8%E3%80%8B"><span class="nav-number">1.4.7.</span> <span class="nav-text">《初始化顺序与向前引用》</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8A%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3%E3%80%8B"><span class="nav-number">1.5.</span> <span class="nav-text">《类与接口》</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8C%85%E8%A3%85%E7%B1%BB%E3%80%8B"><span class="nav-number">1.5.1.</span> <span class="nav-text">《基本数据类型与包装类》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%95%B0%E7%BB%84%E3%80%8B"><span class="nav-number">1.5.2.</span> <span class="nav-text">《数组》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E3%80%8B"><span class="nav-number">1.5.3.</span> <span class="nav-text">《接口类型》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%B5%8C%E5%A5%97%E7%B1%BB%E5%9E%8B%E3%80%8B"><span class="nav-number">1.5.4.</span> <span class="nav-text">《嵌套类型》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%9E%9A%E4%B8%BE%E3%80%8B"><span class="nav-number">1.5.5.</span> <span class="nav-text">《枚举》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%8A%A0%E8%BD%BD%E3%80%81%E9%93%BE%E6%8E%A5%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96%E3%80%8B"><span class="nav-number">1.5.6.</span> <span class="nav-text">《加载、链接与初始化》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E6%88%90%E5%91%98%E7%9A%84%E9%80%89%E6%8B%A9%E3%80%8B"><span class="nav-number">1.5.7.</span> <span class="nav-text">《类型及其成员的选择》</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">不登山峰，不显平地</p>
+  <div class="site-description" itemprop="description">木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lark-coder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lark-coder" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不登山峰，不显平地</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">711k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:47</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

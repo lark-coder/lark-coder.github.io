@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.hudi.tech","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="springboot配置sharding-jdbcMaven依赖配置springboot版本配置：对springboot的版本没有要求，但是springboot的1.x和springboot2.x的配置（springboot2.x的application.yml中需要添加spring.main.allow-bean-definition-overriding&#x3D;true）不一样 123456&lt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot配置sharding-jdbc">
+<meta property="og:url" content="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E9%85%8D%E7%BD%AEsharding-jdbc/index.html">
+<meta property="og:site_name" content="木刻的鱼儿的博客">
+<meta property="og:description" content="springboot配置sharding-jdbcMaven依赖配置springboot版本配置：对springboot的版本没有要求，但是springboot的1.x和springboot2.x的配置（springboot2.x的application.yml中需要添加spring.main.allow-bean-definition-overriding&#x3D;true）不一样 123456&lt;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-16T13:37:01.000Z">
+<meta property="article:modified_time" content="2020-09-05T09:10:18.002Z">
+<meta property="article:author" content="不登山峰，不显平地">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="springboot">
+<meta property="article:tag" content="sharding-jdbc">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E9%85%8D%E7%BD%AEsharding-jdbc/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>springboot配置sharding-jdbc | 木刻的鱼儿的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木刻的鱼儿的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E9%85%8D%E7%BD%AEsharding-jdbc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          springboot配置sharding-jdbc
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-16 21:37:01" itemprop="dateCreated datePublished" datetime="2019-03-16T21:37:01+08:00">2019-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/" itemprop="url" rel="index"><span itemprop="name">springboot</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="springboot配置sharding-jdbc"><a href="#springboot配置sharding-jdbc" class="headerlink" title="springboot配置sharding-jdbc"></a>springboot配置sharding-jdbc</h1><h2 id="Maven依赖配置"><a href="#Maven依赖配置" class="headerlink" title="Maven依赖配置"></a>Maven依赖配置</h2><p>springboot版本配置：对springboot的版本没有要求，但是springboot的1.x和springboot2.x的配置（springboot2.x的application.yml中需要添加spring.main.allow-bean-definition-overriding=true）不一样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-starter-parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.5.4.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">  &lt;relativePath&#x2F;&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">&lt;&#x2F;parent&gt;</span><br></pre></td></tr></table></figure>
+<p>sharding-sphere配置：mysql和数据库连接池druid依赖配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.1.44&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;druid-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.1.10&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.shardingsphere&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;sharding-jdbc-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.1.0.M1&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="配置application-yml"><a href="#配置application-yml" class="headerlink" title="配置application.yml"></a>配置application.yml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8088</span><br><span class="line"></span><br><span class="line">## 分库分表配置(分库的个数和分表的个数互为质数，不然数据分配不均匀，会有空表出现)</span><br><span class="line">sharding:</span><br><span class="line">  jdbc:</span><br><span class="line">    ## 数据源配置</span><br><span class="line">    datasource:</span><br><span class="line">      datasource:</span><br><span class="line">        driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line">        password:</span><br><span class="line">        type: com.alibaba.druid.pool.DruidDataSource</span><br><span class="line">        url: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;coder?characterEncoding&#x3D;utf-8&amp;useSSL&#x3D;false</span><br><span class="line">        username: root</span><br><span class="line">      datasource0:</span><br><span class="line">        driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line">        password:</span><br><span class="line"></span><br><span class="line">        type: com.alibaba.druid.pool.DruidDataSource</span><br><span class="line">        url: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;coder001?characterEncoding&#x3D;utf-8&amp;useSSL&#x3D;false</span><br><span class="line">        username: root</span><br><span class="line">      datasource1:</span><br><span class="line">        driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line">        password:</span><br><span class="line">        type: com.alibaba.druid.pool.DruidDataSource</span><br><span class="line">        url: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;coder002?characterEncoding&#x3D;utf-8&amp;useSSL&#x3D;false</span><br><span class="line">        username: root</span><br><span class="line">      datasource2:</span><br><span class="line">        driver-class-name: com.mysql.jdbc.Driver</span><br><span class="line">        password:</span><br><span class="line">        type: com.alibaba.druid.pool.DruidDataSource</span><br><span class="line">        url: jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;coder003?characterEncoding&#x3D;utf-8&amp;useSSL&#x3D;false</span><br><span class="line">        username: root</span><br><span class="line">      names: datasource,datasource0,datasource1,datasource2</span><br><span class="line">    ## 分库分表配置</span><br><span class="line">    config:</span><br><span class="line">      sharding:</span><br><span class="line">        ## 默认数据源配置：不分库分表的数据存储在这个库里面</span><br><span class="line">        default-data-source-name: datasource</span><br><span class="line">        ## 默认的分库和分表策略</span><br><span class="line">        default-database-strategy:</span><br><span class="line">          standard:</span><br><span class="line">            precise-algorithm-class-name: com.cavalry.beaver.config.DatabasePreciseShardingAlgorithm</span><br><span class="line">            sharding-column: user_id</span><br><span class="line">        default-table-strategy:</span><br><span class="line">          standard:</span><br><span class="line">            precise-algorithm-class-name: com.cavalry.beaver.config.TablePreciseShardingAlgorithm</span><br><span class="line">            sharding-column: user_id</span><br><span class="line">        ## 分库分表配置</span><br><span class="line">        tables:</span><br><span class="line">          user:</span><br><span class="line">            actual-data-nodes: datasource$&#123;0..2&#125;.user_$&#123;0..9&#125;</span><br><span class="line">          user_account:</span><br><span class="line">            actual-data-nodes: datasource$&#123;0..2&#125;.user_account_$&#123;0..9&#125;</span><br><span class="line">            ## 自定义分库配置</span><br><span class="line">            database-strategy:</span><br><span class="line">              standard:</span><br><span class="line">                precise-algorithm-class-name: com.cavalry.beaver.config.DatabasePreciseShardingAlgorithm</span><br><span class="line">                sharding-column:account_id</span><br><span class="line">            ## 自定义分表配置</span><br><span class="line">            table-strategy:</span><br><span class="line">              standard:</span><br><span class="line">                precise-algorithm-class-name: com.cavalry.beaver.config.TablePreciseShardingAlgorithm</span><br><span class="line">                sharding-column: account_id</span><br><span class="line"></span><br><span class="line">## mybatis配置</span><br><span class="line"></span><br><span class="line">mybatis:</span><br><span class="line">  mapper-locations: classpath:mapper&#x2F;*.xml</span><br><span class="line">  check-config-location: true</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="分库策略配置："><a href="#分库策略配置：" class="headerlink" title="分库策略配置："></a>分库策略配置：</h2><p>上面的配置文件中的precise-algorithm-class-name即这个下面这个类的路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class DatabasePreciseShardingAlgorithm implements PreciseShardingAlgorithm&lt;Long&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public String doSharding(Collection&lt;String&gt; availableTargetNames, PreciseShardingValue&lt;Long&gt; shardingValue) &#123;</span><br><span class="line">        for (String tableName : availableTargetNames) &#123;</span><br><span class="line">            if (tableName.endsWith(shardingValue.getValue() % 3 + &quot;&quot;)) &#123;</span><br><span class="line">                return tableName;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        throw new IllegalArgumentException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分表策略配置："><a href="#分表策略配置：" class="headerlink" title="分表策略配置："></a>分表策略配置：</h2><p>上面的配置文件中的precise-algorithm-class-name即这个下面这个类的路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class TablePreciseShardingAlgorithm implements PreciseShardingAlgorithm&lt;Long&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public String doSharding(Collection&lt;String&gt; availableTargetNames, PreciseShardingValue&lt;Long&gt; shardingValue) &#123;</span><br><span class="line">        for (String tableName : availableTargetNames) &#123;</span><br><span class="line">            if (tableName.endsWith(shardingValue.getValue() % 10 + &quot;&quot;)) &#123;</span><br><span class="line">                return tableName;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        throw new IllegalArgumentException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>如果以同一个字段既分库又分表，则需要保证分库和分表的策略（取模）互为质数。否则分库分表之后的数据存储会不平均，会导致有某些数据节点没有数据。</li>
+<li>分库分表的时候最好不要使用联合查询，如果需要联合查询最好配置绑定表</li>
+<li>分库分表的表最好有统一的一个字段，这样能够保证同一个用户的数据存储在同一个数据库中，且存储数据的真实表的后缀也一样，便于后续执行DBA的操作。</li>
+<li>springboot2.x的application.yml中需要添加spring.main.allow-bean-definition-overriding=true的配置</li>
+</ol>
+<h2 id="sharidng-jdbc使用issue"><a href="#sharidng-jdbc使用issue" class="headerlink" title="sharidng-jdbc使用issue"></a>sharidng-jdbc使用issue</h2><h3 id="issue1-sharding配置使用多数据库，其中又有不想分库分表"><a href="#issue1-sharding配置使用多数据库，其中又有不想分库分表" class="headerlink" title="issue1:sharding配置使用多数据库，其中又有不想分库分表"></a>issue1:sharding配置使用多数据库，其中又有不想分库分表</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 分库分表配置(分库的个数和分表的个数互为质数，不然数据分配不均匀，会有空表出现)</span></span><br><span class="line"><span class="attr">sharding:</span></span><br><span class="line">  <span class="attr">jdbc:</span></span><br><span class="line">    <span class="comment">## 数据源配置</span></span><br><span class="line">    <span class="attr">datasource:</span></span><br><span class="line">      <span class="attr">names:</span> <span class="string">datasource0,datasource1</span></span><br><span class="line">      <span class="attr">datasource0:</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">url: jdbc:</span></span><br><span class="line">        <span class="attr">username:</span> </span><br><span class="line">        <span class="attr">password:</span></span><br><span class="line">      <span class="attr">datasource1:</span></span><br><span class="line">        <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">        <span class="attr">url: jdbc:</span></span><br><span class="line">        <span class="attr">username:</span> </span><br><span class="line">        <span class="attr">password:</span> </span><br><span class="line"></span><br><span class="line">    <span class="comment">## 分库分表配置</span></span><br><span class="line">    <span class="attr">config:</span></span><br><span class="line">      <span class="attr">sharding:</span></span><br><span class="line">        <span class="comment">## 默认配置的数据库，如果默认库中的表不需要分库分表，则改表什么都不需要配置</span></span><br><span class="line">        <span class="attr">default-data-source-name:</span> <span class="string">datasource0</span></span><br><span class="line">        <span class="attr">default-table-strategy:</span></span><br><span class="line">          <span class="attr">standard:</span></span><br><span class="line">            <span class="comment">## 默认的分表策略</span></span><br><span class="line">            <span class="attr">precise-algorithm-class-name:</span> <span class="string">分表的接口实现类地址</span></span><br><span class="line">            <span class="comment">## 默认的分表字段</span></span><br><span class="line">            <span class="attr">sharding-column:</span> <span class="string">default_id</span></span><br><span class="line">        <span class="comment">## 分库分表配置</span></span><br><span class="line">        <span class="attr">tables:</span></span><br><span class="line">          <span class="comment">## 按表进行定制，不定制的话不分表，并按照读取的是默认的数据库配置</span></span><br><span class="line">          <span class="attr">table1:</span></span><br><span class="line">            <span class="attr">actual-data-nodes:</span> <span class="string">datasource0.table_1$&#123;0..31&#125;</span></span><br><span class="line">          <span class="attr">table2:</span></span><br><span class="line">            <span class="attr">actual-data-nodes:</span> <span class="string">datasource0.table_2$&#123;0..31&#125;</span></span><br><span class="line">            <span class="comment">## 自定义分表配置</span></span><br><span class="line">            <span class="attr">table-strategy:</span></span><br><span class="line">              <span class="attr">standard:</span></span><br><span class="line">                <span class="attr">precise-algorithm-class-name:</span> <span class="string">分表的接口实现类地址</span></span><br><span class="line">                <span class="attr">sharding-column:</span> <span class="string">table2_id</span></span><br><span class="line">          <span class="attr">table3:</span></span><br><span class="line">            <span class="attr">actual-data-nodes:</span> <span class="string">datasource1.table3_$&#123;0..31&#125;</span></span><br><span class="line">          <span class="attr">table4:</span></span><br><span class="line">            <span class="comment">## 这个表用的是库1的数据库并不分表，对于不是默认库的不分表的情况，都需要如table4一样显式配置声明，并需要修改分表的接口实现类，具体见后面</span></span><br><span class="line">            <span class="attr">actual-data-nodes:</span> <span class="string">datasource1.table4</span></span><br></pre></td></tr></table></figure>
+<h4 id="接口实现类的修改"><a href="#接口实现类的修改" class="headerlink" title="接口实现类的修改"></a>接口实现类的修改</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//添加：用于处理不分表的情况，如果不加这个配置，在for循环里面处理不到异库不分表的情况，会抛出异常</span></span><br><span class="line"><span class="keyword">if</span> (availableTargetNames.size() == <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> String.valueOf(availableTargetNames.toArray()[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原有</span></span><br><span class="line"><span class="keyword">for</span> (String tableName : availableTargetNames) &#123;</span><br><span class="line">    <span class="keyword">if</span> (tableName.endsWith(shardingValue.getValue() % <span class="number">32</span> + <span class="string">&quot;&quot;</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> tableName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br></pre></td></tr></table></figure>
+<h3 id="issue2-sharding-sphere不支持mysql的select-last-insert-id-函数"><a href="#issue2-sharding-sphere不支持mysql的select-last-insert-id-函数" class="headerlink" title="issue2:sharding-sphere不支持mysql的select last_insert_id()函数"></a>issue2:sharding-sphere不支持mysql的select last_insert_id()函数</h3><p>sharding-sphere不支持mysql的select last_insert_id()函数，当需要获取插入数据的id的时候，就无法通过这个sql获取，所以需要自己添加事务，并重新查一下数据库获取id（查询的时候最好加上where条件，将范围缩小，避免出现问题）</p>
+<h3 id="issue3-sharding-sphere-3-1-x-不支持limit-offset-limit语法。"><a href="#issue3-sharding-sphere-3-1-x-不支持limit-offset-limit语法。" class="headerlink" title="issue3:sharding-sphere(3.1.x)不支持limit offset limit语法。"></a>issue3:sharding-sphere(3.1.x)不支持limit offset limit语法。</h3><p>sharding-sphere(3.1.x)不支持limit offset limit语法，解析之后的limit offset limit===&gt;limit 0,offset+limit，这会导致从offet获取数据的时候获取的是从0开始到offset+limit的所有数据。</p>
+<h4 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h4><ol>
+<li>将sharing-sphere的版本降到3.0.0，这个版本对这个sql语法是支持的，但是降到3.0.0之后无法使用分布式事务</li>
+<li>等待sharing-sphere升级到4.0.0版本(预计2019年11月份发布)</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/springboot/" rel="tag"># springboot</a>
+              <a href="/tags/sharding-jdbc/" rel="tag"># sharding-jdbc</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E9%9B%86%E6%88%90swagger2/" rel="prev" title="springboot集成swagger2">
+      <i class="fa fa-chevron-left"></i> springboot集成swagger2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E9%80%9A%E8%BF%87mybatis-generator%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E4%BB%A3%E7%A0%81/" rel="next" title="springboot通过mybatis-generator自动生成代码">
+      springboot通过mybatis-generator自动生成代码 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#springboot%E9%85%8D%E7%BD%AEsharding-jdbc"><span class="nav-number">1.</span> <span class="nav-text">springboot配置sharding-jdbc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven%E4%BE%9D%E8%B5%96%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">Maven依赖配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEapplication-yml"><span class="nav-number">1.2.</span> <span class="nav-text">配置application.yml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%BA%93%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">分库策略配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E8%A1%A8%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">分表策略配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.5.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sharidng-jdbc%E4%BD%BF%E7%94%A8issue"><span class="nav-number">1.6.</span> <span class="nav-text">sharidng-jdbc使用issue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#issue1-sharding%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%8C%E5%85%B6%E4%B8%AD%E5%8F%88%E6%9C%89%E4%B8%8D%E6%83%B3%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="nav-number">1.6.1.</span> <span class="nav-text">issue1:sharding配置使用多数据库，其中又有不想分库分表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E7%B1%BB%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">接口实现类的修改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#issue2-sharding-sphere%E4%B8%8D%E6%94%AF%E6%8C%81mysql%E7%9A%84select-last-insert-id-%E5%87%BD%E6%95%B0"><span class="nav-number">1.6.2.</span> <span class="nav-text">issue2:sharding-sphere不支持mysql的select last_insert_id()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#issue3-sharding-sphere-3-1-x-%E4%B8%8D%E6%94%AF%E6%8C%81limit-offset-limit%E8%AF%AD%E6%B3%95%E3%80%82"><span class="nav-number">1.6.3.</span> <span class="nav-text">issue3:sharding-sphere(3.1.x)不支持limit offset limit语法。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%9A"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">解决办法：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">不登山峰，不显平地</p>
+  <div class="site-description" itemprop="description">木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lark-coder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lark-coder" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不登山峰，不显平地</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">711k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:47</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.hudi.tech","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="摘录《概述》《设计和架构究竟是什么？》 “架构”这个词往往使用于“高层级”的讨论中，这类讨论一般把“底层”的实现细节排除在外。而“设计”一词，往往用来指代具体的系统底层组织结构和实现的细节。但是，从一个真正的系统架构师的日常工作来看，这样的区分是根本不成立的。 总的来说，架构图里实际包含了所有的底层设计细节，这些细节信息共同支撑了顶层的架构设计，底层设计信息和顶层架构设计共同组成了整个房屋的架构文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《架构整洁之道》">
+<meta property="og:url" content="http://www.hudi.tech/2019/03/01/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E3%80%8B/index.html">
+<meta property="og:site_name" content="木刻的鱼儿的博客">
+<meta property="og:description" content="摘录《概述》《设计和架构究竟是什么？》 “架构”这个词往往使用于“高层级”的讨论中，这类讨论一般把“底层”的实现细节排除在外。而“设计”一词，往往用来指代具体的系统底层组织结构和实现的细节。但是，从一个真正的系统架构师的日常工作来看，这样的区分是根本不成立的。 总的来说，架构图里实际包含了所有的底层设计细节，这些细节信息共同支撑了顶层的架构设计，底层设计信息和顶层架构设计共同组成了整个房屋的架构文">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-02-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-05T09:10:18.049Z">
+<meta property="article:author" content="不登山峰，不显平地">
+<meta property="article:tag" content="阅读">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.hudi.tech/2019/03/01/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E3%80%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>《架构整洁之道》 | 木刻的鱼儿的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木刻的鱼儿的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/01/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E3%80%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《架构整洁之道》
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-01T00:00:00+08:00">2019-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h2 id="《概述》"><a href="#《概述》" class="headerlink" title="《概述》"></a>《概述》</h2><h3 id="《设计和架构究竟是什么？》"><a href="#《设计和架构究竟是什么？》" class="headerlink" title="《设计和架构究竟是什么？》"></a>《设计和架构究竟是什么？》</h3><ul>
+<li>“架构”这个词往往使用于“高层级”的讨论中，这类讨论一般把“底层”的实现细节排除在外。而“设计”一词，往往用来指代具体的系统底层组织结构和实现的细节。但是，从一个真正的系统架构师的日常工作来看，这样的区分是根本不成立的。</li>
+<li>总的来说，架构图里实际包含了所有的底层设计细节，这些细节信息共同支撑了顶层的架构设计，底层设计信息和顶层架构设计共同组成了整个房屋的架构文档。</li>
+<li>软件设计的终极目标是，用最小的人力成本来满足架构和维护该系统的需求。</li>
+</ul>
+<h3 id="《两个价值维度》"><a href="#《两个价值维度》" class="headerlink" title="《两个价值维度》"></a>《两个价值维度》</h3><ul>
+<li>对于每个软件系统，我们都可以通过行为和架构两个维度来体现它的实际价值。软件研发人员应该确保自己的系统在这两个维度上的实际价值都能长时间维持在最高的状态。</li>
+<li>紧急/重要矩阵。紧急的和重要的，而紧急的难题永远是不重要的，重要的难题永远是不紧急的。</li>
+<li>软件系统的第一个价值维度：系统行为，是紧急的，但是并不总是特别重要。软件系统的第二各价值维度：系统架构，是重要的，但是并不总是特别紧急。</li>
+<li>业务部门原本就没有能里评估系统架构的重要程度的，这本来就应该是研发人员自己的工作职责。</li>
+</ul>
+<h3 id="《从基础构件开始：编程范式》"><a href="#《从基础构件开始：编程范式》" class="headerlink" title="《从基础构件开始：编程范式》"></a>《从基础构件开始：编程范式》</h3><h3 id="《编程范式总揽》"><a href="#《编程范式总揽》" class="headerlink" title="《编程范式总揽》"></a>《编程范式总揽》</h3><ul>
+<li>编程语言的：二进制编程（阿兰·图灵）–&gt;汇编器（assembler）–&gt;编译器（complier）–目前熟悉的。</li>
+<li>结构化编程：结构化编程对程序控制权的直接转移进行了限制和规范。</li>
+<li>面向对象编程：面向对象编程对程序控制权的间接转移进行了限制和规范。<ul>
+<li>函数调用堆栈（call stack frame）可以挪到堆内存里面，这样函数定义的本地变量就可以在函数返回之后继续存在。这个函数就称为了一个类（class）的构造函数，而它所定义的本地变量就是类的成员变量，构造函数定义的嵌套函数就成为了成员方法（method）。这样一来，我们就可以利用多态（polymorphism）来限制用户对函数指针的使用。</li>
+</ul>
+</li>
+<li>函数式编程：函数式编程对程序中的赋值进行了限制和规范。</li>
+</ul>
+<h3 id="《结构化编程》"><a href="#《结构化编程》" class="headerlink" title="《结构化编程》"></a>《结构化编程》</h3><ul>
+<li>Dijkstra提出的解决方案是采用数学推导方法。他的想法是借鉴数学中的公理、定理、推论、和引理，形成了一种欧几里得结构。Dijkstra认为程序员可以像数学家一样对自己的程序进行推理证明。换句话说，程序员可以用代码将一些已证明可用的结构串联起来，只要自行证明这些额外代码是正确的，就可以推导整个程序的正确性。</li>
+<li>Dijkstra顺序结构的正确性可以通过枚举法证明，其过程与其他一般的数学推导过程是一样的：针对序列中的每个输入，跟踪其对应的输出值的变化就可以了。它样的，Dijkstra利用枚举法有证明了分支结构的可推导性。因为我们只要能用枚举法证明分支结构中每条路径的正确性，自然就可以推导出分支结构本身的正确性。循环结构的证明过程则有些不同，为了证明一段循环程序的正确性，Dijkstra需要采用数据归纳法，具体来说，首先要用枚举法证明循环1次的正确性。接下来再证明如果循环N次是正确的，那么循环N+1次也同样是正确的。最后还要用枚举法证明循环结构的起始与结束条件的正确性。</li>
+<li>这就是科学理论和科学定律的特点：他们可以被证伪，但是没有办法被证明。</li>
+<li>最简单的不可证明的例子：“这句话是假的”，非真也非伪。</li>
+<li>Dijkstra曾经说过：“测试只能展示Bug的存在，并不能证明不存在Bug”，换句话说，一段程序可以由一个测试来证明其错误性，但是不能被证明是正确的。测试的作用是让我们得出某段程序已经足够实现当前目标这一结论。</li>
+<li>结构化编程范式中最有价值的地方就是，它赋予了我们创造可证伪程序单元的能力。</li>
+</ul>
+<h3 id="《面向对象编程》"><a href="#《面向对象编程》" class="headerlink" title="《面向对象编程》"></a>《面向对象编程》</h3><ul>
+<li>面向对象编程到底是什么？面向对象编程就是以多态为手段来对源代码中的依赖关系进行控制的能力，这种能力让软件架构师可以构建出某种插件式架构，让高层策略组件与底层实现组件相分离，底层组件可以编译成插件，实现独立与高层组件的开发和部署。</li>
+</ul>
+<h3 id="《函数式编程》"><a href="#《函数式编程》" class="headerlink" title="《函数式编程》"></a>《函数式编程》</h3><ul>
+<li>在java 程序中，我们使用的是可变量，即变量i，该变量的值会随着程序执行的过程而改变，故被称为循环控制变量。而Clijure程序中不存在这种变量的，变量x一旦被初始化之后，就不会再被更改了。</li>
+<li>函数式变成语言中的变量（Variable）是不可变（Vary）的。</li>
+<li>所有的竞争问题、死锁问题、并发更新问题都是由可变变量导致的。如果变量永远不会被更改，那就不可能产生竞争或者并发更新问题。如果锁状态是不可变的，那就永远不会产生死锁问题。</li>
+<li>由于状态的修改会导致一系列并发问题的产生，所以我们通常会采用某种事物型内存来保护可变变量，避免同步更新和竞争状态的发生。</li>
+<li>一个架构设计良好的应用程序应该将状态修改的部分和不需要修改状态的部分隔离成单独的组件，然后用合适的机制来保护可变量。</li>
+</ul>
+<h3 id="《设计原则》"><a href="#《设计原则》" class="headerlink" title="《设计原则》"></a>《设计原则》</h3><p>软件程序的设计原则</p>
+<ul>
+<li><p>SRP：单一职责原则<br>一个软件系统的最佳结构高度依赖于开发这个系统的组织的内部结构。这样，每个软件模块都有且只有一个需要被改变的理由。</p>
+</li>
+<li><p>OCP：开闭原则<br>如果软件系统想要更容易被改变，那么其设计就必须允许新增代码来修改系统的行为，而非只能靠修改原来的代码。</p>
+</li>
+<li><p>LSP：里氏替换原则<br>如果想用可替换的组件来构建软件系统，那么这些组件就必须遵守同一个约定，以便让这些组件课程相互替换。</p>
+</li>
+<li><p>ISP：接口隔离原则<br>设计中避免不必要的依赖</p>
+</li>
+<li><p>DIP：依赖反转原则<br>高层策略性的代码不应该依赖实现底层细节的代码，恰恰相反，那些实现底层细节的代码应该依赖高层策略性的代码。</p>
+</li>
+<li><p>《单一职责原则》<br>任何一个软件模块都应该只对某一类行为者负责</p>
+</li>
+<li><p>《开闭原则》<br>设计良好的计算机软件应该易于扩展，同事抗拒修改。</p>
+</li>
+<li><p>《里氏替换原则》<br>如果对于每个类型是S的对象o1都存在一个类型为T的对象o2，能使操作T类型的程序P在用o2替换o1时行为保持不变，我们就可以将S称为T的子类型。<br>LSP逐渐演变成了一种更广泛的、指导接口与其实现方式的设计原则。</p>
+</li>
+<li><p>《接口隔离原则》</p>
+</li>
+<li><p>《依赖反转原则》</p>
+</li>
+<li><p>我们每次修改抽象接口的时候，一定也会去修改对应的具体实现。但反过来，当我们修改具体实现时，却很少需要去修改相应的抽象接口。所以我们可以认为接口比实现更稳定。</p>
+</li>
+<li><p>具体编码守则</p>
+<ul>
+<li>应在代码中多使用抽象接口，尽量避免使用那些多变的具体实现类。</li>
+<li>不要再具体实现类上创建衍生类。</li>
+<li>不要覆盖（override）包含具体实现的函数。</li>
+<li>应避免在代码中写入与任何具体实现相关的名字，或者是其他容易变动的事物的名字。</li>
+</ul>
+</li>
+</ul>
+<h2 id="《组件构建原则》"><a href="#《组件构建原则》" class="headerlink" title="《组件构建原则》"></a>《组件构建原则》</h2><h3 id="《组件》"><a href="#《组件》" class="headerlink" title="《组件》"></a>《组件》</h3><p>组件是软件的部署单元，是整个软件系统在部署过程中可以独立完成部署的最小实体。</p>
+<h3 id="《组件聚合》"><a href="#《组件聚合》" class="headerlink" title="《组件聚合》"></a>《组件聚合》</h3><p>(REP＋CCP)–&gt;将由相同原因而修改，并且需要同时修改的东西放在一起。将由于不同原因而修改，并且不同时修改的东西分开。</p>
+<ul>
+<li>REP:复用/发布等同原则<br>软件复用的最小粒度应等同于其发布的最小粒度。</li>
+<li>CCP:共同闭包原则<br>我们应该将那些会同时修改，并且为相同目的而修改的类放到同一个组件中，而将不会同时修改，并且不会为了相同目的而修改的那些类放到不同的组件中。</li>
+<li>CRP:共同复用原则<br>不要强迫一个组件的用户依赖他们不需要的东西。<br>CRP是另一个帮助我们决策类和模块归属于哪一个组件的原则，该原则建议我们将经常共同复用的类和模块放在同一个组件中。</li>
+</ul>
+<h3 id="《组件耦合》"><a href="#《组件耦合》" class="headerlink" title="《组件耦合》"></a>《组件耦合》</h3><ul>
+<li>无依赖环原则:消除循环依赖ADP<ul>
+<li>应用依赖反转原则</li>
+<li>创建一个新的组件</li>
+<li>组件依赖关系是必须要随着项目的逻辑设计一起扩张和演进的。</li>
+</ul>
+</li>
+<li>稳定依赖原则SDP<ul>
+<li>依赖关系必须要指向更稳定的方向。</li>
+</ul>
+</li>
+<li>稳定抽象原则SAP<ul>
+<li>一个组件的抽象化程度应该与其稳定性保持一致。</li>
+</ul>
+</li>
+</ul>
+<h2 id="《软件架构》"><a href="#《软件架构》" class="headerlink" title="《软件架构》"></a>《软件架构》</h2><h3 id="《什么是软件架构》"><a href="#《什么是软件架构》" class="headerlink" title="《什么是软件架构》"></a>《什么是软件架构》</h3><ul>
+<li>如果不亲身承受因系统设计而带来的麻烦，就体会不到设计不佳所带来的痛苦，接着会逐渐迷失正确的方向。</li>
+<li>软件架构这项工作的实质就是规划如何将系统切成组件，并安排好组件之间的排列关系，一级组件之间互相通信的方式。</li>
+<li>一个软件系统的架构质量和该系统是否能正常工作的关系并不大，毕竟世界上有很多架构设计糟糕但是工作正常的系统。真正的麻烦往往并不会在我们运行软件的过程中出现，而是会出现在这个系统的开发、部署、以及后续的补充开发中。</li>
+<li>一个优秀的软件架构师应该致力于最大化可选项数量。</li>
+</ul>
+<h3 id="《独立性》"><a href="#《独立性》" class="headerlink" title="《独立性》"></a>《独立性》</h3><ul>
+<li>软件架构必须为其用例提供支持。</li>
+<li>一个设计好的架构在行为上对系统最重要的作用就是明确和显式地反映系统设计意图的行为，使其在架构层面上可见。</li>
+</ul>
+<h3 id="《划分边界》"><a href="#《划分边界》" class="headerlink" title="《划分边界》"></a>《划分边界》</h3><h3 id="《边界剖析》"><a href="#《边界剖析》" class="headerlink" title="《边界剖析》"></a>《边界剖析》</h3><h3 id="《策略与层次》"><a href="#《策略与层次》" class="headerlink" title="《策略与层次》"></a>《策略与层次》</h3><h3 id="《业务逻辑》"><a href="#《业务逻辑》" class="headerlink" title="《业务逻辑》"></a>《业务逻辑》</h3><h3 id="《尖叫的软件架构》"><a href="#《尖叫的软件架构》" class="headerlink" title="《尖叫的软件架构》"></a>《尖叫的软件架构》</h3><h3 id="《整洁架构》"><a href="#《整洁架构》" class="headerlink" title="《整洁架构》"></a>《整洁架构》</h3><ul>
+<li>按照架构设计出来的系统<ul>
+<li>独立于架构</li>
+<li>可被测试</li>
+<li>独立于UI</li>
+<li>独立于数据库</li>
+<li>独立于任何外部机构</li>
+</ul>
+</li>
+</ul>
+<h3 id="《展示器和谦卑对象》"><a href="#《展示器和谦卑对象》" class="headerlink" title="《展示器和谦卑对象》"></a>《展示器和谦卑对象》</h3><h3 id="《不完全边界》"><a href="#《不完全边界》" class="headerlink" title="《不完全边界》"></a>《不完全边界》</h3><h3 id="《层次与边界》"><a href="#《层次与边界》" class="headerlink" title="《层次与边界》"></a>《层次与边界》</h3><h3 id="《main组件》"><a href="#《main组件》" class="headerlink" title="《main组件》"></a>《main组件》</h3><ul>
+<li>main组件也可以被视为应用程序的一个插件——这个插件负责设置起始状态，配置信息，加载外部资源，最后将控制权交给应用程序的其他高层组件。</li>
+</ul>
+<h3 id="《宏观与微观》"><a href="#《宏观与微观》" class="headerlink" title="《宏观与微观》"></a>《宏观与微观》</h3><ul>
+<li>架构设计的任务就是找到高层策略与底层细节之间的架构边界，同时保证这些边界遵守依赖关系规则。</li>
+<li>所谓的服务本身只是一种比函数调用方式成本稍高的，分割应用程序行为的一种形式，与系统架构无关。</li>
+</ul>
+<h3 id="《测试边界》"><a href="#《测试边界》" class="headerlink" title="《测试边界》"></a>《测试边界》</h3><h3 id="《整洁的嵌入式架构》"><a href="#《整洁的嵌入式架构》" class="headerlink" title="《整洁的嵌入式架构》"></a>《整洁的嵌入式架构》</h3><h2 id="《实现细节》"><a href="#《实现细节》" class="headerlink" title="《实现细节》"></a>《实现细节》</h2><h3 id="《数据库只是实现细节》"><a href="#《数据库只是实现细节》" class="headerlink" title="《数据库只是实现细节》"></a>《数据库只是实现细节》</h3><h3 id="《web是实现细节》"><a href="#《web是实现细节》" class="headerlink" title="《web是实现细节》"></a>《web是实现细节》</h3><h3 id="《应用程序架构是实现细节》"><a href="#《应用程序架构是实现细节》" class="headerlink" title="《应用程序架构是实现细节》"></a>《应用程序架构是实现细节》</h3><h3 id="《案例分析-视频销售网站》"><a href="#《案例分析-视频销售网站》" class="headerlink" title="《案例分析:视频销售网站》"></a>《案例分析:视频销售网站》</h3><h3 id="《拾遗》"><a href="#《拾遗》" class="headerlink" title="《拾遗》"></a>《拾遗》</h3><ul>
+<li>按层封装:将功能相似的代码进行分组。<ul>
+<li>代码可访问性:接口必须是public，因为接口调用者在不同的包里面。</li>
+<li>宽松的分层架构，controller可以绕过service直接调用dao层。</li>
+</ul>
+</li>
+<li>按功能封装，</li>
+<li>按组件封装<ul>
+<li>将“业务逻辑”和“持久化代码”合并在一起，称为“组件”。</li>
+<li>组件是部署单元，组件是系统中能够部署的最小单元，对应java里面就是jar文件。</li>
+</ul>
+</li>
+<li>如果我们将java程序中的所有类型都设置为public，那么包就仅仅是一种组织形式了（类似文件夹一样的分组形式）。而不是一种封装方式。由于public类型在代码库的任何位置调用，我们事实上就可以忽略包的概念，因为它并不能提供什么价值（因为并不能起到任何封装和隐藏的功能）。</li>
+</ul>
+<h2 id="《附录：架构设计考古》"><a href="#《附录：架构设计考古》" class="headerlink" title="《附录：架构设计考古》"></a>《附录：架构设计考古》</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%98%85%E8%AF%BB/" rel="tag"># 阅读</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/02/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E7%BB%93%E6%9E%84%E6%80%9D%E8%80%83%E5%8A%9B%E3%80%8B_%E6%9D%8E%E5%BF%A0%E7%A7%8B/" rel="prev" title="《结构思考力》_李忠秋">
+      <i class="fa fa-chevron-left"></i> 《结构思考力》_李忠秋
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/02/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E4%BA%BA%E7%94%9F%E6%9C%89%E4%BD%95%E6%84%8F%E4%B9%89%E3%80%8B_%E8%83%A1%E9%80%82/" rel="next" title="《人生有何意义》_胡适">
+      《人生有何意义》_胡适 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%91%98%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">摘录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8A%E6%A6%82%E8%BF%B0%E3%80%8B"><span class="nav-number">1.1.</span> <span class="nav-text">《概述》</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%9E%B6%E6%9E%84%E7%A9%B6%E7%AB%9F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E3%80%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">《设计和架构究竟是什么？》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E4%B8%A4%E4%B8%AA%E4%BB%B7%E5%80%BC%E7%BB%B4%E5%BA%A6%E3%80%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">《两个价值维度》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E4%BB%8E%E5%9F%BA%E7%A1%80%E6%9E%84%E4%BB%B6%E5%BC%80%E5%A7%8B%EF%BC%9A%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E3%80%8B"><span class="nav-number">1.1.3.</span> <span class="nav-text">《从基础构件开始：编程范式》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E6%80%BB%E6%8F%BD%E3%80%8B"><span class="nav-number">1.1.4.</span> <span class="nav-text">《编程范式总揽》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E7%BB%93%E6%9E%84%E5%8C%96%E7%BC%96%E7%A8%8B%E3%80%8B"><span class="nav-number">1.1.5.</span> <span class="nav-text">《结构化编程》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E3%80%8B"><span class="nav-number">1.1.6.</span> <span class="nav-text">《面向对象编程》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E3%80%8B"><span class="nav-number">1.1.7.</span> <span class="nav-text">《函数式编程》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99%E3%80%8B"><span class="nav-number">1.1.8.</span> <span class="nav-text">《设计原则》</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8A%E7%BB%84%E4%BB%B6%E6%9E%84%E5%BB%BA%E5%8E%9F%E5%88%99%E3%80%8B"><span class="nav-number">1.2.</span> <span class="nav-text">《组件构建原则》</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E7%BB%84%E4%BB%B6%E3%80%8B"><span class="nav-number">1.2.1.</span> <span class="nav-text">《组件》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E7%BB%84%E4%BB%B6%E8%81%9A%E5%90%88%E3%80%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">《组件聚合》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E7%BB%84%E4%BB%B6%E8%80%A6%E5%90%88%E3%80%8B"><span class="nav-number">1.2.3.</span> <span class="nav-text">《组件耦合》</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8A%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E3%80%8B"><span class="nav-number">1.3.</span> <span class="nav-text">《软件架构》</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E4%BB%80%E4%B9%88%E6%98%AF%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E3%80%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">《什么是软件架构》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E7%8B%AC%E7%AB%8B%E6%80%A7%E3%80%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">《独立性》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%88%92%E5%88%86%E8%BE%B9%E7%95%8C%E3%80%8B"><span class="nav-number">1.3.3.</span> <span class="nav-text">《划分边界》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E8%BE%B9%E7%95%8C%E5%89%96%E6%9E%90%E3%80%8B"><span class="nav-number">1.3.4.</span> <span class="nav-text">《边界剖析》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E7%AD%96%E7%95%A5%E4%B8%8E%E5%B1%82%E6%AC%A1%E3%80%8B"><span class="nav-number">1.3.5.</span> <span class="nav-text">《策略与层次》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E3%80%8B"><span class="nav-number">1.3.6.</span> <span class="nav-text">《业务逻辑》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%B0%96%E5%8F%AB%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E3%80%8B"><span class="nav-number">1.3.7.</span> <span class="nav-text">《尖叫的软件架构》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%95%B4%E6%B4%81%E6%9E%B6%E6%9E%84%E3%80%8B"><span class="nav-number">1.3.8.</span> <span class="nav-text">《整洁架构》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%B1%95%E7%A4%BA%E5%99%A8%E5%92%8C%E8%B0%A6%E5%8D%91%E5%AF%B9%E8%B1%A1%E3%80%8B"><span class="nav-number">1.3.9.</span> <span class="nav-text">《展示器和谦卑对象》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E4%B8%8D%E5%AE%8C%E5%85%A8%E8%BE%B9%E7%95%8C%E3%80%8B"><span class="nav-number">1.3.10.</span> <span class="nav-text">《不完全边界》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%B1%82%E6%AC%A1%E4%B8%8E%E8%BE%B9%E7%95%8C%E3%80%8B"><span class="nav-number">1.3.11.</span> <span class="nav-text">《层次与边界》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8Amain%E7%BB%84%E4%BB%B6%E3%80%8B"><span class="nav-number">1.3.12.</span> <span class="nav-text">《main组件》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%AE%8F%E8%A7%82%E4%B8%8E%E5%BE%AE%E8%A7%82%E3%80%8B"><span class="nav-number">1.3.13.</span> <span class="nav-text">《宏观与微观》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%B5%8B%E8%AF%95%E8%BE%B9%E7%95%8C%E3%80%8B"><span class="nav-number">1.3.14.</span> <span class="nav-text">《测试边界》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%95%B4%E6%B4%81%E7%9A%84%E5%B5%8C%E5%85%A5%E5%BC%8F%E6%9E%B6%E6%9E%84%E3%80%8B"><span class="nav-number">1.3.15.</span> <span class="nav-text">《整洁的嵌入式架构》</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8A%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E3%80%8B"><span class="nav-number">1.4.</span> <span class="nav-text">《实现细节》</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%AA%E6%98%AF%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E3%80%8B"><span class="nav-number">1.4.1.</span> <span class="nav-text">《数据库只是实现细节》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8Aweb%E6%98%AF%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E3%80%8B"><span class="nav-number">1.4.2.</span> <span class="nav-text">《web是实现细节》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%9E%B6%E6%9E%84%E6%98%AF%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82%E3%80%8B"><span class="nav-number">1.4.3.</span> <span class="nav-text">《应用程序架构是实现细节》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90-%E8%A7%86%E9%A2%91%E9%94%80%E5%94%AE%E7%BD%91%E7%AB%99%E3%80%8B"><span class="nav-number">1.4.4.</span> <span class="nav-text">《案例分析:视频销售网站》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%8A%E6%8B%BE%E9%81%97%E3%80%8B"><span class="nav-number">1.4.5.</span> <span class="nav-text">《拾遗》</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8A%E9%99%84%E5%BD%95%EF%BC%9A%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E8%80%83%E5%8F%A4%E3%80%8B"><span class="nav-number">1.5.</span> <span class="nav-text">《附录：架构设计考古》</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">不登山峰，不显平地</p>
+  <div class="site-description" itemprop="description">木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lark-coder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lark-coder" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不登山峰，不显平地</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">711k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:47</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

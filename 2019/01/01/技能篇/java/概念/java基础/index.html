@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.hudi.tech","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="float类型在Java中占用4字节，long类型在 中占用8字节，为什么float类型的取值范围比long类型的取值范围还大？ java中long类型占用8个字节，取值范围是-2^632^63-1，大约是9*10^18。而float类型占用4个字节，取值范围是-3.403E383.403E38。long类型是整数类型，在内存中占用8个字节，共64位，它表示的数值有2^64方个，平分正负之后取值范">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java基础">
+<meta property="og:url" content="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/java%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="木刻的鱼儿的博客">
+<meta property="og:description" content="float类型在Java中占用4字节，long类型在 中占用8字节，为什么float类型的取值范围比long类型的取值范围还大？ java中long类型占用8个字节，取值范围是-2^632^63-1，大约是9*10^18。而float类型占用4个字节，取值范围是-3.403E383.403E38。long类型是整数类型，在内存中占用8个字节，共64位，它表示的数值有2^64方个，平分正负之后取值范">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.hudi.tech/images/java%E5%9F%BA%E7%A1%80/ic1.jpg">
+<meta property="og:image" content="http://www.hudi.tech/images/java%E5%9F%BA%E7%A1%80/pic2.jpg">
+<meta property="og:image" content="http://www.hudi.tech/images/java%E5%9F%BA%E7%A1%80/pic3.jpg">
+<meta property="article:published_time" content="2018-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-05T09:10:18.006Z">
+<meta property="article:author" content="不登山峰，不显平地">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.hudi.tech/images/java%E5%9F%BA%E7%A1%80/ic1.jpg">
+
+<link rel="canonical" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/java%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>java基础 | 木刻的鱼儿的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木刻的鱼儿的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/java%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          java基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="float类型在Java中占用4字节，long类型在-中占用8字节，为什么float类型的取值范围比long类型的取值范围还大？"><a href="#float类型在Java中占用4字节，long类型在-中占用8字节，为什么float类型的取值范围比long类型的取值范围还大？" class="headerlink" title="float类型在Java中占用4字节，long类型在 中占用8字节，为什么float类型的取值范围比long类型的取值范围还大？"></a>float类型在Java中占用4字节，long类型在 中占用8字节，为什么float类型的取值范围比long类型的取值范围还大？</h1><blockquote>
+<p>java中long类型占用8个字节，取值范围是-2^63<del>2^63-1，大约是9*10^18。而float类型占用4个字节，取值范围是-3.403E38</del>3.403E38。<br>long类型是整数类型，在内存中占用8个字节，共64位，它表示的数值有2^64方个，平分正负之后取值范围就是-2^63~2^63-1。<br>float类型在内存中占用4个字节，共32位，但是float在内存中的存储和整数类型不一样，它的公式是：V=(-1)^s * M * 2^E，其中第一位是s，表示正负号，第二位到第九位是M表示指数域，即E；第十位到第三十二位表示小数域，即M的取值范围为[1，2）或[0，1）。<br>浮点数在内存中的二进制值不是直接转换为十进制数值的，而是按照上述公式计算而来，通过这个公式，虽然只用到了4个字节，但是浮点数却比长整型的最大值要大。<br>Long是整形，long是精确的，精确到 个位 的。而Float是浮点型，它是有有效位数的.</p>
+</blockquote>
+<h1 id="使用“-”可以连接两个字符串（String对象），那么，是怎样进行连接的？"><a href="#使用“-”可以连接两个字符串（String对象），那么，是怎样进行连接的？" class="headerlink" title="使用“+”可以连接两个字符串（String对象），那么，是怎样进行连接的？"></a>使用“+”可以连接两个字符串（String对象），那么，是怎样进行连接的？</h1><blockquote>
+<p>java中string的“+”操作实际执行的是Stringbuilder的操作，而且在执行的时候每个+都会重新new 一个stringbuilder，但是java虚拟机也对“+”进行了优化。普通的字符串拼接使用“+”没有问题。但是如果大批量的字符串拼接，最好使用stringBuilder，如果能够指定stringbuilder的容量就最好了，stringbuilder的容量初始是16，会进行扩容（扩容机制是翻倍，而且会发生数据的复制，因为stringbuilder的后台实现是char[]数组）。如果需要线程安全则需要使用stringbuffer。如果知识两个字符串的拼接使用concat性能是最好的，因为concat调用了一次Arrays.copyOf，并且指定了len + otherLen，相当于分配了一次内存空间，并分别从str1和str2各复制一次数据。而如果使用StringBuilder并指定capacity，相当于分配一次内存空间，并分别从str1和str2各复制一次数据，最后因为调用了toString方法，又复制了一次数据。<br>所有的“+”、stringbuilder、stringbuffer最后都会执行tostring方法。</p>
+</blockquote>
+<h2 id="使用String的几点建议"><a href="#使用String的几点建议" class="headerlink" title="使用String的几点建议"></a>使用String的几点建议</h2><ol>
+<li>Java中字符串拼接不要直接使用+拼接。</li>
+<li>使用StringBuilder或者StringBuffer时，尽可能准确地估算capacity，并在构造时指定，避免内存浪费和频繁的扩容及复制。</li>
+<li>在没有线程安全问题时使用StringBuilder， 否则使用StringBuffer。</li>
+<li>两个字符串拼接直接调用String.concat性能最好。</li>
+<li>用equals时总是把能确定不为空的变量写在左边，如使用””.equals(str)判断空串，避免空指针异常。</li>
+<li>第二点是用来排挤第一点的.. 使用str != null &amp;&amp; str.length() == 0来判断空串，效率比第一点高。</li>
+<li>在需要把其他对象转换为字符串对象时，使用String.valueOf(obj)而不是直接调用obj.toString()方法，因为前者已经对空值进行检测了，不会抛出空指针异常。</li>
+<li>使用String.format()方法对字符串进行格式化输出。</li>
+<li>在JDK 7及以上版本，可以在switch结构中使用字符串了，所以对于较多的比较，使用switch代替if-else。</li>
+</ol>
+<h1 id="构造器是否创建了对象？该怎样来证明这一点？"><a href="#构造器是否创建了对象？该怎样来证明这一点？" class="headerlink" title="构造器是否创建了对象？该怎样来证明这一点？"></a>构造器是否创建了对象？该怎样来证明这一点？</h1><h2 id="构造方法和实例方法的区别"><a href="#构造方法和实例方法的区别" class="headerlink" title="构造方法和实例方法的区别"></a>构造方法和实例方法的区别</h2><ol>
+<li>主要的区别在于三个方面：修饰符、返回值、命名<ol>
+<li>和实例方法一样，构造器可以有任何访问的修饰符，public、private、protected或者没有修饰符   ，都可以对构造方法进行修饰。不同于实例方法的是构造方法不能有任何非访问性质的修饰符修饰，例如static、final、synchronized、abstract等都不能修饰构造方法。</li>
+</ol>
+</li>
+</ol>
+<p><strong>解释：</strong>构造方法用于初始化一个实例对象，所以static修饰是没有任何意义的;多个线程不会同时创建内存地址相同的同一个对象，所以synchronized修饰没有意义;构造方法不能被子类继承，所以final和abstract修饰没有意义。</p>
+<ol>
+<li>返回类型是非常重要的，实例方法可以返回任何类型的值或者是无返回值（void）,而构造方法是没有返回类型的，void也不行。</li>
+<li>至于命名就是构造方法与类名相同，当然了实例方法也可以与类名相同,但是习惯上我们为实例方法命名的时候通常是小写的,另一方面也是与构造方法区分开。而构造方法与类名相同,所以首字母一般大写。</li>
+<li>java默认的构造方法java语言中规定每个类至少要有一个构造方法，为了保证这一点，当用户没有给java类定义明确的构造方法的时候，java会为我们提供一个默认的构造方法，这个构造方法没有参数，修饰符位public，且方法体为空。</li>
+<li>构造方法有两种，一种是默认的隐藏的构造方法，一种是显式定义的构造方法（带参），如果自定义了构造方法，则这个类就没有默认的构造方法。</li>
+<li>实例方法和构造方法中this和super的使用“this”的用法<ol>
+<li>实例方法中可以使用this关键字,它指向正在执行方法的类的实例对象,当然static方法中是不可以使用this对象的,因为静态方法不属于类的实例对象;而构造方法中同样可以使用this关键字,构造器中的this是指向同一个对象中不同参数的另一个构造器。</li>
+<li>构造方法中通过this关键字调用其他构造方法时，那么这句代码必须放在第一行，否则会编译错误。</li>
+<li>构造方法中只能通过this调用一次其他的构造方法。</li>
+</ol>
+</li>
+<li>“super”的用法<ol>
+<li>实例方法和构造方法中的super关键字都用于去指向父类，实例方法中的super关键字去调用父类中的某个方法。</li>
+<li>我们在实例化子类对象时,程序会先调用父类的默认构造方法,然后再执行子类的构造方法。</li>
+<li>我们在实例化子类对象的时候会先调用其父类默认的构造方法,但是它的父类没有默认的构造方法,所以不能编译成功。</li>
+<li>在实例化类的对象时,类中的成员变量会首先进行初始化,    如果其中的成员变量有对象，那么它们也会按照顺序执行初始化    工作    。在所有类成员初始化完成后，才调用对象所在类的构造方法创建对象。构造方法作用就是初始化。</li>
+<li> 如果一个类中有静态对象,那么他会在非静态对象初始化前进行初始化,但只初始化一次。而非静态对象每次调用时都要初始化。</li>
+<li>如果一个类中有静态对象，那么它会在非静态对象前初始化，但只初始化一次。非静态对象每次调用时都要初始化。 </li>
+</ol>
+</li>
+<li>初始化顺序<ol>
+<li>主类的静态成员首先初始化。</li>
+<li>主类的父类的构造方法被调用。 </li>
+<li>主类的非静态对象（变量）初始化。</li>
+<li>调用主类的构造方法。 </li>
+</ol>
+</li>
+</ol>
+<h1 id="如果没有在类中显示声明构造器，则编译器会自动生成一个无参的构造器，那么编译器为什么要自动生成这个无参的构造器呢？有什么作用？"><a href="#如果没有在类中显示声明构造器，则编译器会自动生成一个无参的构造器，那么编译器为什么要自动生成这个无参的构造器呢？有什么作用？" class="headerlink" title="如果没有在类中显示声明构造器，则编译器会自动生成一个无参的构造器，那么编译器为什么要自动生成这个无参的构造器呢？有什么作用？"></a>如果没有在类中显示声明构造器，则编译器会自动生成一个无参的构造器，那么编译器为什么要自动生成这个无参的构造器呢？有什么作用？</h1><blockquote>
+<p>如果你创造了一个带有参数的构造方法，那么无参的构造方法必须显式的写出来，否则会编译失败”这句话有点不妥，应该这么理解：每个类至少要有一个构造函数，如果你自己构建了一个带有参数的构造函数而没有再显示的写出无参的构造函数也是可以的，不过当你尝试通过一个无参的构造函数来构建（new）时，此时编译器才会报错，因为找不到这个无参的构造函数。也就是说当一个类你没有给他构造函数，则编译器会自动补上一个无参的，若有的话就不会，你需要显示将此无参的构造函数写出来。</p>
+</blockquote>
+<h1 id="i-与-i到底有什么不同？仅仅是先加与后加的区别吗？"><a href="#i-与-i到底有什么不同？仅仅是先加与后加的区别吗？" class="headerlink" title="i++与++i到底有什么不同？仅仅是先加与后加的区别吗？"></a>i++与++i到底有什么不同？仅仅是先加与后加的区别吗？</h1><blockquote>
+<p>i++和++i的代码实现逻辑<br><img src="/images/java%E5%9F%BA%E7%A1%80/ic1.jpg" alt="图片"><br><img src="/images/java%E5%9F%BA%E7%A1%80/pic2.jpg" alt="图片"><br><img src="/images/java%E5%9F%BA%E7%A1%80/pic3.jpg" alt="图片"></p>
+</blockquote>
+<h1 id="移位运算：5-＜＜-35，会首先进行35-32的求余运算吗？如果是这样，那么5-＜＜-−2的结果是多少呢？"><a href="#移位运算：5-＜＜-35，会首先进行35-32的求余运算吗？如果是这样，那么5-＜＜-−2的结果是多少呢？" class="headerlink" title="移位运算：5 ＜＜ 35，会首先进行35 % 32的求余运算吗？如果是这样，那么5 ＜＜ −2的结果是多少呢？"></a>移位运算：5 ＜＜ 35，会首先进行35 % 32的求余运算吗？如果是这样，那么5 ＜＜ −2的结果是多少呢？</h1><blockquote>
+<p>5&lt;&lt;35会首先进行35%32的取余运算，实际执行的是5&lt;&lt;3的运算，即结果为5*2^3=40。原因是在java中对char，byte或者short进行移位处理，那么在移位进行之前，它们会自动转换成一个int。只有右侧的5（2^5=32，int的最大值是2^32-1）个低位才会有用。这样可防止我们在一个int数里移动不切实际的位数。若对一个long值进行处理，最后得到的结果也是long。此时只会用到右侧的6（2^6=64，int的最大值是2^64-1）个低位，防止移动超过long值里现成的位数。<br>那么5&lt;&lt;-2的实际取值就等于5&lt;&lt;30，又由于5的二进制是101，所以又等于二进制的“01”即十进制的1&lt;&lt;30。</p>
+</blockquote>
+<h1 id="如果重写了equals方法，为什么还要重写hashCode方法？如果没有重写hashCode方法，会有什么问题？"><a href="#如果重写了equals方法，为什么还要重写hashCode方法？如果没有重写hashCode方法，会有什么问题？" class="headerlink" title="如果重写了equals方法，为什么还要重写hashCode方法？如果没有重写hashCode方法，会有什么问题？"></a>如果重写了equals方法，为什么还要重写hashCode方法？如果没有重写hashCode方法，会有什么问题？</h1><blockquote>
+<p>在java中，我们可以使用hashCode()来获取对象的哈希码，其值就是对象的存储地址，这个方法在Object类中声明，因此所有的子类都含有该方法。</p>
+</blockquote>
+<h1 id="从JDK1-7起，switch语句可以支持String类型，那么在底层是如何实现的？"><a href="#从JDK1-7起，switch语句可以支持String类型，那么在底层是如何实现的？" class="headerlink" title="从JDK1.7起，switch语句可以支持String类型，那么在底层是如何实现的？"></a>从JDK1.7起，switch语句可以支持String类型，那么在底层是如何实现的？</h1><blockquote>
+<p>switch 的String变量、case 的String常量都变成对应的字符串的 hash 值。也就是说，switch仍然没有超出它的限制，只是通过使用 String对象的hash值来进行匹配比较，从而支持 String 类型。<br>底层的switch只能处理4个基本类型的值。其他三种类型需要通过其他方式间接处理，即转成基本类型来处理。<br>编译器对包装类的处理是通过拆箱。<br>对枚举类型的处理，是通过枚举常量的序号及一个数组。<br>对字符串String的处理，是通过 String 的hash值。如果string是null则编译不通过</p>
+</blockquote>
+<h1 id="静态方法是否可以重写？方法重写与方法隐藏有什么不同？"><a href="#静态方法是否可以重写？方法重写与方法隐藏有什么不同？" class="headerlink" title="静态方法是否可以重写？方法重写与方法隐藏有什么不同？"></a>静态方法是否可以重写？方法重写与方法隐藏有什么不同？</h1><blockquote>
+<p>如果从重写方法会有什么特点来看，我们是不能重写静态方法的。虽然就算你重写静态方法，编译器也不会报错。也就是说，如果你试图重写静态方法，Java不会阻止你这么做，但你却得不到预期的结果（重写仅对非静态方法有用）。重写指的是根据运行时对象的类型来决定调用哪个方法，而不是根据编译时的类型。让我们猜一猜为什么静态方法是比较特殊的？因为它们是类的方法，所以它们在编译阶段就使用编译出来的类型进行绑定了。使用对象引用来访问静态方法只是Java设计者给程序员的自由。我们应该直接使用类名来访问静态方法，而不要使用对象引用来访问。</p>
+</blockquote>
+<h1 id="为什么不能在静态方法中使用this？this指代的是当前对象，但是，这个所谓的“当前对象”到底在哪里？"><a href="#为什么不能在静态方法中使用this？this指代的是当前对象，但是，这个所谓的“当前对象”到底在哪里？" class="headerlink" title="为什么不能在静态方法中使用this？this指代的是当前对象，但是，这个所谓的“当前对象”到底在哪里？"></a>为什么不能在静态方法中使用this？this指代的是当前对象，但是，这个所谓的“当前对象”到底在哪里？</h1><blockquote>
+<p>这个要从java的内存机制去分析，首先当你New 一个对象的时候，并不是先在堆中为对象开辟内存空间，而是先将类中的静态方法（带有static修饰的静态函数）的代码加载到一个叫做方法区的地方，然后再在堆内存中创建对象。所以说静态方法会随着类的加载而被加载。当你new一个对象时，该对象存在于对内存中，this关键字一般指该对象，但是如果没有new对象，而是通过类名调用该类的静态方法也可以。<br>程序最终都是在内存中执行，变量只有在内存中占有一席之地时才会被访问，类的静态成员（静态变量和静态方法）属于类本身，在类加载的时候就会分配内存，可以通过类名直接去访问，非静态成员（非静态变量和非静态方法）属于类的对象，所以只有在类的对象创建（实例化）的时候才会分配内存，然后通过类的对象去访问。<br>在一个类的静态成员中去访问非静态成员之所以会出错是因为在类的非静态成员不存在的时候静态成员就已经存在了，访问一个内存中不存在的东西当然会出错。</p>
+</blockquote>
+<h1 id="在Java中，类型会在什么时间、什么条件下由JVM加载？加载后一定会初始化吗？"><a href="#在Java中，类型会在什么时间、什么条件下由JVM加载？加载后一定会初始化吗？" class="headerlink" title="在Java中，类型会在什么时间、什么条件下由JVM加载？加载后一定会初始化吗？"></a>在Java中，类型会在什么时间、什么条件下由JVM加载？加载后一定会初始化吗？</h1><h1 id="比起C-C-中的枚举，Java中的枚举有什么不同（优势）？枚举是怎样实现的？"><a href="#比起C-C-中的枚举，Java中的枚举有什么不同（优势）？枚举是怎样实现的？" class="headerlink" title="比起C / C++中的枚举，Java中的枚举有什么不同（优势）？枚举是怎样实现的？"></a>比起C / C++中的枚举，Java中的枚举有什么不同（优势）？枚举是怎样实现的？</h1><blockquote>
+<p>枚举本质上是通过普通的类来实现的，只是编译器为我们进行了处理。每个枚举类型都继承自java.lang.Enum，并自动添加了values和valueOf方法。而每个枚举常量是一个静态常量字段，使用内部类实现，该内部类继承了枚举类。所有枚举常量都通过静态代码块来进行初始化，即在类加载期间就初始化。另外通过把clone、readObject、writeObject这三个方法定义为final的，同时实现是抛出相应的异常。这样保证了每个枚举类型及枚举常量都是不可变的。可以利用枚举的这两个特性来实现线程安全的单例。</p>
+</blockquote>
+<h1 id="为什么要为String对象建立常量池？String常量池有什么好处？"><a href="#为什么要为String对象建立常量池？String常量池有什么好处？" class="headerlink" title="为什么要为String对象建立常量池？String常量池有什么好处？"></a>为什么要为String对象建立常量池？String常量池有什么好处？</h1><h1 id="每个基本数据类型都对应一个包装类型，这些包装类型有什么用？"><a href="#每个基本数据类型都对应一个包装类型，这些包装类型有什么用？" class="headerlink" title="每个基本数据类型都对应一个包装类型，这些包装类型有什么用？"></a>每个基本数据类型都对应一个包装类型，这些包装类型有什么用？</h1><h1 id="内部成员类是如何绑定外围类对象的？"><a href="#内部成员类是如何绑定外围类对象的？" class="headerlink" title="内部成员类是如何绑定外围类对象的？"></a>内部成员类是如何绑定外围类对象的？</h1><blockquote>
+<p>使用内部类最吸引人的原因是：每个内部类都能独立地继承一个（接口的）实现，所以无论外围类是否已经继承了某个（接口的）实现，对于内部类都没有影响。<br>在我们程序设计中有时候会存在一些使用接口很难解决的问题，这个时候我们可以利用内部类提供的、可以继承多个具体的或者抽象的类的能力来解决这些程序设计问题。可以这样说，接口只是解决了部分问题，而内部类使得多重继承的解决方案变得更加完整。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/java%E7%9A%84==%E5%92%8Cequals%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="prev" title="java的==和equals的区别">
+      <i class="fa fa-chevron-left"></i> java的==和equals的区别
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/instanceof/" rel="next" title="instanceof">
+      instanceof <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#float%E7%B1%BB%E5%9E%8B%E5%9C%A8Java%E4%B8%AD%E5%8D%A0%E7%94%A84%E5%AD%97%E8%8A%82%EF%BC%8Clong%E7%B1%BB%E5%9E%8B%E5%9C%A8-%E4%B8%AD%E5%8D%A0%E7%94%A88%E5%AD%97%E8%8A%82%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88float%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4%E6%AF%94long%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4%E8%BF%98%E5%A4%A7%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">float类型在Java中占用4字节，long类型在 中占用8字节，为什么float类型的取值范围比long类型的取值范围还大？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E2%80%9C-%E2%80%9D%E5%8F%AF%E4%BB%A5%E8%BF%9E%E6%8E%A5%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88String%E5%AF%B9%E8%B1%A1%EF%BC%89%EF%BC%8C%E9%82%A3%E4%B9%88%EF%BC%8C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9B%E8%A1%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">使用“+”可以连接两个字符串（String对象），那么，是怎样进行连接的？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8String%E7%9A%84%E5%87%A0%E7%82%B9%E5%BB%BA%E8%AE%AE"><span class="nav-number">2.1.</span> <span class="nav-text">使用String的几点建议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8%E6%98%AF%E5%90%A6%E5%88%9B%E5%BB%BA%E4%BA%86%E5%AF%B9%E8%B1%A1%EF%BC%9F%E8%AF%A5%E6%80%8E%E6%A0%B7%E6%9D%A5%E8%AF%81%E6%98%8E%E8%BF%99%E4%B8%80%E7%82%B9%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">构造器是否创建了对象？该怎样来证明这一点？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E5%92%8C%E5%AE%9E%E4%BE%8B%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.1.</span> <span class="nav-text">构造方法和实例方法的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E5%9C%A8%E7%B1%BB%E4%B8%AD%E6%98%BE%E7%A4%BA%E5%A3%B0%E6%98%8E%E6%9E%84%E9%80%A0%E5%99%A8%EF%BC%8C%E5%88%99%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%9A%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA%E6%97%A0%E5%8F%82%E7%9A%84%E6%9E%84%E9%80%A0%E5%99%A8%EF%BC%8C%E9%82%A3%E4%B9%88%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E8%BF%99%E4%B8%AA%E6%97%A0%E5%8F%82%E7%9A%84%E6%9E%84%E9%80%A0%E5%99%A8%E5%91%A2%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">如果没有在类中显示声明构造器，则编译器会自动生成一个无参的构造器，那么编译器为什么要自动生成这个无参的构造器呢？有什么作用？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#i-%E4%B8%8E-i%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F%E4%BB%85%E4%BB%85%E6%98%AF%E5%85%88%E5%8A%A0%E4%B8%8E%E5%90%8E%E5%8A%A0%E7%9A%84%E5%8C%BA%E5%88%AB%E5%90%97%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">i++与++i到底有什么不同？仅仅是先加与后加的区别吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%EF%BC%9A5-%EF%BC%9C%EF%BC%9C-35%EF%BC%8C%E4%BC%9A%E9%A6%96%E5%85%88%E8%BF%9B%E8%A1%8C35-32%E7%9A%84%E6%B1%82%E4%BD%99%E8%BF%90%E7%AE%97%E5%90%97%EF%BC%9F%E5%A6%82%E6%9E%9C%E6%98%AF%E8%BF%99%E6%A0%B7%EF%BC%8C%E9%82%A3%E4%B9%885-%EF%BC%9C%EF%BC%9C-%E2%88%922%E7%9A%84%E7%BB%93%E6%9E%9C%E6%98%AF%E5%A4%9A%E5%B0%91%E5%91%A2%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">移位运算：5 ＜＜ 35，会首先进行35 % 32的求余运算吗？如果是这样，那么5 ＜＜ −2的结果是多少呢？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E9%87%8D%E5%86%99%E4%BA%86equals%E6%96%B9%E6%B3%95%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E9%87%8D%E5%86%99hashCode%E6%96%B9%E6%B3%95%EF%BC%9F%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89%E9%87%8D%E5%86%99hashCode%E6%96%B9%E6%B3%95%EF%BC%8C%E4%BC%9A%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">如果重写了equals方法，为什么还要重写hashCode方法？如果没有重写hashCode方法，会有什么问题？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8EJDK1-7%E8%B5%B7%EF%BC%8Cswitch%E8%AF%AD%E5%8F%A5%E5%8F%AF%E4%BB%A5%E6%94%AF%E6%8C%81String%E7%B1%BB%E5%9E%8B%EF%BC%8C%E9%82%A3%E4%B9%88%E5%9C%A8%E5%BA%95%E5%B1%82%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">从JDK1.7起，switch语句可以支持String类型，那么在底层是如何实现的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%86%99%EF%BC%9F%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E4%B8%8E%E6%96%B9%E6%B3%95%E9%9A%90%E8%97%8F%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="nav-number">9.</span> <span class="nav-text">静态方法是否可以重写？方法重写与方法隐藏有什么不同？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E5%9C%A8%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%AD%E4%BD%BF%E7%94%A8this%EF%BC%9Fthis%E6%8C%87%E4%BB%A3%E7%9A%84%E6%98%AF%E5%BD%93%E5%89%8D%E5%AF%B9%E8%B1%A1%EF%BC%8C%E4%BD%86%E6%98%AF%EF%BC%8C%E8%BF%99%E4%B8%AA%E6%89%80%E8%B0%93%E7%9A%84%E2%80%9C%E5%BD%93%E5%89%8D%E5%AF%B9%E8%B1%A1%E2%80%9D%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F"><span class="nav-number">10.</span> <span class="nav-text">为什么不能在静态方法中使用this？this指代的是当前对象，但是，这个所谓的“当前对象”到底在哪里？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8Java%E4%B8%AD%EF%BC%8C%E7%B1%BB%E5%9E%8B%E4%BC%9A%E5%9C%A8%E4%BB%80%E4%B9%88%E6%97%B6%E9%97%B4%E3%80%81%E4%BB%80%E4%B9%88%E6%9D%A1%E4%BB%B6%E4%B8%8B%E7%94%B1JVM%E5%8A%A0%E8%BD%BD%EF%BC%9F%E5%8A%A0%E8%BD%BD%E5%90%8E%E4%B8%80%E5%AE%9A%E4%BC%9A%E5%88%9D%E5%A7%8B%E5%8C%96%E5%90%97%EF%BC%9F"><span class="nav-number">11.</span> <span class="nav-text">在Java中，类型会在什么时间、什么条件下由JVM加载？加载后一定会初始化吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AF%94%E8%B5%B7C-C-%E4%B8%AD%E7%9A%84%E6%9E%9A%E4%B8%BE%EF%BC%8CJava%E4%B8%AD%E7%9A%84%E6%9E%9A%E4%B8%BE%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%88%E4%BC%98%E5%8A%BF%EF%BC%89%EF%BC%9F%E6%9E%9A%E4%B8%BE%E6%98%AF%E6%80%8E%E6%A0%B7%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="nav-number">12.</span> <span class="nav-text">比起C &#x2F; C++中的枚举，Java中的枚举有什么不同（优势）？枚举是怎样实现的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%B8%BAString%E5%AF%B9%E8%B1%A1%E5%BB%BA%E7%AB%8B%E5%B8%B8%E9%87%8F%E6%B1%A0%EF%BC%9FString%E5%B8%B8%E9%87%8F%E6%B1%A0%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="nav-number">13.</span> <span class="nav-text">为什么要为String对象建立常量池？String常量池有什么好处？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AA%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E9%83%BD%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%EF%BC%8C%E8%BF%99%E4%BA%9B%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">14.</span> <span class="nav-text">每个基本数据类型都对应一个包装类型，这些包装类型有什么用？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E6%88%90%E5%91%98%E7%B1%BB%E6%98%AF%E5%A6%82%E4%BD%95%E7%BB%91%E5%AE%9A%E5%A4%96%E5%9B%B4%E7%B1%BB%E5%AF%B9%E8%B1%A1%E7%9A%84%EF%BC%9F"><span class="nav-number">15.</span> <span class="nav-text">内部成员类是如何绑定外围类对象的？</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">不登山峰，不显平地</p>
+  <div class="site-description" itemprop="description">木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lark-coder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lark-coder" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不登山峰，不显平地</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">711k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:47</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

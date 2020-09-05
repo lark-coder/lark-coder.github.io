@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.hudi.tech","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1.Spring概述1.1.什么是Spring？Spring是个java企业级应用的开源开发框架。Spring主要用来开发java应用，但是有些扩展是针对构建J2EE平台的web应用。Spring架构目标是简化java企业级应用开发，并通过POJO为基础的编程模型促进良好的编程习惯。 1.2.使用Spring框架的好处是什么？轻量：Spring是轻量的，基本的版本大约2MB控制反转：Spring通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring系列的基础知识">
+<meta property="og:url" content="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/Spring%E7%B3%BB%E5%88%97%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="木刻的鱼儿的博客">
+<meta property="og:description" content="1.Spring概述1.1.什么是Spring？Spring是个java企业级应用的开源开发框架。Spring主要用来开发java应用，但是有些扩展是针对构建J2EE平台的web应用。Spring架构目标是简化java企业级应用开发，并通过POJO为基础的编程模型促进良好的编程习惯。 1.2.使用Spring框架的好处是什么？轻量：Spring是轻量的，基本的版本大约2MB控制反转：Spring通">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-16T13:37:01.000Z">
+<meta property="article:modified_time" content="2020-09-05T09:10:18.001Z">
+<meta property="article:author" content="不登山峰，不显平地">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="spring">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/Spring%E7%B3%BB%E5%88%97%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>spring系列的基础知识 | 木刻的鱼儿的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木刻的鱼儿的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/Spring%E7%B3%BB%E5%88%97%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          spring系列的基础知识
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-16 21:37:01" itemprop="dateCreated datePublished" datetime="2019-03-16T21:37:01+08:00">2019-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-Spring概述"><a href="#1-Spring概述" class="headerlink" title="1.Spring概述"></a>1.Spring概述</h1><h2 id="1-1-什么是Spring？"><a href="#1-1-什么是Spring？" class="headerlink" title="1.1.什么是Spring？"></a>1.1.什么是Spring？</h2><p>Spring是个java企业级应用的开源开发框架。Spring主要用来开发java应用，但是有些扩展是针对构建J2EE平台的web应用。Spring架构目标是简化java企业级应用开发，并通过POJO为基础的编程模型促进良好的编程习惯。</p>
+<h2 id="1-2-使用Spring框架的好处是什么？"><a href="#1-2-使用Spring框架的好处是什么？" class="headerlink" title="1.2.使用Spring框架的好处是什么？"></a>1.2.使用Spring框架的好处是什么？</h2><p>轻量：Spring是轻量的，基本的版本大约2MB<br>控制反转：Spring通过控制反转实现了松散耦合，对象们给出它们的依赖，而不是创建或查找依赖的对象们。<br>面向切面编程（AOP）：Spring支持面向切面的编程，并且把应用业务逻辑和系统服务分开。<br>容器：Spring包含并管理应用中对象的声明周期和配置。<br>MVC框架：Spring的Web框架是个精心设计的框架，是Web框架的一个很好的替代品。<br>事务管理：Spring提供了一个持续的事务管理接口，可以扩展到上至本地事务下至全局事务（JTA）。<br>异常处理：Spring提供方便的API把具体技术相关的异常（比如由JDBC、Hibernate or JDO抛出的）转化为一直的unchecked异常。</p>
+<h2 id="1-3-Spring由那些模块组成？"><a href="#1-3-Spring由那些模块组成？" class="headerlink" title="1.3.Spring由那些模块组成？"></a>1.3.Spring由那些模块组成？</h2><ol>
+<li>Core module</li>
+<li>Bean module</li>
+<li>Context module</li>
+<li>Expression Language module</li>
+<li>JDBC module</li>
+<li>ORM module</li>
+<li>OXM module</li>
+<li>Java Messaging Service(JMS) module</li>
+<li>Transaction module</li>
+<li>Web module</li>
+<li>Web-Servlet module</li>
+<li>Web-struts module</li>
+<li>Web-portlet module</li>
+</ol>
+<h2 id="1-4-核心容器（应用上下文）模块"><a href="#1-4-核心容器（应用上下文）模块" class="headerlink" title="1.4.核心容器（应用上下文）模块"></a>1.4.核心容器（应用上下文）模块</h2><p>这是基本的Spring模块，提供Spring架构的基础功能，BeanFactory是任何以spring为基础的应用的核心。Spring架构建立在此模块之上，它使Spring称为一个容器。</p>
+<h2 id="1-5-BeanFactory-BeanFactory实现举例"><a href="#1-5-BeanFactory-BeanFactory实现举例" class="headerlink" title="1.5.BeanFactory-BeanFactory实现举例"></a>1.5.BeanFactory-BeanFactory实现举例</h2><p>Bean工厂是工厂模式的一个实现，提供了控制反转功能，用来把应用的配置和依赖从真正的应用代码中分离。最常用的BeanFactory实现是XmlBeanFactory类。</p>
+<h2 id="1-6-XMLBeanFactory"><a href="#1-6-XMLBeanFactory" class="headerlink" title="1.6.XMLBeanFactory"></a>1.6.XMLBeanFactory</h2><p>最常用的就是org.springframework.beans.factory.xml.XmlBeanFactory，它根据XML文件中的定义加载beans。该容器从XML文件读取配置元数据并用它去创建一个完全配置的系统或应用。</p>
+<h2 id="1-7-解释AOP模块"><a href="#1-7-解释AOP模块" class="headerlink" title="1.7.解释AOP模块"></a>1.7.解释AOP模块</h2><p>AOP模块用户发给我们的Spring应用做面向； 切面的开发，很多支持由AOP联盟提供，这样就确保了Spring和其他AOP框架的共通性。这个模块将元数据编程引入Spring。</p>
+<h2 id="1-8-解释JDBC抽象和DAO模块"><a href="#1-8-解释JDBC抽象和DAO模块" class="headerlink" title="1.8.解释JDBC抽象和DAO模块"></a>1.8.解释JDBC抽象和DAO模块</h2><p>通过使用JDBC抽象和DAO模块，保证数据库代码的简洁，并能避免数据库资源错误关闭导致的问题，它在各种不同的数据库的错误信息之上，提供了一个统一的异常访问层。它还利用Spring的AOP模块给Spring应用中的对象提供事务管理服务。</p>
+<h2 id="1-9-解释对象-关系映射集成模块"><a href="#1-9-解释对象-关系映射集成模块" class="headerlink" title="1.9.解释对象/关系映射集成模块"></a>1.9.解释对象/关系映射集成模块</h2><p>Spring通过提供ORM模块，支持我们在直接JDBC之上使用一个对象/关系映射（ORM）工具<br>，Spring支持集成主流的ORM框架，如？Hiberate，JDO和iBatis SQL Maps.Spring的事务管理同样支持以上所有的ORM框架及JDBC</p>
+<h2 id="1-10-解释Web模块"><a href="#1-10-解释Web模块" class="headerlink" title="1.10.解释Web模块"></a>1.10.解释Web模块</h2><p>Spring的Web模块是构建在application context模块基础之上，提供一个适合Web应用的上下文。这个模块也包括支持多种面向web的任务，如透明地处理多个文件上传请求和程序级请求参数的绑定到你的业务对象。它也有对jakarta struts的支持</p>
+<h2 id="1-11-Spring配置文件"><a href="#1-11-Spring配置文件" class="headerlink" title="1.11.Spring配置文件"></a>1.11.Spring配置文件</h2><p>Spring配置文件是个XML文件，这个文件包含了类信息，描述了如何配置它们，以及如何相互调用。</p>
+<h2 id="1-12-什么是Spring-IOC容器"><a href="#1-12-什么是Spring-IOC容器" class="headerlink" title="1.12.什么是Spring IOC容器"></a>1.12.什么是Spring IOC容器</h2><p>Spring IOC负责创建对象，管理对象（通过依赖注入（DI），装配对象，配置对象），并且管理这些对象的整个生命周期。</p>
+<h2 id="1-13-IOC的优点是什么？"><a href="#1-13-IOC的优点是什么？" class="headerlink" title="1.13.IOC的优点是什么？"></a>1.13.IOC的优点是什么？</h2><p>IOC或依赖注入把应用的代码量降到最低。它使应用容易测试，单元测试不再需要单例和JNDI查找机制。最小的代码和最小的侵入性使松散耦合得以实现。IOC容器支持加载服务时的饿汉式初始化和懒加载。</p>
+<h2 id="1-14ApplicationContext通常的实现是什么？"><a href="#1-14ApplicationContext通常的实现是什么？" class="headerlink" title="1.14ApplicationContext通常的实现是什么？"></a>1.14ApplicationContext通常的实现是什么？</h2><ul>
+<li>FileSystemXmlApplicationContext：此容器从一个XML文件中加载beans的定义，XML Bean配置文件的全路径名必须提供给它的构造函数。</li>
+<li>ClassPathXmlApplicationContext：此容器也从一个XML文件中加载beans的定义，这里，你需要正确设置classpath，因为这个容器将在XML文件，此文件定义了一个Web应用的所有bean。</li>
+</ul>
+<h2 id="1-15-Bean工厂和Application-contexts有什么区别？"><a href="#1-15-Bean工厂和Application-contexts有什么区别？" class="headerlink" title="1.15.Bean工厂和Application contexts有什么区别？"></a>1.15.Bean工厂和Application contexts有什么区别？</h2><p>Application contexts提供一种方法处理文本消息，一个通常的做法是加载文件资源（比如镜像），它们可以向注册为监听器的bean发布事件。另外，在容器或容器内的对象上执行的那些不得不由bean工厂以程序化方式处理的操作，可以在Application contexts中以声明的方式处理。Application contexts实现了messageSource接口，该接口的实现以可插拔的方式提供获取本读化消息的方法。</p>
+<h2 id="1-16-一个Spring的应用看起来像什么？"><a href="#1-16-一个Spring的应用看起来像什么？" class="headerlink" title="1.16.一个Spring的应用看起来像什么？"></a>1.16.一个Spring的应用看起来像什么？</h2><p>一个定义来一些功能的接口，这实现包括属性，它的setter，getter方法和函数等SpringAOP，Spring的XML配置文件，使用以上功能的客户端程序。</p>
+<h1 id="2-依赖注入"><a href="#2-依赖注入" class="headerlink" title="2.依赖注入"></a>2.依赖注入</h1><h2 id="2-1-什么是Spring的依赖注入？"><a href="#2-1-什么是Spring的依赖注入？" class="headerlink" title="2.1.什么是Spring的依赖注入？"></a>2.1.什么是Spring的依赖注入？</h2><p>依赖注入是IOC的一个方面，是个通常的概念，他有多种解释。这概念是说你不用创建对象，而只需要描述它如何被创建。你不在代码里直接组装你的组件和服务，但是要在配置文件里描述哪些组件需要哪些服务，之后一个容器（IOC容器）负责把它们组装起来。</p>
+<h2 id="2-2-有哪些不同类型的IOC（依赖注入）方式？"><a href="#2-2-有哪些不同类型的IOC（依赖注入）方式？" class="headerlink" title="2.2.有哪些不同类型的IOC（依赖注入）方式？"></a>2.2.有哪些不同类型的IOC（依赖注入）方式？</h2><ul>
+<li>构造器依赖注入：构造器依赖注入通过容器出发一个类的构造器来实现的，该类有一系列参数，每个参数代表一个对其他类的依赖。</li>
+<li>Setter方法注入：<br>Setter方法住注入是容器通过调用无参构造器或无参static工厂方法实例化bean之后，调用bean的setter方法，即实现了基于setter的依赖注入。</li>
+</ul>
+<h2 id="2-3-哪些依赖注入方式你建议使用，构造器注入忙赌场setter方法注入？"><a href="#2-3-哪些依赖注入方式你建议使用，构造器注入忙赌场setter方法注入？" class="headerlink" title="2.3.哪些依赖注入方式你建议使用，构造器注入忙赌场setter方法注入？"></a>2.3.哪些依赖注入方式你建议使用，构造器注入忙赌场setter方法注入？</h2><p>你两种依赖方式都可以使用，构造器注入和Setter注入。最好的解决方案是用构造器实现强制依赖，setter方法实现可选依赖。</p>
+<h1 id="3-Spring-Beans"><a href="#3-Spring-Beans" class="headerlink" title="3.Spring Beans"></a>3.Spring Beans</h1><h2 id="3-1-什么是Spring-Beans"><a href="#3-1-什么是Spring-Beans" class="headerlink" title="3.1.什么是Spring Beans"></a>3.1.什么是Spring Beans</h2><p>Spring beans是那些形成Spring应用的主干的java对象。它们被Spring IOC容器初始化，装配和管理。这些beans通过容器配置的元数据创建，比如，以XML文件中的形式定义。<br>Spring框架定义的beans都是单件beans。在bean tag中有个属性”singleton“，如果它被赋为true，bean就是单件，否则就是一个prototypw bean。默认是true，所有所有在Sprin框架中的beans缺省就是单件。</p>
+<h2 id="3-2-一个Spring-Bean定义包含什么？"><a href="#3-2-一个Spring-Bean定义包含什么？" class="headerlink" title="3.2.一个Spring Bean定义包含什么？"></a>3.2.一个Spring Bean定义包含什么？</h2><p>一个Spring Bean的定义包含容器必知的所有配置元数据，包括如何创建一个bean，它的声明周期详情及它的依赖。</p>
+<h2 id="3-3-如何给Spring容器提供配置元数据？"><a href="#3-3-如何给Spring容器提供配置元数据？" class="headerlink" title="3.3.如何给Spring容器提供配置元数据？"></a>3.3.如何给Spring容器提供配置元数据？</h2><p>这里有三种重要的方法给Spring容器提供配置元数据。<br>XML配置文件，基于注解的配置，基于java的配置。</p>
+<h2 id="3-4-你怎样定义类的作用域？"><a href="#3-4-你怎样定义类的作用域？" class="headerlink" title="3.4.你怎样定义类的作用域？"></a>3.4.你怎样定义类的作用域？</h2><p>当定义一个在Spring里，我们还能给这个bean声明一个作用域。它可以通过bean定义中的scope属性来定义。如，当Spring要在需要的时候每次生产一个新的bean实例，bean的scopw属性被指定为prototype。另一方面，一个bean每次使用的时候必须返回同一个实例，这个bean的scope属性必须设置为singleton。</p>
+<h2 id="3-5-解释Spring支持的几种bean的作用域？"><a href="#3-5-解释Spring支持的几种bean的作用域？" class="headerlink" title="3.5.解释Spring支持的几种bean的作用域？"></a>3.5.解释Spring支持的几种bean的作用域？</h2><ul>
+<li>singleton：bean在每个Spring IOC容器中只有一个实例</li>
+<li>prototype：一个bean定义可以有多个实例。</li>
+<li>request：每次http请求都会创建一个bean，该作用域仅在基于web的Spring ApplicationContext情形下有效。</li>
+<li>session：在一个HTTP Session中，一个bean定义对应一个实例。该作用域仅在基于web的Spring ApplicationContext情形下有效。</li>
+<li>global-session：在一个全局的HTTP Sessionvs，一个bean定义对应一个实例，该作用域仅在基于web的Spring ApplicationContext情形下有效。</li>
+<li>缺省的Spring bean的作用域是singleton</li>
+</ul>
+<h2 id="3-6-Spring框架中的单例bean是线程安全的吗？"><a href="#3-6-Spring框架中的单例bean是线程安全的吗？" class="headerlink" title="3.6.Spring框架中的单例bean是线程安全的吗？"></a>3.6.Spring框架中的单例bean是线程安全的吗？</h2><p>不，Spring框架中的单例bean不是线程安全的。</p>
+<h2 id="3-7-解释Spring框架中bean的声明周期"><a href="#3-7-解释Spring框架中bean的声明周期" class="headerlink" title="3.7.解释Spring框架中bean的声明周期"></a>3.7.解释Spring框架中bean的声明周期</h2><ol>
+<li>Spring容器从XML文件中读取bean的定义，并实例化bean。</li>
+<li>Spring根据bean的定义填充所有的属性。</li>
+<li>如果bean实现了BeanNameAware接口，Spring传递bean的ID到setBeanName方法。</li>
+<li>如果Bean实现了BeanFactoryAware接口，Spring传递bean的ID给setBeanFactory方法。</li>
+<li>如果有任何域bean相关联的BeanPostProcessors，Spring会在postProcesserBeforeInitialization()方法内调用它们。</li>
+<li>如果bean实现了IntializingBean了，调用它的afterPropertySet方法，如果bean声明了初始化方法，调用此初始化方法。</li>
+<li>如果有BeanPostProcessors和bean关联，这些bean的postProcessAfterInitialization()方法将被调用。</li>
+<li>如果bean实现了DisposableBean，它将调用destory()方法。</li>
+</ol>
+<h2 id="3-8-哪些是重要的bean声明周期方法？你能重载它们吗？"><a href="#3-8-哪些是重要的bean声明周期方法？你能重载它们吗？" class="headerlink" title="3.8.哪些是重要的bean声明周期方法？你能重载它们吗？"></a>3.8.哪些是重要的bean声明周期方法？你能重载它们吗？</h2><p>有两个重要的bean声明周期方法，第一个是setup，它是在容器加载bean的时候被调用。第二个是teardown，它是在容器卸载类的时候被调用。<br>the bean标签有两个重要的属性（init-method和destory-method）。用它们你可以自己定制初始化和注销方法。它们也有相应的注解（@PostConstruct和@PreDestory）</p>
+<h2 id="3-9-什么是Spring的内部bean？"><a href="#3-9-什么是Spring的内部bean？" class="headerlink" title="3.9.什么是Spring的内部bean？"></a>3.9.什么是Spring的内部bean？</h2><p>当一个bean仅被用作另一个bean的属性时，它能被声明为一个内部bean，为了定义inner bean，在Spring的基于XMl的配置元数据中，可以在或元素内使用元素，内部bean通常是匿名的。它们的scope一般是prototype。</p>
+<h2 id="3-10-在Spring中如何注入一个java集合？"><a href="#3-10-在Spring中如何注入一个java集合？" class="headerlink" title="3.10.在Spring中如何注入一个java集合？"></a>3.10.在Spring中如何注入一个java集合？</h2><ol>
+<li>list类型用于注入一列值，允许有相同的值。</li>
+<li>set类型用于注入一组值，不孕性有相同的值。</li>
+<li>map类型用于注入一组键值对，键和值都可以为任意类型。</li>
+<li>props类型用于注入一组键值对，键和值只能为String类型。</li>
+</ol>
+<h2 id="3-11-什么是bean装配？"><a href="#3-11-什么是bean装配？" class="headerlink" title="3.11.什么是bean装配？"></a>3.11.什么是bean装配？</h2><p>装配，或bean装配是指在Spring容器中把bean组装到一起，前提是容器需要知道bean的依赖关系，如何通过依赖关系来把它们装配到一起。</p>
+<h2 id="3-12-什么是bean的自动装配？"><a href="#3-12-什么是bean的自动装配？" class="headerlink" title="3.12.什么是bean的自动装配？"></a>3.12.什么是bean的自动装配？</h2><p>Spring容器能够自动装配相互合作的bean，这意味着容器不需要和配置，能通过bean工程自动处理bean之间的协作。</p>
+<h2 id="3-13-解释不同方式的自动装配"><a href="#3-13-解释不同方式的自动装配" class="headerlink" title="3.13.解释不同方式的自动装配"></a>3.13.解释不同方式的自动装配</h2><p>有五种自动装配的方式，可以用来指导Spring容器用自动装配方式来进行依赖注入。</p>
+<ul>
+<li>no：默认的方式是不进行自动装配，通过显示设置ref属性来进行装配。</li>
+<li>byName：通过参数名自动装配，Spring容器在配置文件中发现bean的autowire属性被设置为byname，之后容器试图匹配、装配和该bean的属性具有相同名字的bean。</li>
+<li>byType：通过参数类型自动装配，Spring容器在配置文件中发现bean的autowire属性被设置为byType，之后容器试图匹配、装配和该bean的属性具有相同类型的bean。如果有多个bean相符合条件，则抛出错误。</li>
+<li>constructor：这个方式类似于byType，但是要提供给构造器参数，如果没有确定的带参数的构造器参数类型，将会抛出异常。</li>
+<li>autodetect：首先尝试使用constructor来自动装配，如果无法工作，则使用byType方式。</li>
+</ul>
+<h2 id="3-14-自动装配有哪些局限性？"><a href="#3-14-自动装配有哪些局限性？" class="headerlink" title="3.14.自动装配有哪些局限性？"></a>3.14.自动装配有哪些局限性？</h2><ul>
+<li>重写：你仍需要和配置来定义依赖，意味着总要重写自动装配。</li>
+<li>基本数据类型：你不能自动装配简单的属性，如基本数据类型，String字符串和类</li>
+<li>模糊特性：自动装配不如显式装配精确，如果有可能，建议使用显式装配。</li>
+</ul>
+<h2 id="3-15-你可以在Spring中注入一个null和一个空字符串吗？"><a href="#3-15-你可以在Spring中注入一个null和一个空字符串吗？" class="headerlink" title="3.15.你可以在Spring中注入一个null和一个空字符串吗？"></a>3.15.你可以在Spring中注入一个null和一个空字符串吗？</h2><p>可以</p>
+<h1 id="4-Spring注解"><a href="#4-Spring注解" class="headerlink" title="4.Spring注解"></a>4.Spring注解</h1><h2 id="4-1-什么是基于java的Spring注解配置？"><a href="#4-1-什么是基于java的Spring注解配置？" class="headerlink" title="4.1.什么是基于java的Spring注解配置？"></a>4.1.什么是基于java的Spring注解配置？</h2><p>基于java的配置，允许在少量的java注解的帮助下，进行你的大部分Spring配置而非通过XML文件。以@configuration注解为例，它用来标记类可以当做一个bean的定义，被Spring IOC容器使用。另一个例子是@Bean注解，它表示此方法将要返回一个对象，作为一个bean注册进Spring应用上下文。</p>
+<h2 id="4-2-什么是基于注解的容器配置？"><a href="#4-2-什么是基于注解的容器配置？" class="headerlink" title="4.2.什么是基于注解的容器配置？"></a>4.2.什么是基于注解的容器配置？</h2><p>相对于XML文件，注解型的配置依赖与通过字节码元数据装配组件，而非尖括号的声明。开发者通过在相应的类，方法或属性上进行注解的方法，直接组件类中进行配置，而不是使用xml表述bean的装配关系。</p>
+<h2 id="4-3-怎么开启注解装配？"><a href="#4-3-怎么开启注解装配？" class="headerlink" title="4.3.怎么开启注解装配？"></a>4.3.怎么开启注解装配？</h2><p>注解装配在默认情况下是不开启的，为了使用注解装配，我们必须在Spring配置文件中配置元素。</p>
+<h2 id="4-4-Required注解"><a href="#4-4-Required注解" class="headerlink" title="4.4.@Required注解"></a>4.4.@Required注解</h2><p>这个注解表明bean的属性必须在配置的时候设置，通过一个bean定义的显式的属性值或通过自动装配，若@Required注解的bean属性未被设置，容器将抛出BeanInitializationException。</p>
+<h2 id="4-5-Autowired注解"><a href="#4-5-Autowired注解" class="headerlink" title="4.5.@Autowired注解"></a>4.5.@Autowired注解</h2><p>@Autowired注解提供了更细粒度的控制，包括在何处一级如何完成自动装配。它的用法和@Required一样，修饰setter方法、构造器、属性或者具有任意名称和/或多个参数的PN方法。</p>
+<h2 id="4-6-Qualifier注解"><a href="#4-6-Qualifier注解" class="headerlink" title="4.6.Qualifier注解"></a>4.6.Qualifier注解</h2><p>当有多个相同类型的bran却只有一个需要自动装配时，将@Qualifier注解和@Autowire注解结合使用以消除这种混淆，指定需要装配的确切的bean。</p>
+<h1 id="5-Spring数据访问"><a href="#5-Spring数据访问" class="headerlink" title="5.Spring数据访问"></a>5.Spring数据访问</h1><h2 id="5-1-在Spring框架中如何更有效地使用JDBC？"><a href="#5-1-在Spring框架中如何更有效地使用JDBC？" class="headerlink" title="5.1.在Spring框架中如何更有效地使用JDBC？"></a>5.1.在Spring框架中如何更有效地使用JDBC？</h2><p>使用SpringJDBC框架，资源光日和错误处理的代价都会被减轻。所有开发者只需要写statements和queries从数据存取数据，JDBC也可以在Spring框架提供的模板类的帮助下更有效地被使用，这个模板叫做JdbcTemplate。</p>
+<h2 id="5-2-JdbcTemplate"><a href="#5-2-JdbcTemplate" class="headerlink" title="5.2.JdbcTemplate"></a>5.2.JdbcTemplate</h2><p>JdbcTemplate类提供了很多便利的方法解决诸如数据库数据转变成基本数据类型或对象，执行写好的或可调用的数据库操作语句，提供自定义的数据错误处理。</p>
+<h2 id="5-3-Spring对DAO的支持"><a href="#5-3-Spring对DAO的支持" class="headerlink" title="5.3.Spring对DAO的支持"></a>5.3.Spring对DAO的支持</h2><p>Spring对数据访问对象（DAO）的支持旨在简化它和数据访问技术如JDBC，hibernate or JDO结合使用。这使我们可以方便切换持久层。编码时也不用担心会捕获没中技术特有的异常。</p>
+<h2 id="5-4-使用Spring通过什么方式访问Hibernate？"><a href="#5-4-使用Spring通过什么方式访问Hibernate？" class="headerlink" title="5.4.使用Spring通过什么方式访问Hibernate？"></a>5.4.使用Spring通过什么方式访问Hibernate？</h2><p>在Spring中有两种方式访问Hibernate：</p>
+<ul>
+<li>控制反转Hibernate Template和Callback</li>
+<li>继承HibernateDAOSupport提供一个AOP拦截器</li>
+</ul>
+<h2 id="5-5-Spring支持的ORM"><a href="#5-5-Spring支持的ORM" class="headerlink" title="5.5.Spring支持的ORM"></a>5.5.Spring支持的ORM</h2><ul>
+<li>Hibernate</li>
+<li>iBatis</li>
+<li>JPA：java Persistence API</li>
+<li>TopLink</li>
+<li>JDO：Java Data Objects</li>
+<li>OJB</li>
+</ul>
+<h2 id="5-6-如何通过HibernateDaoSupport将Spring和Hibernate结合起来？"><a href="#5-6-如何通过HibernateDaoSupport将Spring和Hibernate结合起来？" class="headerlink" title="5.6.如何通过HibernateDaoSupport将Spring和Hibernate结合起来？"></a>5.6.如何通过HibernateDaoSupport将Spring和Hibernate结合起来？</h2><p>用Spring的SessionFactory调用LocalSessionFactory。集成过程分三步：</p>
+<ul>
+<li>配置the Hibernate SessionFactory</li>
+<li>继承HibernateDaoSupport实现一个DAO</li>
+<li>在AOP支持的事务中装配</li>
+</ul>
+<h2 id="5-7-Spring支持的事务管理类型"><a href="#5-7-Spring支持的事务管理类型" class="headerlink" title="5.7.Spring支持的事务管理类型"></a>5.7.Spring支持的事务管理类型</h2><ul>
+<li>编程式事务管理：这意味着你通过编程的方式管理事务，给你带来极大的灵活性，但是难维护。</li>
+<li>声明式事务管理：这意味着你可以将业务代码和事务管理分离，你只需要注解和XML配置来管理事务</li>
+</ul>
+<h2 id="5-8-Spring框架的事务管理有哪些优点？"><a href="#5-8-Spring框架的事务管理有哪些优点？" class="headerlink" title="5.8.Spring框架的事务管理有哪些优点？"></a>5.8.Spring框架的事务管理有哪些优点？</h2><p>它为不同的事务API，如JTA，JDBC，Hibernate，JPA和JDO，提供一个不变的编程模式。它为编程式事务管理提供了一套简单的API而不是一些复杂的事务API。如它支持声明式事务管理，它和Spring各种数据访问抽象层很好得集成。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/spring/" rel="tag"># spring</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/String%E7%9A%84subString()%E6%96%B9%E6%B3%95/" rel="prev" title="String的substring()方法">
+      <i class="fa fa-chevron-left"></i> String的substring()方法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/jvm/%E7%90%86%E8%A7%A3Java%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/" rel="next" title="理解java中的内存泄露">
+      理解java中的内存泄露 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Spring%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1.Spring概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AFSpring%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1.1.什么是Spring？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E4%BD%BF%E7%94%A8Spring%E6%A1%86%E6%9E%B6%E7%9A%84%E5%A5%BD%E5%A4%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">1.2.使用Spring框架的好处是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Spring%E7%94%B1%E9%82%A3%E4%BA%9B%E6%A8%A1%E5%9D%97%E7%BB%84%E6%88%90%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">1.3.Spring由那些模块组成？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E6%A0%B8%E5%BF%83%E5%AE%B9%E5%99%A8%EF%BC%88%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%89%E6%A8%A1%E5%9D%97"><span class="nav-number">1.4.</span> <span class="nav-text">1.4.核心容器（应用上下文）模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-BeanFactory-BeanFactory%E5%AE%9E%E7%8E%B0%E4%B8%BE%E4%BE%8B"><span class="nav-number">1.5.</span> <span class="nav-text">1.5.BeanFactory-BeanFactory实现举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-XMLBeanFactory"><span class="nav-number">1.6.</span> <span class="nav-text">1.6.XMLBeanFactory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-%E8%A7%A3%E9%87%8AAOP%E6%A8%A1%E5%9D%97"><span class="nav-number">1.7.</span> <span class="nav-text">1.7.解释AOP模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-%E8%A7%A3%E9%87%8AJDBC%E6%8A%BD%E8%B1%A1%E5%92%8CDAO%E6%A8%A1%E5%9D%97"><span class="nav-number">1.8.</span> <span class="nav-text">1.8.解释JDBC抽象和DAO模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-%E8%A7%A3%E9%87%8A%E5%AF%B9%E8%B1%A1-%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84%E9%9B%86%E6%88%90%E6%A8%A1%E5%9D%97"><span class="nav-number">1.9.</span> <span class="nav-text">1.9.解释对象&#x2F;关系映射集成模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-%E8%A7%A3%E9%87%8AWeb%E6%A8%A1%E5%9D%97"><span class="nav-number">1.10.</span> <span class="nav-text">1.10.解释Web模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-11-Spring%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.11.</span> <span class="nav-text">1.11.Spring配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-12-%E4%BB%80%E4%B9%88%E6%98%AFSpring-IOC%E5%AE%B9%E5%99%A8"><span class="nav-number">1.12.</span> <span class="nav-text">1.12.什么是Spring IOC容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-13-IOC%E7%9A%84%E4%BC%98%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.13.</span> <span class="nav-text">1.13.IOC的优点是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-14ApplicationContext%E9%80%9A%E5%B8%B8%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.14.</span> <span class="nav-text">1.14ApplicationContext通常的实现是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-15-Bean%E5%B7%A5%E5%8E%82%E5%92%8CApplication-contexts%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-number">1.15.</span> <span class="nav-text">1.15.Bean工厂和Application contexts有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-16-%E4%B8%80%E4%B8%AASpring%E7%9A%84%E5%BA%94%E7%94%A8%E7%9C%8B%E8%B5%B7%E6%9D%A5%E5%83%8F%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.16.</span> <span class="nav-text">1.16.一个Spring的应用看起来像什么？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="nav-number">2.</span> <span class="nav-text">2.依赖注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E4%BB%80%E4%B9%88%E6%98%AFSpring%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">2.1.什么是Spring的依赖注入？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%E7%B1%BB%E5%9E%8B%E7%9A%84IOC%EF%BC%88%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%89%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">2.2.有哪些不同类型的IOC（依赖注入）方式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E5%93%AA%E4%BA%9B%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%96%B9%E5%BC%8F%E4%BD%A0%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%9E%84%E9%80%A0%E5%99%A8%E6%B3%A8%E5%85%A5%E5%BF%99%E8%B5%8C%E5%9C%BAsetter%E6%96%B9%E6%B3%95%E6%B3%A8%E5%85%A5%EF%BC%9F"><span class="nav-number">2.3.</span> <span class="nav-text">2.3.哪些依赖注入方式你建议使用，构造器注入忙赌场setter方法注入？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Spring-Beans"><span class="nav-number">3.</span> <span class="nav-text">3.Spring Beans</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E4%BB%80%E4%B9%88%E6%98%AFSpring-Beans"><span class="nav-number">3.1.</span> <span class="nav-text">3.1.什么是Spring Beans</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E4%B8%80%E4%B8%AASpring-Bean%E5%AE%9A%E4%B9%89%E5%8C%85%E5%90%AB%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">3.2.一个Spring Bean定义包含什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E5%A6%82%E4%BD%95%E7%BB%99Spring%E5%AE%B9%E5%99%A8%E6%8F%90%E4%BE%9B%E9%85%8D%E7%BD%AE%E5%85%83%E6%95%B0%E6%8D%AE%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">3.3.如何给Spring容器提供配置元数据？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E4%BD%A0%E6%80%8E%E6%A0%B7%E5%AE%9A%E4%B9%89%E7%B1%BB%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F"><span class="nav-number">3.4.</span> <span class="nav-text">3.4.你怎样定义类的作用域？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-%E8%A7%A3%E9%87%8ASpring%E6%94%AF%E6%8C%81%E7%9A%84%E5%87%A0%E7%A7%8Dbean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F"><span class="nav-number">3.5.</span> <span class="nav-text">3.5.解释Spring支持的几种bean的作用域？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-Spring%E6%A1%86%E6%9E%B6%E4%B8%AD%E7%9A%84%E5%8D%95%E4%BE%8Bbean%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%90%97%EF%BC%9F"><span class="nav-number">3.6.</span> <span class="nav-text">3.6.Spring框架中的单例bean是线程安全的吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-%E8%A7%A3%E9%87%8ASpring%E6%A1%86%E6%9E%B6%E4%B8%ADbean%E7%9A%84%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F"><span class="nav-number">3.7.</span> <span class="nav-text">3.7.解释Spring框架中bean的声明周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-8-%E5%93%AA%E4%BA%9B%E6%98%AF%E9%87%8D%E8%A6%81%E7%9A%84bean%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F%E6%96%B9%E6%B3%95%EF%BC%9F%E4%BD%A0%E8%83%BD%E9%87%8D%E8%BD%BD%E5%AE%83%E4%BB%AC%E5%90%97%EF%BC%9F"><span class="nav-number">3.8.</span> <span class="nav-text">3.8.哪些是重要的bean声明周期方法？你能重载它们吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-9-%E4%BB%80%E4%B9%88%E6%98%AFSpring%E7%9A%84%E5%86%85%E9%83%A8bean%EF%BC%9F"><span class="nav-number">3.9.</span> <span class="nav-text">3.9.什么是Spring的内部bean？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-10-%E5%9C%A8Spring%E4%B8%AD%E5%A6%82%E4%BD%95%E6%B3%A8%E5%85%A5%E4%B8%80%E4%B8%AAjava%E9%9B%86%E5%90%88%EF%BC%9F"><span class="nav-number">3.10.</span> <span class="nav-text">3.10.在Spring中如何注入一个java集合？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-11-%E4%BB%80%E4%B9%88%E6%98%AFbean%E8%A3%85%E9%85%8D%EF%BC%9F"><span class="nav-number">3.11.</span> <span class="nav-text">3.11.什么是bean装配？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-12-%E4%BB%80%E4%B9%88%E6%98%AFbean%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%EF%BC%9F"><span class="nav-number">3.12.</span> <span class="nav-text">3.12.什么是bean的自动装配？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-13-%E8%A7%A3%E9%87%8A%E4%B8%8D%E5%90%8C%E6%96%B9%E5%BC%8F%E7%9A%84%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D"><span class="nav-number">3.13.</span> <span class="nav-text">3.13.解释不同方式的自动装配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-14-%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E6%9C%89%E5%93%AA%E4%BA%9B%E5%B1%80%E9%99%90%E6%80%A7%EF%BC%9F"><span class="nav-number">3.14.</span> <span class="nav-text">3.14.自动装配有哪些局限性？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-15-%E4%BD%A0%E5%8F%AF%E4%BB%A5%E5%9C%A8Spring%E4%B8%AD%E6%B3%A8%E5%85%A5%E4%B8%80%E4%B8%AAnull%E5%92%8C%E4%B8%80%E4%B8%AA%E7%A9%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%90%97%EF%BC%9F"><span class="nav-number">3.15.</span> <span class="nav-text">3.15.你可以在Spring中注入一个null和一个空字符串吗？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Spring%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">4.Spring注解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9F%BA%E4%BA%8Ejava%E7%9A%84Spring%E6%B3%A8%E8%A7%A3%E9%85%8D%E7%BD%AE%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">4.1.什么是基于java的Spring注解配置？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE%EF%BC%9F"><span class="nav-number">4.2.</span> <span class="nav-text">4.2.什么是基于注解的容器配置？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E6%80%8E%E4%B9%88%E5%BC%80%E5%90%AF%E6%B3%A8%E8%A7%A3%E8%A3%85%E9%85%8D%EF%BC%9F"><span class="nav-number">4.3.</span> <span class="nav-text">4.3.怎么开启注解装配？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-Required%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.4.</span> <span class="nav-text">4.4.@Required注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-Autowired%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.5.</span> <span class="nav-text">4.5.@Autowired注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-Qualifier%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.6.</span> <span class="nav-text">4.6.Qualifier注解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Spring%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE"><span class="nav-number">5.</span> <span class="nav-text">5.Spring数据访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E5%9C%A8Spring%E6%A1%86%E6%9E%B6%E4%B8%AD%E5%A6%82%E4%BD%95%E6%9B%B4%E6%9C%89%E6%95%88%E5%9C%B0%E4%BD%BF%E7%94%A8JDBC%EF%BC%9F"><span class="nav-number">5.1.</span> <span class="nav-text">5.1.在Spring框架中如何更有效地使用JDBC？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-JdbcTemplate"><span class="nav-number">5.2.</span> <span class="nav-text">5.2.JdbcTemplate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-Spring%E5%AF%B9DAO%E7%9A%84%E6%94%AF%E6%8C%81"><span class="nav-number">5.3.</span> <span class="nav-text">5.3.Spring对DAO的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-%E4%BD%BF%E7%94%A8Spring%E9%80%9A%E8%BF%87%E4%BB%80%E4%B9%88%E6%96%B9%E5%BC%8F%E8%AE%BF%E9%97%AEHibernate%EF%BC%9F"><span class="nav-number">5.4.</span> <span class="nav-text">5.4.使用Spring通过什么方式访问Hibernate？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-Spring%E6%94%AF%E6%8C%81%E7%9A%84ORM"><span class="nav-number">5.5.</span> <span class="nav-text">5.5.Spring支持的ORM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87HibernateDaoSupport%E5%B0%86Spring%E5%92%8CHibernate%E7%BB%93%E5%90%88%E8%B5%B7%E6%9D%A5%EF%BC%9F"><span class="nav-number">5.6.</span> <span class="nav-text">5.6.如何通过HibernateDaoSupport将Spring和Hibernate结合起来？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-7-Spring%E6%94%AF%E6%8C%81%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.7.</span> <span class="nav-text">5.7.Spring支持的事务管理类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-8-Spring%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BC%98%E7%82%B9%EF%BC%9F"><span class="nav-number">5.8.</span> <span class="nav-text">5.8.Spring框架的事务管理有哪些优点？</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">不登山峰，不显平地</p>
+  <div class="site-description" itemprop="description">木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lark-coder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lark-coder" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不登山峰，不显平地</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">711k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:47</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.hudi.tech","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="jdk1.5特性12345678910111213&#x2F;&#x2F;1、支持泛型    ArrayList list&#x3D;new ArrayList()------&gt;ArrayList&lt;Integer&gt;list&#x3D;new ArrayList&lt;Integer&gt;();&#x2F;&#x2F;2、自动装箱&#x2F;拆箱    int i&#x3D;list.get(0).parseInt();--------&gt;int i&#x3D;l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDK各版本的特性">
+<meta property="og:url" content="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/JDK%E5%90%84%E7%89%88%E6%9C%AC%E7%9A%84%E7%89%B9%E6%80%A7/index.html">
+<meta property="og:site_name" content="木刻的鱼儿的博客">
+<meta property="og:description" content="jdk1.5特性12345678910111213&#x2F;&#x2F;1、支持泛型    ArrayList list&#x3D;new ArrayList()------&gt;ArrayList&lt;Integer&gt;list&#x3D;new ArrayList&lt;Integer&gt;();&#x2F;&#x2F;2、自动装箱&#x2F;拆箱    int i&#x3D;list.get(0).parseInt();--------&gt;int i&#x3D;l">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-12-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-05T09:10:18.005Z">
+<meta property="article:author" content="不登山峰，不显平地">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="jdk">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/JDK%E5%90%84%E7%89%88%E6%9C%AC%E7%9A%84%E7%89%B9%E6%80%A7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JDK各版本的特性 | 木刻的鱼儿的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木刻的鱼儿的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/JDK%E5%90%84%E7%89%88%E6%9C%AC%E7%9A%84%E7%89%B9%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JDK各版本的特性
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="jdk1-5特性"><a href="#jdk1-5特性" class="headerlink" title="jdk1.5特性"></a>jdk1.5特性</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1、支持泛型</span></span><br><span class="line">    ArrayList list=<span class="keyword">new</span> ArrayList()------&gt;ArrayList&lt;Integer&gt;list=<span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line"><span class="comment">//2、自动装箱/拆箱</span></span><br><span class="line">    <span class="keyword">int</span> i=list.get(<span class="number">0</span>).parseInt();--------&gt;<span class="keyword">int</span> i=list.get(<span class="number">0</span>);原始类型与对应的包装类不用显式转换</span><br><span class="line"><span class="comment">//3、for-each</span></span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;a.length;i++------------&gt;<span class="keyword">for</span>(<span class="keyword">int</span> i:a)&#123;......&#125;</span><br><span class="line"><span class="comment">//4、static import</span></span><br><span class="line">    Math.sqrt();---------------&gt;sqrt();</span><br><span class="line"><span class="comment">//5、变长参数</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> ...intlist)</span>有任意个参数,把他看作数组</span></span><br><span class="line"><span class="function"><span class="comment">//6、支持枚举</span></span></span><br><span class="line"><span class="function"><span class="comment">//7、注解</span></span></span><br><span class="line"><span class="function"><span class="comment">//协变返回类型：实际返回类型可以是要求的返回类型的一个子类型</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="jdk1-6特性"><a href="#jdk1-6特性" class="headerlink" title="jdk1.6特性"></a>jdk1.6特性</h1><ol>
+<li>AWT新增加了两个类:Desktop和SystemTray，其中前者用来通过系统默认程序来执行一个操作，如使用默认浏览器浏览指定的URL,用默认邮件客户端给指定的邮箱发邮件,用默认应用程序打开或编辑文件(比如,用记事本打开以txt为后缀名的文件),用系统默认的打印机打印文档等。后者可以用来在系统托盘区创建一个托盘程序</li>
+<li>使用JAXB2来实现对象与XML之间的映射，可以将一个Java对象转变成为XML格式，反之亦然</li>
+<li>StAX，一种利用拉模式解析(pull-parsing)XML文档的API。类似于SAX，也基于事件驱动模型。之所以将StAX加入到JAXP家族，是因为JDK6中的JAXB2和JAX-WS 2.0中都会用StAX。</li>
+<li>使用Compiler API，动态编译Java源文件，如JSP编译引擎就是动态的，所以修改后无需重启服务器。</li>
+<li>轻量级Http Server API，据此可以构建自己的嵌入式HttpServer,它支持Http和Https协议。</li>
+<li>插入式注解处理API(PluggableAnnotation Processing API)</li>
+<li>提供了Console类用以开发控制台程序，位于java.io包中。据此可方便与Windows下的cmd或Linux下的Terminal等交互。</li>
+<li>对脚本语言的支持如: ruby,groovy, javascript</li>
+<li>Common Annotations，原是J2EE 5.0规范的一部分，现在把它的一部分放到了J2SE 6.0中</li>
+<li>嵌入式数据库 Derby</li>
+</ol>
+<h1 id="jdk1-7特性"><a href="#jdk1-7特性" class="headerlink" title="jdk1.7特性"></a>jdk1.7特性</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1、对Java集合（Collections）的增强支持，可直接采用[]、&#123;&#125;的形式存入对象，采用[]的形式按照索引、键值来获取集合中的对象。如：</span></span><br><span class="line">List&lt;String&gt;list=[“item1”,”item2”];<span class="comment">//存</span></span><br><span class="line"></span><br><span class="line">Stringitem=list[<span class="number">0</span>];<span class="comment">//直接取</span></span><br><span class="line">Set&lt;String&gt;set=&#123;“item1”,”item2”,”item3”&#125;;<span class="comment">//存</span></span><br><span class="line">Map&lt;String,Integer&gt; map=&#123;“key1”:<span class="number">1</span>,”key2”:<span class="number">2</span>&#125;;<span class="comment">//存</span></span><br><span class="line">Intvalue=map[“key1”];<span class="comment">//取</span></span><br><span class="line"><span class="comment">//2、在Switch中可用String</span></span><br><span class="line"><span class="comment">//3、数值可加下划线用作分隔符（编译时自动被忽略）</span></span><br><span class="line"><span class="comment">//4、支持二进制数字，如：int binary= 0b1001_1001;</span></span><br><span class="line"><span class="comment">//5、简化了可变参数方法的调用</span></span><br><span class="line"><span class="comment">//6、用泛型类的构造方法时，可以省去泛型参数，编译器会自动判断。</span></span><br><span class="line"><span class="comment">//7、Boolean类型反转，空指针安全,参与位运算</span></span><br><span class="line"><span class="comment">//8、char类型的equals方法: booleanCharacter.equalsIgnoreCase(char ch1, char ch2)</span></span><br><span class="line"><span class="comment">//Map集合支持并发请求，注HashTable是线程安全的，Map是非线程安全的。但此处更新使得其也支持并发。另外，Map对象可这样定义：Map map = &#123;name:&quot;xxx&quot;,age:18&#125;;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="jdk1-8特性"><a href="#jdk1-8特性" class="headerlink" title="jdk1.8特性"></a>jdk1.8特性</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1、接口的默认方法：即接口中可以声明一个非抽象的方法做为默认的实现，但只能声明一个，且在方法的返回类型前要加上“default”关键字。</span></span><br><span class="line"><span class="comment">//2、Lambda 表达式：是对匿名比较器的简化，如：</span></span><br><span class="line">Collections.sort(names,(String a, String b) -&gt; &#123;</span><br><span class="line"><span class="keyword">return</span> b.compareTo(a);</span><br><span class="line">&#125;);</span><br><span class="line">对于函数体只有一行代码的，你可以去掉大括号&#123;&#125;以及<span class="keyword">return</span>关键字。如：</span><br><span class="line">Collections.sort(names,(String a, String b) -&gt; b.compareTo(a));</span><br><span class="line">或：Collections.sort(names, (a, b) -&gt; b.compareTo(a));</span><br><span class="line"><span class="comment">//3、是指仅仅只包含一个抽象方法的接口，要加@FunctionalInterface注解</span></span><br><span class="line"><span class="comment">//4、使用 :: 关键字来传递方法或者构造函数引用</span></span><br><span class="line"><span class="comment">//5、多重注解</span></span><br><span class="line"><span class="comment">//6、还增加了很多与函数式接口类似的接口以及与Map相关的API等……</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-允许给一个给接口添加一个非抽象方法，只需要使用default关键字即可–这个特征又叫扩展方法"><a href="#1-允许给一个给接口添加一个非抽象方法，只需要使用default关键字即可–这个特征又叫扩展方法" class="headerlink" title="1.允许给一个给接口添加一个非抽象方法，只需要使用default关键字即可–这个特征又叫扩展方法"></a>1.允许给一个给接口添加一个非抽象方法，只需要使用default关键字即可–这个特征又叫扩展方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">MMath</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">sum</span><span class="params">(<span class="keyword">double</span> n1,<span class="keyword">double</span> n2)</span></span>;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">double</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Math.sqrt(n)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//接口可以写静态方法，不用加default</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">MMath</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">sum</span><span class="params">(<span class="keyword">double</span> n1,<span class="keyword">double</span> n2)</span></span>;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">double</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Math.sqrt(n)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Lambda表达式"><a href="#2-Lambda表达式" class="headerlink" title="2.Lambda表达式"></a>2.Lambda表达式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//老版本排列字符串</span></span><br><span class="line">List&lt;String&gt; names = Arrays.asList(<span class="string">&quot;peter&quot;</span>, <span class="string">&quot;anna&quot;</span>, <span class="string">&quot;mike&quot;</span>, <span class="string">&quot;xenia&quot;</span>);</span><br><span class="line">Collections.sort(names, <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> b.compareTo(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">lambda表达式排列字符串</span><br><span class="line">编译器可以自动推导出参数的类型，所以可以不用再写一次类型</span><br><span class="line"></span><br><span class="line">Collections.sort(names, (String a, String b) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> b.compareTo(a);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Collections.sort(names, (String a, String b) -&gt; b.compareTo(a));</span><br><span class="line"></span><br><span class="line">Collections.sort(names, (a, b) -&gt; b.compareTo(a));</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-函数式接口"><a href="#3-函数式接口" class="headerlink" title="3.函数式接口"></a>3.函数式接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//“函数式接口”是指仅仅只包含一个抽象方法的接口，每一个该类型的lambda表达式都会被匹配到这个抽象方法。因为 默认方法 不算抽象方法，所以你也可以给你的函数式接口添加默认方法。</span></span><br><span class="line"><span class="comment">//可以将lambda表达式当作任意只包含一个抽象方法的接口类型，确保你的接口一定达到这个要求，你只需要给你的接口添加 @FunctionalInterface 注解，编译器如果发现你标注了这个注解的接口有多于一个抽象方法的时候会报错的。</span></span><br><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Converter</span>&lt;<span class="title">F</span>, <span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">T <span class="title">convert</span><span class="params">(F from)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line">Converter&lt;String, Integer&gt; converter = (from) -&gt; Integer.valueOf(from);</span><br><span class="line">Integer converted = converter.convert(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">System.out.println(converted);    <span class="comment">// 123</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//注意如果@FunctionalInterface如果没有指定，上面的代码也是对的。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-方法与构造函数调用"><a href="#4-方法与构造函数调用" class="headerlink" title="4.方法与构造函数调用"></a>4.方法与构造函数调用</h2><p>3中的方法还可以用静态方法调用–Java 8 允许你使用 :: 关键字来传递方法或者构造函数引用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Converter&lt;String, Integer&gt; converter = Integer::valueOf;</span><br><span class="line">Integer converted = converter.convert(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">System.out.println(converted);   <span class="comment">// 123</span></span><br><span class="line">converter = something::startsWith;</span><br><span class="line">String converted = converter.convert(<span class="string">&quot;Java&quot;</span>);</span><br><span class="line">System.out.println(converted);    <span class="comment">// &quot;J&quot;</span></span><br><span class="line"><span class="comment">//构造函数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    String firstName;</span><br><span class="line">    String lastName;</span><br><span class="line">    Person() &#123;&#125;</span><br><span class="line">    Person(String firstName, String lastName) &#123;</span><br><span class="line">        <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line">        <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">PersonFactory</span>&lt;<span class="title">P</span> <span class="keyword">extends</span> <span class="title">Person</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">P <span class="title">create</span><span class="params">(String firstName, String lastName)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line">PersonFactory&lt;Person&gt; personFactory = Person::<span class="keyword">new</span>;</span><br><span class="line">Person person = personFactory.create(<span class="string">&quot;Peter&quot;</span>, <span class="string">&quot;Parker&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-lambda作用域"><a href="#5-lambda作用域" class="headerlink" title="5.lambda作用域"></a>5.lambda作用域</h2><p>在lambda表达式中访问外层作用域和老版本的匿名对象中的方式很相似。你可以直接访问标记了final的外层局部变量，或者实例的字段以及静态变量。</p>
+<h2 id="6-访问局部变量"><a href="#6-访问局部变量" class="headerlink" title="6.访问局部变量"></a>6.访问局部变量</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以直接在lambda表达式中访问外层的局部变量</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">Converter&lt;Integer, String&gt; stringConverter =</span><br><span class="line">        (from) -&gt; String.valueOf(from + num);</span><br><span class="line">stringConverter.convert(<span class="number">2</span>);     <span class="comment">// 3</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//但是和匿名对象不同的是，这里的变量num可以不用声明为final，该代码同样正确：</span></span><br><span class="line"><span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">Converter&lt;Integer, String&gt; stringConverter =</span><br><span class="line">        (from) -&gt; String.valueOf(from + num);</span><br><span class="line">stringConverter.convert(<span class="number">2</span>);     <span class="comment">// 3</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//不过这里的num必须不可被后面的代码修改（即隐性的具有final的语义），例如下面的就无法编译</span></span><br><span class="line"><span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">Converter&lt;Integer, String&gt; stringConverter =</span><br><span class="line">        (from) -&gt; String.valueOf(from + num);</span><br><span class="line">num = <span class="number">3</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//在lambda表达式中试图修改num同样是不允许的。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-访问对象字段与静态变量"><a href="#7-访问对象字段与静态变量" class="headerlink" title="7.访问对象字段与静态变量"></a>7.访问对象字段与静态变量</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//和本地变量不同的是，lambda内部对于实例的字段以及静态变量是即可读又可写。该行为和匿名对象是一致的</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lambda4</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> outerStaticNum;</span><br><span class="line">    <span class="keyword">int</span> outerNum;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">testScopes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Converter&lt;Integer, String&gt; stringConverter1 = (from) -&gt; &#123;</span><br><span class="line">            outerNum = <span class="number">23</span>;</span><br><span class="line">            <span class="keyword">return</span> String.valueOf(from);</span><br><span class="line">        &#125;;</span><br><span class="line">        Converter&lt;Integer, String&gt; stringConverter2 = (from) -&gt; &#123;</span><br><span class="line">            outerStaticNum = <span class="number">72</span>;</span><br><span class="line">            <span class="keyword">return</span> String.valueOf(from);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-访问接口的默认方法"><a href="#8-访问接口的默认方法" class="headerlink" title="8.访问接口的默认方法"></a>8.访问接口的默认方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//还记得1的MMath例子么，接口MMath定义了一个默认方法sqrt可以直接被MMath的实例包括匿名对象访问到，但是在lambda表达式中这个是不行的。Lambda表达式中是无法访问到默认方法的，以下代码将无法编译：</span></span><br><span class="line">Formula formula = (a) -&gt; sqrt( a * <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/jdk/" rel="tag"># jdk</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/instanceof/" rel="prev" title="instanceof">
+      <i class="fa fa-chevron-left"></i> instanceof
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%BC%82%E5%B8%B8/Error%20%E5%92%8C%20Exception/" rel="next" title="Error和Exception">
+      Error和Exception <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#jdk1-5%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">jdk1.5特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jdk1-6%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">jdk1.6特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jdk1-7%E7%89%B9%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">jdk1.7特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jdk1-8%E7%89%B9%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">jdk1.8特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%85%81%E8%AE%B8%E7%BB%99%E4%B8%80%E4%B8%AA%E7%BB%99%E6%8E%A5%E5%8F%A3%E6%B7%BB%E5%8A%A0%E4%B8%80%E4%B8%AA%E9%9D%9E%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95%EF%BC%8C%E5%8F%AA%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8default%E5%85%B3%E9%94%AE%E5%AD%97%E5%8D%B3%E5%8F%AF%E2%80%93%E8%BF%99%E4%B8%AA%E7%89%B9%E5%BE%81%E5%8F%88%E5%8F%AB%E6%89%A9%E5%B1%95%E6%96%B9%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">1.允许给一个给接口添加一个非抽象方法，只需要使用default关键字即可–这个特征又叫扩展方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">2.Lambda表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3"><span class="nav-number">4.3.</span> <span class="nav-text">3.函数式接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%96%B9%E6%B3%95%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="nav-number">4.4.</span> <span class="nav-text">4.方法与构造函数调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-lambda%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">4.5.</span> <span class="nav-text">5.lambda作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E8%AE%BF%E9%97%AE%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="nav-number">4.6.</span> <span class="nav-text">6.访问局部变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E8%AE%BF%E9%97%AE%E5%AF%B9%E8%B1%A1%E5%AD%97%E6%AE%B5%E4%B8%8E%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F"><span class="nav-number">4.7.</span> <span class="nav-text">7.访问对象字段与静态变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E8%AE%BF%E9%97%AE%E6%8E%A5%E5%8F%A3%E7%9A%84%E9%BB%98%E8%AE%A4%E6%96%B9%E6%B3%95"><span class="nav-number">4.8.</span> <span class="nav-text">8.访问接口的默认方法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">不登山峰，不显平地</p>
+  <div class="site-description" itemprop="description">木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lark-coder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lark-coder" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不登山峰，不显平地</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">711k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:47</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.hudi.tech","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="摘录1.不要在常量和变量中出现容易混淆的字母 包名全小写，类名首字母全大写，常量全部大写并用下划线分隔，变量采用驼峰命名法（Camel Case）命名等，这些都是最基本的Java编码规范 字母“l”作为长整型标志时务必大写。  2.莫让常量蜕变成变量 务必让常量的值在运行期保持不变。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《编写高质量代码：改善java程序的151个建议》_秦小波">
+<meta property="og:url" content="http://www.hudi.tech/2018/11/29/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E4%BB%A3%E7%A0%81%EF%BC%9A%E6%94%B9%E5%96%84java%E7%A8%8B%E5%BA%8F%E7%9A%84151%E4%B8%AA%E5%BB%BA%E8%AE%AE%E3%80%8B_%E7%A7%A6%E5%B0%8F%E6%B3%A2/index.html">
+<meta property="og:site_name" content="木刻的鱼儿的博客">
+<meta property="og:description" content="摘录1.不要在常量和变量中出现容易混淆的字母 包名全小写，类名首字母全大写，常量全部大写并用下划线分隔，变量采用驼峰命名法（Camel Case）命名等，这些都是最基本的Java编码规范 字母“l”作为长整型标志时务必大写。  2.莫让常量蜕变成变量 务必让常量的值在运行期保持不变。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-11-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-05T09:10:18.050Z">
+<meta property="article:author" content="不登山峰，不显平地">
+<meta property="article:tag" content="阅读">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.hudi.tech/2018/11/29/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E4%BB%A3%E7%A0%81%EF%BC%9A%E6%94%B9%E5%96%84java%E7%A8%8B%E5%BA%8F%E7%9A%84151%E4%B8%AA%E5%BB%BA%E8%AE%AE%E3%80%8B_%E7%A7%A6%E5%B0%8F%E6%B3%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>《编写高质量代码：改善java程序的151个建议》_秦小波 | 木刻的鱼儿的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木刻的鱼儿的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2018/11/29/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E4%BB%A3%E7%A0%81%EF%BC%9A%E6%94%B9%E5%96%84java%E7%A8%8B%E5%BA%8F%E7%9A%84151%E4%B8%AA%E5%BB%BA%E8%AE%AE%E3%80%8B_%E7%A7%A6%E5%B0%8F%E6%B3%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《编写高质量代码：改善java程序的151个建议》_秦小波
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-11-29 00:00:00" itemprop="dateCreated datePublished" datetime="2018-11-29T00:00:00+08:00">2018-11-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h3 id="1-不要在常量和变量中出现容易混淆的字母"><a href="#1-不要在常量和变量中出现容易混淆的字母" class="headerlink" title="1.不要在常量和变量中出现容易混淆的字母"></a>1.不要在常量和变量中出现容易混淆的字母</h3><ul>
+<li>包名全小写，类名首字母全大写，常量全部大写并用下划线分隔，变量采用驼峰命名法（Camel Case）命名等，这些都是最基本的Java编码规范</li>
+<li>字母“l”作为长整型标志时务必大写。</li>
+</ul>
+<h3 id="2-莫让常量蜕变成变量"><a href="#2-莫让常量蜕变成变量" class="headerlink" title="2.莫让常量蜕变成变量"></a>2.莫让常量蜕变成变量</h3><ul>
+<li>务必让常量的值在运行期保持不变。</li>
+</ul>
+<h3 id="3-三元操作符的类型务必一致"><a href="#3-三元操作符的类型务必一致" class="headerlink" title="3.三元操作符的类型务必一致"></a>3.三元操作符的类型务必一致</h3><ul>
+<li>三元操作符类型的转换规则：<ul>
+<li>若两个操作数不可转换，则不做转换，返回值为Object类型。</li>
+<li>若两个操作数是明确类型的表达式（比如变量），则按照正常的二进制数字来转换，int类型转换为long类型，long类型转换为float类型等。</li>
+<li>若两个操作数中有一个是数字S，另外一个是表达式，且其类型标示为T，那么，若数字S在T的范围内，则转换为T类型；若S超出了T类型的范围，则T转换为S类型（可以参考“建议22”，会对该问题进行展开描述）。</li>
+<li>若两个操作数都是直接量数字（Literal），则返回值类型为范围较大者。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-避免带有变长参数的方法重载"><a href="#4-避免带有变长参数的方法重载" class="headerlink" title="4.避免带有变长参数的方法重载"></a>4.避免带有变长参数的方法重载</h3><ul>
+<li>变长参数必须是方法中的最后一个参数；一个方法不能定义多个变长参数等</li>
+</ul>
+<h3 id="5-别让null值或空值威胁到变长方法"><a href="#5-别让null值或空值威胁到变长方法" class="headerlink" title="5.别让null值或空值威胁到变长方法"></a>5.别让null值或空值威胁到变长方法</h3><h3 id="6-覆写变长方法也循规蹈矩"><a href="#6-覆写变长方法也循规蹈矩" class="headerlink" title="6.覆写变长方法也循规蹈矩"></a>6.覆写变长方法也循规蹈矩</h3><ul>
+<li>覆写必须满足的条件：<ul>
+<li>重写方法不能缩小访问权限。</li>
+<li>参数列表必须与被重写方法相同。</li>
+<li>返回类型必须与被重写方法的相同或是其子类。</li>
+<li>重写方法不能抛出新的异常，或者超出父类范围的异常，但是可以抛出更少、更有限的异常，或者不抛出异常。</li>
+</ul>
+</li>
+<li>覆写的方法参数与父类相同，不仅仅是类型、数量，还包括显示形式。</li>
+</ul>
+<h3 id="7-警惕自增的陷阱"><a href="#7-警惕自增的陷阱" class="headerlink" title="7.警惕自增的陷阱"></a>7.警惕自增的陷阱</h3><ul>
+<li>Java对自加是这样处理的：首先把count的值（注意是值，不是引用）拷贝到一个临时变量区，然后对count变量加1，最后返回临时变量区的值。程序第一次循环时的详细处理步骤如下：<ul>
+<li>JVM把count值（其值是0）拷贝到临时变量区。</li>
+<li>count值加1，这时候count的值是1。</li>
+<li>返回临时变量区的值，注意这个值是0，没修改过。</li>
+<li>返回值赋值给count，此时count值被重置成0。</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-不要让旧语法困扰你"><a href="#8-不要让旧语法困扰你" class="headerlink" title="8.不要让旧语法困扰你"></a>8.不要让旧语法困扰你</h3><h3 id="9-少用静态导入"><a href="#9-少用静态导入" class="headerlink" title="9.少用静态导入"></a>9.少用静态导入</h3><ul>
+<li>对于静态导入，一定要遵循两个规则：<ul>
+<li>不使用*（星号）通配符，除非是导入静态常量类（只包含常量的类或接口）。</li>
+<li>方法名是具有明确、清晰表象意义的工具类。</li>
+<li>import static java.lang.Math.PI;</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-不要在本类中覆盖静态导入的变量和方法"><a href="#10-不要在本类中覆盖静态导入的变量和方法" class="headerlink" title="10.不要在本类中覆盖静态导入的变量和方法"></a>10.不要在本类中覆盖静态导入的变量和方法</h3><ul>
+<li>编译器有一个“最短路径”原则：如果能够在本类中查找到的变量、常量、方法，就不会到其他包或父类、接口中查找，以确保本类中的属性、方法优先。</li>
+<li>因此，如果要变更一个被静态导入的方法，最好的办法是在原始类中重构，而不是在本类中覆盖。</li>
+<li>类实现Serializable接口的目的是为了可持久化，比如网络传输或本地存储，为系统的分布和异构部署提供先决支持条件。</li>
+</ul>
+<h3 id="11-养成良好习惯，显式声明UID"><a href="#11-养成良好习惯，显式声明UID" class="headerlink" title="11.养成良好习惯，显式声明UID"></a>11.养成良好习惯，显式声明UID</h3><ul>
+<li>类实现Serializable接口的目的是为了可持久化，比如网络传输或本地存储，为系统的分布和异构部署提供先决支持条件。</li>
+<li>显式声明serialVersionUID可以避免对象不一致，但尽量不要以这种方式向JVM“撒谎”。</li>
+</ul>
+<h3 id="12-避免用序列化类在构造函数中为不变量赋值"><a href="#12-避免用序列化类在构造函数中为不变量赋值" class="headerlink" title="12.避免用序列化类在构造函数中为不变量赋值"></a>12.避免用序列化类在构造函数中为不变量赋值</h3><ul>
+<li>反序列化时构造函数不会执行。</li>
+<li>在序列化类中，不使用构造函数为final变量赋值。</li>
+</ul>
+<h3 id="13-避免为final变量复杂赋值"><a href="#13-避免为final变量复杂赋值" class="headerlink" title="13.避免为final变量复杂赋值"></a>13.避免为final变量复杂赋值</h3><ul>
+<li>反序列化时final变量在以下情况下不会被重新赋值：<ul>
+<li>通过构造函数为final变量赋值。</li>
+<li>通过方法返回值为final变量赋值。</li>
+<li>final修饰的属性不是基本类型。</li>
+</ul>
+</li>
+<li>保存到磁盘上（或网络传输）的对象文件包括两部分：<ul>
+<li>类描述信息：包括包路径、继承关系、访问权限、变量描述、变量访问权限、方法签名、返回值，以及变量的关联类信息。要注意的一点是，它并不是class文件的翻版，它不记录方法、构造函数、static变量等的具体实现。之所以类描述会被保存，很简单，是因为能去也能回嘛，这保证反序列化的健壮运行。</li>
+<li>非瞬态（transient关键字）和非静态（static关键字）的实例变量值</li>
+</ul>
+</li>
+</ul>
+<h3 id="14-使用序列化类的私有方法巧妙解决部分属性持久化问题"><a href="#14-使用序列化类的私有方法巧妙解决部分属性持久化问题" class="headerlink" title="14.使用序列化类的私有方法巧妙解决部分属性持久化问题"></a>14.使用序列化类的私有方法巧妙解决部分属性持久化问题</h3><ul>
+<li>部分属性持久化问题看似很简单，只要把不需要持久化的属性加上瞬态关键字（transient关键字）即可。这是一种解决方案，但有时候行不通。</li>
+</ul>
+<h3 id="15-break万万不可忘"><a href="#15-break万万不可忘" class="headerlink" title="15.break万万不可忘"></a>15.break万万不可忘</h3><h3 id="16-易变业务使用脚本语言编写"><a href="#16-易变业务使用脚本语言编写" class="headerlink" title="16.易变业务使用脚本语言编写"></a>16.易变业务使用脚本语言编写</h3><ul>
+<li>脚本语言的三大特征，如下所示：<ul>
+<li>灵活。脚本语言一般都是动态类型，可以不用声明变量类型而直接使用，也可以在运行期改变类型。</li>
+<li>便捷。脚本语言是一种解释型语言，不需要编译成二进制代码，也不需要像Java一样生成字节码。它的执行是依靠解释器解释的，因此在运行期变更代码非常容易，而且不用停止应用。</li>
+<li>简单。只能说部分脚本语言简单，比如Groovy，Java程序员若转到Groovy程序语言上，只需要两个小时，看完语法说明，看完Demo即可使用了，没有太多的技术门槛。</li>
+</ul>
+</li>
+</ul>
+<h3 id="17-慎用动态编译"><a href="#17-慎用动态编译" class="headerlink" title="17.慎用动态编译"></a>17.慎用动态编译</h3><h3 id="18-避免instanceof非预期结果"><a href="#18-避免instanceof非预期结果" class="headerlink" title="18.避免instanceof非预期结果"></a>18.避免instanceof非预期结果</h3><ul>
+<li>‘A’是一个char类型，也就是一个基本类型，不是一个对象，instanceof只能用于对象的判断，不能用于基本类型的判断。</li>
+<li>这是instanceof特有的规则：若左操作数是null，结果就直接返回false，不再运算右操作数是什么类。这对我们的程序非常有利，在使用instanceof操作符时，不用关心被判断的类（也就是左操作数）是否为null，这与我们经常用到的equals、toString方法不同。</li>
+</ul>
+<h3 id="19-断言绝对不是鸡肋"><a href="#19-断言绝对不是鸡肋" class="headerlink" title="19.断言绝对不是鸡肋"></a>19.断言绝对不是鸡肋</h3><ul>
+<li>assert抛出的异常AssertionError是继承自Error的</li>
+<li>断言失败后，JVM会抛出一个AssertionError错误，它继承自Error，注意，这是一个错误，是不可恢复的，也就表示这是一个严重问题，开发者必须予以关注并解决之。</li>
+<li>按照正常执行逻辑不可能到达的代码区域可以放置assert。具体分为三种情况：<ul>
+<li>（1）在私有方法中放置assert作为输入参数的校验<ul>
+<li>在私有方法中可以放置assert校验输入参数，因为私有方法的使用者是作者自己，私有方法的调用者和被调用者之间是一种弱契约关系，或者说没有契约关系，其间的约束是依靠作者自己控制的，因此加上assert可以更好地预防自己犯错，或者无意的程序犯错。</li>
+</ul>
+</li>
+<li>（2）流程控制中不可能达到的区域<ul>
+<li>这类似于JUnit的fail方法，其标志性的意义就是：程序执行到这里就是错误的。</li>
+</ul>
+</li>
+<li>（3）建立程序探针<ul>
+<li>我们可能会在一段程序中定义两个变量，分别代表两个不同的业务含义，但是两者有固定的关系，例如var1=var2*2，那我们就可以在程序中到处设“桩”，断言这两者的关系，如果不满足即表明程序已经出现了异常，业务也就没有必要运行下去了。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="20-不要只替换一个类"><a href="#20-不要只替换一个类" class="headerlink" title="20.不要只替换一个类"></a>20.不要只替换一个类</h3><ul>
+<li>发布应用系统时禁止使用类文件替换方式，整体WAR包发布才是万全之策。</li>
+</ul>
+<h3 id="21-用偶判断，不用奇判断"><a href="#21-用偶判断，不用奇判断" class="headerlink" title="21.用偶判断，不用奇判断"></a>21.用偶判断，不用奇判断</h3><h3 id="22-用整数类型处理货币"><a href="#22-用整数类型处理货币" class="headerlink" title="22.用整数类型处理货币"></a>22.用整数类型处理货币</h3><h3 id="23-不要让类型默默转换"><a href="#23-不要让类型默默转换" class="headerlink" title="23.不要让类型默默转换"></a>23.不要让类型默默转换</h3><ul>
+<li>是因为Java是先运算然后再进行类型转换的，具体地说就是因为disc2的三个运算参数都是int类型，三者相乘的结果虽然也是int类型，但是已经超过了int的最大值，所以其值就是负值了（为什么是负值？因为过界了就会从头开始），再转换成long型，结果还是负值。</li>
+<li>在实际开发中，更通用的做法是主动声明式类型转化（注意不是强制类型转换），代码如下：long dis2 = 1L ＊ LIGHT_SPEED ＊ 60 ＊ 8;</li>
+<li>基本类型转换时，使用主动声明方式减少不必要的Bug。</li>
+</ul>
+<h3 id="24-边界，边界，还是边界"><a href="#24-边界，边界，还是边界" class="headerlink" title="24.边界，边界，还是边界"></a>24.边界，边界，还是边界</h3><ul>
+<li>看着2147483647这个数字很眼熟？那就对了，它是int类型的最大值，没错，有人输入了一个最大值，使校验条件失效了，Why？我们来看程序，order的值是2147483647，那再加上1000就超出int的范围了，其结果是-2147482649，那当然是小于正数2000了！一句话可归结其原因：数字越界使检验条件失效。</li>
+</ul>
+<h3 id="25-不要让四舍五入亏了一方"><a href="#25-不要让四舍五入亏了一方" class="headerlink" title="25.不要让四舍五入亏了一方"></a>25.不要让四舍五入亏了一方</h3><ul>
+<li>根据不同的场景，慎重选择不同的舍入模式，以提高项目的精准度，减少算法损失。</li>
+</ul>
+<h3 id="26-提防包装类型的null值"><a href="#26-提防包装类型的null值" class="headerlink" title="26.提防包装类型的null值"></a>26.提防包装类型的null值</h3><ul>
+<li>在程序的for循环中，隐含了一个拆箱过程，在此过程中包装类型转换为了基本类型。我们知道拆箱过程是通过调用包装对象的intValue方法来实现的，由于包装对象是null值，访问其intValue方法报空指针异常也就在所难免了。问题清楚了，修改也很简单，加入null值检查即可</li>
+<li>包装对象和拆箱对象可以自由转换，这不假，但是要剔除null值，null值并不能转化为基本类型。对于此类问题，我们谨记一点：包装类型参与运算时，要做null值校验。</li>
+</ul>
+<h3 id="27-谨慎包装类型的大小比较"><a href="#27-谨慎包装类型的大小比较" class="headerlink" title="27.谨慎包装类型的大小比较"></a>27.谨慎包装类型的大小比较</h3><h3 id="28-优先使用整型池"><a href="#28-优先使用整型池" class="headerlink" title="28.优先使用整型池"></a>28.优先使用整型池</h3><ul>
+<li>new声明的就是要生成一个新的对象，没二话，这是两个对象，地址肯定不等</li>
+<li>如果是-128到127之间的int类型转换为Integer对象，则直接从cache数组中获得</li>
+<li>cache是IntegerCache内部类的一个静态数组，容纳的是-128到127之间的Integer对象。通过valueOf产生包装对象时，如果int参数在-128和127之间，则直接从整型池中获得对象，不在该范围的int类型则通过new生成包装对象。</li>
+<li>通过包装类的valueOf生成包装实例可以显著提高空间和时间性能。</li>
+</ul>
+<h3 id="29-优先选择基本类型"><a href="#29-优先选择基本类型" class="headerlink" title="29.优先选择基本类型"></a>29.优先选择基本类型</h3><ul>
+<li>包装类型是一个类，它提供了诸如构造方法、类型转换、比较等非常实用的功能，而且在Java 5之后又实现了与基本类型之间的自动转换，这使包装类型如虎添翼，更是应用广泛了，在开发中包装类型已经随处可见，但无论是从安全性、性能方面来说，还是从稳定性方面来说，基本类型都是首选方案。</li>
+<li>定义的两个f()方法实现了重载，一个形参是基本类型，一个形参是包装类型，这类重载很正常。虽然基本类型和包装类型有自动装箱、自动拆箱的功能，但并不影响它们的重载，自动拆箱（装箱）只有在赋值时才会发生，和重载没有关系。</li>
+<li>基本类型可以先加宽，再转变成宽类型的包装类型，但不能直接转变成宽类型的包装类型。这句话比较拗口，简单地说就是，int可以加宽转变成long，然后再转变成Long对象，但不能直接转变成包装类型，注意这里指的都是自动转换，不是通过构造函数生成。</li>
+</ul>
+<h3 id="30-不要随便设置随机种子"><a href="#30-不要随便设置随机种子" class="headerlink" title="30.不要随便设置随机种子"></a>30.不要随便设置随机种子</h3><h3 id="31-在接口中不要存在实现代码"><a href="#31-在接口中不要存在实现代码" class="headerlink" title="31.在接口中不要存在实现代码"></a>31.在接口中不要存在实现代码</h3><ul>
+<li>接口是一个契约，不仅仅约束着实现者，同时也是一个保证，保证提供的服务（常量、方法）是稳定、可靠的，如果把实现代码写到接口中，那接口就绑定了可能变化的因素，这就会导致实现不再稳定和可靠，是随时都可能被抛弃、被更改、被重构的。所以，接口中虽然可以有实现，但应避免使用。</li>
+</ul>
+<h3 id="32-静态变量一定要先声明后赋值"><a href="#32-静态变量一定要先声明后赋值" class="headerlink" title="32.静态变量一定要先声明后赋值"></a>32.静态变量一定要先声明后赋值</h3><ul>
+<li>静态变量是类加载时被分配到数据区（Data Area）的，它在内存中只有一个拷贝，不会被分配多次，其后的所有赋值操作都是值改变，地址则保持不变。</li>
+<li>我们知道JVM初始化变量是先声明空间，然后再赋值的。静态变量是在类初始化时首先被加载的，JVM会去查找类中所有的静态声明，然后分配空间，注意这时候只是完成了地址空间的分配，还没有赋值，之后JVM会根据类中静态赋值（包括静态类赋值和静态块赋值）的先后顺序来执行。对于程序来说，就是先声明了int类型的地址空间，并把地址传递给了i，然后按照类中的先后顺序执行赋值动作，首先执行静态块中i=100，接着执行i=1，那最后的结果就是i=1了。</li>
+</ul>
+<h3 id="33-不要覆写静态方法"><a href="#33-不要覆写静态方法" class="headerlink" title="33.不要覆写静态方法"></a>33.不要覆写静态方法</h3><ul>
+<li>我们知道一个实例对象有两个类型：表面类型（Apparent Type）和实际类型（Actual Type），表面类型是声明时的类型，实际类型是对象产生时的类型，比如我们例子，变量base的表面类型是Base，实际类型是Sub。对于非静态方法，它是根据对象的实际类型来执行的，也就是执行了Sub类中的doAnything方法。而对于静态方法来说就比较特殊了，首先静态方法不依赖实例对象，它是通过类名访问的；其次，可以通过对象访问静态方法，如果是通过对象调用静态方法，JVM则会通过对象的表面类型查找到静态方法的入口，继而执行之。</li>
+<li>在子类中构建与父类相同的方法名、输入参数、输出参数、访问权限（权限可以扩大），并且父类、子类都是静态方法，此种行为叫做隐藏（Hide），它与覆写有两点不同：<ul>
+<li>表现形式不同。隐藏用于静态方法，覆写用于非静态方法。在代码上的表现是：@Override注解可以用于覆写，不能用于隐藏。</li>
+<li>职责不同。隐藏的目的是为了抛弃父类静态方法，重现子类方法，例如我们的例子，Sub.doSomething的出现是为了遮盖父类的Base.doSomething方法，也就是期望父类的静态方法不要破坏子类的业务行为；而覆写则是将父类的行为增强或减弱，延续父类的职责。</li>
+</ul>
+</li>
+</ul>
+<h3 id="34-构造函数尽量简化"><a href="#34-构造函数尽量简化" class="headerlink" title="34.构造函数尽量简化"></a>34.构造函数尽量简化</h3><h3 id="35-避免在构造函数中初始化其他类"><a href="#35-避免在构造函数中初始化其他类" class="headerlink" title="35.避免在构造函数中初始化其他类"></a>35.避免在构造函数中初始化其他类</h3><ul>
+<li>构造函数是一个类初始化必须执行的代码，它决定着类的初始化效率，如果构造函数比较复杂，而且还关联了其他类，则可能产生意想不到的问题，我们来看如下代码：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">           Son s = <span class="keyword">new</span> Son();</span><br><span class="line">           s.doSomething();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//父类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span>&#123;</span><br><span class="line">    Father()&#123;</span><br><span class="line">           <span class="keyword">new</span> Other();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//子类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>&#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;Hi,show me something&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//相关类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Other</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Other</span><span class="params">()</span></span>&#123;</span><br><span class="line">           <span class="keyword">new</span> Son();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>这段代码并不复杂，只是在构造函数中初始化了其他类，想想看这段代码的运行结果是什么？是打印“Hi,show me something”吗？</li>
+<li>答案是这段代码不能运行，报StackOverflowError异常，栈（Stack）内存溢出。这是因为声明s变量时，调用了Son的无参构造函数，JVM又默认调用了父类Father的无参构造函数，接着Father类又初始化了Other类，而Other类又调用了Son类，于是一个死循环就诞生了，直到栈内存被消耗完毕为止。</li>
+<li>可能有读者会觉得这样的场景不可能在开发中出现，那我们来思考这样的场景：Father是由框架提供的，Son类是我们自己编写的扩展代码，而Other类则是框架要求的拦截类（Interceptor类或者Handle类或者Hook方法），再来看看该问题，这种场景不可能出现吗？</li>
+<li>那有读者可能要说了，这种问题只要系统一运行就会发现，不可能对项目产生影响。</li>
+<li>那是因为我们在这里展示的代码比较简单，很容易一眼洞穿，一个项目中的构造函数可不止一两个，类之间的关系也不会这么简单的，要想瞥一眼就能明白是否有缺陷这对所有人员来说都是不可能完成的任务，解决此类问题的最好办法就是：不要在构造函数中声明初始化其他类，养成良好的习惯。</li>
+</ul>
+<h3 id="36-使用构造代码块精炼程序"><a href="#36-使用构造代码块精炼程序" class="headerlink" title="36.使用构造代码块精炼程序"></a>36.使用构造代码块精炼程序</h3><ul>
+<li>在Java中一共有四种类型的代码块：<ul>
+<li>普通代码块：就是在方法后面使用“{}”括起来的代码片段，它不能单独执行，必须通过方法名调用执行。</li>
+<li>静态代码块：在类中使用static修饰，并使用“{}”括起来的代码片段，用于静态变量的初始化或对象创建前的环境初始化。</li>
+<li>同步代码块：使用synchronized关键字修饰，并使用“{}”括起来的代码片段，它表示同一时间只能有一个线程进入到该方法块中，是一种多线程保护机制。</li>
+<li>构造代码块：在类中没有任何的前缀或后缀，并使用“{}”括起来的代码片段。</li>
+</ul>
+</li>
+<li>构造代码块会在每个构造函数内首先执行（需要注意的是：构造代码块不是在构造函数之前运行的，它依托于构造函数的执行），明白了这一点，我们就可以把构造代码块应用到如下场景中：<ul>
+<li>初始化实例变量（Instance Variable）<br>如果每个构造函数都要初始化变量，可以通过构造代码块来实现。当然也可以通过定义一个方法，然后在每个构造函数中调用该方法来实现，没错，可以解决，但是要在每个构造函数中都调用该方法，而这就是其缺点，若采用构造代码块的方式则不用定义和调用，会直接由编译器写入到每个构造函数中，这才是解决此类问题的绝佳方式。</li>
+<li>初始化实例环境<br>一个对象必须在适当的场景下才能存在，如果没有适当的场景，则就需要在创建对象时创建此场景，例如在JEE开发中，要产生HTTP Request必须首先建立HTTP Session，在创建HTTP Request时就可以通过构造代码块来检查HTTP Session是否已经存在，不存在则创建之。</li>
+</ul>
+</li>
+</ul>
+<h3 id="37-构造代码块会想你所想"><a href="#37-构造代码块会想你所想" class="headerlink" title="37.构造代码块会想你所想"></a>37.构造代码块会想你所想</h3><ul>
+<li>如果遇到this关键字（也就是构造函数调用自身其他的构造函数时）则不插入构造代码块，对于我们的例子来说，编译器在编译时发现String形参的构造函数调用了无参构造，于是放弃插入构造代码块，所以只执行了一次构造代码块</li>
+</ul>
+<h3 id="38-使用静态内部类提高封装性"><a href="#38-使用静态内部类提高封装性" class="headerlink" title="38.使用静态内部类提高封装性"></a>38.使用静态内部类提高封装性</h3><ul>
+<li>Java中的嵌套类（Nested Class）分为两种：静态内部类（也叫静态嵌套类，Static Nested Class）和内部类（Inner Class）。内部类我们介绍过很多了，现在来看看静态内部类。什么是静态内部类呢？是内部类，并且是静态（static修饰）的即为静态内部类。只有在是静态内部类的情况下才能把static修复符放在类前，其他任何时候static都是不能修饰类的。</li>
+<li>那静态内部类与普通内部类有什么区别呢？问得好，区别如下：<ul>
+<li>（1）静态内部类不持有外部类的引用<br>在普通内部类中，我们可以直接访问外部类的属性、方法，即使是private类型也可以访问，这是因为内部类持有一个外部类的引用，可以自由访问。而静态内部类，则只可以访问外部类的静态方法和静态属性（如果是private权限也能访问，这是由其代码位置所决定的），其他则不能访问。</li>
+<li>（2）静态内部类不依赖外部类<br>普通内部类与外部类之间是相互依赖的关系，内部类实例不能脱离外部类实例，也就是说它们会同生同死，一起声明，一起被垃圾回收器回收。而静态内部类是可以独立存在的，即使外部类消亡了，静态内部类还是可以存在的。</li>
+<li>（3）普通内部类不能声明static的方法和变量<br>普通内部类不能声明static的方法和变量，注意这里说的是变量，常量（也就是final static修饰的属性）还是可以的，而静态内部类形似外部类，没有任何限制。</li>
+</ul>
+</li>
+</ul>
+<h3 id="39-使用匿名类的构造函数"><a href="#39-使用匿名类的构造函数" class="headerlink" title="39.使用匿名类的构造函数"></a>39.使用匿名类的构造函数</h3><h3 id="40-匿名类的构造函数很特殊"><a href="#40-匿名类的构造函数很特殊" class="headerlink" title="40.匿名类的构造函数很特殊"></a>40.匿名类的构造函数很特殊</h3><h3 id="41-让多重继承成为现实"><a href="#41-让多重继承成为现实" class="headerlink" title="41.让多重继承成为现实"></a>41.让多重继承成为现实</h3><ul>
+<li>在Java中一个类可以多重实现，但不能多重继承，也就是说一个类能够同时实现多个接口，但不能同时继承多个类。</li>
+<li>内部类可以继承一个与外部类无关的类，保证了内部类的独立性，正是基于这一点，多重继承才会成为可能。</li>
+</ul>
+<h3 id="42-让工具类不可实例化"><a href="#42-让工具类不可实例化" class="headerlink" title="42.让工具类不可实例化"></a>42.让工具类不可实例化</h3><ul>
+<li>如果一个类不允许实例化，就要保证“平常”渠道都不能实例化它。</li>
+</ul>
+<h3 id="43-避免对象的浅拷贝"><a href="#43-避免对象的浅拷贝" class="headerlink" title="43.避免对象的浅拷贝"></a>43.避免对象的浅拷贝</h3><ul>
+<li>我们知道一个类实现了Cloneable接口就表示它具备了被拷贝的能力，如果再覆写clone()方法就会完全具备拷贝能力。拷贝是在内存中进行的，所以在性能方面比直接通过new生成对象要快很多，特别是在大对象的生成上，这会使性能的提升非常显著。</li>
+</ul>
+<h3 id="44-推荐使用序列化实现对象的拷贝"><a href="#44-推荐使用序列化实现对象的拷贝" class="headerlink" title="44.推荐使用序列化实现对象的拷贝"></a>44.推荐使用序列化实现对象的拷贝</h3><h3 id="45-覆写equals方法时不要识别不出自己"><a href="#45-覆写equals方法时不要识别不出自己" class="headerlink" title="45.覆写equals方法时不要识别不出自己"></a>45.覆写equals方法时不要识别不出自己</h3><h3 id="46-equals应该考虑null值情景"><a href="#46-equals应该考虑null值情景" class="headerlink" title="46.equals应该考虑null值情景"></a>46.equals应该考虑null值情景</h3><h3 id="47-在equals中使用getClass进行类型判断"><a href="#47-在equals中使用getClass进行类型判断" class="headerlink" title="47.在equals中使用getClass进行类型判断"></a>47.在equals中使用getClass进行类型判断</h3><ul>
+<li>在覆写equals时建议使用getClass进行类型判断，而不要使用instanceof。</li>
+</ul>
+<h3 id="48-覆写equals方法必须覆写hashCode方法"><a href="#48-覆写equals方法必须覆写hashCode方法" class="headerlink" title="48.覆写equals方法必须覆写hashCode方法"></a>48.覆写equals方法必须覆写hashCode方法</h3><h3 id="49-推荐覆写toString方法"><a href="#49-推荐覆写toString方法" class="headerlink" title="49.推荐覆写toString方法"></a>49.推荐覆写toString方法</h3><h3 id="50-使用package-info类为包服务"><a href="#50-使用package-info类为包服务" class="headerlink" title="50.使用package-info类为包服务"></a>50.使用package-info类为包服务</h3><h3 id="51-不要主动进行垃圾回收"><a href="#51-不要主动进行垃圾回收" class="headerlink" title="51.不要主动进行垃圾回收"></a>51.不要主动进行垃圾回收</h3><h3 id="52-推荐使用String直接量赋值"><a href="#52-推荐使用String直接量赋值" class="headerlink" title="52.推荐使用String直接量赋值"></a>52.推荐使用String直接量赋值</h3><ul>
+<li>String类是一个不可变（Immutable）对象其实有两层意思. 一是String类是final类，不可继承，不可能产生一个String的子类；二是在String类提供的所有方法中，如果有String返回值，就会新建一个String对象，不对原对象进行修改，这也就保证了原对象是不可改变的。</li>
+</ul>
+<h3 id="53-注意方法中传递的参数要求"><a href="#53-注意方法中传递的参数要求" class="headerlink" title="53.注意方法中传递的参数要求"></a>53.注意方法中传递的参数要求</h3><ul>
+<li>replaceAll传递的第一个参数是正则表达式。</li>
+</ul>
+<h3 id="54-正确使用String、StringBuffer、StringBuilder"><a href="#54-正确使用String、StringBuffer、StringBuilder" class="headerlink" title="54.正确使用String、StringBuffer、StringBuilder"></a>54.正确使用String、StringBuffer、StringBuilder</h3><h3 id="55-注意字符串的位置"><a href="#55-注意字符串的位置" class="headerlink" title="55.注意字符串的位置"></a>55.注意字符串的位置</h3><ul>
+<li>在“+”表达式中，String字符串具有最高优先级。</li>
+</ul>
+<h3 id="56-自由选择字符串拼接方法"><a href="#56-自由选择字符串拼接方法" class="headerlink" title="56.自由选择字符串拼接方法"></a>56.自由选择字符串拼接方法</h3><ul>
+<li>对一个字符串进行拼接有三种方法:加号、concat方法及StringBuilder</li>
+</ul>
+<h3 id="57-推荐在复杂字符串操作中使用正则表达式"><a href="#57-推荐在复杂字符串操作中使用正则表达式" class="headerlink" title="57.推荐在复杂字符串操作中使用正则表达式"></a>57.推荐在复杂字符串操作中使用正则表达式</h3><ul>
+<li>正则表达式是恶魔，威力巨大，但难以控制。</li>
+</ul>
+<h3 id="58-强烈建议使用UTF编码"><a href="#58-强烈建议使用UTF编码" class="headerlink" title="58.强烈建议使用UTF编码"></a>58.强烈建议使用UTF编码</h3><h3 id="59-对字符串排序持一种宽容的心态"><a href="#59-对字符串排序持一种宽容的心态" class="headerlink" title="59.对字符串排序持一种宽容的心态"></a>59.对字符串排序持一种宽容的心态</h3><h3 id="60-性能考虑，数组是首选"><a href="#60-性能考虑，数组是首选" class="headerlink" title="60.性能考虑，数组是首选"></a>60.性能考虑，数组是首选</h3><ul>
+<li>性能要求较高的场景中使用数组替代集合。</li>
+</ul>
+<h3 id="61-若有必要，使用变长数组"><a href="#61-若有必要，使用变长数组" class="headerlink" title="61.若有必要，使用变长数组"></a>61.若有必要，使用变长数组</h3><h3 id="62-警惕数组的浅拷贝"><a href="#62-警惕数组的浅拷贝" class="headerlink" title="62.警惕数组的浅拷贝"></a>62.警惕数组的浅拷贝</h3><h3 id="63-在明确的场景下，为集合指定初始容量"><a href="#63-在明确的场景下，为集合指定初始容量" class="headerlink" title="63.在明确的场景下，为集合指定初始容量"></a>63.在明确的场景下，为集合指定初始容量</h3><h3 id="64-多种最值算法，适时选择"><a href="#64-多种最值算法，适时选择" class="headerlink" title="64.多种最值算法，适时选择"></a>64.多种最值算法，适时选择</h3><ul>
+<li>最值计算时使用集合最简单，使用数组性能最优。</li>
+</ul>
+<h3 id="65-避开基本类型数组转换列表陷阱"><a href="#65-避开基本类型数组转换列表陷阱" class="headerlink" title="65.避开基本类型数组转换列表陷阱"></a>65.避开基本类型数组转换列表陷阱</h3><ul>
+<li>原始类型数组不能作为asList的输入参数，否则会引起程序逻辑混乱。</li>
+</ul>
+<h3 id="66-asList方法产生的List对象不可更改"><a href="#66-asList方法产生的List对象不可更改" class="headerlink" title="66.asList方法产生的List对象不可更改"></a>66.asList方法产生的List对象不可更改</h3><h3 id="67-不同的列表选择不同的遍历方法"><a href="#67-不同的列表选择不同的遍历方法" class="headerlink" title="67.不同的列表选择不同的遍历方法"></a>67.不同的列表选择不同的遍历方法</h3><h3 id="68-频繁插入和删除时使用LinkedList"><a href="#68-频繁插入和删除时使用LinkedList" class="headerlink" title="68.频繁插入和删除时使用LinkedList"></a>68.频繁插入和删除时使用LinkedList</h3><h3 id="69-列表相等只需关心元素数据"><a href="#69-列表相等只需关心元素数据" class="headerlink" title="69.列表相等只需关心元素数据"></a>69.列表相等只需关心元素数据</h3><h3 id="70-子列表只是原列表的一个视图"><a href="#70-子列表只是原列表的一个视图" class="headerlink" title="70.子列表只是原列表的一个视图"></a>70.子列表只是原列表的一个视图</h3><h3 id="71-推荐使用subList处理局部列表"><a href="#71-推荐使用subList处理局部列表" class="headerlink" title="71.推荐使用subList处理局部列表"></a>71.推荐使用subList处理局部列表</h3><h3 id="72-生成子列表后不要再操作原列表"><a href="#72-生成子列表后不要再操作原列表" class="headerlink" title="72.生成子列表后不要再操作原列表"></a>72.生成子列表后不要再操作原列表</h3><ul>
+<li>通过Collections. unmodifiableList方法设置列表为只读状态</li>
+</ul>
+<h3 id="73-使用Comparator进行排序"><a href="#73-使用Comparator进行排序" class="headerlink" title="73.使用Comparator进行排序"></a>73.使用Comparator进行排序</h3><ul>
+<li>Comparable接口可以作为实现类的默认排序法，Comparator接口则是一个类的扩展排序工具。</li>
+</ul>
+<h3 id="74-不推荐使用binarySearch对列表进行检索"><a href="#74-不推荐使用binarySearch对列表进行检索" class="headerlink" title="74.不推荐使用binarySearch对列表进行检索"></a>74.不推荐使用binarySearch对列表进行检索</h3><h3 id="75-集合中的元素必须做到compareTo和equals同步"><a href="#75-集合中的元素必须做到compareTo和equals同步" class="headerlink" title="75.集合中的元素必须做到compareTo和equals同步"></a>75.集合中的元素必须做到compareTo和equals同步</h3><h3 id="76-集合运算时使用更优雅的方式"><a href="#76-集合运算时使用更优雅的方式" class="headerlink" title="76.集合运算时使用更优雅的方式"></a>76.集合运算时使用更优雅的方式</h3><ul>
+<li>并集:list1.addAll(list2);</li>
+<li>交集:list1.retainAll(list2);</li>
+<li>差集:list1.removeAll(list2);</li>
+<li>无重复的并集:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除在list1中出现的元素</span></span><br><span class="line">list2.removeAll(list1);</span><br><span class="line"><span class="comment">//把剩余的list2元素加到list1中</span></span><br><span class="line">list1.addAll(list2);</span><br></pre></td></tr></table></figure>
+<h3 id="77-使用shuffle打乱列表"><a href="#77-使用shuffle打乱列表" class="headerlink" title="77.使用shuffle打乱列表"></a>77.使用shuffle打乱列表</h3></li>
+<li>Collections.shuffle(list);比如发送端发送一组数据，先随机打乱顺序，然后加密发送，接收端解密，然后自行排序，即可实现即使是相同的数据源，也会产生不同密文的效果，加强了数据的安全性。</li>
+</ul>
+<h3 id="78-减少HashMap中元素的数量"><a href="#78-减少HashMap中元素的数量" class="headerlink" title="78.减少HashMap中元素的数量"></a>78.减少HashMap中元素的数量</h3><ul>
+<li>尽量让HashMap中的元素少量并简单。</li>
+</ul>
+<h3 id="79-集合中的哈希码不要重复"><a href="#79-集合中的哈希码不要重复" class="headerlink" title="79.集合中的哈希码不要重复"></a>79.集合中的哈希码不要重复</h3><h3 id="80-多线程使用Vector或HashTable"><a href="#80-多线程使用Vector或HashTable" class="headerlink" title="80.多线程使用Vector或HashTable"></a>80.多线程使用Vector或HashTable</h3><h3 id="81-非稳定排序推荐使用List"><a href="#81-非稳定排序推荐使用List" class="headerlink" title="81.非稳定排序推荐使用List"></a>81.非稳定排序推荐使用List</h3><ul>
+<li>Set与List的最大区别就是Set中的元素不可以重复（这个重复指的equals方法的返回值相等）</li>
+<li>TreeSet，该类实现了类默认排序为升序的Set集合，如果插入一个元素，默认会按照升序排列（当然是根据Comparable接口的compareTo的返回值确定排序位置了）</li>
+<li>SortedSet接口（TreeSet实现了该接口）只是定义了在给集合加入元素时将其进行排序，并不能保证元素修改后的排序结果，因此TreeSet适用于不变量的集合数据排序，比如String、Integer等类型，但不适用于可变量的排序，特别是不确定何时元素会发生变化的数据集合。</li>
+</ul>
+<h3 id="2-由点及面，一叶知秋—集合大家族"><a href="#2-由点及面，一叶知秋—集合大家族" class="headerlink" title="2.由点及面，一叶知秋—集合大家族"></a>2.由点及面，一叶知秋—集合大家族</h3><ul>
+<li>（1）List<br>实现List接口的集合主要有：ArrayList、LinkedList、Vector、Stack，其中ArrayList是一个动态数组，LinkedList是一个双向链表，Vector是一个线程安全的动态数组，Stack是一个对象栈，遵循先进后出的原则。</li>
+<li>（2）Set<br>Set是不包含重复元素的集合，其主要的实现类有：EnumSet、HashSet、TreeSet，其中EnumSet是枚举类型的专用Set，所有元素都是枚举类型；HashSet是以哈希码决定其元素位置的Set，其原理与HashMap相似，它提供快速的插入和查找方法；TreeSet是一个自动排序的Set，它实现了SortedSet接口。</li>
+<li>（3）Map<br>Map是一个大家族，它可以分为排序Map和非排序Map，排序Map主要是TreeMap类，它根据Key值进行自动排序；非排序Map主要包括：HashMap、HashTable、Properties、EnumMap等，其中Properties是HashTable的子类，它的主要用途是从Property文件中加载数据，并提供方便的读写操作；EnumMap则是要求其Key必须是某一个枚举类型。<br>Map中还有一个WeakHashMap类需要说明，它是一个采用弱键方式实现的Map类，它的特点是：WeakHashMap对象的存在并不会阻止垃圾回收器对键值对的回收，也就是说使用WeakHashMap装载数据不用担心内存溢出的问题，GC会自动删除不用的键值对，这是好事。但也存在一个严重问题：GC是静悄悄回收的（何时回收？God knows!），我们的程序无法知晓该动作，存在着重大的隐患。</li>
+<li>（4）Queue<br>队列，它分为两类，一类是阻塞式队列，队列满了以后再插入元素则会抛出异常，主要包括：ArrayBlockingQueue、PriorityBlockingQueue、LinkedBlockingQueue，其中ArrayBlockingQueue是一个以数组方式实现的有界阻塞队列，PriorityBlockingQueue是依照优先级组建的队列，LinkedBlockingQueue是通过链表实现的阻塞队列；另一类是非阻塞队列，无边界的，只要内存允许，都可以持续追加元素，我们最经常使用的是PriorityQueue类。<br>还有一种队列，是双端队列，支持在头、尾两端插入和移除元素，它的主要实现类是：ArrayDeque、LinkedBlockingDeque、LinkedList。</li>
+<li>（5）数组<br>数组与集合的最大区别就是数组能够容纳基本类型，而集合就不行，更重要的一点就是所有的集合底层存储的都是数组。</li>
+<li>（6）工具类<br>数组的工具类是java.util.Arrays和java.lang.reflect.Array，集合的工具类是java.util . C o l l e c t i o n s ，有了这两个工具类，操作数组和集合会易如反掌，得心应手。</li>
+<li>（7）扩展类<br>集合类当然可以自行扩展了，想写一个自己的List？没问题，但最好的办法还是“拿来主义”，可以使用Apache的commons-collections扩展包，也可以使用Google的google-collections扩展包，这些足以应对我们的开发需要。</li>
+</ul>
+<h3 id="83-推荐使用枚举定义常量"><a href="#83-推荐使用枚举定义常量" class="headerlink" title="83.推荐使用枚举定义常量"></a>83.推荐使用枚举定义常量</h3><h3 id="84-使用构造函数协助描述枚举项"><a href="#84-使用构造函数协助描述枚举项" class="headerlink" title="84.使用构造函数协助描述枚举项"></a>84.使用构造函数协助描述枚举项</h3><h3 id="85-小心switch带来的空值异常"><a href="#85-小心switch带来的空值异常" class="headerlink" title="85.小心switch带来的空值异常"></a>85.小心switch带来的空值异常</h3><h3 id="86-在switch的default代码块中增加AssertionError错误"><a href="#86-在switch的default代码块中增加AssertionError错误" class="headerlink" title="86.在switch的default代码块中增加AssertionError错误"></a>86.在switch的default代码块中增加AssertionError错误</h3><ul>
+<li>在default后直接抛出一个AssertionError错误，其含义就是“不要跑到这里来，一跑到这里就会出问题”，这样可以保证在增加一个枚举项的情况下，若其他代码未修改，运行期马上就会报错，这样一来就很容易查找到错误，方便立刻排除。</li>
+</ul>
+<h3 id="87-使用valueof前必须进行校验"><a href="#87-使用valueof前必须进行校验" class="headerlink" title="87.使用valueof前必须进行校验"></a>87.使用valueof前必须进行校验</h3><h3 id="88-用枚举实现工厂方法模式更简洁"><a href="#88-用枚举实现工厂方法模式更简洁" class="headerlink" title="88.用枚举实现工厂方法模式更简洁"></a>88.用枚举实现工厂方法模式更简洁</h3><h3 id="89-枚举项的数量限制在64个以内"><a href="#89-枚举项的数量限制在64个以内" class="headerlink" title="89.枚举项的数量限制在64个以内"></a>89.枚举项的数量限制在64个以内</h3><h3 id="90-小心注解继承"><a href="#90-小心注解继承" class="headerlink" title="90.小心注解继承"></a>90.小心注解继承</h3><h3 id="91-枚举和注解结合使用威力更大"><a href="#91-枚举和注解结合使用威力更大" class="headerlink" title="91.枚举和注解结合使用威力更大"></a>91.枚举和注解结合使用威力更大</h3><h3 id="92-注意-Override不同版本的区别"><a href="#92-注意-Override不同版本的区别" class="headerlink" title="92.注意@Override不同版本的区别"></a>92.注意@Override不同版本的区别</h3><ul>
+<li>@Override注解用于方法的覆写上，它在编译期有效，也就是Java编译器在编译时会根据该注解检查方法是否真的是覆写，如果不是就报错，拒绝编译。</li>
+<li>如果是Java 1.6版本的程序移植到1.5版本环境中，就需要删除实现接口方法上的@Override注解。</li>
+</ul>
+<h3 id="93-Java的泛型是类型擦除的"><a href="#93-Java的泛型是类型擦除的" class="headerlink" title="93.Java的泛型是类型擦除的"></a>93.Java的泛型是类型擦除的</h3><ul>
+<li>Java的泛型在编译期有效，在运行期被删除，也就是说所有的泛型参数类型在编译后都会被清除掉</li>
+<li>Java泛型擦除引起的问题：在编译后所有的泛型类型都会做相应的转化。转换规则如下：<ul>
+<li>List、List、List擦除后的类型为List。</li>
+<li>List。</li>
+<li>List&lt;? extends E&gt;、List&lt;? super E&gt;擦除后的类型为List。</li>
+<li>List擦除后为List。</li>
+</ul>
+</li>
+<li>1）泛型的class对象是相同的:每个类都有一个class属性，泛型化不会改变class属性的返回值</li>
+<li>2）泛型数组初始化时不能声明泛型类型</li>
+<li>3）instanceof不允许存在泛型参数</li>
+</ul>
+<h3 id="94-不能初始化泛型参数和数组"><a href="#94-不能初始化泛型参数和数组" class="headerlink" title="94.不能初始化泛型参数和数组"></a>94.不能初始化泛型参数和数组</h3><ul>
+<li>类的成员变量是在类初始化前初始化的，所以要求在初始化前它必须具有明确的类型，否则就只能声明，不能初始化。</li>
+</ul>
+<h3 id="95-强制声明泛型的实际类型"><a href="#95-强制声明泛型的实际类型" class="headerlink" title="95.强制声明泛型的实际类型"></a>95.强制声明泛型的实际类型</h3><ul>
+<li>Arrays工具类有一个方法asList可以把一个变长参数或数组转变为列表，但是它有一个缺点：它所生成的List长度是不可改变的</li>
+</ul>
+<h3 id="96-不同的场景使用不同的泛型通配符"><a href="#96-不同的场景使用不同的泛型通配符" class="headerlink" title="96.不同的场景使用不同的泛型通配符"></a>96.不同的场景使用不同的泛型通配符</h3><ul>
+<li>（1）泛型结构只参与“读”操作则限定上界（extends关键字）</li>
+<li>（2）泛型结构只参与“写”操作则限定下界（使用super关键字）</li>
+</ul>
+<h3 id="97-警惕泛型是不能协变和逆变的"><a href="#97-警惕泛型是不能协变和逆变的" class="headerlink" title="97.警惕泛型是不能协变和逆变的"></a>97.警惕泛型是不能协变和逆变的</h3><h3 id="98-建议采用的顺序是List、List-lt-gt-、List"><a href="#98-建议采用的顺序是List、List-lt-gt-、List" class="headerlink" title="98.建议采用的顺序是List、List&lt;?&gt;、List"></a>98.建议采用的顺序是List、List&lt;?&gt;、List</h3><ul>
+<li>List表示的是List集合中的元素都为T类型，具体类型在运行期决定；List&lt;?&gt;表示的是任意类型，与List类似，而List则表示List集合中的所有元素为Object类型，因为Object是所有类的父类，所以List也可以容纳所有的类类型</li>
+<li>List可以进行读写操作:List可以进行诸如add、remove等操作，因为它的类型是固定的T类型，在编码期不需要进行任何的转型操作。</li>
+</ul>
+<h3 id="99-严格限定泛型类型采用多重界限"><a href="#99-严格限定泛型类型采用多重界限" class="headerlink" title="99.严格限定泛型类型采用多重界限"></a>99.严格限定泛型类型采用多重界限</h3><h3 id="100-数组的真实类型必须是泛型类型的子类型"><a href="#100-数组的真实类型必须是泛型类型的子类型" class="headerlink" title="100.数组的真实类型必须是泛型类型的子类型"></a>100.数组的真实类型必须是泛型类型的子类型</h3><h3 id="101-注意Class类的特殊性"><a href="#101-注意Class类的特殊性" class="headerlink" title="101.注意Class类的特殊性"></a>101.注意Class类的特殊性</h3><h3 id="102-适时选择getDeclared×××和get×××"><a href="#102-适时选择getDeclared×××和get×××" class="headerlink" title="102.适时选择getDeclared×××和get×××"></a>102.适时选择getDeclared×××和get×××</h3><ul>
+<li>getMethod方法获得的是所有public访问级别的方法，包括从父类继承的方法，而getDeclaredMethod获得是自身类的所有方法，包括公用（public）方法、私有（private）方法等，而且不受限于访问权限。</li>
+</ul>
+<h3 id="103-反射访问属性或方法时将Accessible设置为true"><a href="#103-反射访问属性或方法时将Accessible设置为true" class="headerlink" title="103.反射访问属性或方法时将Accessible设置为true"></a>103.反射访问属性或方法时将Accessible设置为true</h3><ul>
+<li>对于我们已经“习惯”了的代码，多思考一下为什么。</li>
+</ul>
+<h3 id="104-使用forName动态加载类文件"><a href="#104-使用forName动态加载类文件" class="headerlink" title="104.使用forName动态加载类文件"></a>104.使用forName动态加载类文件</h3><ul>
+<li>一个对象的生成必然会经过以下两个步骤:<ul>
+<li>加载到内存中生成Class的实例对象。</li>
+<li>通过new关键字生成实例对象。</li>
+</ul>
+</li>
+</ul>
+<h3 id="105-动态加载不适合数组"><a href="#105-动态加载不适合数组" class="headerlink" title="105.动态加载不适合数组"></a>105.动态加载不适合数组</h3><h3 id="106-动态代理可以使代理模式更加灵活"><a href="#106-动态代理可以使代理模式更加灵活" class="headerlink" title="106.动态代理可以使代理模式更加灵活"></a>106.动态代理可以使代理模式更加灵活</h3><h3 id="107-使用反射增加装饰模式的普适性"><a href="#107-使用反射增加装饰模式的普适性" class="headerlink" title="107.使用反射增加装饰模式的普适性"></a>107.使用反射增加装饰模式的普适性</h3><h3 id="108-反射让模板方法模式更强大"><a href="#108-反射让模板方法模式更强大" class="headerlink" title="108.反射让模板方法模式更强大"></a>108.反射让模板方法模式更强大</h3><h3 id="109-不需要太多关注反射效率"><a href="#109-不需要太多关注反射效率" class="headerlink" title="109.不需要太多关注反射效率"></a>109.不需要太多关注反射效率</h3><h3 id="110-提倡异常封装"><a href="#110-提倡异常封装" class="headerlink" title="110.提倡异常封装"></a>110.提倡异常封装</h3><h3 id="111-采用异常链传递异常"><a href="#111-采用异常链传递异常" class="headerlink" title="111.采用异常链传递异常"></a>111.采用异常链传递异常</h3><h3 id="112-受检异常尽可能转化为非受检异常"><a href="#112-受检异常尽可能转化为非受检异常" class="headerlink" title="112.受检异常尽可能转化为非受检异常"></a>112.受检异常尽可能转化为非受检异常</h3><h3 id="113-不要在finally块中处理返回值"><a href="#113-不要在finally块中处理返回值" class="headerlink" title="113.不要在finally块中处理返回值"></a>113.不要在finally块中处理返回值</h3><h3 id="114-不要在构造函数中抛出异常"><a href="#114-不要在构造函数中抛出异常" class="headerlink" title="114.不要在构造函数中抛出异常"></a>114.不要在构造函数中抛出异常</h3><ul>
+<li>一个对象的创建要经过内存分配、静态代码初始化、构造函数执行等过程，对象生成的关键步骤是构造函数</li>
+</ul>
+<h3 id="115-使用Throwable获得栈信息"><a href="#115-使用Throwable获得栈信息" class="headerlink" title="115.使用Throwable获得栈信息"></a>115.使用Throwable获得栈信息</h3><h3 id="116-异常只为异常服务"><a href="#116-异常只为异常服务" class="headerlink" title="116.异常只为异常服务"></a>116.异常只为异常服务</h3><ul>
+<li>异常只能用在非正常的情况下，不能成为正常情况的主逻辑，也就是说，异常只是主场景中的辅助场景，不能喧宾夺主。</li>
+</ul>
+<h3 id="117-多使用异常，把性能问题放一边"><a href="#117-多使用异常，把性能问题放一边" class="headerlink" title="117.多使用异常，把性能问题放一边"></a>117.多使用异常，把性能问题放一边</h3><h3 id="118-不推荐覆写start方法"><a href="#118-不推荐覆写start方法" class="headerlink" title="118.不推荐覆写start方法"></a>118.不推荐覆写start方法</h3><h3 id="119-启动线程前stop方法是不可靠的"><a href="#119-启动线程前stop方法是不可靠的" class="headerlink" title="119.启动线程前stop方法是不可靠的"></a>119.启动线程前stop方法是不可靠的</h3><h3 id="120-不使用stop方法停止线程"><a href="#120-不使用stop方法停止线程" class="headerlink" title="120.不使用stop方法停止线程"></a>120.不使用stop方法停止线程</h3><ul>
+<li>如果期望终止一个正在运行的线程，则不能使用已经过时的stop方法，需要自行编码实现，如此即可保证原子逻辑不被破坏，代码逻辑不会出现异常。</li>
+</ul>
+<h3 id="121-线程优先级只使用三个等级"><a href="#121-线程优先级只使用三个等级" class="headerlink" title="121.线程优先级只使用三个等级"></a>121.线程优先级只使用三个等级</h3><ul>
+<li>Java的优先级只是代表抢占CPU的机会大小，优先级越高，抢占CPU的机会越大，被优先执行的可能性越高，优先级相差不大，则抢占CPU的机会差别也不大，这就是导致了优先级为9的线程可能比优先级为10的线程先运行。</li>
+</ul>
+<h3 id="122-使用线程异常处理器提升系统可靠性"><a href="#122-使用线程异常处理器提升系统可靠性" class="headerlink" title="122.使用线程异常处理器提升系统可靠性"></a>122.使用线程异常处理器提升系统可靠性</h3><h3 id="123-volatile不能保证数据同步"><a href="#123-volatile不能保证数据同步" class="headerlink" title="123.volatile不能保证数据同步"></a>123.volatile不能保证数据同步</h3><h3 id="124-异步运算考虑使用Callable接口"><a href="#124-异步运算考虑使用Callable接口" class="headerlink" title="124.异步运算考虑使用Callable接口"></a>124.异步运算考虑使用Callable接口</h3><h3 id="125-优先选择线程池"><a href="#125-优先选择线程池" class="headerlink" title="125.优先选择线程池"></a>125.优先选择线程池</h3><ul>
+<li>线程池的实现涉及以下三个名词：<ul>
+<li>（1）工作线程（Worker）线程池中的线程，只有两个状态：可运行状态和等待状态，在没有任务时它们处于等待状态，运行时可以循环地执行任务。</li>
+<li>（2）任务接口（Task）这是每个任务必须实现的接口，以供工作线程调度器调度，它主要规定了任务的入口、任务执行完的场景处理、任务的执行状态等。这里有两种类型的任务：具有返回值（或异常）的Callable接口任务和无返回值并兼容旧版本的Runnable接口任务。</li>
+<li>（3）任务队列（Wok Queue）也叫做工作队列，用于存放等待处理的任务，一般是BlockingQueue的实现类，用来实现任务的排队处理。</li>
+</ul>
+</li>
+</ul>
+<h3 id="126-适时选择不同的线程池来实现"><a href="#126-适时选择不同的线程池来实现" class="headerlink" title="126.适时选择不同的线程池来实现"></a>126.适时选择不同的线程池来实现</h3><ul>
+<li><p>线程池的管理是这样一个过程：首先创建线程池，然后根据任务的数量逐步将线程增大到corePoolSize数量，如果此时仍有任务增加，则放置到workQueue中，直到workQueue爆满为止，然后继续增加池中的线程数量（增强处理能力），最终达到maximumPoolSize，那如果此时还有任务要增加进来呢？这就需要handler来处理了，或者丢弃新任务，或者拒绝新任务，或者挤占已有任务等。</p>
+<ul>
+<li>corePoolSize：最小线程数。<br>线程池启动后，在池中保持线程的最小数量。需要说明的是线程数量是逐步到达corePoolSize值的，例如corePoolSize被设置为10，而任务数量只有5，则线程池中最多会启动5个线程，而不是一次性地启动10个线程。</li>
+<li>maximumPoolSize：最大线程数量。<br>这是池中能够容纳的最大线程数量，如果超出，则使用RejectedExecutionHandler拒绝策略处理。</li>
+<li>keepAliveTime：线程最大生命期。<br>这里的生命期有两个约束条件：一是该参数针对的是超过corePoolSize数量的线程；二是处于非运行状态的线程。这么说吧，如果corePoolSize为10，maximumPoolSize为20，此时线程池中有15个线程在运行，一段时间后，其中有3个线程处于等待状态的时间超过了keepAliveTime指定的时间，则结束这3个线程，此时线程池中则还有12个线程正在运行。</li>
+<li>unit：时间单位。<br>这是keepAliveTime的时间单位，可以是纳秒、毫秒、秒、分钟等选项。</li>
+<li>workQueue：任务队列。<br>当线程池中的线程都处于运行状态，而此时任务数量继续增加，则需要有一个容器来容纳这些任务，这就是任务队列。</li>
+<li>threadFactory：线程工厂。<br>定义如何启动一个线程，可以设置线程名称，并且可以确认是否是后台线程等。</li>
+<li>handler：拒绝任务处理器。<br>由于超出线程数量和队列容量而对继续增加的任务进行处理的程序。</li>
+</ul>
+</li>
+</ul>
+<h3 id="127-Lock与synchronized是不一样的"><a href="#127-Lock与synchronized是不一样的" class="headerlink" title="127.Lock与synchronized是不一样的"></a>127.Lock与synchronized是不一样的</h3><ul>
+<li>显式锁是对象级别的锁，而内部锁是类级别的锁，也就是说Lock锁是跟随对象的，synchronized锁是跟随类的，更简单地说把Lock定义为多线程类的私有属性是起不到资源互斥作用的，除非是把Lock定义为所有线程的共享变量。</li>
+<li>灵活、强大则选择Lock，快捷、安全则选择synchronized。</li>
+</ul>
+<h3 id="128-预防线程死锁"><a href="#128-预防线程死锁" class="headerlink" title="128.预防线程死锁"></a>128.预防线程死锁</h3><h3 id="129-适当设置阻塞队列长度"><a href="#129-适当设置阻塞队列长度" class="headerlink" title="129.适当设置阻塞队列长度"></a>129.适当设置阻塞队列长度</h3><ul>
+<li>阻塞队列的容量是固定的，非阻塞队列则是变长的。阻塞队列可以在声明时指定队列的容量，若指定的容量，则元素的数量不可超过该容量，若不指定，队列的容量为Integer的最大值。</li>
+</ul>
+<h3 id="130-使用CountDownLatch协调子线程"><a href="#130-使用CountDownLatch协调子线程" class="headerlink" title="130.使用CountDownLatch协调子线程"></a>130.使用CountDownLatch协调子线程</h3><h3 id="131-CyclicBarrier让多线程齐步走"><a href="#131-CyclicBarrier让多线程齐步走" class="headerlink" title="131.CyclicBarrier让多线程齐步走"></a>131.CyclicBarrier让多线程齐步走</h3><h3 id="132-提升Java性能的基本方法"><a href="#132-提升Java性能的基本方法" class="headerlink" title="132.提升Java性能的基本方法"></a>132.提升Java性能的基本方法</h3><h3 id="133-若非必要，不要克隆对象"><a href="#133-若非必要，不要克隆对象" class="headerlink" title="133.若非必要，不要克隆对象"></a>133.若非必要，不要克隆对象</h3><h3 id="134-推荐使用“望闻问切”的方式诊断性能"><a href="#134-推荐使用“望闻问切”的方式诊断性能" class="headerlink" title="134.推荐使用“望闻问切”的方式诊断性能"></a>134.推荐使用“望闻问切”的方式诊断性能</h3><h3 id="135-必须定义性能衡量标准"><a href="#135-必须定义性能衡量标准" class="headerlink" title="135.必须定义性能衡量标准"></a>135.必须定义性能衡量标准</h3><h3 id="136-枪打出头鸟—解决首要系统性能问题"><a href="#136-枪打出头鸟—解决首要系统性能问题" class="headerlink" title="136.枪打出头鸟—解决首要系统性能问题"></a>136.枪打出头鸟—解决首要系统性能问题</h3><h3 id="137-调整JVM参数以提升性能"><a href="#137-调整JVM参数以提升性能" class="headerlink" title="137.调整JVM参数以提升性能"></a>137.调整JVM参数以提升性能</h3><h3 id="138-性能是个大“咕咚”"><a href="#138-性能是个大“咕咚”" class="headerlink" title="138.性能是个大“咕咚”"></a>138.性能是个大“咕咚”</h3><h3 id="139-大胆采用开源工具"><a href="#139-大胆采用开源工具" class="headerlink" title="139.大胆采用开源工具"></a>139.大胆采用开源工具</h3><h3 id="140-推荐使用Guava扩展工具包"><a href="#140-推荐使用Guava扩展工具包" class="headerlink" title="140.推荐使用Guava扩展工具包"></a>140.推荐使用Guava扩展工具包</h3><h3 id="141-Apache扩展包"><a href="#141-Apache扩展包" class="headerlink" title="141.Apache扩展包"></a>141.Apache扩展包</h3><h3 id="142-推荐使用Joda日期时间扩展包"><a href="#142-推荐使用Joda日期时间扩展包" class="headerlink" title="142.推荐使用Joda日期时间扩展包"></a>142.推荐使用Joda日期时间扩展包</h3><h3 id="143-可以选择多种Collections扩展"><a href="#143-可以选择多种Collections扩展" class="headerlink" title="143.可以选择多种Collections扩展"></a>143.可以选择多种Collections扩展</h3><h3 id="144-提倡良好的代码风格"><a href="#144-提倡良好的代码风格" class="headerlink" title="144.提倡良好的代码风格"></a>144.提倡良好的代码风格</h3><h3 id="145-不要完全依靠单元测试来发现问题"><a href="#145-不要完全依靠单元测试来发现问题" class="headerlink" title="145.不要完全依靠单元测试来发现问题"></a>145.不要完全依靠单元测试来发现问题</h3><h3 id="146-让注释正确、清晰、简洁"><a href="#146-让注释正确、清晰、简洁" class="headerlink" title="146.让注释正确、清晰、简洁"></a>146.让注释正确、清晰、简洁</h3><h3 id="147-让接口的职责保持单一"><a href="#147-让接口的职责保持单一" class="headerlink" title="147.让接口的职责保持单一"></a>147.让接口的职责保持单一</h3><h3 id="148-增强类的可替换性"><a href="#148-增强类的可替换性" class="headerlink" title="148.增强类的可替换性"></a>148.增强类的可替换性</h3><h3 id="149-依赖抽象而不是实现"><a href="#149-依赖抽象而不是实现" class="headerlink" title="149.依赖抽象而不是实现"></a>149.依赖抽象而不是实现</h3><h3 id="150-抛弃7条不良的编码习惯"><a href="#150-抛弃7条不良的编码习惯" class="headerlink" title="150.抛弃7条不良的编码习惯"></a>150.抛弃7条不良的编码习惯</h3><h3 id="151-以技术员自律而不是工人"><a href="#151-以技术员自律而不是工人" class="headerlink" title="151.以技术员自律而不是工人"></a>151.以技术员自律而不是工人</h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%98%85%E8%AF%BB/" rel="tag"># 阅读</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/11/07/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E4%BA%BA%E6%80%A7%E7%9A%84%E6%9E%B7%E9%94%81%E3%80%8B_%E6%AF%9B%E5%A7%86/" rel="prev" title="《人性的枷锁》_毛姆">
+      <i class="fa fa-chevron-left"></i> 《人性的枷锁》_毛姆
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/29/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E8%B7%AF%E8%A5%BF%E6%B3%95%E6%95%88%E5%BA%94%E3%80%8B_%E8%8F%B2%E5%88%A9%E6%99%AE%E3%83%BB%E6%B4%A5%E5%B7%B4%E5%A4%9A/" rel="next" title="《路西法效应》_菲利普・津巴多">
+      《路西法效应》_菲利普・津巴多 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%91%98%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">摘录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%8D%E8%A6%81%E5%9C%A8%E5%B8%B8%E9%87%8F%E5%92%8C%E5%8F%98%E9%87%8F%E4%B8%AD%E5%87%BA%E7%8E%B0%E5%AE%B9%E6%98%93%E6%B7%B7%E6%B7%86%E7%9A%84%E5%AD%97%E6%AF%8D"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.不要在常量和变量中出现容易混淆的字母</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%8E%AB%E8%AE%A9%E5%B8%B8%E9%87%8F%E8%9C%95%E5%8F%98%E6%88%90%E5%8F%98%E9%87%8F"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.莫让常量蜕变成变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%B8%89%E5%85%83%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%8A%A1%E5%BF%85%E4%B8%80%E8%87%B4"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.三元操作符的类型务必一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%81%BF%E5%85%8D%E5%B8%A6%E6%9C%89%E5%8F%98%E9%95%BF%E5%8F%82%E6%95%B0%E7%9A%84%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.避免带有变长参数的方法重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%88%AB%E8%AE%A9null%E5%80%BC%E6%88%96%E7%A9%BA%E5%80%BC%E5%A8%81%E8%83%81%E5%88%B0%E5%8F%98%E9%95%BF%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.5.</span> <span class="nav-text">5.别让null值或空值威胁到变长方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E8%A6%86%E5%86%99%E5%8F%98%E9%95%BF%E6%96%B9%E6%B3%95%E4%B9%9F%E5%BE%AA%E8%A7%84%E8%B9%88%E7%9F%A9"><span class="nav-number">1.0.6.</span> <span class="nav-text">6.覆写变长方法也循规蹈矩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E8%AD%A6%E6%83%95%E8%87%AA%E5%A2%9E%E7%9A%84%E9%99%B7%E9%98%B1"><span class="nav-number">1.0.7.</span> <span class="nav-text">7.警惕自增的陷阱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E4%B8%8D%E8%A6%81%E8%AE%A9%E6%97%A7%E8%AF%AD%E6%B3%95%E5%9B%B0%E6%89%B0%E4%BD%A0"><span class="nav-number">1.0.8.</span> <span class="nav-text">8.不要让旧语法困扰你</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E5%B0%91%E7%94%A8%E9%9D%99%E6%80%81%E5%AF%BC%E5%85%A5"><span class="nav-number">1.0.9.</span> <span class="nav-text">9.少用静态导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-%E4%B8%8D%E8%A6%81%E5%9C%A8%E6%9C%AC%E7%B1%BB%E4%B8%AD%E8%A6%86%E7%9B%96%E9%9D%99%E6%80%81%E5%AF%BC%E5%85%A5%E7%9A%84%E5%8F%98%E9%87%8F%E5%92%8C%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.10.</span> <span class="nav-text">10.不要在本类中覆盖静态导入的变量和方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E5%85%BB%E6%88%90%E8%89%AF%E5%A5%BD%E4%B9%A0%E6%83%AF%EF%BC%8C%E6%98%BE%E5%BC%8F%E5%A3%B0%E6%98%8EUID"><span class="nav-number">1.0.11.</span> <span class="nav-text">11.养成良好习惯，显式声明UID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-%E9%81%BF%E5%85%8D%E7%94%A8%E5%BA%8F%E5%88%97%E5%8C%96%E7%B1%BB%E5%9C%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%AD%E4%B8%BA%E4%B8%8D%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC"><span class="nav-number">1.0.12.</span> <span class="nav-text">12.避免用序列化类在构造函数中为不变量赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-%E9%81%BF%E5%85%8D%E4%B8%BAfinal%E5%8F%98%E9%87%8F%E5%A4%8D%E6%9D%82%E8%B5%8B%E5%80%BC"><span class="nav-number">1.0.13.</span> <span class="nav-text">13.避免为final变量复杂赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-%E4%BD%BF%E7%94%A8%E5%BA%8F%E5%88%97%E5%8C%96%E7%B1%BB%E7%9A%84%E7%A7%81%E6%9C%89%E6%96%B9%E6%B3%95%E5%B7%A7%E5%A6%99%E8%A7%A3%E5%86%B3%E9%83%A8%E5%88%86%E5%B1%9E%E6%80%A7%E6%8C%81%E4%B9%85%E5%8C%96%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.14.</span> <span class="nav-text">14.使用序列化类的私有方法巧妙解决部分属性持久化问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-break%E4%B8%87%E4%B8%87%E4%B8%8D%E5%8F%AF%E5%BF%98"><span class="nav-number">1.0.15.</span> <span class="nav-text">15.break万万不可忘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-%E6%98%93%E5%8F%98%E4%B8%9A%E5%8A%A1%E4%BD%BF%E7%94%A8%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%E7%BC%96%E5%86%99"><span class="nav-number">1.0.16.</span> <span class="nav-text">16.易变业务使用脚本语言编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-%E6%85%8E%E7%94%A8%E5%8A%A8%E6%80%81%E7%BC%96%E8%AF%91"><span class="nav-number">1.0.17.</span> <span class="nav-text">17.慎用动态编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-%E9%81%BF%E5%85%8Dinstanceof%E9%9D%9E%E9%A2%84%E6%9C%9F%E7%BB%93%E6%9E%9C"><span class="nav-number">1.0.18.</span> <span class="nav-text">18.避免instanceof非预期结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-%E6%96%AD%E8%A8%80%E7%BB%9D%E5%AF%B9%E4%B8%8D%E6%98%AF%E9%B8%A1%E8%82%8B"><span class="nav-number">1.0.19.</span> <span class="nav-text">19.断言绝对不是鸡肋</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-%E4%B8%8D%E8%A6%81%E5%8F%AA%E6%9B%BF%E6%8D%A2%E4%B8%80%E4%B8%AA%E7%B1%BB"><span class="nav-number">1.0.20.</span> <span class="nav-text">20.不要只替换一个类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-%E7%94%A8%E5%81%B6%E5%88%A4%E6%96%AD%EF%BC%8C%E4%B8%8D%E7%94%A8%E5%A5%87%E5%88%A4%E6%96%AD"><span class="nav-number">1.0.21.</span> <span class="nav-text">21.用偶判断，不用奇判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-%E7%94%A8%E6%95%B4%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%A4%84%E7%90%86%E8%B4%A7%E5%B8%81"><span class="nav-number">1.0.22.</span> <span class="nav-text">22.用整数类型处理货币</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-%E4%B8%8D%E8%A6%81%E8%AE%A9%E7%B1%BB%E5%9E%8B%E9%BB%98%E9%BB%98%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.0.23.</span> <span class="nav-text">23.不要让类型默默转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-%E8%BE%B9%E7%95%8C%EF%BC%8C%E8%BE%B9%E7%95%8C%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BE%B9%E7%95%8C"><span class="nav-number">1.0.24.</span> <span class="nav-text">24.边界，边界，还是边界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-%E4%B8%8D%E8%A6%81%E8%AE%A9%E5%9B%9B%E8%88%8D%E4%BA%94%E5%85%A5%E4%BA%8F%E4%BA%86%E4%B8%80%E6%96%B9"><span class="nav-number">1.0.25.</span> <span class="nav-text">25.不要让四舍五入亏了一方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-%E6%8F%90%E9%98%B2%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E7%9A%84null%E5%80%BC"><span class="nav-number">1.0.26.</span> <span class="nav-text">26.提防包装类型的null值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-%E8%B0%A8%E6%85%8E%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A4%A7%E5%B0%8F%E6%AF%94%E8%BE%83"><span class="nav-number">1.0.27.</span> <span class="nav-text">27.谨慎包装类型的大小比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8%E6%95%B4%E5%9E%8B%E6%B1%A0"><span class="nav-number">1.0.28.</span> <span class="nav-text">28.优先使用整型池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-%E4%BC%98%E5%85%88%E9%80%89%E6%8B%A9%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.0.29.</span> <span class="nav-text">29.优先选择基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-%E4%B8%8D%E8%A6%81%E9%9A%8F%E4%BE%BF%E8%AE%BE%E7%BD%AE%E9%9A%8F%E6%9C%BA%E7%A7%8D%E5%AD%90"><span class="nav-number">1.0.30.</span> <span class="nav-text">30.不要随便设置随机种子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-%E5%9C%A8%E6%8E%A5%E5%8F%A3%E4%B8%AD%E4%B8%8D%E8%A6%81%E5%AD%98%E5%9C%A8%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81"><span class="nav-number">1.0.31.</span> <span class="nav-text">31.在接口中不要存在实现代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E4%B8%80%E5%AE%9A%E8%A6%81%E5%85%88%E5%A3%B0%E6%98%8E%E5%90%8E%E8%B5%8B%E5%80%BC"><span class="nav-number">1.0.32.</span> <span class="nav-text">32.静态变量一定要先声明后赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-%E4%B8%8D%E8%A6%81%E8%A6%86%E5%86%99%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.33.</span> <span class="nav-text">33.不要覆写静态方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%B0%BD%E9%87%8F%E7%AE%80%E5%8C%96"><span class="nav-number">1.0.34.</span> <span class="nav-text">34.构造函数尽量简化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#35-%E9%81%BF%E5%85%8D%E5%9C%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96%E5%85%B6%E4%BB%96%E7%B1%BB"><span class="nav-number">1.0.35.</span> <span class="nav-text">35.避免在构造函数中初始化其他类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#36-%E4%BD%BF%E7%94%A8%E6%9E%84%E9%80%A0%E4%BB%A3%E7%A0%81%E5%9D%97%E7%B2%BE%E7%82%BC%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.0.36.</span> <span class="nav-text">36.使用构造代码块精炼程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#37-%E6%9E%84%E9%80%A0%E4%BB%A3%E7%A0%81%E5%9D%97%E4%BC%9A%E6%83%B3%E4%BD%A0%E6%89%80%E6%83%B3"><span class="nav-number">1.0.37.</span> <span class="nav-text">37.构造代码块会想你所想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#38-%E4%BD%BF%E7%94%A8%E9%9D%99%E6%80%81%E5%86%85%E9%83%A8%E7%B1%BB%E6%8F%90%E9%AB%98%E5%B0%81%E8%A3%85%E6%80%A7"><span class="nav-number">1.0.38.</span> <span class="nav-text">38.使用静态内部类提高封装性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#39-%E4%BD%BF%E7%94%A8%E5%8C%BF%E5%90%8D%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.39.</span> <span class="nav-text">39.使用匿名类的构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#40-%E5%8C%BF%E5%90%8D%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%BE%88%E7%89%B9%E6%AE%8A"><span class="nav-number">1.0.40.</span> <span class="nav-text">40.匿名类的构造函数很特殊</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#41-%E8%AE%A9%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF%E6%88%90%E4%B8%BA%E7%8E%B0%E5%AE%9E"><span class="nav-number">1.0.41.</span> <span class="nav-text">41.让多重继承成为现实</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#42-%E8%AE%A9%E5%B7%A5%E5%85%B7%E7%B1%BB%E4%B8%8D%E5%8F%AF%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="nav-number">1.0.42.</span> <span class="nav-text">42.让工具类不可实例化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#43-%E9%81%BF%E5%85%8D%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="nav-number">1.0.43.</span> <span class="nav-text">43.避免对象的浅拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#44-%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E5%BA%8F%E5%88%97%E5%8C%96%E5%AE%9E%E7%8E%B0%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%8B%B7%E8%B4%9D"><span class="nav-number">1.0.44.</span> <span class="nav-text">44.推荐使用序列化实现对象的拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#45-%E8%A6%86%E5%86%99equals%E6%96%B9%E6%B3%95%E6%97%B6%E4%B8%8D%E8%A6%81%E8%AF%86%E5%88%AB%E4%B8%8D%E5%87%BA%E8%87%AA%E5%B7%B1"><span class="nav-number">1.0.45.</span> <span class="nav-text">45.覆写equals方法时不要识别不出自己</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#46-equals%E5%BA%94%E8%AF%A5%E8%80%83%E8%99%91null%E5%80%BC%E6%83%85%E6%99%AF"><span class="nav-number">1.0.46.</span> <span class="nav-text">46.equals应该考虑null值情景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#47-%E5%9C%A8equals%E4%B8%AD%E4%BD%BF%E7%94%A8getClass%E8%BF%9B%E8%A1%8C%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD"><span class="nav-number">1.0.47.</span> <span class="nav-text">47.在equals中使用getClass进行类型判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#48-%E8%A6%86%E5%86%99equals%E6%96%B9%E6%B3%95%E5%BF%85%E9%A1%BB%E8%A6%86%E5%86%99hashCode%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.48.</span> <span class="nav-text">48.覆写equals方法必须覆写hashCode方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#49-%E6%8E%A8%E8%8D%90%E8%A6%86%E5%86%99toString%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.49.</span> <span class="nav-text">49.推荐覆写toString方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#50-%E4%BD%BF%E7%94%A8package-info%E7%B1%BB%E4%B8%BA%E5%8C%85%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.0.50.</span> <span class="nav-text">50.使用package-info类为包服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#51-%E4%B8%8D%E8%A6%81%E4%B8%BB%E5%8A%A8%E8%BF%9B%E8%A1%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-number">1.0.51.</span> <span class="nav-text">51.不要主动进行垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#52-%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8String%E7%9B%B4%E6%8E%A5%E9%87%8F%E8%B5%8B%E5%80%BC"><span class="nav-number">1.0.52.</span> <span class="nav-text">52.推荐使用String直接量赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#53-%E6%B3%A8%E6%84%8F%E6%96%B9%E6%B3%95%E4%B8%AD%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0%E8%A6%81%E6%B1%82"><span class="nav-number">1.0.53.</span> <span class="nav-text">53.注意方法中传递的参数要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#54-%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8String%E3%80%81StringBuffer%E3%80%81StringBuilder"><span class="nav-number">1.0.54.</span> <span class="nav-text">54.正确使用String、StringBuffer、StringBuilder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#55-%E6%B3%A8%E6%84%8F%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.0.55.</span> <span class="nav-text">55.注意字符串的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#56-%E8%87%AA%E7%94%B1%E9%80%89%E6%8B%A9%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%BC%E6%8E%A5%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.56.</span> <span class="nav-text">56.自由选择字符串拼接方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#57-%E6%8E%A8%E8%8D%90%E5%9C%A8%E5%A4%8D%E6%9D%82%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.0.57.</span> <span class="nav-text">57.推荐在复杂字符串操作中使用正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#58-%E5%BC%BA%E7%83%88%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8UTF%E7%BC%96%E7%A0%81"><span class="nav-number">1.0.58.</span> <span class="nav-text">58.强烈建议使用UTF编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#59-%E5%AF%B9%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8E%92%E5%BA%8F%E6%8C%81%E4%B8%80%E7%A7%8D%E5%AE%BD%E5%AE%B9%E7%9A%84%E5%BF%83%E6%80%81"><span class="nav-number">1.0.59.</span> <span class="nav-text">59.对字符串排序持一种宽容的心态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#60-%E6%80%A7%E8%83%BD%E8%80%83%E8%99%91%EF%BC%8C%E6%95%B0%E7%BB%84%E6%98%AF%E9%A6%96%E9%80%89"><span class="nav-number">1.0.60.</span> <span class="nav-text">60.性能考虑，数组是首选</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#61-%E8%8B%A5%E6%9C%89%E5%BF%85%E8%A6%81%EF%BC%8C%E4%BD%BF%E7%94%A8%E5%8F%98%E9%95%BF%E6%95%B0%E7%BB%84"><span class="nav-number">1.0.61.</span> <span class="nav-text">61.若有必要，使用变长数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#62-%E8%AD%A6%E6%83%95%E6%95%B0%E7%BB%84%E7%9A%84%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="nav-number">1.0.62.</span> <span class="nav-text">62.警惕数组的浅拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#63-%E5%9C%A8%E6%98%8E%E7%A1%AE%E7%9A%84%E5%9C%BA%E6%99%AF%E4%B8%8B%EF%BC%8C%E4%B8%BA%E9%9B%86%E5%90%88%E6%8C%87%E5%AE%9A%E5%88%9D%E5%A7%8B%E5%AE%B9%E9%87%8F"><span class="nav-number">1.0.63.</span> <span class="nav-text">63.在明确的场景下，为集合指定初始容量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#64-%E5%A4%9A%E7%A7%8D%E6%9C%80%E5%80%BC%E7%AE%97%E6%B3%95%EF%BC%8C%E9%80%82%E6%97%B6%E9%80%89%E6%8B%A9"><span class="nav-number">1.0.64.</span> <span class="nav-text">64.多种最值算法，适时选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#65-%E9%81%BF%E5%BC%80%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E5%88%97%E8%A1%A8%E9%99%B7%E9%98%B1"><span class="nav-number">1.0.65.</span> <span class="nav-text">65.避开基本类型数组转换列表陷阱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#66-asList%E6%96%B9%E6%B3%95%E4%BA%A7%E7%94%9F%E7%9A%84List%E5%AF%B9%E8%B1%A1%E4%B8%8D%E5%8F%AF%E6%9B%B4%E6%94%B9"><span class="nav-number">1.0.66.</span> <span class="nav-text">66.asList方法产生的List对象不可更改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#67-%E4%B8%8D%E5%90%8C%E7%9A%84%E5%88%97%E8%A1%A8%E9%80%89%E6%8B%A9%E4%B8%8D%E5%90%8C%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.67.</span> <span class="nav-text">67.不同的列表选择不同的遍历方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#68-%E9%A2%91%E7%B9%81%E6%8F%92%E5%85%A5%E5%92%8C%E5%88%A0%E9%99%A4%E6%97%B6%E4%BD%BF%E7%94%A8LinkedList"><span class="nav-number">1.0.68.</span> <span class="nav-text">68.频繁插入和删除时使用LinkedList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#69-%E5%88%97%E8%A1%A8%E7%9B%B8%E7%AD%89%E5%8F%AA%E9%9C%80%E5%85%B3%E5%BF%83%E5%85%83%E7%B4%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">1.0.69.</span> <span class="nav-text">69.列表相等只需关心元素数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#70-%E5%AD%90%E5%88%97%E8%A1%A8%E5%8F%AA%E6%98%AF%E5%8E%9F%E5%88%97%E8%A1%A8%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%86%E5%9B%BE"><span class="nav-number">1.0.70.</span> <span class="nav-text">70.子列表只是原列表的一个视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#71-%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8subList%E5%A4%84%E7%90%86%E5%B1%80%E9%83%A8%E5%88%97%E8%A1%A8"><span class="nav-number">1.0.71.</span> <span class="nav-text">71.推荐使用subList处理局部列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#72-%E7%94%9F%E6%88%90%E5%AD%90%E5%88%97%E8%A1%A8%E5%90%8E%E4%B8%8D%E8%A6%81%E5%86%8D%E6%93%8D%E4%BD%9C%E5%8E%9F%E5%88%97%E8%A1%A8"><span class="nav-number">1.0.72.</span> <span class="nav-text">72.生成子列表后不要再操作原列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#73-%E4%BD%BF%E7%94%A8Comparator%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F"><span class="nav-number">1.0.73.</span> <span class="nav-text">73.使用Comparator进行排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#74-%E4%B8%8D%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8binarySearch%E5%AF%B9%E5%88%97%E8%A1%A8%E8%BF%9B%E8%A1%8C%E6%A3%80%E7%B4%A2"><span class="nav-number">1.0.74.</span> <span class="nav-text">74.不推荐使用binarySearch对列表进行检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#75-%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%BF%85%E9%A1%BB%E5%81%9A%E5%88%B0compareTo%E5%92%8Cequals%E5%90%8C%E6%AD%A5"><span class="nav-number">1.0.75.</span> <span class="nav-text">75.集合中的元素必须做到compareTo和equals同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#76-%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97%E6%97%B6%E4%BD%BF%E7%94%A8%E6%9B%B4%E4%BC%98%E9%9B%85%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">1.0.76.</span> <span class="nav-text">76.集合运算时使用更优雅的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#77-%E4%BD%BF%E7%94%A8shuffle%E6%89%93%E4%B9%B1%E5%88%97%E8%A1%A8"><span class="nav-number">1.0.77.</span> <span class="nav-text">77.使用shuffle打乱列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#78-%E5%87%8F%E5%B0%91HashMap%E4%B8%AD%E5%85%83%E7%B4%A0%E7%9A%84%E6%95%B0%E9%87%8F"><span class="nav-number">1.0.78.</span> <span class="nav-text">78.减少HashMap中元素的数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#79-%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E5%93%88%E5%B8%8C%E7%A0%81%E4%B8%8D%E8%A6%81%E9%87%8D%E5%A4%8D"><span class="nav-number">1.0.79.</span> <span class="nav-text">79.集合中的哈希码不要重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#80-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%BD%BF%E7%94%A8Vector%E6%88%96HashTable"><span class="nav-number">1.0.80.</span> <span class="nav-text">80.多线程使用Vector或HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#81-%E9%9D%9E%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8List"><span class="nav-number">1.0.81.</span> <span class="nav-text">81.非稳定排序推荐使用List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%94%B1%E7%82%B9%E5%8F%8A%E9%9D%A2%EF%BC%8C%E4%B8%80%E5%8F%B6%E7%9F%A5%E7%A7%8B%E2%80%94%E9%9B%86%E5%90%88%E5%A4%A7%E5%AE%B6%E6%97%8F"><span class="nav-number">1.0.82.</span> <span class="nav-text">2.由点及面，一叶知秋—集合大家族</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#83-%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E6%9E%9A%E4%B8%BE%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F"><span class="nav-number">1.0.83.</span> <span class="nav-text">83.推荐使用枚举定义常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#84-%E4%BD%BF%E7%94%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%8D%8F%E5%8A%A9%E6%8F%8F%E8%BF%B0%E6%9E%9A%E4%B8%BE%E9%A1%B9"><span class="nav-number">1.0.84.</span> <span class="nav-text">84.使用构造函数协助描述枚举项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#85-%E5%B0%8F%E5%BF%83switch%E5%B8%A6%E6%9D%A5%E7%9A%84%E7%A9%BA%E5%80%BC%E5%BC%82%E5%B8%B8"><span class="nav-number">1.0.85.</span> <span class="nav-text">85.小心switch带来的空值异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#86-%E5%9C%A8switch%E7%9A%84default%E4%BB%A3%E7%A0%81%E5%9D%97%E4%B8%AD%E5%A2%9E%E5%8A%A0AssertionError%E9%94%99%E8%AF%AF"><span class="nav-number">1.0.86.</span> <span class="nav-text">86.在switch的default代码块中增加AssertionError错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#87-%E4%BD%BF%E7%94%A8valueof%E5%89%8D%E5%BF%85%E9%A1%BB%E8%BF%9B%E8%A1%8C%E6%A0%A1%E9%AA%8C"><span class="nav-number">1.0.87.</span> <span class="nav-text">87.使用valueof前必须进行校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#88-%E7%94%A8%E6%9E%9A%E4%B8%BE%E5%AE%9E%E7%8E%B0%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E6%9B%B4%E7%AE%80%E6%B4%81"><span class="nav-number">1.0.88.</span> <span class="nav-text">88.用枚举实现工厂方法模式更简洁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#89-%E6%9E%9A%E4%B8%BE%E9%A1%B9%E7%9A%84%E6%95%B0%E9%87%8F%E9%99%90%E5%88%B6%E5%9C%A864%E4%B8%AA%E4%BB%A5%E5%86%85"><span class="nav-number">1.0.89.</span> <span class="nav-text">89.枚举项的数量限制在64个以内</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#90-%E5%B0%8F%E5%BF%83%E6%B3%A8%E8%A7%A3%E7%BB%A7%E6%89%BF"><span class="nav-number">1.0.90.</span> <span class="nav-text">90.小心注解继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#91-%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%B3%A8%E8%A7%A3%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8%E5%A8%81%E5%8A%9B%E6%9B%B4%E5%A4%A7"><span class="nav-number">1.0.91.</span> <span class="nav-text">91.枚举和注解结合使用威力更大</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#92-%E6%B3%A8%E6%84%8F-Override%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.0.92.</span> <span class="nav-text">92.注意@Override不同版本的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#93-Java%E7%9A%84%E6%B3%9B%E5%9E%8B%E6%98%AF%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4%E7%9A%84"><span class="nav-number">1.0.93.</span> <span class="nav-text">93.Java的泛型是类型擦除的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#94-%E4%B8%8D%E8%83%BD%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B3%9B%E5%9E%8B%E5%8F%82%E6%95%B0%E5%92%8C%E6%95%B0%E7%BB%84"><span class="nav-number">1.0.94.</span> <span class="nav-text">94.不能初始化泛型参数和数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#95-%E5%BC%BA%E5%88%B6%E5%A3%B0%E6%98%8E%E6%B3%9B%E5%9E%8B%E7%9A%84%E5%AE%9E%E9%99%85%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.0.95.</span> <span class="nav-text">95.强制声明泛型的实际类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#96-%E4%B8%8D%E5%90%8C%E7%9A%84%E5%9C%BA%E6%99%AF%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E6%B3%9B%E5%9E%8B%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">1.0.96.</span> <span class="nav-text">96.不同的场景使用不同的泛型通配符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#97-%E8%AD%A6%E6%83%95%E6%B3%9B%E5%9E%8B%E6%98%AF%E4%B8%8D%E8%83%BD%E5%8D%8F%E5%8F%98%E5%92%8C%E9%80%86%E5%8F%98%E7%9A%84"><span class="nav-number">1.0.97.</span> <span class="nav-text">97.警惕泛型是不能协变和逆变的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#98-%E5%BB%BA%E8%AE%AE%E9%87%87%E7%94%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E6%98%AFList%E3%80%81List-lt-gt-%E3%80%81List"><span class="nav-number">1.0.98.</span> <span class="nav-text">98.建议采用的顺序是List、List&lt;?&gt;、List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#99-%E4%B8%A5%E6%A0%BC%E9%99%90%E5%AE%9A%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%9E%8B%E9%87%87%E7%94%A8%E5%A4%9A%E9%87%8D%E7%95%8C%E9%99%90"><span class="nav-number">1.0.99.</span> <span class="nav-text">99.严格限定泛型类型采用多重界限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#100-%E6%95%B0%E7%BB%84%E7%9A%84%E7%9C%9F%E5%AE%9E%E7%B1%BB%E5%9E%8B%E5%BF%85%E9%A1%BB%E6%98%AF%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AD%90%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.0.100.</span> <span class="nav-text">100.数组的真实类型必须是泛型类型的子类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#101-%E6%B3%A8%E6%84%8FClass%E7%B1%BB%E7%9A%84%E7%89%B9%E6%AE%8A%E6%80%A7"><span class="nav-number">1.0.101.</span> <span class="nav-text">101.注意Class类的特殊性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#102-%E9%80%82%E6%97%B6%E9%80%89%E6%8B%A9getDeclared%C3%97%C3%97%C3%97%E5%92%8Cget%C3%97%C3%97%C3%97"><span class="nav-number">1.0.102.</span> <span class="nav-text">102.适时选择getDeclared×××和get×××</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#103-%E5%8F%8D%E5%B0%84%E8%AE%BF%E9%97%AE%E5%B1%9E%E6%80%A7%E6%88%96%E6%96%B9%E6%B3%95%E6%97%B6%E5%B0%86Accessible%E8%AE%BE%E7%BD%AE%E4%B8%BAtrue"><span class="nav-number">1.0.103.</span> <span class="nav-text">103.反射访问属性或方法时将Accessible设置为true</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#104-%E4%BD%BF%E7%94%A8forName%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E7%B1%BB%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.104.</span> <span class="nav-text">104.使用forName动态加载类文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#105-%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E4%B8%8D%E9%80%82%E5%90%88%E6%95%B0%E7%BB%84"><span class="nav-number">1.0.105.</span> <span class="nav-text">105.动态加载不适合数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#106-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%8F%AF%E4%BB%A5%E4%BD%BF%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E6%9B%B4%E5%8A%A0%E7%81%B5%E6%B4%BB"><span class="nav-number">1.0.106.</span> <span class="nav-text">106.动态代理可以使代理模式更加灵活</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#107-%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84%E5%A2%9E%E5%8A%A0%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%99%AE%E9%80%82%E6%80%A7"><span class="nav-number">1.0.107.</span> <span class="nav-text">107.使用反射增加装饰模式的普适性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#108-%E5%8F%8D%E5%B0%84%E8%AE%A9%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E6%9B%B4%E5%BC%BA%E5%A4%A7"><span class="nav-number">1.0.108.</span> <span class="nav-text">108.反射让模板方法模式更强大</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#109-%E4%B8%8D%E9%9C%80%E8%A6%81%E5%A4%AA%E5%A4%9A%E5%85%B3%E6%B3%A8%E5%8F%8D%E5%B0%84%E6%95%88%E7%8E%87"><span class="nav-number">1.0.109.</span> <span class="nav-text">109.不需要太多关注反射效率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#110-%E6%8F%90%E5%80%A1%E5%BC%82%E5%B8%B8%E5%B0%81%E8%A3%85"><span class="nav-number">1.0.110.</span> <span class="nav-text">110.提倡异常封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#111-%E9%87%87%E7%94%A8%E5%BC%82%E5%B8%B8%E9%93%BE%E4%BC%A0%E9%80%92%E5%BC%82%E5%B8%B8"><span class="nav-number">1.0.111.</span> <span class="nav-text">111.采用异常链传递异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#112-%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8%E5%B0%BD%E5%8F%AF%E8%83%BD%E8%BD%AC%E5%8C%96%E4%B8%BA%E9%9D%9E%E5%8F%97%E6%A3%80%E5%BC%82%E5%B8%B8"><span class="nav-number">1.0.112.</span> <span class="nav-text">112.受检异常尽可能转化为非受检异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#113-%E4%B8%8D%E8%A6%81%E5%9C%A8finally%E5%9D%97%E4%B8%AD%E5%A4%84%E7%90%86%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">1.0.113.</span> <span class="nav-text">113.不要在finally块中处理返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#114-%E4%B8%8D%E8%A6%81%E5%9C%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%AD%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="nav-number">1.0.114.</span> <span class="nav-text">114.不要在构造函数中抛出异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#115-%E4%BD%BF%E7%94%A8Throwable%E8%8E%B7%E5%BE%97%E6%A0%88%E4%BF%A1%E6%81%AF"><span class="nav-number">1.0.115.</span> <span class="nav-text">115.使用Throwable获得栈信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#116-%E5%BC%82%E5%B8%B8%E5%8F%AA%E4%B8%BA%E5%BC%82%E5%B8%B8%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.0.116.</span> <span class="nav-text">116.异常只为异常服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#117-%E5%A4%9A%E4%BD%BF%E7%94%A8%E5%BC%82%E5%B8%B8%EF%BC%8C%E6%8A%8A%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98%E6%94%BE%E4%B8%80%E8%BE%B9"><span class="nav-number">1.0.117.</span> <span class="nav-text">117.多使用异常，把性能问题放一边</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#118-%E4%B8%8D%E6%8E%A8%E8%8D%90%E8%A6%86%E5%86%99start%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.118.</span> <span class="nav-text">118.不推荐覆写start方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#119-%E5%90%AF%E5%8A%A8%E7%BA%BF%E7%A8%8B%E5%89%8Dstop%E6%96%B9%E6%B3%95%E6%98%AF%E4%B8%8D%E5%8F%AF%E9%9D%A0%E7%9A%84"><span class="nav-number">1.0.119.</span> <span class="nav-text">119.启动线程前stop方法是不可靠的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#120-%E4%B8%8D%E4%BD%BF%E7%94%A8stop%E6%96%B9%E6%B3%95%E5%81%9C%E6%AD%A2%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.0.120.</span> <span class="nav-text">120.不使用stop方法停止线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#121-%E7%BA%BF%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%AA%E4%BD%BF%E7%94%A8%E4%B8%89%E4%B8%AA%E7%AD%89%E7%BA%A7"><span class="nav-number">1.0.121.</span> <span class="nav-text">121.线程优先级只使用三个等级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#122-%E4%BD%BF%E7%94%A8%E7%BA%BF%E7%A8%8B%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8%E6%8F%90%E5%8D%87%E7%B3%BB%E7%BB%9F%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="nav-number">1.0.122.</span> <span class="nav-text">122.使用线程异常处理器提升系统可靠性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#123-volatile%E4%B8%8D%E8%83%BD%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5"><span class="nav-number">1.0.123.</span> <span class="nav-text">123.volatile不能保证数据同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#124-%E5%BC%82%E6%AD%A5%E8%BF%90%E7%AE%97%E8%80%83%E8%99%91%E4%BD%BF%E7%94%A8Callable%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.0.124.</span> <span class="nav-text">124.异步运算考虑使用Callable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#125-%E4%BC%98%E5%85%88%E9%80%89%E6%8B%A9%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="nav-number">1.0.125.</span> <span class="nav-text">125.优先选择线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#126-%E9%80%82%E6%97%B6%E9%80%89%E6%8B%A9%E4%B8%8D%E5%90%8C%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%9D%A5%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.0.126.</span> <span class="nav-text">126.适时选择不同的线程池来实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#127-Lock%E4%B8%8Esynchronized%E6%98%AF%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84"><span class="nav-number">1.0.127.</span> <span class="nav-text">127.Lock与synchronized是不一样的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#128-%E9%A2%84%E9%98%B2%E7%BA%BF%E7%A8%8B%E6%AD%BB%E9%94%81"><span class="nav-number">1.0.128.</span> <span class="nav-text">128.预防线程死锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#129-%E9%80%82%E5%BD%93%E8%AE%BE%E7%BD%AE%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E9%95%BF%E5%BA%A6"><span class="nav-number">1.0.129.</span> <span class="nav-text">129.适当设置阻塞队列长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#130-%E4%BD%BF%E7%94%A8CountDownLatch%E5%8D%8F%E8%B0%83%E5%AD%90%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.0.130.</span> <span class="nav-text">130.使用CountDownLatch协调子线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#131-CyclicBarrier%E8%AE%A9%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%BD%90%E6%AD%A5%E8%B5%B0"><span class="nav-number">1.0.131.</span> <span class="nav-text">131.CyclicBarrier让多线程齐步走</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#132-%E6%8F%90%E5%8D%87Java%E6%80%A7%E8%83%BD%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95"><span class="nav-number">1.0.132.</span> <span class="nav-text">132.提升Java性能的基本方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#133-%E8%8B%A5%E9%9D%9E%E5%BF%85%E8%A6%81%EF%BC%8C%E4%B8%8D%E8%A6%81%E5%85%8B%E9%9A%86%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.0.133.</span> <span class="nav-text">133.若非必要，不要克隆对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#134-%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E2%80%9C%E6%9C%9B%E9%97%BB%E9%97%AE%E5%88%87%E2%80%9D%E7%9A%84%E6%96%B9%E5%BC%8F%E8%AF%8A%E6%96%AD%E6%80%A7%E8%83%BD"><span class="nav-number">1.0.134.</span> <span class="nav-text">134.推荐使用“望闻问切”的方式诊断性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#135-%E5%BF%85%E9%A1%BB%E5%AE%9A%E4%B9%89%E6%80%A7%E8%83%BD%E8%A1%A1%E9%87%8F%E6%A0%87%E5%87%86"><span class="nav-number">1.0.135.</span> <span class="nav-text">135.必须定义性能衡量标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#136-%E6%9E%AA%E6%89%93%E5%87%BA%E5%A4%B4%E9%B8%9F%E2%80%94%E8%A7%A3%E5%86%B3%E9%A6%96%E8%A6%81%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.136.</span> <span class="nav-text">136.枪打出头鸟—解决首要系统性能问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#137-%E8%B0%83%E6%95%B4JVM%E5%8F%82%E6%95%B0%E4%BB%A5%E6%8F%90%E5%8D%87%E6%80%A7%E8%83%BD"><span class="nav-number">1.0.137.</span> <span class="nav-text">137.调整JVM参数以提升性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#138-%E6%80%A7%E8%83%BD%E6%98%AF%E4%B8%AA%E5%A4%A7%E2%80%9C%E5%92%95%E5%92%9A%E2%80%9D"><span class="nav-number">1.0.138.</span> <span class="nav-text">138.性能是个大“咕咚”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#139-%E5%A4%A7%E8%83%86%E9%87%87%E7%94%A8%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7"><span class="nav-number">1.0.139.</span> <span class="nav-text">139.大胆采用开源工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#140-%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8Guava%E6%89%A9%E5%B1%95%E5%B7%A5%E5%85%B7%E5%8C%85"><span class="nav-number">1.0.140.</span> <span class="nav-text">140.推荐使用Guava扩展工具包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#141-Apache%E6%89%A9%E5%B1%95%E5%8C%85"><span class="nav-number">1.0.141.</span> <span class="nav-text">141.Apache扩展包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#142-%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8Joda%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%89%A9%E5%B1%95%E5%8C%85"><span class="nav-number">1.0.142.</span> <span class="nav-text">142.推荐使用Joda日期时间扩展包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#143-%E5%8F%AF%E4%BB%A5%E9%80%89%E6%8B%A9%E5%A4%9A%E7%A7%8DCollections%E6%89%A9%E5%B1%95"><span class="nav-number">1.0.143.</span> <span class="nav-text">143.可以选择多种Collections扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#144-%E6%8F%90%E5%80%A1%E8%89%AF%E5%A5%BD%E7%9A%84%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC"><span class="nav-number">1.0.144.</span> <span class="nav-text">144.提倡良好的代码风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#145-%E4%B8%8D%E8%A6%81%E5%AE%8C%E5%85%A8%E4%BE%9D%E9%9D%A0%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E6%9D%A5%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.145.</span> <span class="nav-text">145.不要完全依靠单元测试来发现问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#146-%E8%AE%A9%E6%B3%A8%E9%87%8A%E6%AD%A3%E7%A1%AE%E3%80%81%E6%B8%85%E6%99%B0%E3%80%81%E7%AE%80%E6%B4%81"><span class="nav-number">1.0.146.</span> <span class="nav-text">146.让注释正确、清晰、简洁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#147-%E8%AE%A9%E6%8E%A5%E5%8F%A3%E7%9A%84%E8%81%8C%E8%B4%A3%E4%BF%9D%E6%8C%81%E5%8D%95%E4%B8%80"><span class="nav-number">1.0.147.</span> <span class="nav-text">147.让接口的职责保持单一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#148-%E5%A2%9E%E5%BC%BA%E7%B1%BB%E7%9A%84%E5%8F%AF%E6%9B%BF%E6%8D%A2%E6%80%A7"><span class="nav-number">1.0.148.</span> <span class="nav-text">148.增强类的可替换性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#149-%E4%BE%9D%E8%B5%96%E6%8A%BD%E8%B1%A1%E8%80%8C%E4%B8%8D%E6%98%AF%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.0.149.</span> <span class="nav-text">149.依赖抽象而不是实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#150-%E6%8A%9B%E5%BC%837%E6%9D%A1%E4%B8%8D%E8%89%AF%E7%9A%84%E7%BC%96%E7%A0%81%E4%B9%A0%E6%83%AF"><span class="nav-number">1.0.150.</span> <span class="nav-text">150.抛弃7条不良的编码习惯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#151-%E4%BB%A5%E6%8A%80%E6%9C%AF%E5%91%98%E8%87%AA%E5%BE%8B%E8%80%8C%E4%B8%8D%E6%98%AF%E5%B7%A5%E4%BA%BA"><span class="nav-number">1.0.151.</span> <span class="nav-text">151.以技术员自律而不是工人</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">不登山峰，不显平地</p>
+  <div class="site-description" itemprop="description">木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lark-coder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lark-coder" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不登山峰，不显平地</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">711k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">10:47</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
