@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E9%85%8D%E7%BD%AEsharding-jdbc/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/02/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E7%9A%84%E5%B9%82%E7%AD%89%E6%80%A7(%E4%B8%8D%E8%A2%AB%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9)%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -206,7 +206,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E9%85%8D%E7%BD%AEsharding-jdbc/" class="post-title-link" itemprop="url">springboot配置sharding-jdbc</a>
+            <a href="/2019/04/02/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E7%9A%84%E5%B9%82%E7%AD%89%E6%80%A7(%E4%B8%8D%E8%A2%AB%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9)%EF%BC%9F/" class="post-title-link" itemprop="url">如何保证消息消费的幂等性（不被重复消费）？</a>
         </h2>
 
         <div class="post-meta">
@@ -216,7 +216,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-16 21:37:01" itemprop="dateCreated datePublished" datetime="2019-03-16T21:37:01+08:00">2019-03-16</time>
+              <time title="创建时间：2019-04-02 16:31:02" itemprop="dateCreated datePublished" datetime="2019-04-02T16:31:02+08:00">2019-04-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -235,15 +235,7 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/" itemprop="url" rel="index"><span itemprop="name">springboot</span></a>
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a>
                 </span>
             </span>
 
@@ -253,14 +245,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.5k</span>
+              <span>479</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -272,12 +264,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="springboot配置sharding-jdbc"><a href="#springboot配置sharding-jdbc" class="headerlink" title="springboot配置sharding-jdbc"></a>springboot配置sharding-jdbc</h1><h2 id="Maven依赖配置"><a href="#Maven依赖配置" class="headerlink" title="Maven依赖配置"></a>Maven依赖配置</h2><p>springboot版本配置：对springboot的版本没有要求，但是springboot的1.x和springboot2.x的配置（springboot2.x的application.yml中需要添加spring.main.allow-bean-definition-overriding=true）不一样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-starter-parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.5.4.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">  &lt;relativePath&#x2F;&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">&lt;&#x2F;parent&gt;</span><br></pre></td></tr></table></figure>
-<p>sharding-sphere配置：mysql和数据库连接池druid依赖配置</p>
+          <h1 id="如何保证消息不被重复消费？-如何保证消息消费的幂等性？"><a href="#如何保证消息不被重复消费？-如何保证消息消费的幂等性？" class="headerlink" title="如何保证消息不被重复消费？/ 如何保证消息消费的幂等性？"></a>如何保证消息不被重复消费？/ 如何保证消息消费的幂等性？</h1><p>Kafka 实际上有个 offset 的概念，就是每个消息写进去，都有一个 offset，代表消息的序号，然后 consumer 消费了数据之后，每隔一段时间（定时定期），会把自己消费过的消息的 offset 提交一下，表示“我已经消费过了，下次我要是重启啥的，你就让我继续从上次消费到的 offset 来继续消费吧”。</p>
+<ul>
+<li>比如你拿个数据要写库，你先根据主键查一下，如果这数据都有了，你就别插入了，update 一下好吧。</li>
+<li>比如你是写 Redis，那没问题了，反正每次都是 set，天然幂等性。</li>
+<li>比如你不是上面两个场景，那做的稍微复杂一点，你需要让生产者发送每条数据的时候，里面加一个全局唯一的 id，类似订单 id 之类的东西，然后你这里消费到了之后，先根据这个 id 去比如 Redis 里查一下，之前消费过吗？如果没有消费过，你就处理，然后这个 id 写 Redis。如果消费过了，那你就别处理了，保证别重复处理相同的消息即可。</li>
+<li>比如基于数据库的唯一键来保证重复数据不会重复插入多条。因为有唯一键约束了，重复数据插入只会报错，不会导致数据库中出现脏数据。</li>
+</ul>
+
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E9%85%8D%E7%BD%AEsharding-jdbc/#more" rel="contents">
+              <a class="btn" href="/2019/04/02/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E6%B6%88%E8%B4%B9%E7%9A%84%E5%B9%82%E7%AD%89%E6%80%A7(%E4%B8%8D%E8%A2%AB%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9)%EF%BC%9F/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -301,7 +298,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E9%9B%86%E6%88%90swagger2/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/02/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%80%A7%E4%BC%A0%E8%BE%93(%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1)%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -315,7 +312,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E9%9B%86%E6%88%90swagger2/" class="post-title-link" itemprop="url">springboot集成swagger2</a>
+            <a href="/2019/04/02/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%80%A7%E4%BC%A0%E8%BE%93(%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1)%EF%BC%9F/" class="post-title-link" itemprop="url">如何保证消息的可靠性传输？</a>
         </h2>
 
         <div class="post-meta">
@@ -325,7 +322,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-16 21:37:01" itemprop="dateCreated datePublished" datetime="2019-03-16T21:37:01+08:00">2019-03-16</time>
+              <time title="创建时间：2019-04-02 16:31:02" itemprop="dateCreated datePublished" datetime="2019-04-02T16:31:02+08:00">2019-04-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -344,15 +341,7 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/" itemprop="url" rel="index"><span itemprop="name">springboot</span></a>
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a>
                 </span>
             </span>
 
@@ -362,7 +351,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -381,11 +370,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="配置流程"><a href="#配置流程" class="headerlink" title="配置流程"></a>配置流程</h1><h2 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1.添加依赖"></a>1.添加依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- swagger--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger2&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.7.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;io.springfox&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;springfox-swagger-ui&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;2.7.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="2-配置swagger"><a href="#2-配置swagger" class="headerlink" title="2.配置swagger"></a>2.配置swagger</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import springfox.documentation.builders.ApiInfoBuilder;</span><br><span class="line">import springfox.documentation.builders.PathSelectors;</span><br><span class="line">import springfox.documentation.builders.RequestHandlerSelectors;</span><br><span class="line">import springfox.documentation.service.ApiInfo;</span><br><span class="line">import springfox.documentation.service.Contact;</span><br><span class="line">import springfox.documentation.spi.DocumentationType;</span><br><span class="line">import springfox.documentation.spring.web.plugins.Docket;</span><br><span class="line">import springfox.documentation.swagger2.annotations.EnableSwagger2;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @Description TODO</span><br><span class="line"> * @Auther name@cavalry.com</span><br><span class="line"> * @ate 2019&#x2F;1&#x2F;8 14:49</span><br><span class="line"> **&#x2F;</span><br><span class="line">@Configuration</span><br><span class="line">@EnableSwagger2</span><br><span class="line">public class SwaggerConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public Docket createRestApi() &#123;</span><br><span class="line">        return new Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo())</span><br><span class="line">                .select()</span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(&quot;com.cavalry.mvcplatform&quot;))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private ApiInfo apiInfo() &#123;</span><br><span class="line">        Contact contact &#x3D; new Contact(&quot;name&quot;,&quot;&quot;,&quot;name@cavalry.com&quot;);</span><br><span class="line">        return new ApiInfoBuilder()</span><br><span class="line">                .title(&quot;用户RESTful APIs&quot;)</span><br><span class="line">                .description(&quot;用户的API列表&quot;)</span><br><span class="line">                .contact(contact)</span><br><span class="line">                .version(&quot;1.0&quot;)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="如何保证消息的可靠性传输？-如何处理消息丢失的问题？"><a href="#如何保证消息的可靠性传输？-如何处理消息丢失的问题？" class="headerlink" title="如何保证消息的可靠性传输？/ 如何处理消息丢失的问题？"></a>如何保证消息的可靠性传输？/ 如何处理消息丢失的问题？</h1><h2 id="Rabbit"><a href="#Rabbit" class="headerlink" title="Rabbit"></a>Rabbit</h2><h3 id="生产者丢了数据"><a href="#生产者丢了数据" class="headerlink" title="生产者丢了数据"></a>生产者丢了数据</h3><ul>
+<li>生产者将数据发送到 RabbitMQ 的时候，可能数据就在半路给搞丢了，因为网络问题啥的，都有可能。</li>
+<li>此时可以选择用 RabbitMQ 提供的事务功能，就是生产者发送数据之前开启 RabbitMQ 事务channel.txSelect，然后发送消息，如果消息没有成功被 RabbitMQ 接收到，那么生产者会收到异常报错，此时就可以回滚事务channel.txRollback，然后重试发送消息；如果收到了消息，那么可以提交事务channel.txCommit。<br>但是问题是，RabbitMQ 事务机制（同步）一搞，基本上吞吐量会下来，因为太耗性能。<br>所以一般来说，如果你要确保说写 RabbitMQ 的消息别丢，可以开启 confirm 模式，在生产者那里设置开启 confirm 模式之后，你每次写的消息都会分配一个唯一的 id，然后如果写入了 RabbitMQ 中，RabbitMQ 会给你回传一个 ack 消息，告诉你说这个消息 ok 了。如果 RabbitMQ 没能处理这个消息，会回调你的一个 nack 接口，告诉你这个消息接收失败，你可以重试。而且你可以结合这个机制自己在内存里维护每个消息 id 的状态，如果超过一定时间还没接收到这个消息的回调，那么你可以重发。<br>事务机制和 cnofirm 机制最大的不同在于，事务机制是同步的，你提交一个事务之后会阻塞在那儿，但是 confirm 机制是异步的，你发送个消息之后就可以发送下一个消息，然后那个消息 RabbitMQ 接收了之后会异步回调你的一个接口通知你这个消息接收到了。<br>所以一般在生产者这块避免数据丢失，都是用 confirm 机制的。<h3 id="RabbitMQ-弄丢了数据"><a href="#RabbitMQ-弄丢了数据" class="headerlink" title="RabbitMQ 弄丢了数据"></a>RabbitMQ 弄丢了数据</h3>就是 RabbitMQ 自己弄丢了数据，这个你必须开启 RabbitMQ 的持久化，就是消息写入之后会持久化到磁盘，哪怕是 RabbitMQ 自己挂了，恢复之后会自动读取之前存储的数据，一般数据不会丢。除非极其罕见的是，RabbitMQ 还没持久化，自己就挂了，可能导致少量数据丢失，但是这个概率较小。<h4 id="设置持久化的方式"><a href="#设置持久化的方式" class="headerlink" title="设置持久化的方式"></a>设置持久化的方式</h4></li>
+<li>创建 queue 的时候将其设置为持久化，这样就可以保证 RabbitMQ 持久化 queue 的元数据，但是它是不会持久化 queue 里的数据的。</li>
+<li>第二个是发送消息的时候将消息的 deliveryMode 设置为 2，就是将消息设置为持久化的，此时 RabbitMQ 就会将消息持久化到磁盘上去。<br>必须要同时设置这两个持久化才行，RabbitMQ 哪怕是挂了，再次重启，也会从磁盘上重启恢复 queue，恢复这个 queue 里的数据。<br>注意，哪怕是你给 RabbitMQ 开启了持久化机制，也有一种可能，就是这个消息写到了 RabbitMQ 中，但是还没来得及持久化到磁盘上，结果不巧，此时 RabbitMQ 挂了，就会导致内存里的一点点数据丢失。<br>所以，持久化可以跟生产者那边的 confirm 机制配合起来，只有消息被持久化到磁盘之后，才会通知生产者 ack 了，所以哪怕是在持久化到磁盘之前，RabbitMQ 挂了，数据丢了，生产者收不到 ack，你也是可以自己重发的。<h3 id="消费端弄丢了数据"><a href="#消费端弄丢了数据" class="headerlink" title="消费端弄丢了数据"></a>消费端弄丢了数据</h3>RabbitMQ 如果丢失了数据，主要是因为你消费的时候，刚消费到，还没处理，结果进程挂了，比如重启了，那么就尴尬了，RabbitMQ 认为你都消费了，这数据就丢了。<br>这个时候得用 RabbitMQ 提供的 ack 机制，简单来说，就是你<strong>必须关闭 RabbitMQ 的自动 ack</strong>，可以通过一个 api 来调用就行，然后每次你自己代码里确保处理完的时候，再在程序里 ack 一把。这样的话，如果你还没处理完，不就没有 ack 了？那 RabbitMQ 就认为你还没处理完，这个时候 RabbitMQ 会把这个消费分配给别的 consumer 去处理，消息是不会丢的。<h2 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h2><h3 id="消费端弄丢了数据-1"><a href="#消费端弄丢了数据-1" class="headerlink" title="消费端弄丢了数据"></a>消费端弄丢了数据</h3>唯一可能导致消费者弄丢数据的情况，就是说，你消费到了这个消息，然后消费者那边自动提交了 offset，让 Kafka 以为你已经消费好了这个消息，但其实你才刚准备处理这个消息，你还没处理，你自己就挂了，此时这条消息就丢咯。<br>这不是跟 RabbitMQ 差不多吗，大家都知道 Kafka 会自动提交 offset，那么只要关闭自动提交 offset，在处理完之后自己手动提交 offset，就可以保证数据不会丢。但是此时确实还是可能会有重复消费，比如你刚处理完，还没提交 offset，结果自己挂了，此时肯定会重复消费一次，自己保证幂等性就好了。<br>生产环境碰到的一个问题，就是说我们的 Kafka 消费者消费到了数据之后是写到一个内存的 queue 里先缓冲一下，结果有的时候，你刚把消息写入内存 queue，然后消费者会自动提交 offset。然后此时我们重启了系统，就会导致内存 queue 里还没来得及处理的数据就丢失了。<h3 id="Kafka-弄丢了数据"><a href="#Kafka-弄丢了数据" class="headerlink" title="Kafka 弄丢了数据"></a>Kafka 弄丢了数据</h3>这块比较常见的一个场景，就是 Kafka 某个 broker 宕机，然后重新选举 partition 的 leader。大家想想，要是此时其他的 follower 刚好还有些数据没有同步，结果此时 leader 挂了，然后选举某个 follower 成 leader 之后，不就少了一些数据？这就丢了一些数据啊。<br>生产环境也遇到过，我们也是，之前 Kafka 的 leader 机器宕机了，将 follower 切换为 leader 之后，就会发现说这个数据就丢了。<br>所以此时一般是要求起码设置如下 4 个参数：</li>
+</ul>
+<ol>
+<li>给 topic 设置 replication.factor 参数：这个值必须大于 1，要求每个 partition 必须有至少 2 个副本。</li>
+<li>在 Kafka 服务端设置 min.insync.replicas 参数：这个值必须大于 1，这个是要求一个 leader 至少感知到有至少一个 follower 还跟自己保持联系，没掉队，这样才能确保 leader 挂了还有一个 follower 吧。</li>
+<li>在 producer 端设置 acks=all：这个是要求每条数据，必须是写入所有 replica 之后，才能认为是写成功了。</li>
+<li>在 producer 端设置 retries=MAX（很大很大很大的一个值，无限次重试的意思）：这个是要求一旦写入失败，就无限重试，卡在这里了。<br>我们生产环境就是按照上述要求配置的，这样配置之后，至少在 Kafka broker 端就可以保证在 leader 所在 broker 发生故障，进行 leader 切换时，数据不会丢失。<h3 id="生产者会不会弄丢数据？"><a href="#生产者会不会弄丢数据？" class="headerlink" title="生产者会不会弄丢数据？"></a>生产者会不会弄丢数据？</h3>如果按照上述的思路设置了 acks=all，一定不会丢，要求是，你的 leader 接收到消息，所有的 follower 都同步到了消息之后，才认为本次写成功了。如果没满足这个条件，生产者会自动不断的重试，重试无限次。</li>
+</ol>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E9%9B%86%E6%88%90swagger2/#more" rel="contents">
+              <a class="btn" href="/2019/04/02/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E7%9A%84%E5%8F%AF%E9%9D%A0%E6%80%A7%E4%BC%A0%E8%BE%93(%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1)%EF%BC%9F/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -409,7 +408,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%A0%A1%E9%AA%8C/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/02/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E9%80%89%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -423,7 +422,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%A0%A1%E9%AA%8C/" class="post-title-link" itemprop="url">springboot集成swagger2</a>
+            <a href="/2019/04/02/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E9%80%89%E5%9E%8B/" class="post-title-link" itemprop="url">消息队列的选型</a>
         </h2>
 
         <div class="post-meta">
@@ -433,7 +432,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-16 21:37:01" itemprop="dateCreated datePublished" datetime="2019-03-16T21:37:01+08:00">2019-03-16</time>
+              <time title="创建时间：2019-04-02 16:31:02" itemprop="dateCreated datePublished" datetime="2019-04-02T16:31:02+08:00">2019-04-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -452,15 +451,7 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/" itemprop="url" rel="index"><span itemprop="name">springboot</span></a>
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a>
                 </span>
             </span>
 
@@ -470,444 +461,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>509</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>@Null  被注释的元素必须为null</li>
-<li>@NotNull  被注释的元素不能为null</li>
-<li>@AssertTrue  被注释的元素必须为true</li>
-<li>@AssertFalse  被注释的元素必须为false</li>
-<li>@Min(value)  被注释的元素必须是一个数字，其值必须大于等于指定的最小值</li>
-<li>@Max(value)  被注释的元素必须是一个数字，其值必须小于等于指定的最大值</li>
-<li>@DecimalMin(value)  被注释的元素必须是一个数字，其值必须大于等于指定的最小值</li>
-<li>@DecimalMax(value)  被注释的元素必须是一个数字，其值必须小于等于指定的最大值</li>
-<li>@Size(max,min)  被注释的元素的大小必须在指定的范围内。</li>
-<li>@Digits(integer,fraction)  被注释的元素必须是一个数字，其值必须在可接受的范围内</li>
-<li>@Past  被注释的元素必须是一个过去的日期</li>
-<li>@Future  被注释的元素必须是一个将来的日期</li>
-<li>@Pattern(value) 被注释的元素必须符合指定的正则表达式。</li>
-<li>@Email 被注释的元素必须是电子邮件地址</li>
-<li>@Length 被注释的字符串的大小必须在指定的范围内</li>
-<li>@NotEmpty  被注释的字符串必须非空</li>
-<li>@Range  被注释的元素必须在合适的范围内</li>
-</ul>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%A0%A1%E9%AA%8C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/%E4%BA%8B%E5%8A%A1/%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/%E4%BA%8B%E5%8A%A1/%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">事务的基本概念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-16 21:37:01" itemprop="dateCreated datePublished" datetime="2019-03-16T21:37:01+08:00">2019-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E4%BA%8B%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">事务</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>12k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>11 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-什么是事务？"><a href="#1-什么是事务？" class="headerlink" title="1.什么是事务？"></a>1.什么是事务？</h1><p>事务由一组操作组成，我们希望这组操作能够全部正确运行，如果这一组操作中的任意一个步骤发生错误，那么就需要回滚之前已经完成的操作。也就是同一个事务的所有操作，要么全部正确执行，要么全部不要执行。</p>
-<h1 id="2-事务的四大特性ACID"><a href="#2-事务的四大特性ACID" class="headerlink" title="2.事务的四大特性ACID"></a>2.事务的四大特性ACID</h1><h2 id="原子性：Atomicity"><a href="#原子性：Atomicity" class="headerlink" title="原子性：Atomicity"></a>原子性：Atomicity</h2><p>原子性要求，事务是不可分割的执行单元，事务中的所有操作要么全部执行，要么全部不执行。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/%E4%BA%8B%E5%8A%A1/%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%8D%81%E4%B9%9D%E9%97%B4%E6%88%BF%E3%80%8B_%E8%8B%8F%E7%AB%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%8D%81%E4%B9%9D%E9%97%B4%E6%88%BF%E3%80%8B_%E8%8B%8F%E7%AB%A5/" class="post-title-link" itemprop="url">《十九间房》_苏童</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-14T00:00:00+08:00">2019-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>508</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h2 id="《刺青时代》"><a href="#《刺青时代》" class="headerlink" title="《刺青时代》"></a>《刺青时代》</h2><ul>
-<li>小拐、刺青、猪头帮</li>
-</ul>
-<h2 id="《园艺》"><a href="#《园艺》" class="headerlink" title="《园艺》"></a>《园艺》</h2><ul>
-<li>失踪、藤蔓、儿子、女儿、话剧、侦探</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%8D%81%E4%B9%9D%E9%97%B4%E6%88%BF%E3%80%8B_%E8%8B%8F%E7%AB%A5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/13/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%9F%8E%E5%8C%97%E5%9C%B0%E5%B8%A6%E3%80%8B_%E8%8B%8F%E7%AB%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/13/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%9F%8E%E5%8C%97%E5%9C%B0%E5%B8%A6%E3%80%8B_%E8%8B%8F%E7%AB%A5/" class="post-title-link" itemprop="url">《城北地带》_苏童</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-13 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-13T00:00:00+08:00">2019-03-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>584</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><ul>
-<li>沈庭方不偏不倚的评点也代表了香椿树街的公众看法，类似的邻里风波往往在不偏不倚的舆论裁决中结束，没有绝对的胜方和负方，公正之绳本身也是模糊而溃烂的，就像街上随意拉起的晾衣绳，或者就像化工厂从香椿树街凌空高架的那根输油管道，人们每天从此经过却易于忽略它们的存在。</li>
-<li>城市只是意味着视线尽头的天空颜色发生了变化，那里的天空沉淀了一片烟雾的灰黑色。</li>
-<li>他确实很累了，除此之外达生的眼睛有点泛潮，但达生对自己说那不过是一滴夜露而已。</li>
-<li>十步街远远不止十步长，就像香椿树街上其实见不到香椿树一样，这里的房屋看上去比香椿树街更古旧也更残破一些，木头都露出了黑漆漆的颜色，晾晒的衣裳和腌肉腌菜也都挤在行人的头顶上，每座房子都像是被什么牵拉着，朝木塔一侧歪斜着，达生骑着车子在十步街上东张西望，他觉得本城的传奇人物严三郎不该是住在这里的，但他又想不出来严三郎应该住在哪里。</li>
-<li>在这条街上无法竖良好口碑的人，他们的冤屈往往会被公正舆论所忽视，而金兰的冤屈也像初春城下的柳絮，飘了几天就无声地消失了。</li>
-<li>雨点打在滕凤的黄油布雨伞上，打在我们的香椿树街上，城北一带的气候暂时是凉爽的，但谁都知道雨季是匆匆而来匆匆而去的。下那么多雨有什么用？雨季一过炎热的夏天又将来临，年复一年，炎热的令人烦躁的夏天总是会来临的。</li>
-</ul>
-<h1 id="读后感"><a href="#读后感" class="headerlink" title="读后感"></a>读后感</h1><ul>
-<li>敢死，是不是意味着在死者心中有超越生死的东西，而我们现在根本不敢。</li>
-<li>少年啊，有些执着的少年。</li>
-</ul>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/13/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%9F%8E%E5%8C%97%E5%9C%B0%E5%B8%A6%E3%80%8B_%E8%8B%8F%E7%AB%A5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/06/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E8%8B%8F%E6%A0%BC%E6%8B%89%E5%BA%95%E4%B9%8B%E6%AD%BB%E3%80%8B_%E6%9F%8F%E6%8B%89%E5%9B%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/06/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E8%8B%8F%E6%A0%BC%E6%8B%89%E5%BA%95%E4%B9%8B%E6%AD%BB%E3%80%8B_%E6%9F%8F%E6%8B%89%E5%9B%BE/" class="post-title-link" itemprop="url">《苏格拉底之死》_柏拉图</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -926,24 +480,63 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h2 id="《尤息弗罗篇》"><a href="#《尤息弗罗篇》" class="headerlink" title="《尤息弗罗篇》"></a>《尤息弗罗篇》</h2><ul>
-<li>有人看着一个东西并不是因为那个东西是一个被看着的东西，而是正好相反，它之所以是一个被看着的东西是因为有人看它。同样，有人领着一个东西并不是因为那个东西是一个被领着的东西，而是相反，它之所以是一个被领着的东西是因为有人领着它。有人携带着一个东西并不是因为那个东西是一个被携带着的东西，相反，它之所以是被携带着的东西是因为有人携带着它。</li>
-<li>我们得拿你开玩笑了，因为你自己也看到了，你说的那些话总不会待在你把它们放置的地方。</li>
-</ul>
-<h2 id="《申辩篇》"><a href="#《申辩篇》" class="headerlink" title="《申辩篇》"></a>《申辩篇》</h2><ul>
-<li>你们一心只想着聚敛钱财、追求名誉，却从不关心真理、追求智慧，不关心如何使自己的灵魂得到完善，你们难道不感到羞愧吗？</li>
-<li>不要介意我的说话方式是好是坏，而只关心我说得是否正确、是否公正。因为关心公正是法官们应该做的，就像作为演讲者应该讲真话一样。</li>
-<li>如果你不使自己忙碌得与众不同，所有这些谣言和议论都不会产生，除非你做了一些与众不同的事。告诉我们是怎么回事，这样我们会更谨慎地对待这个案件。</li>
-<li>我比这个人有智慧，似乎不是因为我们谁知道些有价值的事情，而是因为他自以为知道些什么而实际上不知道；而我虽然也不知道那些事情，但我知道自己并不知道。所以，因为这一点点的区别，我似乎比他有智慧。</li>
-<li>那些优秀的工匠似乎也和诗人一样有着同一个毛病：他们由于自己成功的手艺，而觉得自己在其他重要事务上也非常有智慧。这个错误认知掩盖了那种智慧。</li>
-<li>先生们，害怕死亡是什么东西呢？它只是一种无知而自以为知道、没有智慧而自以为有智慧。没人知道死亡是否是人生最大的祝福，然而人们害怕死亡就好像他们知道死亡是最坏的事情似的。把自己不知道的东西当成知道的，这种无知是该受责备的。</li>
-<li>只要我还能呼吸，还能活动，我就不能停止践行哲学，就不能不去劝告你们，向我遇到的每个人用我惯用的方式讲：‘雅典人啊，以伟大、智慧和力量闻名于世的伟大雅典城邦中的公民，你们一心只想着聚敛钱财、追求名誉，却从不关心真理、追求智慧，不关心如何使自己的灵魂得到完善，你们难道不感到羞愧吗？</li>
-<li>所以，雅典人，我跟你们讲，不管你们是否照阿尼图斯说的去做，是否释放我，你们都知道我是不会改变自己的作风的，即使让我反复受死也不改初衷。</li>
-<li>我被神叫到城邦来，就如同牛虻附在一头又大又高贵的马上，它由于过于巨大而慵懒，需要被叮咬刺激才能焕发活力。我相信神把我放在城邦中，就是让我到处走动，去劝诫、刺激、责备你们中的每一个人，不管你们走到哪里，都整天跟着你们。</li>
-</ul>
+          <h1 id="消息队列的选型"><a href="#消息队列的选型" class="headerlink" title="消息队列的选型"></a>消息队列的选型</h1><h2 id="Kafka、ActiveMQ、RabbitMQ、RocketMQ-对比"><a href="#Kafka、ActiveMQ、RabbitMQ、RocketMQ-对比" class="headerlink" title="Kafka、ActiveMQ、RabbitMQ、RocketMQ 对比"></a>Kafka、ActiveMQ、RabbitMQ、RocketMQ 对比</h2><table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>ActiveMQ</strong></th>
+<th><strong>RabbitMQ</strong></th>
+<th><strong>RocketMQ</strong></th>
+<th><strong>Kafka</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单机吞吐量</td>
+<td>万级，比 RocketMQ、Kafka 低一个数量级</td>
+<td>同 ActiveMQ</td>
+<td>10 万级，支撑高吞吐</td>
+<td>10 万级，高吞吐，一般配合大数据类的系统来进行实时数据计算、日志采集等场景</td>
+</tr>
+<tr>
+<td>topic 数量对吞吐量的影响</td>
+<td></td>
+<td></td>
+<td>topic 可以达到几百/几千的级别，吞吐量会有较小幅度的下降，这是 RocketMQ 的一大优势，在同等机器下，可以支撑大量的 topic</td>
+<td>topic 从几十到几百个时候，吞吐量会大幅度下降，在同等机器下，Kafka 尽量保证 topic 数量不要过多，如果要支撑大规模的 topic，需要增加更多的机器资源</td>
+</tr>
+<tr>
+<td>时效性</td>
+<td>ms 级</td>
+<td>微秒级，这是 RabbitMQ 的一大特点，延迟最低</td>
+<td>ms 级</td>
+<td>延迟在 ms 级以内</td>
+</tr>
+<tr>
+<td>可用性</td>
+<td>高，基于主从架构实现高可用</td>
+<td>同 ActiveMQ</td>
+<td>非常高，分布式架构</td>
+<td>非常高，分布式，一个数据多个副本，少数机器宕机，不会丢失数据，不会导致不可用</td>
+</tr>
+<tr>
+<td>消息可靠性</td>
+<td>有较低的概率丢失数据</td>
+<td>基本不丢</td>
+<td>经过参数优化配置，可以做到 0 丢失</td>
+<td>同 RocketMQ</td>
+</tr>
+<tr>
+<td>功能支持</td>
+<td>MQ 领域的功能极其完备</td>
+<td>基于 erlang 开发，并发能力很强，性能极好，延时很低</td>
+<td>MQ 功能较为完善，还是分布式的，扩展性好</td>
+<td>功能较为简单，主要支持简单的 MQ 功能，在大数据领域的实时计算以及日志采集被大规模使用</td>
+</tr>
+</tbody></table>
+<h2 id="各MQ如何进行选择"><a href="#各MQ如何进行选择" class="headerlink" title="各MQ如何进行选择"></a>各MQ如何进行选择</h2><p>综上：<br>从单机吞吐量上面来看，ActiveMQ和RabbitMQ都是万级。但是RocketMQ和kafka是十万级别的，且能够支撑高吞吐量，kafka主要配置大数据类的系统进行实时数据处理和日志采集。<br>从topic对吞吐量的影响上来看，RocketMQ的topic可以达到几百/几千的级别，吞吐量会有较小幅度的下降，在同等机器下，可以支撑大量的topic。但是kafka的topic从几十到几百个时候，吞吐量会大幅度下降，在同等机器下，Kafka尽量保证topic数量不要过多，如果要支撑大规模的 topic，需要增加更多的机器资源。<br>从时效性上来看，RabbitMQ最快，是微秒级，其他三个都是毫秒级<br>从可用性上来看，ActiveMQ和RabbitMQ可用性高，基于主从架构来实现，而RocketMQ和kafka的可用性非常高，采用的是分布式的架构来实现<br>从消息可靠性上来看，ActiveMQ有较低的概率丢失数据，RabbitMQ能够保证基本不丢，而RocketMQ和kafka可以通过参数优化保证数据的0丢失。<br>从功能支持上面来看，ActiveMQ在MQ领域的功能极其完备，RabbitMQ基于 erlang 开发，并发能力很强，性能极好，延时很低。RocketMQ功能较为完善，还是分布式的，扩展性好。kafka功能较为简单，主要支持简单的 MQ 功能，在大数据领域的实时计算以及日志采集被大规模使用。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/03/06/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E8%8B%8F%E6%A0%BC%E6%8B%89%E5%BA%95%E4%B9%8B%E6%AD%BB%E3%80%8B_%E6%9F%8F%E6%8B%89%E5%9B%BE/#more" rel="contents">
+              <a class="btn" href="/2019/04/02/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E9%80%89%E5%9E%8B/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -967,7 +560,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/05/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%B7%B7%E6%B2%8C%E8%9D%B4%E8%9D%B6%E3%80%8B_%E5%88%98%E6%85%88%E6%AC%A3/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/02/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%B5%B7%E5%AD%90%E8%AF%97%E5%85%A8%E9%9B%86%E3%80%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -981,7 +574,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/05/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%B7%B7%E6%B2%8C%E8%9D%B4%E8%9D%B6%E3%80%8B_%E5%88%98%E6%85%88%E6%AC%A3/" class="post-title-link" itemprop="url">《混沌蝴蝶》_刘慈欣</a>
+            <a href="/2019/04/02/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%B5%B7%E5%AD%90%E8%AF%97%E5%85%A8%E9%9B%86%E3%80%8B/" class="post-title-link" itemprop="url">《海子诗全集》</a>
         </h2>
 
         <div class="post-meta">
@@ -991,14 +584,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-05 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-05T00:00:00+08:00">2019-03-05</time>
+              <time title="创建时间：2019-04-02 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-02T00:00:00+08:00">2019-04-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+                <time title="修改时间：2020-09-05 23:00:03" itemprop="dateModified" datetime="2020-09-05T23:00:03+08:00">2020-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1020,7 +613,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>21</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1039,13 +632,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><ul>
-<li>为了苦难终的祖国，我扑动蝴蝶的翅膀……</li>
-</ul>
-
+          <p>《海子诗全集》的阅读摘录</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/03/05/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%B7%B7%E6%B2%8C%E8%9D%B4%E8%9D%B6%E3%80%8B_%E5%88%98%E6%85%88%E6%AC%A3/#more" rel="contents">
+              <a class="btn" href="/2019/04/02/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%B5%B7%E5%AD%90%E8%AF%97%E5%85%A8%E9%9B%86%E3%80%8B/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1069,7 +659,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/02/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E4%BA%BA%E7%94%9F%E6%9C%89%E4%BD%95%E6%84%8F%E4%B9%89%E3%80%8B_%E8%83%A1%E9%80%82/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/01/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1083,7 +673,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/02/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E4%BA%BA%E7%94%9F%E6%9C%89%E4%BD%95%E6%84%8F%E4%B9%89%E3%80%8B_%E8%83%A1%E9%80%82/" class="post-title-link" itemprop="url">《人生有何意义》_胡适</a>
+            <a href="/2019/04/01/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/" class="post-title-link" itemprop="url">消息队列的优缺点</a>
         </h2>
 
         <div class="post-meta">
@@ -1093,7 +683,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-02 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-02T00:00:00+08:00">2019-03-02</time>
+              <time title="创建时间：2019-04-01 17:09:01" itemprop="dateCreated datePublished" datetime="2019-04-01T17:09:01+08:00">2019-04-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1108,11 +698,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">消息队列</span></a>
                 </span>
             </span>
 
@@ -1122,14 +712,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.3k</span>
+              <span>879</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -1141,67 +731,55 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h2 id="《人生有何意义》"><a href="#《人生有何意义》" class="headerlink" title="《人生有何意义》"></a>《人生有何意义》</h2><ul>
-<li>生命本没有意义，你要能给他什么意义，他就有什么意义。与其终日冥想人生有何意义，不如试用此生做点有意义的事。</li>
-<li>人生在世，究竟是为什么的？<ul>
-<li>现在的人最怕的是有人问他这个问题。得意的人听着这个问题就要扫兴，不得意的人想着这个问题就要发狂，他们是聪明人，不愿意扫兴，更不愿意发狂，所以给你一个疯子的绰号，就算完了。</li>
-</ul>
+          <h1 id="消息队列的优缺点"><a href="#消息队列的优缺点" class="headerlink" title="消息队列的优缺点"></a>消息队列的优缺点</h1><h2 id="消息队列的优点：解耦、异步、削峰。"><a href="#消息队列的优点：解耦、异步、削峰。" class="headerlink" title="消息队列的优点：解耦、异步、削峰。"></a>消息队列的优点：解耦、异步、削峰。</h2><ul>
+<li><ol>
+<li>解耦<blockquote>
+<p>场景：当一个初始系统需要将消息发送给多个其他系统的时候，如果通过接口来实现的话，需要调用多个接口，代码维护工作量较大，而且需要初始系统需要进行多种异常处理（其他系统挂了的消息暂存、提醒等等操作），如果这时新增了一个系统或者中间有一个系统不使用了，这时就需要对这个系统进行代码上的操作。但是如果使用MQ来实现的话，将初始系统和其他系统进行异步解耦，这个初始系统只需要将消息发送给MQ，其他系统从MQ中订阅数据，当新增系统或减少系统的时候只是增加对MQ的订阅或者取消订阅操作，对初始系统没有任何的影响。</p>
+</blockquote>
 </li>
-<li>我仔细一想，觉得做了中国人，老婆是不能不讨的，只好将就点罢。</li>
-<li>人生的意义全是各人自己寻出来、造出来的：高尚，卑劣，清贵，污浊，有用，无用……全靠自己的作为。</li>
-<li>人生的意义不在于何以有生，而在于自己怎样生活。你若情愿把这六尺之躯葬送在白昼做梦之上，那就是你这一生的意义。你若发愤振作起来，决心去寻求生命的意义，去创造自己的生命的意义，那么，你活一日便有一日的意义，做一事便添一事的意义，生命无穷，生命的意义也无穷了。总之，生命本没有意义，你要能给它什么意义，它就有什么意义。与其终日冥想人生有何意义，不如试用此生做点有意义的事……</li>
-<li>认得人生如梦，故无所求。但无所求不是无为。人生固然不过一梦，但一生只有这一场做梦的机会，岂可不努力做一个轰轰烈烈像个样子的梦？岂可糊糊涂涂懵懵懂懂混过这几十年吗？</li>
-<li>人生不是单独的，人是社会的动物，他能看见和想像他所看不到的东西，他有能看到上至数百万年下至子孙百代的能力。</li>
-<li>知世如梦无所求，无所求心普定寂，还似梦中随梦境，成就河沙梦功德。——王安石《梦》</li>
-<li>哲学是研究人生切要的问题，从根本上着想，去找根本的解决。</li>
-<li>哲学是研究人生切要的问题，从意义上着想，去找一个比较可普遍适用的意义。</li>
-<li>真有价值的东西，决不为怀疑所毁，而能被怀疑所毁的东西，决不会真有价值。</li>
-<li>人性是静的、永恒不变的，时代却是动的、绵延变化的，这就是动与静的关系，这就是这变与不变的反应，决定了一切人们的全部人生。也就是这人生，屠格涅夫得以造成他的优美的艺术。</li>
-<li>谁在主宰着人性呢？谁在推动着时代呢？又是谁在播弄着这时代和人性的关系及反应造成的人生呢？屠格涅夫告诉我们：这是自然。自然主宰着人性，自然推动着时代，自然播弄着这人生。宇宙没有绝对的真理，人生没有客观的意义，一切的一切，只是像树，不得不被风吹，只是像物件，不得不被阳光照耀。屠格涅夫感觉到这个，认识了这个，也忠实地描写了这个，所以在他的纵横交织着时代和人性的作品下，显示了不可理解的人生，在这个人生下，又潜伏着一个无情的命运之神。激动了读者的情感的，是这命运之神。威胁着读者的思想的，也是这命运之神。</li>
-<li>黑暗的背景，时时在那些新的运动中露出狰狞的面目，充满着热情的青年们，时时受着旧时代人们的讥笑和诅咒，时时遇见事实上的重大打击。</li>
-<li>时代是永远变动的，但不是时代本身有什么目的，他不会按照一定的目的用一定的方式向前走。一切都是偶然地盲目地走着，谁也不知道是为什么，谁也不知道怎样，到底时代怎样推进，怕也只有命运能决定罢！</li>
-<li>人性是命运决定的，时代也是命运决定的，人性和时代反应出来的人生，还是命运决定的！</li>
-<li>工程师的作用，在能够找出自然界的利益，强迫自然世界把它的利益一个一个贡献出来；就是改造自然、征服自然、控制自然，以减除人的痛苦，增加人的幸福。</li>
-<li>见乃谓之象；形乃谓之器；制而用之谓之法；利用出入，民咸用之，谓之神。</li>
-<li>但是我们当此庆贺的纪念，与其追念过去的成功，远不如悬想将来的进步。过去的成绩只应该鼓励现在的人努力造一个更大更好的将来，这是“时”字的教训。倘若过去的光荣只使后来的人增加自满的心，不再求进步，那就像一个辛苦积钱的人成了家私之后天天捧着元宝玩弄，岂不成了一个守钱奴了吗？</li>
-<li>“科学的人生观”有两个意思：第一拿科学做人生观的基础，第二拿科学的态度、精神、方法，做我们生活的态度、生活的方法。</li>
-<li>你知道中国最有名的人是谁？提起此人，人人皆晓，处处闻名。他姓差，名不多，是各省各县各村人氏。你一定见过他，一定听过别人谈起他。差不多先生的名字天天挂在大家的口头，因为他是中国全国人的代表。</li>
-<li>差不多先生的相貌和你和我都差不多。他有一双眼睛，但看得不很清楚；有两只耳朵，但听得不很分明；有鼻子和嘴，但他对于气味和口味都不很讲究。他的脑子也不小，但他的记性却不很精明，他的思想也不很细密。</li>
-<li>我渐渐明白，世间最可厌恶的事莫如一张生气的脸；世间最下流的事莫如把生气的脸摆给旁人看。这比打骂还难受。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>异步<blockquote>
+<p>对于系统直接的调用，如果初始系统需要调用多个其他系统进行信息的同步，这时候可以使用MQ进行消息的发布，其他系统同时进行消息的处理，这样减少同步处理，降低请求的相应时间，提升用户的体验。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>削峰<blockquote>
+<p>这个场景对于数据库来说尤为使用，以mysql数据库为例，能够承受的压力诗2000QPS，如果超过5000QPS的话会导致数据库直接宕机，导致系统崩溃。但是超过5000QPS的请求在每天可能只有一两个小时，如果这时候通过MQ进行削峰，在高峰期的时候将请求放到MQ中，然后从MQ中拉取数据（可以设置为2000QPS的速度拉取，不要超过系统的承受能力，MQ会对消息进行缓存），就能够达到削峰的作用。</p>
+</blockquote>
+</li>
+</ol>
+</li>
 </ul>
-<h2 id="《为什么读书》"><a href="#《为什么读书》" class="headerlink" title="《为什么读书》"></a>《为什么读书》</h2><ul>
-<li>如今的中国人，肚子饿了，还有些施粥的厂把粥给他们吃。只是那些脑子叫饿的人可真没有东西吃了。</li>
-<li>我想这都是现在一班教会学堂出身的英文教习的罪过。这些英文教习，只会用他们先生教过的课本。他们的先生又只会用他们先生的先生教过的课本。所以现在中国学堂所用的英文书籍，大概都是教会先生的太老师或太太老师们教过的课本！怪不得和现在的思想潮流绝无关系了。</li>
-<li>社会所需要的是做事的人才，学堂所造成的是不会做事又不肯做事的人才，这种教育不是亡国的教育吗？</li>
-<li>我们今日也痛骂康有为。但二十年前的中国，骂康有为太新；二十年后的中国，却骂康有为太旧。</li>
-<li>书中自有千钟粟，书中自有黄金屋，书中自有颜如玉。</li>
-<li>为什么要读书？有三点可以讲：第一，因为书是过去已经知道的智识学问和经验的一种记录，我们读书便是要接受这人类的遗产；第二，为要读书而读书，读了书便可以多读书；第三，读书可以帮助我们解决困难、应付环境，并可获得思想材料的来源。</li>
-<li>所以人最大的贡献就是[留下 ]过去的智识和经验，使后人可以节省许多脑力。</li>
-<li>不读书不能读书，要能读书才能多读书。</li>
-<li>读书的目的在于读书，要读书越多才可以读书越多。</li>
-<li>古人说：“开卷有益。”正是此意。读书不是单为文凭功名，只因为书中可以供给学问知识，可以帮助我们解决困难，可以帮助我们思想。</li>
-<li>我可以很诚恳地说，中国旧籍是经不起读的。中国有五千年文化，“四部”的书已是汗牛充栋。究竟有几部书应该读，我也曾经想过。其中有条理有系统的精心结构之作，二千五百年以来恐怕只有半打。“集”是杂货店，“史”和“子”还是杂货店。至于“经”，也只是杂货店，讲到内容，可以说没有一些东西可以给我们改进道德增进智识的帮助的。中国书不够读，我们要另开生路，辟殖民地，这条生路，就是每一个少年人必须至少要精通一种外国文字。读外国语要读到有乐而无苦，能做到这地步，书中便有无穷乐趣。</li>
-<li>在这个值得纪念的仪式完毕之后，你们就被列入少数特权分子之列 ——大学毕业生。今天并不是标示着人生一段时期的结束或完毕，而是一个新生活的开始，一个真正生活和真正充满责任的开端。</li>
-<li>一个头脑受过训练的人在看一件事是用批判和客观的态度，而且也用适当的智识学问为凭依。他不容许偏见和个人的利益来影响他的判断，和左右他的观点。他一直都是好奇的，但是他绝对不会轻易相信人。他并不仓促地下结论，也不轻易地附和他人的意见，他宁愿耽搁一段时间，一直等到他有充分的时间来查考事实和证据后，才下结论。</li>
-<li>总而言之，一个受过训练的头脑，就是对于易陷入偏见、武断和盲目接受传统与权威的陷阱，存有戒心和疑惧。同时，一个受过训练的脑筋绝不是消极或是毁灭性的。他怀疑人并不是喜欢怀疑的缘故；也并不是认为“所有的话都有可疑之处，所有的判断都有虚假之处”。他之所以怀疑是为了想确切相信一件事。为了要根据更坚固的证据和更健全的推理为基础，来建立或重新建立信仰。</li>
-<li>你们是否充分准备来做这件在你们一生中最神圣的行动 ——有责任心的思考？</li>
-<li>我们不看见北京大街的墙上大书着“打倒英日”不要五分钟的热度吗？其实写那些大字的人，写成之后，自己看着很满意，他的“热度”早已消除大半了；他回到家里，坐也坐得下了，睡也睡得着了。所谓“民气”，无论在中国在欧美，都是这样：突然而来，倏然而去。</li>
-<li>救国事业更非短时间所能解决：帝国主义不是赤手空拳打得倒的；“英日强盗”也不是几千万人的喊声咒得死的。救国是一件顶大的事业：排队游街，高喊着“打倒英日强盗”，算不得救国事业；甚至于砍下手指写血书，甚至于蹈海投江，杀身殉国，都算不得救国的事业。救国的事业须要有各色各样的人才；真正的救国的预备在于把自己造成一个有用的人才。</li>
-<li>我们只希望大家知道：在一个扰攘纷乱的时期里跟着人家乱跑乱喊，不能就算是尽了爱国的责任，此外还有更难更可贵的任务：在纷乱的喊声里，能立定脚跟，打定主意，救出你自己，努力把你这块材料铸造成个有用的东西！</li>
-<li>为什么要研究问题呢？因为我们的社会现在正当根本动摇的时候，有许多风俗制度，向来不发生问题的，现在因为不能适应时势的需要，不能使人满意，都渐渐地变成困难的问题，不能不彻底研究，不能不考问旧日的解决法是否错误；如果错了，错在什么地方；错误寻出了，可有什么更好的解决方法；有什么方法可以适应现时的要求。</li>
-<li>凡社会上成为问题的问题，一定是与许多人有密切关系的。这许多人虽然不能提出什么新解决，但是他们平时对于这个问题自然不能不注意。若有人能把这个问题的各方面都细细分析出来，加上评判的研究，指出不满意的所在，提出新鲜的救济方法，自然容易引起许多人的注意。</li>
-<li>研究问题所以能于短时期中发生很大的效力，正因为研究问题有这几种好处：（1）研究社会人生切要的问题最容易引起大家的注意；（2）因为问题关切人生，故最容易引起反对，但反对是该欢迎的，因为反对便是兴趣的表示，况且反对的讨论不但给我们许多不要钱的广告，还可使我们得讨论的益处，使真理格外分明；（3）因为问题是逼人的活问题，故容易使人觉悟，容易得人信从；（4）因为从研究问题里面输入的学理，最容易消除平常人对于学理的抗拒力，最容易使人于不知不觉之中受学理的影响；（5）因为研究问题可以不知不觉地养成一班研究的、评判的、独立思想的革新人才。</li>
-<li>现在有许多人自己不懂得国粹是什么东西，却偏要高谈“保存国粹”。林琴南先生做文章论古文之不当废，他说，“吾知其理而不能言其所以然”！现在许多国粹党，有几个不是这样糊涂懵懂的？这种人如何配谈国粹？若要知道什么是国粹、什么是国渣，先须要用评判的态度、科学的精神，去做一番整理国故的工夫。</li>
-<li>我们今日必须坚决的信仰：五千万失学儿童的救济比五千架飞机的功效至少要大五万倍！</li>
-<li>新生活就是有意思的生活。</li>
-<li>凡是自己说不出“为什么这样做”的事，都是没有意思的生活。反过来说，凡是自己说得出“为什么这样做”的事，都可以说是有意思的生活。</li>
-<li>生活的“为什么”，就是生活的意思。</li>
-<li>说明这个“我”是社会上无数势力所造成的。</li>
-<li>什么是人格？人格只是已养成的行为习惯的总和。什么是信心？信心只是敢于肯定一个不可知的将来的勇气。</li>
+<h2 id="消息队列的不足：可用性降低、复杂度提升、一致性问题"><a href="#消息队列的不足：可用性降低、复杂度提升、一致性问题" class="headerlink" title="消息队列的不足：可用性降低、复杂度提升、一致性问题"></a>消息队列的不足：可用性降低、复杂度提升、一致性问题</h2><ul>
+<li><ol>
+<li>系统可用性降低<blockquote>
+<p>系统引入的外部依赖越多，越容易挂掉。本来你就是 A 系统调用 BCD 三个系统的接口就好了，人 ABCD 四个系统好好的，没啥问题，你偏加个 MQ 进来，万一 MQ 挂了咋整，MQ 一挂，整套系统崩溃的，你不就完了？如何保证消息队列的高可用，可以点击这里查看。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>系统复杂度提高<blockquote>
+<p>硬生生加个 MQ 进来，你怎么保证消息没有重复消费？怎么处理消息丢失的情况？怎么保证消息传递的顺序性？头大头大，问题一大堆，痛苦不已。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>一致性问题<blockquote>
+<p>A 系统处理完了直接返回成功了，人都以为你这个请求就成功了；但是问题是，要是 BCD 三个系统那里，BD 两个系统写库成功了，结果 C 系统写库失败了，咋整？你这数据就不一致了。</p>
+</blockquote>
+</li>
+</ol>
+</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/03/02/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E4%BA%BA%E7%94%9F%E6%9C%89%E4%BD%95%E6%84%8F%E4%B9%89%E3%80%8B_%E8%83%A1%E9%80%82/#more" rel="contents">
+              <a class="btn" href="/2019/04/01/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1225,7 +803,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/01/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E3%80%8B/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%9C%80%E5%90%8E%E4%B8%80%E5%90%8D%E5%A5%B3%E7%9F%A5%E9%9D%92%E3%80%8B_%E9%98%8E%E8%BF%9E%E7%A7%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1239,7 +817,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/01/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E3%80%8B/" class="post-title-link" itemprop="url">《架构整洁之道》</a>
+            <a href="/2019/03/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%9C%80%E5%90%8E%E4%B8%80%E5%90%8D%E5%A5%B3%E7%9F%A5%E9%9D%92%E3%80%8B_%E9%98%8E%E8%BF%9E%E7%A7%91/" class="post-title-link" itemprop="url">《最后一名女知青》_阎连科</a>
         </h2>
 
         <div class="post-meta">
@@ -1249,7 +827,120 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-01T00:00:00+08:00">2019-03-01</time>
+              <time title="创建时间：2019-03-28 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-28T00:00:00+08:00">2019-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 23:24:28" itemprop="dateModified" datetime="2020-09-05T23:24:28+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>536</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><p>庙里坐着一个孤独的和尚，双手合掌于胸前，念着佛语，普度着芸芸众生。</p>
+<ul>
+<li>人世的苍凉，这当儿如雨前的乌云，罩在台子地的上空。地下一米多处，是被考究为文化层的黄土，这土上站的人们，却一片片死着不言，只有狐狸走向囚车的脚步，咚咚咚地炸在地上。</li>
+<li>闹半天，人，就是这么一档儿事。终于更加坚信，在哪儿不是活一辈子呢？</li>
+<li>人生之事，简单可谓简单，复杂可谓复杂。捅破了窗户去说，在哪儿不是吃吃睡睡一辈子呢？</li>
+<li>回走时，他不为这血淋淋的念头惊奇，却惊奇自己对这念头的平静。想到底怎样了呢？足也不过刚邻四十岁的界河，如何对死就这样的平静，这还了得嘛。</li>
+<li>人在世间，谁没有上百次思想生死，无非都没有实施的勇气罢了。</li>
+<li>人总是对人的需要，迫切如渴念生命长寿。</li>
+<li>下乡二十来年养成的对人生规规正正的态度，虽在都市显得过分死板，甚至呆头呆脑，但终于没有失去做人的品行。</li>
+<li>眼下，她特别想要宁静，走出亚细亚街澎湃的繁华，就是为了追寻一种安宁。到了这般的年龄，到了这般的挣扎，到了这般的境况，着实急需精神清静的喘息。</li>
+<li>人生的漏洞，也许只能用躲开才能堵上。</li>
+<li>乡村虽然换了一件衣服，可它从肉体到心灵，都还是原样，至少说变化不大。精神的纯洁，依然如故，这就终于替从都市生活中逃出的人们，留下了一巢洞穴。</li>
+<li>那种所谓的理智，实则是一种对情感的压抑。</li>
+</ul>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%9C%80%E5%90%8E%E4%B8%80%E5%90%8D%E5%A5%B3%E7%9F%A5%E9%9D%92%E3%80%8B_%E9%98%8E%E8%BF%9E%E7%A7%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/25/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/25/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" class="post-title-link" itemprop="url">springboot发送邮件组件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-25 11:16:01" itemprop="dateCreated datePublished" datetime="2019-03-25T11:16:01+08:00">2019-03-25</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1264,11 +955,19 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/" itemprop="url" rel="index"><span itemprop="name">springboot</span></a>
                 </span>
             </span>
 
@@ -1278,14 +977,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4k</span>
+              <span>7.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -1297,15 +996,361 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h2 id="《概述》"><a href="#《概述》" class="headerlink" title="《概述》"></a>《概述》</h2><h3 id="《设计和架构究竟是什么？》"><a href="#《设计和架构究竟是什么？》" class="headerlink" title="《设计和架构究竟是什么？》"></a>《设计和架构究竟是什么？》</h3><ul>
-<li>“架构”这个词往往使用于“高层级”的讨论中，这类讨论一般把“底层”的实现细节排除在外。而“设计”一词，往往用来指代具体的系统底层组织结构和实现的细节。但是，从一个真正的系统架构师的日常工作来看，这样的区分是根本不成立的。</li>
-<li>总的来说，架构图里实际包含了所有的底层设计细节，这些细节信息共同支撑了顶层的架构设计，底层设计信息和顶层架构设计共同组成了整个房屋的架构文档。</li>
-<li>软件设计的终极目标是，用最小的人力成本来满足架构和维护该系统的需求。</li>
-</ul>
-<h3 id="《两个价值维度》"><a href="#《两个价值维度》" class="headerlink" title="《两个价值维度》"></a>《两个价值维度》</h3>
+          <h1 id="springboot发送邮件组件"><a href="#springboot发送邮件组件" class="headerlink" title="springboot发送邮件组件"></a>springboot发送邮件组件</h1><h2 id="添加邮件发送配置"><a href="#添加邮件发送配置" class="headerlink" title="添加邮件发送配置"></a>添加邮件发送配置</h2><p>配置位置自定义，目前放在resources:config/email.properties<br>如果只有一种发送邮件的情况，修改下面的配置即可。<br>如果有多种发送邮件的情况，有两种解决方案:1.需要复制一份默认配置在当前配置文件中，并修改配置前缀；2.新增一个配置文件，并拷贝一份配置即可(也可在新配置文件中修改配置前缀，达到多个配置的目的)。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 发送者信息</span></span><br><span class="line"><span class="string">default.senderName=name</span></span><br><span class="line"><span class="string">default.senderAddress=name@mail.com</span></span><br><span class="line"><span class="string">default.senderPassword=password</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 邮件服务器</span></span><br><span class="line"><span class="string">default.serverHost=default.mail.com</span></span><br><span class="line"><span class="string">default.serverPort=25</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 接收者</span></span><br><span class="line"><span class="string">default.toAddress=name@mail.com</span></span><br><span class="line"><span class="comment"># 抄送者</span></span><br><span class="line"><span class="string">default.ccAddress=name2@mail.com</span></span><br><span class="line"><span class="comment"># 秘密抄送者</span></span><br><span class="line"><span class="comment">#default.bccAddress=name3@mail.com</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否需要验证身份</span></span><br><span class="line"><span class="string">default.defaultValate=true</span></span><br></pre></td></tr></table></figure>
+<h2 id="读取配置"><a href="#读取配置" class="headerlink" title="读取配置"></a>读取配置</h2>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/03/01/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E3%80%8B/#more" rel="contents">
+              <a class="btn" href="/2019/03/25/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/25/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%9C%A8%E7%BB%86%E9%9B%A8%E4%B8%AD%E5%91%BC%E5%96%8A%E3%80%8B_%E4%BD%99%E5%8D%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/25/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%9C%A8%E7%BB%86%E9%9B%A8%E4%B8%AD%E5%91%BC%E5%96%8A%E3%80%8B_%E4%BD%99%E5%8D%8E/" class="post-title-link" itemprop="url">《在细雨中呼喊》_余华</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-25 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-25T00:00:00+08:00">2019-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 23:22:56" itemprop="dateModified" datetime="2020-09-05T23:22:56+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><ul>
+<li>这本书试图表达人们在面对过去时，比面对未来更有信心。因为未来充满了冒险，充满了不可战胜的神秘，只有当这些结束以后，惊奇和恐惧也就转化成了幽默和甜蜜。这就是人们为什么如此热爱回忆的理由，如同流动的河水，在不同民族的不同语言里永久和宽广地荡漾着，支撑着我们的生活和阅读。</li>
+<li>因为当人们无法选择自己的未来时，就会珍惜自己选择过去的权利。回忆的动人之处就在于可以重新选择，可以将那些毫无关联的往事重新组合起来，从而获得了全新的过去，而且还可以不断地更换自己的组合，以求获得不一样的经历。当一个人独自坐在公园的长椅上，在日落时让嘴角露出一丝微笑，他孤独的形象似乎值得同情，然而谁又能体会到他此刻的美妙旅程？他正坐在回忆的马车里，他的生活重新开始了，而且这一次的生活是他自己精心挑选的。<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2></li>
+<li>1965年的时候，一个孩子开始了对黑夜不可名状的恐惧。我回想起了那个细雨飘扬的夜晚，当时我已经睡了，我是那么的小巧，就像玩具似的被放在床上。屋檐滴水所显示的，是寂静的存在，我的逐渐入睡，是对雨中水滴的逐渐遗忘。应该是在这时候，在我安全而又平静地进入睡眠时，仿佛呈现出一条幽静的道路，树木和草丛依次闪开。一个女人哭泣般的呼喊声从远处传来，嘶哑的声音在当初寂静无比的黑夜里突然响起，使我此刻回想中的童年的我颤抖不已。</li>
+<li>一个清澈透明的上午，我跟在村里几个孩子后面奔跑，脚下是松软的泥土和迎风起舞的青草。阳光那时候似乎更像是温和的颜色涂抹在我们身上，而不是耀眼的光芒。</li>
+<li>回想中的往事已被抽去了当初的情绪，只剩下了外壳。此刻蕴含其中的情绪是我现在的情绪。</li>
+<li>我第一次看到了死去的人，看上去他像是睡着的。这是我六岁时的真实感受，原来死去就是睡着了。</li>
+<li>我不知道自己已被父母送给了别人，我以为前往的地方是一次有趣的游玩。在那条小路上，疾病缠身的祖父与我擦肩而过，面对他忧虑的目光，我得意洋洋地对他说:“我现在没工夫和你说话。”</li>
+<li>我十二岁那年王立强死后，我独自一人回到南门，仿佛又开始了被人领养的生活。那些日子里，我经常有一些奇怪的感觉，似乎王立强和李秀英才是我的真正父母，而南门这个家对于我，只是一种施舍而已。</li>
+<li>我独自坐在池塘旁，在过去的时间里风尘仆仆。我独自的微笑和眼泪汪汪，使村里人万分惊讶。</li>
+<li>哥哥显然是村里孩子中最早接受现实的提醒，他开始预感到自己一生都将不如城里同学，这是他对内心自卑的最初感受。</li>
+<li>哥哥知道是城里同学出卖了他，他并不因此表现出一丝愤怒，甚至连责怪的意思都没有。他继续着和他们的亲密交往，我知道他这样做是不愿让村里人看到城里同学一下子都不来了。然而哥哥的努力最终还是失败了。当他们高中毕业以后，一个个陆续参加了工作，便不再像以前那么游手好闲，所以哥哥也到了被他们抛弃的时候了。</li>
+<li>长期以来，我固守着自己的想法。回首往事或者怀念故乡，其实只是在现实里不知所措以后的故作镇静，即便有某种感情伴随着出现，也不过是装饰而已。</li>
+<li>回忆中的池塘总是给我以温暖，这一次真实的出现则唤醒了我过去的现实。看着水面上漂浮的脏物，我知道了池塘并不是为了安慰我而存在的，更确切地说，它是作为过去的一个标记，不仅没有从我记忆里消失，而且依然坚守在南门的土地上，为的是给予我永远的提醒。</li>
+<li>现在我眺望往事时，仿佛看到她所抱住的不是一个人，而只是空气。冯玉青宁愿丧失名誉，克服羞怯去抱住这空空荡荡。</li>
+<li>孙光明抢到七颗水果糖和满满一把蚕豆，他坐在地上将它们和泥土碎石子小心翼翼地分开。孙光平站在一旁虎视眈眈地看着四周贪婪盯着弟弟的孩子，使他们谁也不敢上前去抢孙光明手中的食物。</li>
+<li>现在眼前经常会出现模糊的幻觉，我似乎能够看到时间的流动。时间呈现为透明的灰暗，所有一切都包孕在这隐藏的灰暗之中。我们并不是生活在土地上，事实上我们生活在时间里。田野、街道、河流、房屋是我们置身时间之中的伙伴。时间将我们推移向前或者向后，并且改变着我们的模样。</li>
+<li>我弟弟在那个失去生命的夏日走出房屋时，应该说是平淡无奇，他千百次这样走出房屋。由于那次孙光明走出去后所出现的结局，我的记忆修改了当初的情景。当我的目光越过了漫长的回忆之路，重新看到孙光明时，他走出的已经不是房屋。我的弟弟不小心走出了时间。他一旦脱离时间便固定下来，我们则在时间的推移下继续前行。孙光明将会看着时间带走了他周围的人和周围的景色。我看到了这样的真实场景：生者将死者埋葬以后，死者便永远躺在那里，而生者继续走动。这真实的场景是时间给予依然浪迹在现实里的人的暗示。</li>
+<li>于是我找到了生与死之间的不同，活着的人是无法看清太阳的，只有临死之人的眼睛才能穿越光芒看清太阳。</li>
+<li>葬礼的时候我一直站在远处，长久的孤单和被冷落，使我在村里似乎不再作为一个人而存在。母亲嘶叫般的哭声最后一次在灿烂的阳光下飘荡起来，父亲和哥哥的悲伤在远处无法看清。孙光明由一张草席包裹着被抬到了那里，村里人零乱地分布在村口到坟墓的路上。父亲和哥哥将我弟弟放入坟坑之中，盖上了泥土。于是弟弟正式结束了和人在一起的岁月。</li>
+<li>那天晚上我坐在屋后的池塘旁，长久地看着弟弟的坟墓在月光下幽静地隆起。虽然弟弟躺在远处，可我感到此刻他正坐在我的身旁。弟弟终于也和我一样远离了父母兄长和村中百姓。走的不是一样的路，最终却是如此近似。只是弟弟的离去显得更为果断和轻松。</li>
+<li>就这样，我的父亲先把自己的幻想灌输给村里的人，然后再用村里人因此而起的流言来巩固自己的幻想。</li>
+<li>母亲的哭喊，只能增加他对这个家庭的羞耻感，却无法唤醒他为母亲而起的愤怒。</li>
+<li>我几次看到孙光平站在田头，呆呆地望着满脸皱纹满身泥土的疲惫老人，从田里走上来。我看到了哥哥眼睛里流露出来的空虚和悲哀。</li>
+<li>白昼来临以后，他有时候会想到远在北京的弟弟。那时我经常收到哥哥的来信，但在信上什么都没说，信上空洞的内容让我感受到了哥哥空洞的内心。</li>
+<li>我战栗地和他一起喊叫，一方面惊恐地感到罪恶正在来临，另一方面我又体验到无与伦比的激动和欢快。</li>
+<li>我不再装模作样地拥有很多朋友，而是回到了孤单之中，以真正的我开始了独自的生活。有时我也会因为寂寞而难以忍受空虚的折磨，但我宁愿以这样的方式来维护自己的自尊，也不愿以耻辱为代价去换取那种表面的朋友。</li>
+<li>刚才的情景与其说让我悲哀，不如说是让我震惊。正是那一刻，生活第一次向我显示了和想象完全不一样的容貌。</li>
+<li>也许是时过境迁，没人会长久地去记着苏宇，我们没再受到挑衅，从而也没再得到巩固我们友谊的机会。总之当我们凶狠地对待这个世界时，这个世界突然变得温文尔雅了。是仇恨把我和苏杭联结在一起，仇恨一旦淡漠下去，我和苏杭的友谊也就逐渐散失。</li>
+<li>面对这个幼小的孩子，我年龄的优势荡然无存。</li>
+<li>后来我才知道鲁鲁其实没有哥哥，但我对这个事实一直保持沉默，这样孩子就不会感到我注意了他的编造。孩子在孤立无援的时候，寻求他想象中哥哥的支持。我知道想象和希望对于他的重要和必需，事实上对于我也同样如此。</li>
+<li>我可以想象她当初的眼睛如同黑夜来临般灰暗，命运对她的歧视，使她窘迫地站在岸边东张西望。</li>
+<li>我是这时候转身离去的，我内心涌出的悲哀倒不是冯玉青对我的遗忘，而是我第一次亲眼目睹到美丽的残酷凋零。那个站在屋前迎着朝阳抬起双臂梳头的冯玉青，在我此后的记忆里已经蒙上了一层厚厚的尘土。</li>
+<li>他们像一班叫花子似的到处招徕生意。我祖父满怀着造桥的雄心大志，却很不合时宜地走在那个热衷于破坏的时代里。到头来这班人马不得不丧失最初的纯洁，他们什么活都干，连洗刷僵尸和掘坟也不放过，只有这样才能使他们不至于抛尸在荒野。</li>
+<li>祖父晚年的形象就像一把被遗弃的破旧椅子，以无声的状态期待着火的光临。</li>
+<li>生命在面对消亡时，展现了对往昔的无限依恋。</li>
+<li>我在此后的岁月里，会战栗地去回想水牛死前的情景，它对自己生命的谦让，不做任何反抗地死去，使我眼前出现了令人不安的破碎图景。</li>
+<li>我当初的心情，就如一个死囚去执行对另一个死囚的处决。</li>
+<li>我突然发现了逃跑的意义，它使惩罚变得遥远，同时又延伸了快乐。</li>
+<li>她只是沉浸在我当时年龄还无法理解的自我与孤独之中，她站在生与死的界线上，同时被两者抛弃。</li>
+<li>过早的自由使他像扛着沉重的行李一样，扛着自己的命运，在纷繁的街道上趔趔趄趄不知去向。</li>
+<li>在无依无靠的时候，这个只有九岁的孩子，想象没有面对未来，而是过早地通往了过去。</li>
+<li>那位和死者亲密无间并且无所顾忌的老太太，由于生命还在极其苦恼地延续，她就不得不经常和极其陌生的现实打交道。她用可怕的方式使国庆的灵魂得到安宁，国庆则以勇敢的行为在现实中保护了她。</li>
+<li>于是孤立的我，经历了也许是我一生中勇敢的时刻，我大声告诉他们：无论怎样我都不写。我站在教室的角落里，看到众多的同学都吃惊地望着自己。我虚荣的激动使我声音颤抖。极不牢靠的兴奋，让我感到自己，一个十岁的孩子拥有了真理。是的，我是对的。老师自己也说过，一个人不可能没有缺点。</li>
+<li>似乎所有的一切，都不过是我在内心的自我争吵，我同时扮演了老师和我，终于我精疲力竭地放弃了这种游戏。</li>
+<li>成年人的权威，使孩子之间的美好友情顷刻完蛋。</li>
+<li>可我毕竟太年幼了，意志只有在吃饱穿暖时，才会在我这里坚强无比。一旦饿得头晕眼花，也就难以抵挡食物的诱惑了。事实上我过去和现在，都不是那种愿为信念去死的人，我是那样崇拜生命在我体内流淌的声音。除了生命本身，我再也找不出活下去的另外理由了。</li>
+</ul>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/25/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%9C%A8%E7%BB%86%E9%9B%A8%E4%B8%AD%E5%91%BC%E5%96%8A%E3%80%8B_%E4%BD%99%E5%8D%8E/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/22/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%95%85%E4%B9%A1%E7%9B%B8%E5%A4%84%E6%B5%81%E4%BC%A0%E3%80%8B_%E5%88%98%E9%9C%87%E4%BA%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/22/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%95%85%E4%B9%A1%E7%9B%B8%E5%A4%84%E6%B5%81%E4%BC%A0%E3%80%8B_%E5%88%98%E9%9C%87%E4%BA%91/" class="post-title-link" itemprop="url">《故乡相处流传》_刘震云</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-22 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-22T00:00:00+08:00">2019-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 22:59:40" itemprop="dateModified" datetime="2020-09-05T22:59:40+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>374</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>《故乡相处流传》的阅读摘录</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/22/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%95%85%E4%B9%A1%E7%9B%B8%E5%A4%84%E6%B5%81%E4%BC%A0%E3%80%8B_%E5%88%98%E9%9C%87%E4%BA%91/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/21/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%89%8B%E6%9C%BA%E3%80%8B_%E5%88%98%E9%9C%87%E4%BA%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/21/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%89%8B%E6%9C%BA%E3%80%8B_%E5%88%98%E9%9C%87%E4%BA%91/" class="post-title-link" itemprop="url">《手机》_刘震云</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-21 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-21T00:00:00+08:00">2019-03-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 23:14:07" itemprop="dateModified" datetime="2020-09-05T23:14:07+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>60</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><ul>
+<li>那时严守一觉得，世上最有趣的事情，好不过卖葱。</li>
+<li>村里的天空黑得浓，黑得厚，两人常端着矿灯，站在村后的山坡上往天上写字。</li>
+</ul>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/21/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%89%8B%E6%9C%BA%E3%80%8B_%E5%88%98%E9%9C%87%E4%BA%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1328,7 +1373,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1394,20 +1439,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-count">359</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1448,12 +1493,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">711k</span>
+    <span title="站点总字数">734k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:47</span>
+    <span title="站点阅读时长">11:07</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>

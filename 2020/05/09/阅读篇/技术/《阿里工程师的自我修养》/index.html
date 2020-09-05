@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.hudi.tech","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="《阿里工程师的自我修养》的阅读摘录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《阿里工程师的自我修养》_曾鸣">
+<meta property="og:url" content="http://www.hudi.tech/2020/05/09/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB%E3%80%8B/index.html">
+<meta property="og:site_name" content="木刻的鱼儿的博客">
+<meta property="og:description" content="《阿里工程师的自我修养》的阅读摘录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-05T14:39:15.281Z">
+<meta property="article:author" content="不登山峰，不显平地">
+<meta property="article:tag" content="阅读">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.hudi.tech/2020/05/09/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB%E3%80%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>《阿里工程师的自我修养》_曾鸣 | 木刻的鱼儿的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">木刻的鱼儿的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2020/05/09/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E9%98%BF%E9%87%8C%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB%E3%80%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《阿里工程师的自我修养》_曾鸣
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-09 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-09T00:00:00+08:00">2020-05-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 22:39:15" itemprop="dateModified" datetime="2020-09-05T22:39:15+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+            <div class="post-description">《阿里工程师的自我修养》的阅读摘录</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="阅读摘录"><a href="#阅读摘录" class="headerlink" title="阅读摘录"></a>阅读摘录</h1><h2 id="一、技术人具备“结构化思维”意味着什么？"><a href="#一、技术人具备“结构化思维”意味着什么？" class="headerlink" title="一、技术人具备“结构化思维”意味着什么？"></a>一、技术人具备“结构化思维”意味着什么？</h2><ul>
+<li>逻辑是一种能力，而套路是方法论，是经验。逻辑是道的东西，而方法论是术的 东西。二者都很重要，只有熟练的掌握二者我们才能更好的进行结构化思考。<h3 id="1-1-什么是结构化思维？"><a href="#1-1-什么是结构化思维？" class="headerlink" title="1.1.什么是结构化思维？"></a>1.1.什么是结构化思维？</h3></li>
+<li>表达要有逻辑：所谓逻辑是指我们的结构之间必须是有逻辑关系的。主要的四种逻辑思维方式：<ol>
+<li>演绎（因果）顺序</li>
+<li>时间（步骤）顺序</li>
+<li>空间（结构）顺序：MECE(Mutually Exclusive Collectively Exhaustive，相互独立，完全穷尽)原则。</li>
+<li>程度（重要性）顺序</li>
+</ol>
+</li>
+<li>做事要有套路：套路是指我们解决问题的方法论，这个也非常重要。<ol>
+<li>5W2H方法：why、who、when、where、what、how、how much</li>
+<li>SMART原则：具体的（Specific）、可衡量的（Measurable）、可执行的（Attainble）、相关的（Relevant）、有截止期限（Time-bound）</li>
+</ol>
+</li>
+</ul>
+<h3 id="1-2-如何进行结构化思考？"><a href="#1-2-如何进行结构化思考？" class="headerlink" title="1.2.如何进行结构化思考？"></a>1.2.如何进行结构化思考？</h3><ul>
+<li>建立中心：建立中心也就是要定义清楚要解决的问题，要明确目标。<ol>
+<li>自上而下:适用于问题比较明确的情况，我们只需要找到问题的核心要素即可，然后进行展开即可。</li>
+<li>自下而上:对于问题不够明确的情况，我们需要对多种杂乱的内容，进行分类、剪枝、归纳汇总成一个中心。</li>
+</ol>
+<ul>
+<li>比如面对“系统 bug 多”的问题，向上抽象是“提升代码质量”，向下抽象是 “加强测试”，都可以作为中心，选择哪个为中心取决于你当前要解决的问题是什么。</li>
+</ul>
+</li>
+<li>结构化分解</li>
+</ul>
+<h3 id="1-3-结构化思维应用？"><a href="#1-3-结构化思维应用？" class="headerlink" title="1.3.结构化思维应用？"></a>1.3.结构化思维应用？</h3><ul>
+<li>例1：如果落地新团队？<ul>
+<li>我们要知道对一个企业来说，核心要素无外乎就是业务、技术和人，也就是说这 三个要素是我们要建立的中心。基于这个中心，我们可以进行进一步拆解，形成子结 构。然后对子结构再进行分析找到应对策略。</li>
+<li>熟悉业务<ol>
+<li>了解产品</li>
+<li>了解流程</li>
+<li>客户走访</li>
+</ol>
+</li>
+<li>熟悉技术<ol>
+<li>了解系统架构</li>
+<li>了解领域模型</li>
+<li>了解代码结构</li>
+</ol>
+</li>
+<li>熟悉人<ol>
+<li>了解组织架构</li>
+<li>了解人员角色</li>
+<li>拜山头</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>例2：打造极客文化<ol>
+<li>空间顺序分解：技术沉淀、技术分享、技术氛围、技术能力</li>
+<li>时间顺序分解： 做极客-&gt; 建立技术委员会-&gt; 分配人物，指定owner-&gt; 全员KO-&gt; 安排执行-&gt; 回顾复盘</li>
+</ol>
+</li>
+<li>例3：如何晋升述职<ol>
+<li>罗列事情：提出问题、定义问题、分析问题、解决问题、展望未来<br>类似的框架还有 zoom in/zoom out。我们说事情时，应该像电影镜头一样，先 从远拉近，再由近拉远。zoom in 是先从宏观背景开始，首先让大家知道你的事情发 生的背景，为什么这事重要?然后讲到具体细节，怎么做成的?解决了什么问题?背 后的思考是什么?最后 Zoom out，再从细节调回到整体，结果是什么，带来的客户 价值是什么，你对未来的思考是什么。</li>
+<li>价值的背后：人情价值背后的东西，多问自己几个为什么？</li>
+</ol>
+</li>
+</ul>
+<h2 id="二、优秀工程师必备的三大思维，你拥有那些？"><a href="#二、优秀工程师必备的三大思维，你拥有那些？" class="headerlink" title="二、优秀工程师必备的三大思维，你拥有那些？"></a>二、优秀工程师必备的三大思维，你拥有那些？</h2><h3 id="2-1-产品思维"><a href="#2-1-产品思维" class="headerlink" title="2.1. 产品思维"></a>2.1. 产品思维</h3><ul>
+<li>产品思维的起源是用户(或客户)价值。用户价值是通过技术手段以产品或服务 的形态去解决用户的痛点，或带去爽点。毫无疑问，工程师在日常工作中应时刻关注 并理清自己的工作与用户(或客户)价值的联系，并且应该通过聚焦于用户价值去安 排工作的优先级和分配自己的精力。</li>
+<li>所有产品都存在演进的过程，所创造的用户价值也在被不断地挖掘与探索，那时 不同的细化价值需要通过产品特性去区分和表达。特性也是产品差异化的一种体现， 特性也间接地确定了软件实现层面的功能模块边界。作为开发工程师，也需要对产品 特性有非常透彻的理解，并能将其很好地抽象并转化为软件实现层面的功能模块。特 性需要考虑通过售卖 license 等形式进行开启或关闭去实现售卖，这一点对于 2B 的 产品甚是必要。<h3 id="2-2-技术思维"><a href="#2-2-技术思维" class="headerlink" title="2.2. 技术思维"></a>2.2. 技术思维</h3><h3 id="2-3-工程思维"><a href="#2-3-工程思维" class="headerlink" title="2.3. 工程思维"></a>2.3. 工程思维</h3></li>
+<li>工程思维的起点是流程。流程的背后是科学，以既定的步骤、阶段性的输入 / 输 出去完成价值创造，通过过程控制确保最终结果让人满意。由于流程涉及每一个工程 师的工作质量与效率，其含义不只在于定义、工具化、检查等内容，而是应基于工程 师的日常工作习惯，将流程与工程师的工作环境无缝整合。“无缝”体现于流程中的 概念与工程师群体已建立的专业常识相一致、没有增加毫无价值的负担，根本仍是确 保易用性。</li>
+</ul>
+<h2 id="三、优秀工程师必备的一项技能，你解锁了吗？"><a href="#三、优秀工程师必备的一项技能，你解锁了吗？" class="headerlink" title="三、优秀工程师必备的一项技能，你解锁了吗？"></a>三、优秀工程师必备的一项技能，你解锁了吗？</h2><h3 id="3-1-有那些对程序员最重要的思考力"><a href="#3-1-有那些对程序员最重要的思考力" class="headerlink" title="3.1. 有那些对程序员最重要的思考力"></a>3.1. 有那些对程序员最重要的思考力</h3><ul>
+<li>原理性思维：找出知识背后的原理<br>  1.为什么订单创单要先 create，然后 enable ? 这其实是一种采用二阶段提交解决分布式事务的思路，只是从一般的事务框架 延展到交易领域;<ol start="2">
+<li>业务系统中为什么要使用消息?  因为消息使用的是观察者模式，观察者模式的好处是可以实现多个消费事务与触发事务的解耦;</li>
+<li>为什么业务系统中会使用 DTS 来做补偿? 这本质上是一种最终一致性 BASE 理论解决分布式事务的一种思路;</li>
+<li>为什么更新数据的时候一定要在 sql 中加上版本比对或者状态比对?这本质上是一种借助 DB 实现的乐观锁机制。</li>
+</ol>
+</li>
+<li>结构化思维：构建自己的知识树<br>  1 .一定要总结出自己的知识树，而不要盲从书本上的或者别人的<ol start="2">
+<li>习惯性总结</li>
+<li>记录</li>
+<li>训练自己的思维习惯和做事方式变得结构化</li>
+</ol>
+</li>
+<li>拓展性思维：举一反三，拓展思维<ol>
+<li>举一反三：解决同类型的N个问题</li>
+<li>寻求更多的可能性：拓展解决问题的不同手段</li>
+</ol>
+</li>
+<li>抓重点思维：提升效率，方便记忆和传递<ol>
+<li>归纳法</li>
+<li>优先级法</li>
+</ol>
+</li>
+<li>反思性思维：思考哪里可以做得更好<br>  1.反思性思维最重要的意识:做事情的过程总有优化的空间，每次都要有进步;<ol start="2">
+<li>反思是一种习惯和潜意识，可以在不经意之间经常进行，其实不需要很形式<h3 id="3-2-锻炼思考力的有效实践"><a href="#3-2-锻炼思考力的有效实践" class="headerlink" title="3.2. 锻炼思考力的有效实践"></a>3.2. 锻炼思考力的有效实践</h3></li>
+</ol>
+</li>
+</ul>
+<ol>
+<li>意识觉醒</li>
+<li>保持信心</li>
+<li>空杯心态</li>
+<li>思考的实践从哪里来？</li>
+<li>思考力提升的判断标准：广度、深度、速度</li>
+<li>工具和记录</li>
+<li>相互分享：项目分享、周会分享、群内分享、年度/季度分享、小圈子</li>
+<li>技术 Leader 在训练大家思考力中的职责，在技术团队中，技术 Leader 的思考力意识、能力和实际行动，决定了一个团 队的整体思考力水平和成长速度!<br> 1.先要把自己变成一个思考者，自己做表率，以身作则;<ol start="2">
+<li>意识心态上先变过来，要把团队同学的成长速度最为最重要的职责之一，没有这个意识都是空谈;</li>
+<li>多创造思考的条件和氛围，一定要抓住任何机会(代码 reivew、方案评审、周会都可以)鼓励大家去思考和分享;</li>
+<li>控制团队节奏，给大家学习和思考留出一定的时间;</li>
+<li>及时的引导和示范，有的同学可能掌握会偏慢一些，这时候需要有耐心去引导同学找到思考的感觉;</li>
+<li>不必过多干预细节，发挥大家的群体智慧，而不必做过多干预，更不能以个人的意志去强迫别人接受。</li>
+</ol>
+</li>
+</ol>
+<h2 id="四、如何在工作中快速成长？致工程师的10哥简单技巧"><a href="#四、如何在工作中快速成长？致工程师的10哥简单技巧" class="headerlink" title="四、如何在工作中快速成长？致工程师的10哥简单技巧"></a>四、如何在工作中快速成长？致工程师的10哥简单技巧</h2><h3 id="4-1-思考脑和反射脑"><a href="#4-1-思考脑和反射脑" class="headerlink" title="4.1. 思考脑和反射脑"></a>4.1. 思考脑和反射脑</h3><ul>
+<li>思考脑管理性，反射脑管直觉，存储脑管记忆，直 觉依赖习惯，用直觉做出反应，快速，但未必正确;思考脑管理性，理性依赖逻辑， 缓慢，但更加正确。<ol>
+<li>专注输入:做到只字不差地阅读，只字不差地听。</li>
+<li>专注输出:定期做 PPT 进行分享。<h3 id="4-2-习以为常"><a href="#4-2-习以为常" class="headerlink" title="4.2. 习以为常"></a>4.2. 习以为常</h3><h3 id="4-3-时间管理：三八理论"><a href="#4-3-时间管理：三八理论" class="headerlink" title="4.3. 时间管理：三八理论"></a>4.3. 时间管理：三八理论</h3><h3 id="4-4-最重要的财富：注意力"><a href="#4-4-最重要的财富：注意力" class="headerlink" title="4.4. 最重要的财富：注意力"></a>4.4. 最重要的财富：注意力</h3><h3 id="4-5-拿结果手段：执行力"><a href="#4-5-拿结果手段：执行力" class="headerlink" title="4.5. 拿结果手段：执行力"></a>4.5. 拿结果手段：执行力</h3></li>
+</ol>
+</li>
+<li>每个人身体内至少有多个角色，从认知的角度来看，有两个角色，一个是投资 者，投资自己的成长;另外一个是消费者，消费自己的时间和注意力，很少关注自己 成长。我们一生一直在扮演这两个角色，互相博弈，成长者获胜持续成长，消费者获 胜原地踏步。<h3 id="4-6-贵人"><a href="#4-6-贵人" class="headerlink" title="4.6. 贵人"></a>4.6. 贵人</h3><h3 id="4-7-会议"><a href="#4-7-会议" class="headerlink" title="4.7. 会议"></a>4.7. 会议</h3></li>
+</ul>
+<ol>
+<li>作为参与者，认真聆听，快速提炼自己想表达的逻辑，然后参与讨论。</li>
+<li>作为聆听者，仔细聆听，认真输入，在脑中组织思路，组织逻辑。</li>
+<li>作为中断者，发现有些会议真的没有继续的必要了，出于好意，提示会议的重心或者结束会议。<h3 id="4-8-跳出舒适区"><a href="#4-8-跳出舒适区" class="headerlink" title="4.8. 跳出舒适区"></a>4.8. 跳出舒适区</h3><h3 id="4-9-职业规划"><a href="#4-9-职业规划" class="headerlink" title="4.9. 职业规划"></a>4.9. 职业规划</h3><h3 id="4-10-时间换空间"><a href="#4-10-时间换空间" class="headerlink" title="4.10. 时间换空间"></a>4.10. 时间换空间</h3></li>
+</ol>
+<h2 id="五、技术三板斧：关于技术规划、管理、架构的思考"><a href="#五、技术三板斧：关于技术规划、管理、架构的思考" class="headerlink" title="五、技术三板斧：关于技术规划、管理、架构的思考"></a>五、技术三板斧：关于技术规划、管理、架构的思考</h2><h3 id="5-1-关于技术规划三板斧"><a href="#5-1-关于技术规划三板斧" class="headerlink" title="5.1. 关于技术规划三板斧"></a>5.1. 关于技术规划三板斧</h3><ol>
+<li>全局分析</li>
+<li>定目标</li>
+<li>以始为终， 从最终结果的角度，来溯源开始。<h3 id="5-2-关于技术管理三板斧"><a href="#5-2-关于技术管理三板斧" class="headerlink" title="5.2. 关于技术管理三板斧"></a>5.2. 关于技术管理三板斧</h3></li>
+<li>把控核心细节</li>
+<li>数据化度量</li>
+<li>清单革命<h3 id="5-3-关于技术架构三板斧"><a href="#5-3-关于技术架构三板斧" class="headerlink" title="5.3. 关于技术架构三板斧"></a>5.3. 关于技术架构三板斧</h3></li>
+<li>多元多维</li>
+<li>分而治之</li>
+<li>各个击破</li>
+</ol>
+<h2 id="六、程序员如何自我学习？阿里资深技术专家这样做"><a href="#六、程序员如何自我学习？阿里资深技术专家这样做" class="headerlink" title="六、程序员如何自我学习？阿里资深技术专家这样做"></a>六、程序员如何自我学习？阿里资深技术专家这样做</h2><ul>
+<li>纯靠经验积累行不通，技 术淘汰的速度远大于你经验积累的速度。<h3 id="6-1-工具要非常熟练"><a href="#6-1-工具要非常熟练" class="headerlink" title="6.1. 工具要非常熟练"></a>6.1. 工具要非常熟练</h3><h3 id="6-2-读书-amp-看文档"><a href="#6-2-读书-amp-看文档" class="headerlink" title="6.2. 读书&amp;看文档"></a>6.2. 读书&amp;看文档</h3><h3 id="6-3-视频学习"><a href="#6-3-视频学习" class="headerlink" title="6.3. 视频学习"></a>6.3. 视频学习</h3><h3 id="6-4-技术新闻，twitter上技术大牛-amp-参加技术大会"><a href="#6-4-技术新闻，twitter上技术大牛-amp-参加技术大会" class="headerlink" title="6.4. 技术新闻，twitter上技术大牛&amp;参加技术大会"></a>6.4. 技术新闻，twitter上技术大牛&amp;参加技术大会</h3><h3 id="6-5-做项目，写demo，看源码"><a href="#6-5-做项目，写demo，看源码" class="headerlink" title="6.5. 做项目，写demo，看源码"></a>6.5. 做项目，写demo，看源码</h3></li>
+</ul>
+<h2 id="七、从计算机知识到落地能力，你欠缺了什么？"><a href="#七、从计算机知识到落地能力，你欠缺了什么？" class="headerlink" title="七、从计算机知识到落地能力，你欠缺了什么？"></a>七、从计算机知识到落地能力，你欠缺了什么？</h2><h2 id="八、阿里资深技术专家的十年感悟"><a href="#八、阿里资深技术专家的十年感悟" class="headerlink" title="八、阿里资深技术专家的十年感悟"></a>八、阿里资深技术专家的十年感悟</h2><ul>
+<li>一个人走得快，一群人走得远</li>
+</ul>
+<h2 id="九、如何量化考核技术人员的KPI"><a href="#九、如何量化考核技术人员的KPI" class="headerlink" title="九、如何量化考核技术人员的KPI"></a>九、如何量化考核技术人员的KPI</h2><ol>
+<li>业务贡献:包括需求把控，业务项目和业务创新。</li>
+<li>技术贡献:包括设计重构、技术影响力、Code Review、创新提效和代码质量。<ol>
+<li>应用质量</li>
+<li>设计重构</li>
+<li>技术影响力</li>
+<li>Code Review</li>
+<li>创新提效</li>
+<li>代码质量</li>
+</ol>
+</li>
+<li>团队贡献:包括招聘、新人培养和团队氛围。</li>
+</ol>
+<h2 id="十、如何成为优秀的技术主管？你要做到这三点"><a href="#十、如何成为优秀的技术主管？你要做到这三点" class="headerlink" title="十、如何成为优秀的技术主管？你要做到这三点"></a>十、如何成为优秀的技术主管？你要做到这三点</h2><h3 id="10-1-开发规范"><a href="#10-1-开发规范" class="headerlink" title="10.1. 开发规范"></a>10.1. 开发规范</h3><ol>
+<li>命名规范</li>
+<li>统一IDE代码模版</li>
+<li>Maven使用规范</li>
+<li>代码Commit规范</li>
+<li>统一API规范</li>
+<li>异常处理规范：直接返回、抛出异常、重试处理、熔断处理、降级处理</li>
+<li>统一日志管理</li>
+<li>统一mysql的开发规范</li>
+<li>统一工具与框架<h3 id="10-2-开发流程"><a href="#10-2-开发流程" class="headerlink" title="10.2. 开发流程"></a>10.2. 开发流程</h3></li>
+<li>需求管理</li>
+<li>技术架构评审：技术选型、高性能、高可用、可扩展性、可伸缩性、弹性处理、兼容性、安全性、可测性、可运维性、监控与报警</li>
+<li>代码评审：确认代码功能、编码规范、潜在的bug、文档和注释、重复代码、复杂度、监控与报警、测试覆盖率</li>
+<li>发布计划评审<h3 id="10-3-技术规划与管理"><a href="#10-3-技术规划与管理" class="headerlink" title="10.3. 技术规划与管理"></a>10.3. 技术规划与管理</h3></li>
+<li>系统健康度巡检：系统指标、慢查询、慢接口、错误日志</li>
+<li>技术规划：架构优化、性能优化、弹性和可靠性、可伸缩</li>
+<li>技术TL需要具备的素养<ul>
+<li>技术视野良好，解决问题能力和架构设计能力出色</li>
+<li>动手能力要强，学习能力出色</li>
+</ul>
+</li>
+</ol>
+<h2 id="十一、在阿里做了五年技术主管，我有话想说"><a href="#十一、在阿里做了五年技术主管，我有话想说" class="headerlink" title="十一、在阿里做了五年技术主管，我有话想说"></a>十一、在阿里做了五年技术主管，我有话想说</h2><ul>
+<li><p>团队建设</p>
+</li>
+<li><p>团队管理</p>
+</li>
+<li><p>团队文化</p>
+<ol>
+<li>坦诚，公开，透明;</li>
+<li>平等相处，消除等级感;</li>
+<li>工作气氛轻松，团队关系和谐; </li>
+<li>敢于担当，主动承担责任;</li>
+<li>成就他人，乐于分享。</li>
+</ol>
+</li>
+<li><p>作为 TL 我通常会与团队的人聊以下 话题:</p>
+<ol>
+<li>你有没有认为自己的价值和能力被低估了吗?为什么?</li>
+<li>你觉得在工作中能学到东西吗?你最近学到了什么?你还希望在哪些领域进行学习?</li>
+<li>近期这段时间，对自己有哪些满意、不满意的地方?</li>
+<li>目前工作中，有哪些困惑?希望我如何去帮助你?</li>
+<li>对团队和我的一些期待和建议。</li>
+<li>在公司战略和目标方面，你最不清楚的是什么 ?</li>
+</ol>
+</li>
+<li><p>人才筛选</p>
+<ol>
+<li>和岗位需要的专业技能高度匹配:专业技术技能面试过关，定岗定责;</li>
+<li>沟通力强:理解公司的业务，知晓管理层，了解公司的发展方向;</li>
+<li>责任心:凡事有交代，件件有着落，事事有回音;</li>
+<li>靠谱并自带正能量:不抱怨，主动解决问题，懂得纪律的重要性，一诺千金; 5. 价值观认同:认同公司，有目标有理想、有激情有冲劲;</li>
+</ol>
+</li>
+</ul>
+<h2 id="十二、如果我是一线技术主管。。。"><a href="#十二、如果我是一线技术主管。。。" class="headerlink" title="十二、如果我是一线技术主管。。。"></a>十二、如果我是一线技术主管。。。</h2><ol>
+<li>不抱怨</li>
+<li>向上管理</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%98%85%E8%AF%BB/" rel="tag"># 阅读</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/07/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%9C%A8%E8%AF%BB/%E3%80%8A%E5%B0%B1%E4%B8%9A%E3%80%81%E5%88%A9%E6%81%AF%E5%92%8C%E8%B4%A7%E5%B8%81%E9%80%9A%E8%AE%BA%E3%80%8B_%E7%BA%A6%E7%BF%B0%C2%B7%E5%87%AF%E6%81%A9%E6%96%AF/" rel="prev" title="《就业、利息和货币通论》_约翰·凯恩斯">
+      <i class="fa fa-chevron-left"></i> 《就业、利息和货币通论》_约翰·凯恩斯
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/12/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E7%A8%8B%E5%BA%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E3%80%8B_%E7%9F%A2%E6%B3%BD%E4%B9%85%E9%9B%84/" rel="next" title="《程序是怎样跑起来的》_矢泽久雄">
+      《程序是怎样跑起来的》_矢泽久雄 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E6%91%98%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">阅读摘录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%85%B7%E5%A4%87%E2%80%9C%E7%BB%93%E6%9E%84%E5%8C%96%E6%80%9D%E7%BB%B4%E2%80%9D%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">一、技术人具备“结构化思维”意味着什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E7%BB%93%E6%9E%84%E5%8C%96%E6%80%9D%E7%BB%B4%EF%BC%9F"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.什么是结构化思维？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%BB%93%E6%9E%84%E5%8C%96%E6%80%9D%E8%80%83%EF%BC%9F"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2.如何进行结构化思考？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E7%BB%93%E6%9E%84%E5%8C%96%E6%80%9D%E7%BB%B4%E5%BA%94%E7%94%A8%EF%BC%9F"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3.结构化思维应用？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BC%98%E7%A7%80%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%BF%85%E5%A4%87%E7%9A%84%E4%B8%89%E5%A4%A7%E6%80%9D%E7%BB%B4%EF%BC%8C%E4%BD%A0%E6%8B%A5%E6%9C%89%E9%82%A3%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">二、优秀工程师必备的三大思维，你拥有那些？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E4%BA%A7%E5%93%81%E6%80%9D%E7%BB%B4"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1. 产品思维</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%8A%80%E6%9C%AF%E6%80%9D%E7%BB%B4"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2. 技术思维</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%B7%A5%E7%A8%8B%E6%80%9D%E7%BB%B4"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3. 工程思维</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BC%98%E7%A7%80%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%BF%85%E5%A4%87%E7%9A%84%E4%B8%80%E9%A1%B9%E6%8A%80%E8%83%BD%EF%BC%8C%E4%BD%A0%E8%A7%A3%E9%94%81%E4%BA%86%E5%90%97%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">三、优秀工程师必备的一项技能，你解锁了吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%9C%89%E9%82%A3%E4%BA%9B%E5%AF%B9%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E6%80%9D%E8%80%83%E5%8A%9B"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1. 有那些对程序员最重要的思考力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E9%94%BB%E7%82%BC%E6%80%9D%E8%80%83%E5%8A%9B%E7%9A%84%E6%9C%89%E6%95%88%E5%AE%9E%E8%B7%B5"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2. 锻炼思考力的有效实践</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%BF%AB%E9%80%9F%E6%88%90%E9%95%BF%EF%BC%9F%E8%87%B4%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%8410%E5%93%A5%E7%AE%80%E5%8D%95%E6%8A%80%E5%B7%A7"><span class="nav-number">1.4.</span> <span class="nav-text">四、如何在工作中快速成长？致工程师的10哥简单技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E6%80%9D%E8%80%83%E8%84%91%E5%92%8C%E5%8F%8D%E5%B0%84%E8%84%91"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1. 思考脑和反射脑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E4%B9%A0%E4%BB%A5%E4%B8%BA%E5%B8%B8"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2. 习以为常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86%EF%BC%9A%E4%B8%89%E5%85%AB%E7%90%86%E8%AE%BA"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3. 时间管理：三八理论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E8%B4%A2%E5%AF%8C%EF%BC%9A%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4. 最重要的财富：注意力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-%E6%8B%BF%E7%BB%93%E6%9E%9C%E6%89%8B%E6%AE%B5%EF%BC%9A%E6%89%A7%E8%A1%8C%E5%8A%9B"><span class="nav-number">1.4.5.</span> <span class="nav-text">4.5. 拿结果手段：执行力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-%E8%B4%B5%E4%BA%BA"><span class="nav-number">1.4.6.</span> <span class="nav-text">4.6. 贵人</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-%E4%BC%9A%E8%AE%AE"><span class="nav-number">1.4.7.</span> <span class="nav-text">4.7. 会议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-8-%E8%B7%B3%E5%87%BA%E8%88%92%E9%80%82%E5%8C%BA"><span class="nav-number">1.4.8.</span> <span class="nav-text">4.8. 跳出舒适区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-9-%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92"><span class="nav-number">1.4.9.</span> <span class="nav-text">4.9. 职业规划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-10-%E6%97%B6%E9%97%B4%E6%8D%A2%E7%A9%BA%E9%97%B4"><span class="nav-number">1.4.10.</span> <span class="nav-text">4.10. 时间换空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%8A%80%E6%9C%AF%E4%B8%89%E6%9D%BF%E6%96%A7%EF%BC%9A%E5%85%B3%E4%BA%8E%E6%8A%80%E6%9C%AF%E8%A7%84%E5%88%92%E3%80%81%E7%AE%A1%E7%90%86%E3%80%81%E6%9E%B6%E6%9E%84%E7%9A%84%E6%80%9D%E8%80%83"><span class="nav-number">1.5.</span> <span class="nav-text">五、技术三板斧：关于技术规划、管理、架构的思考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%85%B3%E4%BA%8E%E6%8A%80%E6%9C%AF%E8%A7%84%E5%88%92%E4%B8%89%E6%9D%BF%E6%96%A7"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1. 关于技术规划三板斧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E5%85%B3%E4%BA%8E%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86%E4%B8%89%E6%9D%BF%E6%96%A7"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2. 关于技术管理三板斧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E5%85%B3%E4%BA%8E%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E4%B8%89%E6%9D%BF%E6%96%A7"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3. 关于技术架构三板斧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E7%A8%8B%E5%BA%8F%E5%91%98%E5%A6%82%E4%BD%95%E8%87%AA%E6%88%91%E5%AD%A6%E4%B9%A0%EF%BC%9F%E9%98%BF%E9%87%8C%E8%B5%84%E6%B7%B1%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E8%BF%99%E6%A0%B7%E5%81%9A"><span class="nav-number">1.6.</span> <span class="nav-text">六、程序员如何自我学习？阿里资深技术专家这样做</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E5%B7%A5%E5%85%B7%E8%A6%81%E9%9D%9E%E5%B8%B8%E7%86%9F%E7%BB%83"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1. 工具要非常熟练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E8%AF%BB%E4%B9%A6-amp-%E7%9C%8B%E6%96%87%E6%A1%A3"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2. 读书&amp;看文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-%E8%A7%86%E9%A2%91%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3. 视频学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-%E6%8A%80%E6%9C%AF%E6%96%B0%E9%97%BB%EF%BC%8Ctwitter%E4%B8%8A%E6%8A%80%E6%9C%AF%E5%A4%A7%E7%89%9B-amp-%E5%8F%82%E5%8A%A0%E6%8A%80%E6%9C%AF%E5%A4%A7%E4%BC%9A"><span class="nav-number">1.6.4.</span> <span class="nav-text">6.4. 技术新闻，twitter上技术大牛&amp;参加技术大会</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-%E5%81%9A%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%86%99demo%EF%BC%8C%E7%9C%8B%E6%BA%90%E7%A0%81"><span class="nav-number">1.6.5.</span> <span class="nav-text">6.5. 做项目，写demo，看源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E4%BB%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9F%A5%E8%AF%86%E5%88%B0%E8%90%BD%E5%9C%B0%E8%83%BD%E5%8A%9B%EF%BC%8C%E4%BD%A0%E6%AC%A0%E7%BC%BA%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.7.</span> <span class="nav-text">七、从计算机知识到落地能力，你欠缺了什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E9%98%BF%E9%87%8C%E8%B5%84%E6%B7%B1%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E7%9A%84%E5%8D%81%E5%B9%B4%E6%84%9F%E6%82%9F"><span class="nav-number">1.8.</span> <span class="nav-text">八、阿里资深技术专家的十年感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E5%A6%82%E4%BD%95%E9%87%8F%E5%8C%96%E8%80%83%E6%A0%B8%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E7%9A%84KPI"><span class="nav-number">1.9.</span> <span class="nav-text">九、如何量化考核技术人员的KPI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E3%80%81%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E4%BC%98%E7%A7%80%E7%9A%84%E6%8A%80%E6%9C%AF%E4%B8%BB%E7%AE%A1%EF%BC%9F%E4%BD%A0%E8%A6%81%E5%81%9A%E5%88%B0%E8%BF%99%E4%B8%89%E7%82%B9"><span class="nav-number">1.10.</span> <span class="nav-text">十、如何成为优秀的技术主管？你要做到这三点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-1-%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83"><span class="nav-number">1.10.1.</span> <span class="nav-text">10.1. 开发规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-2-%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="nav-number">1.10.2.</span> <span class="nav-text">10.2. 开发流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-3-%E6%8A%80%E6%9C%AF%E8%A7%84%E5%88%92%E4%B8%8E%E7%AE%A1%E7%90%86"><span class="nav-number">1.10.3.</span> <span class="nav-text">10.3. 技术规划与管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E5%9C%A8%E9%98%BF%E9%87%8C%E5%81%9A%E4%BA%86%E4%BA%94%E5%B9%B4%E6%8A%80%E6%9C%AF%E4%B8%BB%E7%AE%A1%EF%BC%8C%E6%88%91%E6%9C%89%E8%AF%9D%E6%83%B3%E8%AF%B4"><span class="nav-number">1.11.</span> <span class="nav-text">十一、在阿里做了五年技术主管，我有话想说</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E5%A6%82%E6%9E%9C%E6%88%91%E6%98%AF%E4%B8%80%E7%BA%BF%E6%8A%80%E6%9C%AF%E4%B8%BB%E7%AE%A1%E3%80%82%E3%80%82%E3%80%82"><span class="nav-number">1.12.</span> <span class="nav-text">十二、如果我是一线技术主管。。。</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">不登山峰，不显平地</p>
+  <div class="site-description" itemprop="description">木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">359</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lark-coder" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lark-coder" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">不登山峰，不显平地</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">734k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:07</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

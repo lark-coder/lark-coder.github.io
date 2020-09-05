@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/30/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E9%AA%86%E9%A9%BC%E7%A5%A5%E5%AD%90%E3%80%8B_%E8%80%81%E8%88%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -206,7 +206,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">观察者模式</a>
+            <a href="/2019/04/30/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E9%AA%86%E9%A9%BC%E7%A5%A5%E5%AD%90%E3%80%8B_%E8%80%81%E8%88%8D/" class="post-title-link" itemprop="url">《骆驼祥子》_老舍</a>
         </h2>
 
         <div class="post-meta">
@@ -216,14 +216,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-18 15:18:01" itemprop="dateCreated datePublished" datetime="2019-03-18T15:18:01+08:00">2019-03-18</time>
+              <time title="创建时间：2019-04-30 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-30T00:00:00+08:00">2019-04-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+                <time title="修改时间：2020-09-05 23:07:00" itemprop="dateModified" datetime="2020-09-05T23:07:00+08:00">2020-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -231,15 +231,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
                 </span>
             </span>
 
@@ -249,7 +245,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>2.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -268,13 +264,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>观察者模式主要是由观察者和被观察对象共同组成，<br>观察者实现Observer接口中的update方法，主要作用是当被观察者对象发生变化时，会执行这个update方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * This method is called whenever the observed object is changed. An</span></span><br><span class="line"><span class="comment">     * application calls an &lt;tt&gt;Observable&lt;/tt&gt; object&#x27;s</span></span><br><span class="line"><span class="comment">     * &lt;code&gt;notifyObservers&lt;/code&gt; method to have all the object&#x27;s</span></span><br><span class="line"><span class="comment">     * observers notified of the change.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>   o     the observable object.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>   arg   an argument passed to the &lt;code&gt;notifyObservers&lt;/code&gt;</span></span><br><span class="line"><span class="comment">     *                 method.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>被观察对象通过继承Observerable对象实现消息的发布，主要有以下几个方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Observable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> changed = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> Vector obs;</span><br><span class="line">   </span><br><span class="line">    <span class="comment">//Observable类定义两个私有变量，一个是状态，一个是观察者集合，并通过构造方法初始化构造方法集合。</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Observable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	obs = <span class="keyword">new</span> Vector();</span><br><span class="line"> &#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/*addObserver方法实现对观察者的添加，首先判断观察者是否为空，如果为空输出空指针异常，如果不为空在进行判断在观察者集合中已经存在。addObserver方法要添加synchronized关键字。说明：synchronized 修饰方法时锁定的是调用该方法的对象。它并不能使调用该方法的多个对象在执行顺序上互斥。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(Observer o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">	<span class="keyword">if</span> (!obs.contains(o)) &#123;</span><br><span class="line">	    obs.addElement(o);</span><br><span class="line">	&#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//删除其中一个观察者对象</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">deleteObserver</span><span class="params">(Observer o)</span> </span>&#123;</span><br><span class="line">    obs.removeElement(o);</span><br><span class="line"> &#125;</span><br><span class="line"><span class="comment">//删除所有的观察者对象</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">deleteObservers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	obs.removeAllElements();</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">//通知所有的观察者执行方法</span></span><br><span class="line"><span class="comment">//判断当前的对象是否变化，只有执行变化之后才会对观察者集合进行循环并执行update方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">(Object arg)</span> </span>&#123;</span><br><span class="line">    Object[] arrLocal;</span><br><span class="line"><span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!changed)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        arrLocal = obs.toArray();</span><br><span class="line">        clearChanged();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = arrLocal.length-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)</span><br><span class="line">        ((Observer)arrLocal[i]).update(<span class="keyword">this</span>, arg);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//修改被观察对象的状态，要加synchronized关键字</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    changed = <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//修改被观察对象的状态，要加synchronized关键字</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">clearChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    changed = <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取被观察者对象的状态</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">hasChanged</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> changed;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//返回被观察者对象的状态</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">countObservers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> obs.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><ul>
+<li>他的身量与筋肉都发展到年岁前边去；二十来的岁，他已经很大很高，虽然肢体还没被年月铸成一定的格局，可是已经像个成人了——一个脸上身上都带出天真淘气的样子的大人。</li>
+<li>因为嘴常闲着，所以他有工夫去思想，他的眼仿佛是老看着自己的心。</li>
+<li>他的身量，力气，一向使他自尊自傲，可是在过去的这些日子，无缘无故的他受尽了委屈与困苦。</li>
+<li>明知买到手中并没好处，可是爱书的人见书就想买，养马的见了马就舍不得，有过三把儿骆驼的也是如此。况且祥子说可以贱卖呢；懂行的人得到个便宜，就容易忘掉东西买到手中有没有好处。</li>
+<li>要强又怎样呢，这个世界并不因为自己要强而公道一些，凭着什么把他的车白白抢去呢？即使马上再弄来一辆，焉知不再遇上那样的事呢？他觉得过去的事像个噩梦，使他几乎不敢再希望将来。</li>
+<li>汽车夫对洋车夫的态度，正有点像祥子的对那些老弱残兵；同是在地狱里，可是层次不同。他们想不到大家须立在一块儿，而是各走各的路，个人的希望与努力蒙住了各个人的眼，每个人都觉得赤手空拳可以成家立业，在黑暗中各自去摸索个人的路。祥子不想别人，不管别人，他只想着自己的钱与将来的成功。</li>
+<li>正和一切的生命同样，受了损害之后，无可如何的只想由自己去收拾残局。</li>
+<li>毛病似乎是在他太老实，老实就必定吃亏，没有情理可讲！</li>
+<li>平日，他觉得自己是头顶着天，脚踩着地，无牵无挂的一条好汉。现在，他才明白过来，悔悟过来，人是不能独自活着的。</li>
+<li>穷人的命，他似乎看明白了，是枣核儿两头尖：幼小的时候能不饿死，万幸；到老了能不饿死，很难。只有中间的一段，年轻力壮，不怕饥饱劳碌，还能像个人儿似的。</li>
+<li>这个银白的世界，没有他坐下的地方，也没有他的去处；白茫茫的一片，只有饿着肚子的小鸟，与走投无路的人，知道什么叫作哀叹。</li>
+<li>他在桥上立了许久，世界像是已经死去，没一点声音，没一点动静，灰白的雪花似乎得了机会，慌乱的，轻快的，一劲儿往下落，要神不知鬼不觉的把世界埋上。</li>
+<li>一个拉车的吞的是粗粮，冒出来的是血；他要卖最大的力气，得最低的报酬；要立在人间的最低处，等着一切人一切法一切困苦的击打。</li>
+<li>他的话不够表现他的心思的，他领略了一切苦处，他的口张不开，像个哑巴。买车，车丢了；省钱，钱丢了；自己一切的努力只为别人来欺侮！谁也不敢招惹，连条野狗都得躲着，临完还是被人欺侮得出不来气！</li>
+<li>朝阳的一点光，借着雪，已照明了全城。蓝的天，白的雪，天上有光，雪上有光，蓝白之间闪起一片金花，使人痛快得睁不开眼！</li>
+<li>“人和厂子，没有别的地方可去！”这一句话说尽了祥子心中的委屈、羞愧与无可奈何。他没别的办法，只好去投降！一切的路都封上了，他只能在雪白的地上去找那黑塔似的虎妞。他顾体面、要强、忠实、义气；都没一点用处，因为有条“狗”命！</li>
+<li>把夜里的事交给梦，白天的事交给手脚，他仿佛是个能干活的死人。</li>
+<li>他想不起哭，他想不起笑，他的大手大脚在这小而暖的屋中活动着，像小木笼里一只大兔子，眼睛红红地看着外边，看着里边，空有能飞跑的腿，跑不出去！</li>
+<li>那灯下的四个金字——人和车厂——变了样儿！他不识字，他可是记得头一个字是什么样子：像两根棍儿连在一处，既不是个叉子，又没做成个三角，那么个简单而奇怪的字。由声音找字，那大概就是“人”。这个“人”改了样儿，变成了“仁”——比“人”更奇怪的一个字。</li>
+<li>道路是死的，人心是活的，在入棺材以前总是不断地希望着。</li>
+<li>愚蠢与残忍是这里的一些现象；所以愚蠢，所以残忍，却另有原因。</li>
+<li>一点恐惧，唤醒了理智；一点理智浇灭了心火；他几乎想马上逃走。这里只有苦恼，上这条路的必闹出笑话！</li>
+<li>经验是生活的肥料，有什么样的经验便变成什么样的人，在沙漠里养不出牡丹来。祥子完全入了辙，他不比别的车夫好，也不比他们坏，就是那么个车夫样的车夫。</li>
+<li>他不会和别人谈心，因为他的话都是血做的，窝在心的深处。</li>
+<li>祥子开始说过去的事，从怎么由乡间到城里说起。本来不想说这些没用的事，可是不说这些，心中不能痛快，事情也显着不齐全。他的记忆是血汗与苦痛砌成的，不能随便说着玩，一说起来也不愿掐头去尾。每一滴汗，每一滴血，都是由生命中流出去的，所以每一件事都有值得说的价值。</li>
+<li>这一天特别的晴美，蓝天上没有一点云，日光从干凉的空气中射下，使人感到一些爽快的暖气。鸡鸣犬吠，和小贩们的吆喝声，都能传达到很远，隔着街能听到些响亮清脆的声儿，像从天上落下的鹤唳。洋车都打开了布棚，车上的铜活闪着黄光。便道上骆驼缓慢稳当地走着，街心中汽车电车疾驰，地上来往着人马，天上飞着白鸽，整个的老城处处动中有静，乱得痛快，静得痛快，一片声音，万种生活，都覆在晴爽的蓝天下面，到处静静地立着树木。</li>
+<li>到处好玩，到处热闹，到处有声有色。夏初的一阵暴热像一道神符，使这老城处处带着魔力。它不管死亡，不管祸患，不管困苦，到时候它就施展出它的力量，把百万的人心都催眠过去，做梦似的唱着它的赞美诗。它污浊，它美丽，它衰老，它活泼，它杂乱，它安闲，它可爱，它是伟大的夏初的北平。</li>
+<li>这些人的心中没有好歹，不懂得善恶，辨不清是非，他们死攥着一些礼教，愿被称为文明人；他们却爱看千刀万剐他们的同类，像小儿割宰一只小狗那么残忍与痛快。一朝权到手，他们之中的任何人也会去屠城，这是他们的快举。他们没得到这个威权，就不妨先多看些杀猪宰羊与杀人，过一点瘾。连这个要是也摸不着看，他们会对个孩子也骂千刀杀，万刀杀，解解心中的恶气。</li>
+<li>体面的，要强的，好梦想的，利己的，个人的，健壮的，伟大的，祥子，不知陪着人家送了多少回殡；不知道何时何地会埋起他自己来，埋起这堕落的，自私的，不幸的，社会病胎里的产儿，个人主义的末路鬼！</li>
+</ul>
+<h1 id="读后感"><a href="#读后感" class="headerlink" title="读后感"></a>读后感</h1><ul>
+<li>祥子的心智放在如今也就十三四岁的样子，他一个人过惯了，对突然“有人管”感到天然的恐惧（而不论它的好坏），只有熬过去才能明了。可惜，太多的打击已经使他处于崩溃的边缘，尤其是理想的多次湮灭。</li>
+</ul>
+
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/#more" rel="contents">
+              <a class="btn" href="/2019/04/30/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E9%AA%86%E9%A9%BC%E7%A5%A5%E5%AD%90%E3%80%8B_%E8%80%81%E8%88%8D/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -298,7 +325,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99%E5%8F%8A%E5%88%86%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/29/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E9%9B%86%E5%90%88/hashMap%E4%B8%8ECurrentHashMap%E5%AF%B9%E6%AF%94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -312,7 +339,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99%E5%8F%8A%E5%88%86%E7%B1%BB/" class="post-title-link" itemprop="url">设计模式的原则及分类</a>
+            <a href="/2019/04/29/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E9%9B%86%E5%90%88/hashMap%E4%B8%8ECurrentHashMap%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">hashMap与CurrentHashMap对比</a>
         </h2>
 
         <div class="post-meta">
@@ -322,7 +349,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-18 15:14:01" itemprop="dateCreated datePublished" datetime="2019-03-18T15:14:01+08:00">2019-03-18</time>
+              <time title="创建时间：2019-04-29 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-29T00:00:00+08:00">2019-04-29</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -345,7 +372,7 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E9%9B%86%E5%90%88/" itemprop="url" rel="index"><span itemprop="name">集合</span></a>
                 </span>
             </span>
 
@@ -355,7 +382,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>780</span>
+              <span>26</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -374,16 +401,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="设计模式遵循的原则"><a href="#设计模式遵循的原则" class="headerlink" title="设计模式遵循的原则"></a>设计模式遵循的原则</h1><h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><ul>
-<li>对扩展开发，对修改关闭</li>
-<li>一个软件实体，如类、模块、函数应该对扩展开放，对修改关闭。</li>
-</ul>
-<h2 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h2><ul>
-<li>主要是针对类来说，每个类有一个单一的职责，每个类只有一个琪琪其变化的原因。</li>
-</ul>
+          <h1 id="HashMap为什么不是线程安全的？体现在什么地方？"><a href="#HashMap为什么不是线程安全的？体现在什么地方？" class="headerlink" title="HashMap为什么不是线程安全的？体现在什么地方？"></a>HashMap为什么不是线程安全的？体现在什么地方？</h1>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8E%9F%E5%88%99%E5%8F%8A%E5%88%86%E7%B1%BB/#more" rel="contents">
+              <a class="btn" href="/2019/04/29/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E9%9B%86%E5%90%88/hashMap%E4%B8%8ECurrentHashMap%E5%AF%B9%E6%AF%94/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -407,7 +428,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/Spring%E7%9A%84task%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/27/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E8%80%81%E5%BC%A0%E7%9A%84%E5%93%B2%E5%AD%A6%E3%80%8B_%E8%80%81%E8%88%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -421,7 +442,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/Spring%E7%9A%84task%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">spring的task定时任务配置</a>
+            <a href="/2019/04/27/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E8%80%81%E5%BC%A0%E7%9A%84%E5%93%B2%E5%AD%A6%E3%80%8B_%E8%80%81%E8%88%8D/" class="post-title-link" itemprop="url">《老张的哲学》_老舍</a>
         </h2>
 
         <div class="post-meta">
@@ -431,14 +452,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-18 15:11:01" itemprop="dateCreated datePublished" datetime="2019-03-18T15:11:01+08:00">2019-03-18</time>
+              <time title="创建时间：2019-04-27 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-27T00:00:00+08:00">2019-04-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+                <time title="修改时间：2020-09-05 23:05:37" itemprop="dateModified" datetime="2020-09-05T23:05:37+08:00">2020-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -446,15 +467,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
                 </span>
             </span>
 
@@ -464,7 +481,248 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><ul>
+<li>那是五月的天气，小太阳撅着血盆似的小红嘴，忙着和那东来西去的白云亲嘴。有的唇儿一挨慌忙的飞去；有的任着意偎着小太阳的红脸蛋；有的化着恶龙，张着嘴想把她一口吞了；有的变着小绵羊跑着求她的青眼。这样艳美的景色，可惜人们却不曾注意，那倒不是人们的错处，只是小太阳太娇羞了，太泼辣了，把要看的人们晒的满脸流油。于是富人们支起凉棚索兴不看；穷人们倒在柳荫之下作他们的好梦，谁来惹这个闲气。</li>
+<li>老张出来向孙八递了一个眼色。孙八把耳朵递给老张。</li>
+<li>他们年幼的时候，她说笑话给他听，他转转眼珠又把她的笑话改编一回，说给她听，有时编的驴唇不对马嘴。他们一天不见不见也见几次；他们一天真见不着，他们在梦里见几次。他们见不着的时候，像把心挖出来抛在沙漠里，烈风吹着，飞砂打着，热日炙着；他们的心碎了，焦了，化为飞灰了！他们见着，安慰了，快活了，他们的心用爱情缝在一处了！</li>
+<li>她的面貌，身材，服装，那一样也不比别人新奇。把她放在普通中国妇女里，叫你无从分别那是她，那是别人。你可以用普通中国妇人的一切形容她，或者也可以用她代表她们。</li>
+<li>爱情要是没有苦味，甜蜜从何处领略？爱情要是没有眼泪，笑声从何处飞来？爱情是神秘的，宝贵的，必要的，没有他，世界只是一片枯草，一带黄沙，为爱情而哭而笑而昏乱是有味的，真实的！人们要是得不着恋爱的自由，一切的自由全是假的；人们没有两性的爱，一切的爱是虚空的。</li>
+<li>只是世界上的事，在亲自经验过以前，先不用说好说坏。</li>
+<li>每个人有他自己异于别人的生趣与事业，不能一样，也无须一样。可是对于年节好似无论谁也免不了有一番感触，正如时辰钟到了一定的时候就响一声或好几声。生命好似量时间的机器！</li>
+<li>世上不怕有蓝脸的恶鬼，只怕有黄脸的傻好人。因为他们能，也甘心，作恶鬼的奴仆，听恶鬼的指使，不自觉的给恶鬼扩充势力。社会永远不会清明，并不是因恶鬼的作祟，是那群傻好人醉生梦死的瞎捣乱。恶鬼可以用刀用枪去驱逐，而傻好人是不露形迹的在树根底下钻窟窿的。</li>
+<li>人们当在愁波患海之中，纵身心微弱，也还扎挣着往前干，好像愁患的链锁箍住那条迎风欲倒的身体，欲死而不得。这样的一个人，一旦心缝中觉得一阵舒服，那团苦气再拧结不住；于是身上一发轻，心中一发暖，眼前一发亮，死了！</li>
+<li>风，雨，花，鸟，还依然奏着世界的大曲，谁知道，谁理会世界上少了一个人，世界上有个可怜的她！</li>
+<li>花谢花开，花丛中彼此不知道谁开谁谢！风，雨，花，鸟，还鼓动着世界的灿烂之梦，谁知道又少了一朵鲜美的花！她死了！</li>
+</ul>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/27/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E8%80%81%E5%BC%A0%E7%9A%84%E5%93%B2%E5%AD%A6%E3%80%8B_%E8%80%81%E8%88%8D/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/22/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E7%A6%BB%E5%A9%9A%E3%80%8B_%E8%80%81%E8%88%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/22/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E7%A6%BB%E5%A9%9A%E3%80%8B_%E8%80%81%E8%88%8D/" class="post-title-link" itemprop="url">《离婚》_老舍</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-22 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-22T00:00:00+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 23:05:44" itemprop="dateModified" datetime="2020-09-05T23:05:44+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><ul>
+<li>张大哥是个博学的人，自幼便出经入史，似乎也读过《结婚的爱》。他必须读书，好证明自己的意见怎样妥当。他长着一对阴阳眼：左眼的上皮特别长，永远把眼珠囚禁着一半；右眼没有特色，一向是照常办公。这只左眼便是极细密的小筛子。右眼所读所见的一切，都要经过这半闭的左目筛过一番——那被囚禁的半个眼珠是向内看着自己的心的。这样，无论读什么，他自己的意见总是最妥善的；那与他意见不合之处，已随时被左眼给筛下去了。</li>
+<li>假如人人有个满意的妻子，世界上决不会闹“共产”。张大哥深信此理。革命青年一结婚，便会老实起来，是个事实，张大哥于此点颇有证据。因此，在他的眼中，凡是未婚的人脸上起了几个小红点，或是已婚的眉头不大舒展，必定与婚事有关，而马上应当设法解决。不然，非出事不可！</li>
+<li>老李这几天眉头不大舒展，一定大有文章。张大哥嘱咐他先吃一片阿司匹灵，又告诉他吃一丸清瘟解毒。无效，老李的眉头依然皱着。张大哥给他定了脉案——婚姻问题。</li>
+<li>火光，肉味，小猫喵喵的叫。也许这就是真理，就是生命。谁知道！</li>
+<li>老李向来没吃过这么多这么舒服的饭。舒服，他这才佩服了张大哥生命观，肚子里有油水，生命才有意义。</li>
+<li>这种敷衍目下的办法——虽然是善意的——似乎只能继续保持社会的黑暗，而使人人乐意生活在黑暗里；偶尔有点光明，人们还许都闭上眼，受不住呢！</li>
+<li>大概在这种社会里，是个有点思想的就不能不苦闷。</li>
+<li>可是话也得两说着：社会黑暗所以大家苦闷，也许是大家苦闷，社会才黑暗。</li>
+<li>他的宇宙就是这个院子，他的生命就是瞎热闹一回，热闹而没有任何意义。不过，他不是个坏人——一个黑暗里的小虫，可是不咬人。</li>
+<li>我并不想尝尝恋爱的滋味，我要追求的是点——诗意。家庭，社会，国家，世界，都是脚踏实地的，都没有诗意。大多数的妇女——已婚的未婚的都算在内——是平凡的，或者比男人们更平凡一些；我要——哪怕是看看呢，一个还未被实际给教坏了的女子，情热像一首诗，愉快像一些乐音，贞纯像个天使。我大概是有点疯狂，这点疯狂是，假如我能认识自己，不敢浪漫而愿有个梦想，看社会黑暗而希望马上太平，知道人生的宿命而想象一个永生的乐园，不许自己迷信而愿有些神秘，我的疯狂是这些个不好形容的东西组合成的；你或者以为这全是废话？</li>
+<li>他不敢再去捉弄那漫无边际的理想，理想使他难受得渺茫，像个随时变化而永远阴惨的梦。</li>
+<li>前面一堵墙，推开它，那面是荒山野水，可是雄伟辽阔。不敢去推，恐怕那未经人吸过的空气有毒！后面一堵墙，推开它，那面是床帷桌椅，炉火茶烟。不敢去推，恐怕那污浊的空气有毒！站在这儿吧，两墙之间站着个梦里的人！</li>
+<li>老李呆呆的看着那乘喜轿：神秘，奇怪，可笑。可是，这就是真实；不然，人们不会还这么敬重这加大的鸟笼似的玩艺。</li>
+<li>赵科员的长相与举动，和白听戏的红票差不多，有实际上的用处，而没有分毫的价值。</li>
+<li>张大哥晓得自从女子剪发以后，北平的新房都有漏水的天性，所以一租房的时候，就先向这肉嫩的地方指了一刀，结果是减少了两块钱的房租。</li>
+<li>吃衙门的虫儿不想，不会，也不肯，干别的。可恨的怪物！</li>
+<li>大嫂马上非认菱作干女儿不可，也立刻想起家中橱柜里还有一对花漆木碗，连三的抽屉里——西边那个——有一个银锁，系着一条大红珠线索子。非认干女儿不可。现成的木碗与银锁，现成的菱，现成的大嫂，为什么不联结起来呢。</li>
+<li>爱是个最热，同时又最冷的东西！</li>
+<li>“爸，菱有了干妈，张大嫂子，过两天给送木碗和银锁来。我呢？我认妈妈作干妈得了；你给妈点钱，叫妈给我买木碗，不要银锁，要两只皮马，你给我的那只，我并没使劲，也不怎么破了个窟窿，怎吹也吹不起来了！”</li>
+<li>张大哥对于儿子的希望不大——北平人对儿子的希望都不大——只盼他成为下得去的，有模有样的，有一官半职的，有家有室的，一个中等人。</li>
+<li>生命似在薄雾里，不十分黑，也不十分亮，叫人哭不得笑不得。应当来些日光；假如不能，来阵暴风也好吹走这层雾。</li>
+<li>男人批评别人的太太，妇人批评自己的丈夫！</li>
+<li>世上原没讨厌的人，生活的过程使大家不快活，不快活自然显着讨厌。</li>
+<li>这就是爱的滋味吧？脸上瘦，手上烫，心中渺茫，希望作好梦而梦中常是哭泣与乱七八糟？</li>
+<li>男人是要不得的，他想：女人的天真是女人自作的陷阱，女人的姿色是自然给女人的锁镣，女人的丑陋是女人的活地狱，女人怎么着也不好，都因为男子坏！</li>
+<li>所长是谁？官僚兼土匪。小赵？骗子兼科员。张大哥？男性的媒婆。吴太极？饭桶兼把式匠。孙先生？流氓兼北平俗语搜集者。邱先生？苦闷的象征兼科员。这一堆东西也可以组成一个机关？</li>
+<li>天下的事只怕没人作；作出来不一定准好或是准坏，就怕不作。</li>
+<li>他的理想女子不一定美，而是使人舒适的一朵微有香味的花，不必是牡丹芍药；梨花或是秋葵就正好。多咱他遇上这个花，他觉得他就会充分的浪漫——“他”心中那点浪漫——就会通身都发笑，或是心中蓄满了泪而轻轻的流出，一滴一滴的滴在那朵花的瓣上。到了这种境界，他才能觉到生命，才能哭能笑，才会反抗，才会努力去作爱作的事。就是社会黑得像个老烟筒，他也能快活，奋斗，努力，改造；只要有这么个妇女在他的身旁。他不愿只解决性欲，他要个无论什么时候都合成一体的伴侣。不必一定同床，而俩人的呼吸能一致的在同一梦境——一条小溪上，比如说——里呼吸着。不必说话，而两颗心相对微笑。</li>
+</ul>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/22/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E7%A6%BB%E5%A9%9A%E3%80%8B_%E8%80%81%E8%88%8D/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/22/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E9%81%93%E5%BE%B7%E7%9A%84%E8%B0%B1%E7%B3%BB%E3%80%8B_%E5%B0%BC%E9%87%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/22/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E9%81%93%E5%BE%B7%E7%9A%84%E8%B0%B1%E7%B3%BB%E3%80%8B_%E5%B0%BC%E9%87%87/" class="post-title-link" itemprop="url">《道德的谱系》_尼采</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-22 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-22T00:00:00+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 22:56:06" itemprop="dateModified" datetime="2020-09-05T22:56:06+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -483,10 +741,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xmlns:mvc</span>=<span class="string">&quot;http://www.springframework.org/schema/mvc&quot;</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xmlns:task</span>=<span class="string">&quot;http://www.springframework.org/schema/task&quot;</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">      http://www.springframework.org/schema/beans/spring-beans-3.2.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">      http://www.springframework.org/schema/context </span></span></span><br><span class="line"><span class="tag"><span class="string">      http://www.springframework.org/schema/context/spring-context-3.2.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">      http://www.springframework.org/schema/mvc</span></span></span><br><span class="line"><span class="tag"><span class="string">      http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/task</span></span></span><br><span class="line"><span class="tag"><span class="string">       http://www.springframework.org/schema/task/spring-task-3.2.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!-- 要扫描的包的路径 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">context:component-scan</span></span></span><br><span class="line"><span class="tag">		<span class="attr">base-package</span>=<span class="string">&quot;com.genersoft.kwlz.schedule.*&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">task:annotation-driven</span> <span class="attr">executor</span>=<span class="string">&quot;taskExecutor&quot;</span></span></span><br><span class="line"><span class="tag">		<span class="attr">scheduler</span>=<span class="string">&quot;scheduler&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">task:scheduler</span> <span class="attr">id</span>=<span class="string">&quot;scheduler&quot;</span> <span class="attr">pool-size</span>=<span class="string">&quot;5&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">task:scheduled-tasks</span> <span class="attr">scheduler</span>=<span class="string">&quot;scheduler&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">task:scheduled</span> <span class="attr">ref</span>=<span class="string">&quot;internalFilePerceptionTask&quot;</span></span></span><br><span class="line"><span class="tag">			<span class="attr">method</span>=<span class="string">&quot;initD&quot;</span> <span class="attr">cron</span>=<span class="string">&quot;0/2 * * * * ?&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">task:scheduled-tasks</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;internalFilePerceptionTask&quot;</span></span></span><br><span class="line"><span class="tag">		<span class="attr">class</span>=<span class="string">&quot;com.genersoft.kwlz.schedule.DBCollectAgent&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;taskExecutor&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">&quot;taskExecutor&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!--多线程执行定时任务，暂不启用，这里是个demo样例 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;taskExecutor&quot;</span></span></span><br><span class="line"><span class="tag">		<span class="attr">class</span>=<span class="string">&quot;org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor&quot;</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 线程池维护线程的最少数量 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;corePoolSize&quot;</span> <span class="attr">value</span>=<span class="string">&quot;5&quot;</span> /&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 线程池维护线程所允许的空闲时间，默认为60s --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;keepAliveSeconds&quot;</span> <span class="attr">value</span>=<span class="string">&quot;200&quot;</span> /&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 线程池维护线程的最大数量 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maxPoolSize&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20&quot;</span> /&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 缓存队列最大长度 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;queueCapacity&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20&quot;</span> /&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 对拒绝task的处理策略 线程池对拒绝任务（无线程可用）的处理策略，目前只支持AbortPolicy、CallerRunsPolicy；默认为后者 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;rejectedExecutionHandler&quot;</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- AbortPolicy:直接抛出java.util.concurrent.RejectedExecutionException异常 --&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- CallerRunsPolicy:主线程直接执行该任务，执行完之后尝试添加下一个任务到线程池中，可以有效降低向线程池内添加任务的速度 --&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- DiscardOldestPolicy:抛弃旧的任务、暂不支持；会导致被丢弃的任务无法再次被执行 --&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- DiscardPolicy:抛弃当前任务、暂不支持；会导致被丢弃的任务无法再次被执行 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">bean</span></span></span><br><span class="line"><span class="tag">				<span class="attr">class</span>=<span class="string">&quot;java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;waitForTasksToCompleteOnShutdown&quot;</span></span></span><br><span class="line"><span class="tag">			<span class="attr">value</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+          <p>《道德的谱系》的阅读摘录</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/Spring%E7%9A%84task%E4%BB%BB%E5%8A%A1%E7%9A%84%E9%85%8D%E7%BD%AE/#more" rel="contents">
+              <a class="btn" href="/2019/04/22/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E9%81%93%E5%BE%B7%E7%9A%84%E8%B0%B1%E7%B3%BB%E3%80%8B_%E5%B0%BC%E9%87%87/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -510,7 +768,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/Java%E5%9F%BA%E7%A1%80(github%E6%95%B4%E7%90%86)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -524,7 +782,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">mysql存储过程</a>
+            <a href="/2019/04/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/Java%E5%9F%BA%E7%A1%80(github%E6%95%B4%E7%90%86)/" class="post-title-link" itemprop="url">Java基础（github整理）</a>
         </h2>
 
         <div class="post-meta">
@@ -534,7 +792,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-18 14:59:01" itemprop="dateCreated datePublished" datetime="2019-03-18T14:59:01+08:00">2019-03-18</time>
+              <time title="创建时间：2019-04-16 11:50:00" itemprop="dateCreated datePublished" datetime="2019-04-16T11:50:00+08:00">2019-04-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -553,11 +811,11 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
                 </span>
             </span>
 
@@ -567,14 +825,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>421</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>10 分钟</span>
             </span>
 
         </div>
@@ -586,10 +844,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="存储过程示例"><a href="#存储过程示例" class="headerlink" title="存储过程示例"></a>存储过程示例</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> pro() </span><br><span class="line"><span class="keyword">begin</span> </span><br><span class="line"><span class="keyword">declare</span> i <span class="built_in">int</span>;</span><br><span class="line"><span class="keyword">set</span> i=<span class="number">1</span>; </span><br><span class="line">while(i&lt;=1165) do  #对学号的循环 </span><br><span class="line">    <span class="keyword">insert</span> dxp_create_table <span class="keyword">values</span>(i+<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>);  </span><br><span class="line">    <span class="keyword">set</span> i=i+<span class="number">1</span>; </span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">while</span>;</span><br><span class="line"><span class="keyword">END</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">call</span> pro();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--  查看数据库的定时任务是否开启</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">&#x27;%event_scheduler%&#x27;</span>;</span><br><span class="line"><span class="comment">--  开启数据库的定时任务（这种方式只有在此次数据库服务运行的时候会启动定时任务，重启之后定时任务会自动关闭）</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> event_scheduler =<span class="number">1</span>; </span><br><span class="line"><span class="comment">--  通过定时任务开启数据库任务的定时任务</span></span><br></pre></td></tr></table></figure>
+          <h1 id="1-面向对象和面向过程的区别"><a href="#1-面向对象和面向过程的区别" class="headerlink" title="1.面向对象和面向过程的区别"></a>1.面向对象和面向过程的区别</h1><h2 id="1-1面向过程"><a href="#1-1面向过程" class="headerlink" title="1.1面向过程"></a>1.1面向过程</h2><p><strong>优点：</strong> 性能比面向对象高。因为类调用时需要实例化，开销比较大，比较消耗资源，所以当性能是最重要的考量因素的时候，比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发<br><br><strong>缺点：</strong> 没有面向对象易维护、易复用、易扩展</p>
+<h2 id="1-2面向对象"><a href="#1-2面向对象" class="headerlink" title="1.2面向对象"></a>1.2面向对象</h2><p><strong>优点：</strong> 易维护、易复用、易扩展，由于面向对象又封装、继承、多态的特性，可以设计出低耦合的系统，使系统更加灵活，更加易于维护。<br><br><strong>缺点：</strong> 性能比面向过程低</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/#more" rel="contents">
+              <a class="btn" href="/2019/04/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/Java%E5%9F%BA%E7%A1%80(github%E6%95%B4%E7%90%86)/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -613,7 +872,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%90%84%E7%A7%8D%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/14/%E6%8A%80%E8%83%BD%E7%AF%87/%E8%BD%AF%E8%80%83/%E3%80%8A%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88%E6%95%99%E7%A8%8B%E3%80%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -627,7 +886,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%90%84%E7%A7%8D%E9%94%81/" class="post-title-link" itemprop="url">mysql锁</a>
+            <a href="/2019/04/14/%E6%8A%80%E8%83%BD%E7%AF%87/%E8%BD%AF%E8%80%83/%E3%80%8A%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88%E6%95%99%E7%A8%8B%E3%80%8B/" class="post-title-link" itemprop="url">《软件设计教程》</a>
         </h2>
 
         <div class="post-meta">
@@ -637,604 +896,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-03-18 14:59:01" itemprop="dateCreated datePublished" datetime="2019-03-18T14:59:01+08:00">2019-03-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>581</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h2><p>乐观锁不是数据库自带的，需要我们自己去实现。乐观锁是指再进行数据库操作的时候的，认为这次的操作不回导致冲突，再操作数据的时候不做任何特殊处理（不加锁，但是会加一个记录的版本version），在进行更新的时候判断是否有冲突，没有冲突再进行数据的操作，有冲突的话不进行更新操作。</p>
-<h2 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h2><p>悲观锁与乐观锁相对应，认为再进行数据操作的时候，这个操作会发生数据冲突，所以再每次操作的时候都需要通过获取锁才能进行响应的操作。所以悲观锁需要耗费更多的时间。<br>悲观锁由数据库自己实现。直接调用数据库响应的相关语句就可以。悲观锁又涉及到两种锁的：共享锁和排他锁。这两种锁是悲观锁的不同实现。</p>
-<h3 id="共享锁"><a href="#共享锁" class="headerlink" title="共享锁"></a>共享锁</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%90%84%E7%A7%8D%E9%94%81/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%95%B0%E6%8D%AE%E6%BA%90%E8%BF%81%E7%A7%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%95%B0%E6%8D%AE%E6%BA%90%E8%BF%81%E7%A7%BB/" class="post-title-link" itemprop="url">mysql数据源迁移</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-18 14:59:01" itemprop="dateCreated datePublished" datetime="2019-03-18T14:59:01+08:00">2019-03-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>833</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Linux下mysql数据源迁移"><a href="#Linux下mysql数据源迁移" class="headerlink" title="Linux下mysql数据源迁移"></a>Linux下mysql数据源迁移</h2><ol>
-<li>停止mysql服务或停止mysql进程<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service mysql stop</span><br><span class="line">mysqladmin -u root -p shutdown</span><br></pre></td></tr></table></figure></li>
-<li>新建mysql的新数据源目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir &#x2F;tmp&#x2F;mysql</span><br></pre></td></tr></table></figure></li>
-<li>迁移数据源<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv &#x2F;var&#x2F;lib&#x2F;mysql &#x2F;tmp&#x2F;mysql</span><br><span class="line">或 cp -r &#x2F;var&#x2F;lib&#x2F;mysql &#x2F;tmp&#x2F;mysql</span><br></pre></td></tr></table></figure></li>
-<li>修改mysql配置文件<br>修改etc/my.cnf或/usr/sharemysql/my.cnf<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#socket　 &#x3D; &#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql.sock（原内容，为了更稳妥用“#”注释此行）</span><br><span class="line">socket　 &#x3D; &#x2F;tmp&#x2F;mysql&#x2F;mysql.sock</span><br></pre></td></tr></table></figure></li>
-<li>修改mysql启动命令的配置/etc/init.d/mysql<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#datadir&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql</span><br><span class="line">datadir&#x3D;&#x2F;tmp&#x2F;mysql</span><br></pre></td></tr></table></figure></li>
-<li>重启mysql服务或重启mysql<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service mysql restart</span><br><span class="line">service mysql start</span><br></pre></td></tr></table></figure></li>
-<li>重启linux<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure></li>
-</ol>
-<ul>
-<li>修改mysql目录的权限<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -r mysql:mysql &#x2F;tmp&#x2F;mysql</span><br></pre></td></tr></table></figure></li>
-<li>查询mysql存储目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;%datadir%&#39;;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<h2 id="Windows下mysql数据源迁移"><a href="#Windows下mysql数据源迁移" class="headerlink" title="Windows下mysql数据源迁移"></a>Windows下mysql数据源迁移</h2><ol>
-<li>通过管理员身份运行cmd<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net stop mysql</span><br></pre></td></tr></table></figure></li>
-<li>复制原来数据库目录到新目录</li>
-<li>修改MySQL配置文件，修改basedir为新目录</li>
-<li>启动mysql<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start mysql</span><br></pre></td></tr></table></figure></li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%95%B0%E6%8D%AE%E6%BA%90%E8%BF%81%E7%A7%BB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">mysql特殊语法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-18 14:59:01" itemprop="dateCreated datePublished" datetime="2019-03-18T14:59:01+08:00">2019-03-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-查询mysql空间"><a href="#1-查询mysql空间" class="headerlink" title="1. 查询mysql空间"></a>1. 查询mysql空间</h1><ul>
-<li>数据库空间大小<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROUND</span>(<span class="keyword">SUM</span>(DATA_LENGTH/<span class="number">1024</span>/<span class="number">1024</span>),<span class="number">2</span>) <span class="keyword">FROM</span> INFORMATION_SCHEMA.TABLES <span class="keyword">WHERE</span> TABLE_SCHEMA=<span class="string">&#x27;SINO_DXP&#x27;</span> </span><br></pre></td></tr></table></figure></li>
-<li>数据表空间大小<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROUND</span>(<span class="keyword">SUM</span>(DATA_LENGTH/<span class="number">1024</span>/<span class="number">1024</span>),<span class="number">2</span>) <span class="keyword">FROM</span> INFORMATION_SCHEMA.TABLES <span class="keyword">WHERE</span> TABLE_SCHEMA=<span class="string">&#x27;SINO_DXP&#x27;</span> <span class="keyword">AND</span> TABLE_NAME=<span class="string">&#x27;DXP_INTERFACE_FIELD&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="2-mysql备份数据库"><a href="#2-mysql备份数据库" class="headerlink" title="2. mysql备份数据库"></a>2. mysql备份数据库</h1><ul>
-<li>全库备份<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -ppassword database &gt; /usr/backup/20180621/database.sql</span><br></pre></td></tr></table></figure></li>
-<li>单表备份<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u用户名 -p密码 数据库名 表名 <span class="comment">--where=&quot;筛选条件&quot; &gt; 导出文件路径</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="3-查询数据库中的表"><a href="#3-查询数据库中的表" class="headerlink" title="3. 查询数据库中的表"></a>3. 查询数据库中的表</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-title-link" itemprop="url">数据库的概念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-18 14:59:01" itemprop="dateCreated datePublished" datetime="2019-03-18T14:59:01+08:00">2019-03-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>861</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="数据库是什么"><a href="#数据库是什么" class="headerlink" title="数据库是什么?"></a>数据库是什么?</h3><p>数据库（Database）是按照数据结构来组织、存储和管理数据的建立在计算机存储设备上的仓库。<br>    简单来说就是本身可视为电子化的文件柜——存储电子文件的处所，用户可以对文件中的数据进行新增、截取、更新、删除等操作。<br>    严格来说，数据库是长期存储在计算机内、可组织的、可共享的数据集合。数据库中的数据指的是以一定的数据模型组织、描述和存储在一起、尽可能小的冗余度、较高的数据独立性和易扩展性的特点并可在一定范围内为多个用户共享。这样的数据集合具有以下特点：尽可能不重复、以最优方式为某个特定组织的多种应用服务，其数据结构独立语使用他的应用程序，对数据的增删改查由统一软件进行管理和控制。<br>数据库是数据管理的高级阶段，它是由文件管理系统发展起来的。</p>
-<ol>
-<li><p>本质特征<br> 永久存储、有组织、可共享</p>
-</li>
-<li><p>目标特征<br> 较小的冗余度、较高的独立性、较好的扩展性</p>
-</li>
-<li><p>主要功能<br> 数据定义功能（DDL）、数据操纵功能（DML）、数据控制功能</p>
-</li>
-<li><p>数据模型的三要素</p>
-<ul>
-<li>数据结构、数据操作、数据完整性规则</li>
-</ul>
-</li>
-<li><p>数据类型<br> 层次模型、网状模型、关系模型</p>
-</li>
-<li><p>三级模式<br> 模式（逻辑模式）、外模式（子模式）、内模式（物理模式、存储模式）</p>
-</li>
-<li><p>二级映像<br> 模式到外模式的映像、内模式到模式的映像</p>
-</li>
-<li><p>关系操作语言<br> 关系代数、SQL、关系演算</p>
-</li>
-<li><p>关系的完整性<br> 实体完整性、参照完整性、用户自定义完整性</p>
-</li>
-<li><p>关系代数中传统的集合运算包括：并、交、差、积。</p>
-</li>
-<li><p>关系代数中专门的关系运算包括：选择、投影、连接、除。</p>
-</li>
-<li><p>两个实体之间的联系类型<br>一对一、一对多、多对多。</p>
-</li>
-<li><p>封锁的类型有：<br>排他锁（X锁）、共享锁（S锁）。</p>
-</li>
-<li><p>意向锁的种类<br>意向共享锁（IS）、意向排他锁（IX）。共享意向排他锁（SIX）。</p>
-</li>
-<li><p>数据依赖的类型有<br>函数依赖、多值依赖、连接依赖。</p>
-</li>
-<li><p>“不好”的关系模式存在的主要问题包括<br>插入异常、删除异常、较大的冗余。</p>
-</li>
-<li><p>在E-R图设计时，常用的三种抽象是：<br>分类、概括、聚集。</p>
-</li>
-<li><p>E-R图合并时，常见的三种冲突是：<br>属性冲突、命名冲突、结构冲突</p>
-</li>
-<li><p>数据库的存储控制包括：<br>自助存储控制、强制存储控制。</p>
-</li>
-<li><p>数据库的SQL语言中，授予权限的命令是：grant；</p>
-</li>
-<li><p>回收权限的命令是：revoke。 </p>
-</li>
-</ol>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">达梦数据库特殊语法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-18 14:59:01" itemprop="dateCreated datePublished" datetime="2019-03-18T14:59:01+08:00">2019-03-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%BE%BE%E6%A2%A6/" itemprop="url" rel="index"><span itemprop="name">达梦</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>290</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="查询某个模式下的所有表的表名："><a href="#查询某个模式下的所有表的表名：" class="headerlink" title="查询某个模式下的所有表的表名："></a>查询某个模式下的所有表的表名：</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SYSOBJECTS <span class="keyword">WHERE</span> SCHID=(<span class="keyword">SELECT</span> <span class="keyword">ID</span> <span class="keyword">FROM</span> SYSOBJECTS <span class="keyword">WHERE</span> <span class="keyword">NAME</span>=<span class="string">&#x27;DXP&#x27;</span>) <span class="keyword">AND</span> <span class="keyword">SUBTYPE</span>$=<span class="string">&#x27;UTAB&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="查询某个模式下的某个表的大小："><a href="#查询某个模式下的某个表的大小：" class="headerlink" title="查询某个模式下的某个表的大小："></a>查询某个模式下的某个表的大小：</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(TABLE_USED_PAGES(<span class="string">&#x27;DATABASE&#x27;</span>,<span class="string">&#x27;TABLE&#x27;</span>)*(PAGE/<span class="number">1024</span>)+TABLE_USED_SPACE(<span class="string">&#x27;DATABASE&#x27;</span>,<span class="string">&#x27;TABLE&#x27;</span>)*(PAGE/<span class="number">1024</span>));</span><br></pre></td></tr></table></figure>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8Ajava%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E3%80%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/18/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8Ajava%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E3%80%8B/" class="post-title-link" itemprop="url">《java深入解析》</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-18 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-18T00:00:00+08:00">2019-03-18</time>
+              <time title="创建时间：2019-04-14 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-14T00:00:00+08:00">2019-04-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1263,14 +925,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>13k</span>
+              <span>4.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>12 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -1282,31 +944,323 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h2 id="《基础概念》"><a href="#《基础概念》" class="headerlink" title="《基础概念》"></a>《基础概念》</h2><ul>
-<li>float类型在Java中占用 节，long类型在 中占用 节，为什么float类型的取值范围比long类型的取值范围还大？</li>
-<li>使用“+”可以连接两个字符串（String对象），那么，是怎样进行连接的？</li>
-<li>构造器是否创建了对象？该怎样来证明这一点？</li>
-<li>如果没有在类中显示声明构造器，则编译器会自动生成一个无参的构造器，那么编译器为什么要自动生成这个无参的构造器呢？有什么作用？</li>
-<li>i++与++i到底有什么不同？仅仅是先加与后加的区别吗？</li>
-<li>移位运算： ＜＜ ，会首先进行 % 的求余运算吗？如果是这样，那么 ＜＜ − 结果是多少呢？</li>
-<li>如果重写了equals方法，为什么还要重写hashCode方法？如果没有重写hashCode方法，会有什么问题？</li>
-<li>从JDK ，switch语句可以支持String类型，那么在底层是如何实现的？</li>
-<li>静态方法是否可以重写？方法重写与方法隐藏有什么不同？</li>
-<li>为什么不能在静态方法中使用this？this指代的是当前对象，但是，这个所谓的“当前对象”到底在哪里？</li>
-<li>在Java中，类型会在什么时间、什么条件下由JVM加载？加载后一定会初始化吗？</li>
-<li>比起C / C++中的枚举，Java中的枚举有什么不同（优势）？枚举是怎样实现的？</li>
-<li>为什么要为String对象建立常量池？String常量池有什么好处？</li>
-<li>每个基本数据类型都对应一个包装类型，这些包装类型有什么用？</li>
-<li>内部成员类是如何绑定外围类对象的？</li>
+          <h1 id="1-《第一章-计算机网络概论》"><a href="#1-《第一章-计算机网络概论》" class="headerlink" title="1.《第一章 计算机网络概论》"></a>1.《第一章 计算机网络概论》</h1><h2 id="1-1计算机系统基础知识"><a href="#1-1计算机系统基础知识" class="headerlink" title="1.1计算机系统基础知识"></a>1.1计算机系统基础知识</h2><h3 id="1-1-1计算机系统硬件基本构成"><a href="#1-1-1计算机系统硬件基本构成" class="headerlink" title="1.1.1计算机系统硬件基本构成"></a>1.1.1计算机系统硬件基本构成</h3><ul>
+<li>计算机系统由硬件和软件构成，他们协同工作来运行程序。计算机基本硬件系统包括运算器、控制器、存储器、输入设备和输出设备5大部分构成。<ul>
+<li>运算器和控制器等部件被集成在一起统称为中央处理单元（Central Processing Unit，CPU）。CPU是硬件的核心，用于数据的架构处理，能完成各种算术、逻辑运算及控制功能。</li>
+<li>存储器是计算机系统的记忆设备，分为内部存储器和外部存储器。前者速度高、容量小，一般用于临时存放程序、数据及中间结果。后者速度慢、容量大，可以长期保存程序和数据。</li>
+<li>输入设备和输出设备合称为外部设备（外设）。输入设备用于输入原始数据和各种命令，而输出设备则用于输出计算机运行的结果。</li>
 </ul>
-<h3 id="《关键字》"><a href="#《关键字》" class="headerlink" title="《关键字》"></a>《关键字》</h3><ul>
-<li>Java语言仍将goto定义为一个关键字，用来限制程序员将goto作为一个标识符来使用，由于是一个从不使用的关键字，故也称为“保留字”。</li>
-<li>与goto类似，Java语言也将const定义为关键字，但是却没有任何语法应用，也就是保留字。使用const来作为标识符也是不允许的。</li>
-<li>在Java语言中，这 符号是 字面常量（也称直接量）。其中，true与false是布尔类型的字面常量，null是引用类型的字面常量。这些就好比“abc”是String类型的字面常量，而数值“ 是int类型的字面常量一样。而不是java的关键字。尽管true、false、null不是关键字，但是，也不能将其作为标识符使用，否则同样会产生编译错误。从这一点来说，这 字面常量与关键字的表现是相似的。</li>
+</li>
 </ul>
+<h3 id="1-1-2中央处理单元"><a href="#1-1-2中央处理单元" class="headerlink" title="1.1.2中央处理单元"></a>1.1.2中央处理单元</h3>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/03/18/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8Ajava%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E3%80%8B/#more" rel="contents">
+              <a class="btn" href="/2019/04/14/%E6%8A%80%E8%83%BD%E7%AF%87/%E8%BD%AF%E8%80%83/%E3%80%8A%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88%E6%95%99%E7%A8%8B%E3%80%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8Ajava%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8Ajava%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B/" class="post-title-link" itemprop="url">《java并发编程的艺术》</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-14 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-14T00:00:00+08:00">2019-04-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 22:50:18" itemprop="dateModified" datetime="2020-09-05T22:50:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>34k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>31 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>《java并发编程的艺术》的阅读摘录</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8Ajava%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/13/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%96%87%E5%8D%9A%E5%A3%AB%E3%80%8B_%E8%80%81%E8%88%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/13/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%96%87%E5%8D%9A%E5%A3%AB%E3%80%8B_%E8%80%81%E8%88%8D/" class="post-title-link" itemprop="url">《文博士》_老舍</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-13 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-13T00:00:00+08:00">2019-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 23:16:25" itemprop="dateModified" datetime="2020-09-05T23:16:25+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>246</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><ul>
+<li>他肚中寡寡劳劳，在灯光下，晚风中，几乎忘了自己是谁，只觉得生命是一团委屈与冤枉。</li>
+<li>那油红油红的一两件竹器代表着南方的文化，那些新旧的木器表示着北方的精神：唐府本是由南边迁来的，到现在已有六七十年了。由这点东西还可以看出唐宅人们的文化程度，新旧的东西都混合在一处，老的不肯丢掉，新的也渐次被容纳。这点调和的精神仿佛显出一点民族的弱点：既不能顽强的自尊，抓住一些老的东西不放手，又不肯彻底的取纳新的，把老旧的玩艺儿一扫光除尽。</li>
+</ul>
+<h1 id="读后感"><a href="#读后感" class="headerlink" title="读后感"></a>读后感</h1><ul>
+<li>从人民中来，到人民中去</li>
+<li>如果学习只是为了名利，那将真的毫无意义了</li>
+</ul>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/13/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%96%87%E5%8D%9A%E5%A3%AB%E3%80%8B_%E8%80%81%E8%88%8D/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/04/09/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/ElasticSearch%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/09/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/ElasticSearch%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">ElasticSearch的分布式架构原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-09 20:37:02" itemprop="dateCreated datePublished" datetime="2019-04-09T20:37:02+08:00">2019-04-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" itemprop="url" rel="index"><span itemprop="name">搜索引擎</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>21</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ElasticSearch的分布式架构原理"><a href="#ElasticSearch的分布式架构原理" class="headerlink" title="ElasticSearch的分布式架构原理"></a>ElasticSearch的分布式架构原理</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/09/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/ElasticSearch%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E5%8E%9F%E7%90%86/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1329,7 +1283,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1395,20 +1349,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-count">359</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1449,12 +1403,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">711k</span>
+    <span title="站点总字数">734k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:47</span>
+    <span title="站点阅读时长">11:07</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>

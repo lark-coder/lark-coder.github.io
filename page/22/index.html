@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/git/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/%E4%BA%8B%E5%8A%A1/%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -206,7 +206,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/git/" class="post-title-link" itemprop="url">git</a>
+            <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/%E4%BA%8B%E5%8A%A1/%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">事务的基本概念</a>
         </h2>
 
         <div class="post-meta">
@@ -216,14 +216,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+              <time title="创建时间：2019-03-16 21:37:01" itemprop="dateCreated datePublished" datetime="2019-03-16T21:37:01+08:00">2019-03-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:17" itemprop="dateModified" datetime="2020-09-05T17:10:17+08:00">2020-09-05</time>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -231,7 +231,15 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">工具篇</span></a>
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E4%BA%8B%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">事务</span></a>
                 </span>
             </span>
 
@@ -241,14 +249,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
+              <span>12k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>11 分钟</span>
             </span>
 
         </div>
@@ -260,14 +268,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="查询git提交的代码行数"><a href="#查询git提交的代码行数" class="headerlink" title="查询git提交的代码行数"></a>查询git提交的代码行数</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --author=&quot;yourname&quot; --pretty=tformat: --numstat | awk &#x27;&#123; add += $1; subs += $2; loc += $1 - $2 &#125; END &#123; printf &quot;added lines: %s, removed lines: %s, total lines: %s\n&quot;, add, subs, loc &#125;&#x27; -</span><br></pre></td></tr></table></figure>
-
-<h1 id="统计每个人增删行数"><a href="#统计每个人增删行数" class="headerlink" title="统计每个人增删行数"></a>统计每个人增删行数</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --format=&#x27;%aN&#x27; | sort -u | while read name; do echo -en &quot;$name\t&quot;; git log --author=&quot;$name&quot; --pretty=tformat: --numstat | awk &#x27;&#123; add += $1; subs += $2; loc += $1 - $2 &#125; END &#123; printf &quot;added lines: %s, removed lines: %s, total lines: %s\n&quot;, add, subs, loc &#125;&#x27; -; done</span><br></pre></td></tr></table></figure>
-
-<h1 id="查看仓库提交排名前五"><a href="#查看仓库提交排名前五" class="headerlink" title="查看仓库提交排名前五"></a>查看仓库提交排名前五</h1>
+          <h1 id="1-什么是事务？"><a href="#1-什么是事务？" class="headerlink" title="1.什么是事务？"></a>1.什么是事务？</h1><p>事务由一组操作组成，我们希望这组操作能够全部正确运行，如果这一组操作中的任意一个步骤发生错误，那么就需要回滚之前已经完成的操作。也就是同一个事务的所有操作，要么全部正确执行，要么全部不要执行。</p>
+<h1 id="2-事务的四大特性ACID"><a href="#2-事务的四大特性ACID" class="headerlink" title="2.事务的四大特性ACID"></a>2.事务的四大特性ACID</h1><h2 id="原子性：Atomicity"><a href="#原子性：Atomicity" class="headerlink" title="原子性：Atomicity"></a>原子性：Atomicity</h2><p>原子性要求，事务是不可分割的执行单元，事务中的所有操作要么全部执行，要么全部不执行。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/git/#more" rel="contents">
+              <a class="btn" href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/%E4%BA%8B%E5%8A%A1/%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -291,7 +296,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/idea/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%8D%81%E4%B9%9D%E9%97%B4%E6%88%BF%E3%80%8B_%E8%8B%8F%E7%AB%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -305,7 +310,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/idea/" class="post-title-link" itemprop="url">idea</a>
+            <a href="/2019/03/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%8D%81%E4%B9%9D%E9%97%B4%E6%88%BF%E3%80%8B_%E8%8B%8F%E7%AB%A5/" class="post-title-link" itemprop="url">《十九间房》_苏童</a>
         </h2>
 
         <div class="post-meta">
@@ -315,14 +320,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+              <time title="创建时间：2019-03-14 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-14T00:00:00+08:00">2019-03-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:17" itemprop="dateModified" datetime="2020-09-05T17:10:17+08:00">2020-09-05</time>
+                <time title="修改时间：2020-09-05 23:13:40" itemprop="dateModified" datetime="2020-09-05T23:13:40+08:00">2020-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -330,7 +335,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">工具篇</span></a>
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
                 </span>
             </span>
 
@@ -340,7 +349,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>121</span>
+              <span>508</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -359,12 +368,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="idea的terminal查看文件"><a href="#idea的terminal查看文件" class="headerlink" title="idea的terminal查看文件"></a>idea的terminal查看文件</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat fileName |more</span><br></pre></td></tr></table></figure>
-<h1 id="安装alibaba的java规约插件"><a href="#安装alibaba的java规约插件" class="headerlink" title="安装alibaba的java规约插件"></a>安装alibaba的java规约插件</h1><p>alibaba的java规约：<a target="_blank" rel="noopener" href="https://github.com/alibaba/p3c/tree/master/idea-plugin">https://github.com/alibaba/p3c/tree/master/idea-plugin</a></p>
-
+          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h2 id="《刺青时代》"><a href="#《刺青时代》" class="headerlink" title="《刺青时代》"></a>《刺青时代》</h2><ul>
+<li>小拐、刺青、猪头帮</li>
+</ul>
+<h2 id="《园艺》"><a href="#《园艺》" class="headerlink" title="《园艺》"></a>《园艺》</h2><ul>
+<li>失踪、藤蔓、儿子、女儿、话剧、侦探</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/idea/#more" rel="contents">
+              <a class="btn" href="/2019/03/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%8D%81%E4%B9%9D%E9%97%B4%E6%88%BF%E3%80%8B_%E8%8B%8F%E7%AB%A5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -388,7 +400,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/linux/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/13/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%9F%8E%E5%8C%97%E5%9C%B0%E5%B8%A6%E3%80%8B_%E8%8B%8F%E7%AB%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -402,7 +414,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/linux/" class="post-title-link" itemprop="url">Linux</a>
+            <a href="/2019/03/13/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%9F%8E%E5%8C%97%E5%9C%B0%E5%B8%A6%E3%80%8B_%E8%8B%8F%E7%AB%A5/" class="post-title-link" itemprop="url">《城北地带》_苏童</a>
         </h2>
 
         <div class="post-meta">
@@ -412,14 +424,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+              <time title="创建时间：2019-03-13 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-13T00:00:00+08:00">2019-03-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:17" itemprop="dateModified" datetime="2020-09-05T17:10:17+08:00">2020-09-05</time>
+                <time title="修改时间：2020-09-05 22:54:57" itemprop="dateModified" datetime="2020-09-05T22:54:57+08:00">2020-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -427,7 +439,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">工具篇</span></a>
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
                 </span>
             </span>
 
@@ -437,7 +453,106 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
+              <span>584</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>《城北地带》的阅读摘录</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/13/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%9F%8E%E5%8C%97%E5%9C%B0%E5%B8%A6%E3%80%8B_%E8%8B%8F%E7%AB%A5/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/06/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E8%8B%8F%E6%A0%BC%E6%8B%89%E5%BA%95%E4%B9%8B%E6%AD%BB%E3%80%8B_%E6%9F%8F%E6%8B%89%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/06/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E8%8B%8F%E6%A0%BC%E6%8B%89%E5%BA%95%E4%B9%8B%E6%AD%BB%E3%80%8B_%E6%9F%8F%E6%8B%89%E5%9B%BE/" class="post-title-link" itemprop="url">《苏格拉底之死》_柏拉图</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">2019-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 23:15:23" itemprop="dateModified" datetime="2020-09-05T23:15:23+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -456,334 +571,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="查询端口链接数"><a href="#查询端口链接数" class="headerlink" title="查询端口链接数"></a>查询端口链接数</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nat |grep 8080 -c</span><br></pre></td></tr></table></figure>
-
-<h1 id="history添加时间记录"><a href="#history添加时间记录" class="headerlink" title="history添加时间记录"></a>history添加时间记录</h1><ol>
-<li>任意目录下执行：vi ~/.bashrc</li>
-<li>修改这个文件，添加两行命令<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Display date</span></span><br><span class="line">export HISTTIMEFORMAT=&#x27;%F %T  &#x27;</span><br></pre></td></tr></table></figure></li>
-<li>保存文件并执行：source ~/.bashrc，使其立即生效</li>
-</ol>
-<h1 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a>环境变量配置</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/linux/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/maven/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/maven/" class="post-title-link" itemprop="url">maven</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:17" itemprop="dateModified" datetime="2020-09-05T17:10:17+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">工具篇</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>153</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="maven出错初步解决"><a href="#maven出错初步解决" class="headerlink" title="maven出错初步解决"></a>maven出错初步解决</h1><p>为了方便起见，可以直接使用第三步。能解决大部分的mvn错误，而且能够看到出错的信息，进一步确定出错位置，并进行排查。</p>
-<ol>
-<li><p>Step1<br>mvn install</p>
-</li>
-<li><p>Step2<br>mvn install -N</p>
-</li>
-<li><p>Step3<br>mvn -U clean install</p>
-</li>
-</ol>
-<h1 id="maven的本地仓库的路径："><a href="#maven的本地仓库的路径：" class="headerlink" title="maven的本地仓库的路径："></a>maven的本地仓库的路径：</h1><p>./.m2/repository</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/maven/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2github+hexo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2github+hexo/" class="post-title-link" itemprop="url">个人博客github+hexo</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">工具篇</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h1><ol>
-<li><p>安装git和node，默认安装即可</p>
-</li>
-<li><p>判断是否安装成功</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置git和github绑定</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 双击git-bash.exe（git的安装目录下）</span></span><br><span class="line">ssh-keygen -t rsa -C “stwh1850957895@126.com”</span><br><span class="line"><span class="meta">#</span><span class="bash"> 直接回车直到生成id_rsa.pub文件，这个文件在C:/users/用户名/.ssh/文件目录下</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改github中的设置，配置ssh信息</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在git-bash.exe中执行</span></span><br><span class="line">ssh -T git@github.com</span><br><span class="line"><span class="meta">#</span><span class="bash"> 验证是否链接成功</span></span><br><span class="line">设置通用下车</span><br><span class="line">npm config set registry https://registry.npm.taobao.org</span><br><span class="line">git config --global user.name &quot;yourname&quot;</span><br><span class="line">git config --global user.email &quot;youremail&quot;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在任意一个路径新建文件夹，即git的根目录</span></span><br><span class="line">git init</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加代码</span></span><br><span class="line">git add .</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提交</span></span><br><span class="line">git commit -m &quot;wison&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果仓库中有文件，先拉取文件</span></span><br><span class="line">git pull origin master</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提交</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h1 id="主题next的github地址"><a href="#主题next的github地址" class="headerlink" title="主题next的github地址"></a>主题next的github地址</h1><p><a href="mailto:&#103;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#x6f;&#x6d;">&#103;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#x6f;&#x6d;</a>:theme-next/hexo-theme-next.git</p>
-<h1 id="添加搜索功能"><a href="#添加搜索功能" class="headerlink" title="添加搜索功能"></a>添加搜索功能</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2github+hexo/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E7%A7%81%E6%9C%89%E7%AF%87/%E5%81%B6%E5%BE%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/01/%E7%A7%81%E6%9C%89%E7%AF%87/%E5%81%B6%E5%BE%97/" class="post-title-link" itemprop="url">偶得</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A7%81%E6%9C%89%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">私有篇</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>414</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>繁华之下，必藏有污浊暗流。</li>
-<li>吾不识青天高，黄地厚；唯见月寒日暖，来煎人寿。——李贺</li>
-<li>胸有惊雷，面如平湖。</li>
-<li>满腔热情，敌不过三言两语。</li>
+          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h2 id="《尤息弗罗篇》"><a href="#《尤息弗罗篇》" class="headerlink" title="《尤息弗罗篇》"></a>《尤息弗罗篇》</h2><ul>
+<li>有人看着一个东西并不是因为那个东西是一个被看着的东西，而是正好相反，它之所以是一个被看着的东西是因为有人看它。同样，有人领着一个东西并不是因为那个东西是一个被领着的东西，而是相反，它之所以是一个被领着的东西是因为有人领着它。有人携带着一个东西并不是因为那个东西是一个被携带着的东西，相反，它之所以是被携带着的东西是因为有人携带着它。</li>
+<li>我们得拿你开玩笑了，因为你自己也看到了，你说的那些话总不会待在你把它们放置的地方。</li>
 </ul>
-<hr>
-<p><strong>《悲歌》</strong><br>今生将不再见你<br><br>只为 再见的 已不是你<br><br>心中的你已永不再现<br><br>再现的 只是些沧桑的<br><br>日月和流年<br></p>
-<hr>
-<ul>
-<li>天地要留下庄子，于是便有了蔺且啊</li>
+<h2 id="《申辩篇》"><a href="#《申辩篇》" class="headerlink" title="《申辩篇》"></a>《申辩篇》</h2><ul>
+<li>你们一心只想着聚敛钱财、追求名誉，却从不关心真理、追求智慧，不关心如何使自己的灵魂得到完善，你们难道不感到羞愧吗？</li>
+<li>不要介意我的说话方式是好是坏，而只关心我说得是否正确、是否公正。因为关心公正是法官们应该做的，就像作为演讲者应该讲真话一样。</li>
+<li>如果你不使自己忙碌得与众不同，所有这些谣言和议论都不会产生，除非你做了一些与众不同的事。告诉我们是怎么回事，这样我们会更谨慎地对待这个案件。</li>
+<li>我比这个人有智慧，似乎不是因为我们谁知道些有价值的事情，而是因为他自以为知道些什么而实际上不知道；而我虽然也不知道那些事情，但我知道自己并不知道。所以，因为这一点点的区别，我似乎比他有智慧。</li>
+<li>那些优秀的工匠似乎也和诗人一样有着同一个毛病：他们由于自己成功的手艺，而觉得自己在其他重要事务上也非常有智慧。这个错误认知掩盖了那种智慧。</li>
+<li>先生们，害怕死亡是什么东西呢？它只是一种无知而自以为知道、没有智慧而自以为有智慧。没人知道死亡是否是人生最大的祝福，然而人们害怕死亡就好像他们知道死亡是最坏的事情似的。把自己不知道的东西当成知道的，这种无知是该受责备的。</li>
+<li>只要我还能呼吸，还能活动，我就不能停止践行哲学，就不能不去劝告你们，向我遇到的每个人用我惯用的方式讲：‘雅典人啊，以伟大、智慧和力量闻名于世的伟大雅典城邦中的公民，你们一心只想着聚敛钱财、追求名誉，却从不关心真理、追求智慧，不关心如何使自己的灵魂得到完善，你们难道不感到羞愧吗？</li>
+<li>所以，雅典人，我跟你们讲，不管你们是否照阿尼图斯说的去做，是否释放我，你们都知道我是不会改变自己的作风的，即使让我反复受死也不改初衷。</li>
+<li>我被神叫到城邦来，就如同牛虻附在一头又大又高贵的马上，它由于过于巨大而慵懒，需要被叮咬刺激才能焕发活力。我相信神把我放在城邦中，就是让我到处走动，去劝诫、刺激、责备你们中的每一个人，不管你们走到哪里，都整天跟着你们。</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E7%A7%81%E6%9C%89%E7%AF%87/%E5%81%B6%E5%BE%97/#more" rel="contents">
+              <a class="btn" href="/2019/03/06/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E8%8B%8F%E6%A0%BC%E6%8B%89%E5%BA%95%E4%B9%8B%E6%AD%BB%E3%80%8B_%E6%9F%8F%E6%8B%89%E5%9B%BE/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -807,7 +612,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E7%A7%81%E6%9C%89%E7%AF%87/%E5%A4%87%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/05/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%B7%B7%E6%B2%8C%E8%9D%B4%E8%9D%B6%E3%80%8B_%E5%88%98%E6%85%88%E6%AC%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -821,7 +626,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/01/%E7%A7%81%E6%9C%89%E7%AF%87/%E5%A4%87%E7%94%A8/" class="post-title-link" itemprop="url">备用</a>
+            <a href="/2019/03/05/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%B7%B7%E6%B2%8C%E8%9D%B4%E8%9D%B6%E3%80%8B_%E5%88%98%E6%85%88%E6%AC%A3/" class="post-title-link" itemprop="url">《混沌蝴蝶》_刘慈欣</a>
         </h2>
 
         <div class="post-meta">
@@ -831,14 +636,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+              <time title="创建时间：2019-03-05 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-05T00:00:00+08:00">2019-03-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+                <time title="修改时间：2020-09-05 23:02:03" itemprop="dateModified" datetime="2020-09-05T23:02:03+08:00">2020-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -846,7 +651,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A7%81%E6%9C%89%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">私有篇</span></a>
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
                 </span>
             </span>
 
@@ -856,7 +665,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
+              <span>21</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -875,18 +684,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ul>
-<li>讨厌＝讨人喜欢，百看不厌。</li>
-<li>早点回家，饭在锅里，我在床上。</li>
-<li>人身上有根骨头，看到她的那一眼，我就有了根骨头。</li>
-</ul>
-<hr>
-<p>“我结婚你来吗？”<br><br>“我劫婚你走吗？”<br><br>她要走了，他从楼上拎着大包飞奔下来：“喂，你落下了一个东西！”<br><br>她止步回头：“什么东西？”<br><br>“我”<br></p>
-<hr>
-<p>“快来看我的眼睛！”<br><br>“没什么啊。”<br><br>“你撒谎！里面明明有我喜欢的人！”<br><br>可爱的你偷走了我的情，盗走了我的心，我决定告上法庭？法官翻遍了所有的纪录和案例后，陪审团一致通过：判你终身伴我！<br></p>
+          <p>《混沌蝴蝶》的阅读摘录</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E7%A7%81%E6%9C%89%E7%AF%87/%E5%A4%87%E7%94%A8/#more" rel="contents">
+              <a class="btn" href="/2019/03/05/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%B7%B7%E6%B2%8C%E8%9D%B4%E8%9D%B6%E3%80%8B_%E5%88%98%E6%85%88%E6%AC%A3/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -910,7 +711,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E7%A7%81%E6%9C%89%E7%AF%87/%E6%AD%A6%E4%BE%A0/">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/02/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E4%BA%BA%E7%94%9F%E6%9C%89%E4%BD%95%E6%84%8F%E4%B9%89%E3%80%8B_%E8%83%A1%E9%80%82/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -924,7 +725,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/01/01/%E7%A7%81%E6%9C%89%E7%AF%87/%E6%AD%A6%E4%BE%A0/" class="post-title-link" itemprop="url">武侠</a>
+            <a href="/2019/03/02/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E4%BA%BA%E7%94%9F%E6%9C%89%E4%BD%95%E6%84%8F%E4%B9%89%E3%80%8B_%E8%83%A1%E9%80%82/" class="post-title-link" itemprop="url">《人生有何意义》_胡适</a>
         </h2>
 
         <div class="post-meta">
@@ -934,14 +735,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+              <time title="创建时间：2019-03-02 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-02T00:00:00+08:00">2019-03-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+                <time title="修改时间：2020-09-05 23:11:16" itemprop="dateModified" datetime="2020-09-05T23:11:16+08:00">2020-09-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -949,7 +750,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A7%81%E6%9C%89%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">私有篇</span></a>
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
                 </span>
             </span>
 
@@ -959,7 +764,163 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.3k</span>
+              <span>6.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h2 id="《人生有何意义》"><a href="#《人生有何意义》" class="headerlink" title="《人生有何意义》"></a>《人生有何意义》</h2><ul>
+<li>生命本没有意义，你要能给他什么意义，他就有什么意义。与其终日冥想人生有何意义，不如试用此生做点有意义的事。</li>
+<li>人生在世，究竟是为什么的？<ul>
+<li>现在的人最怕的是有人问他这个问题。得意的人听着这个问题就要扫兴，不得意的人想着这个问题就要发狂，他们是聪明人，不愿意扫兴，更不愿意发狂，所以给你一个疯子的绰号，就算完了。</li>
+</ul>
+</li>
+<li>我仔细一想，觉得做了中国人，老婆是不能不讨的，只好将就点罢。</li>
+<li>人生的意义全是各人自己寻出来、造出来的：高尚，卑劣，清贵，污浊，有用，无用……全靠自己的作为。</li>
+<li>人生的意义不在于何以有生，而在于自己怎样生活。你若情愿把这六尺之躯葬送在白昼做梦之上，那就是你这一生的意义。你若发愤振作起来，决心去寻求生命的意义，去创造自己的生命的意义，那么，你活一日便有一日的意义，做一事便添一事的意义，生命无穷，生命的意义也无穷了。总之，生命本没有意义，你要能给它什么意义，它就有什么意义。与其终日冥想人生有何意义，不如试用此生做点有意义的事……</li>
+<li>认得人生如梦，故无所求。但无所求不是无为。人生固然不过一梦，但一生只有这一场做梦的机会，岂可不努力做一个轰轰烈烈像个样子的梦？岂可糊糊涂涂懵懵懂懂混过这几十年吗？</li>
+<li>人生不是单独的，人是社会的动物，他能看见和想像他所看不到的东西，他有能看到上至数百万年下至子孙百代的能力。</li>
+<li>知世如梦无所求，无所求心普定寂，还似梦中随梦境，成就河沙梦功德。——王安石《梦》</li>
+<li>哲学是研究人生切要的问题，从根本上着想，去找根本的解决。</li>
+<li>哲学是研究人生切要的问题，从意义上着想，去找一个比较可普遍适用的意义。</li>
+<li>真有价值的东西，决不为怀疑所毁，而能被怀疑所毁的东西，决不会真有价值。</li>
+<li>人性是静的、永恒不变的，时代却是动的、绵延变化的，这就是动与静的关系，这就是这变与不变的反应，决定了一切人们的全部人生。也就是这人生，屠格涅夫得以造成他的优美的艺术。</li>
+<li>谁在主宰着人性呢？谁在推动着时代呢？又是谁在播弄着这时代和人性的关系及反应造成的人生呢？屠格涅夫告诉我们：这是自然。自然主宰着人性，自然推动着时代，自然播弄着这人生。宇宙没有绝对的真理，人生没有客观的意义，一切的一切，只是像树，不得不被风吹，只是像物件，不得不被阳光照耀。屠格涅夫感觉到这个，认识了这个，也忠实地描写了这个，所以在他的纵横交织着时代和人性的作品下，显示了不可理解的人生，在这个人生下，又潜伏着一个无情的命运之神。激动了读者的情感的，是这命运之神。威胁着读者的思想的，也是这命运之神。</li>
+<li>黑暗的背景，时时在那些新的运动中露出狰狞的面目，充满着热情的青年们，时时受着旧时代人们的讥笑和诅咒，时时遇见事实上的重大打击。</li>
+<li>时代是永远变动的，但不是时代本身有什么目的，他不会按照一定的目的用一定的方式向前走。一切都是偶然地盲目地走着，谁也不知道是为什么，谁也不知道怎样，到底时代怎样推进，怕也只有命运能决定罢！</li>
+<li>人性是命运决定的，时代也是命运决定的，人性和时代反应出来的人生，还是命运决定的！</li>
+<li>工程师的作用，在能够找出自然界的利益，强迫自然世界把它的利益一个一个贡献出来；就是改造自然、征服自然、控制自然，以减除人的痛苦，增加人的幸福。</li>
+<li>见乃谓之象；形乃谓之器；制而用之谓之法；利用出入，民咸用之，谓之神。</li>
+<li>但是我们当此庆贺的纪念，与其追念过去的成功，远不如悬想将来的进步。过去的成绩只应该鼓励现在的人努力造一个更大更好的将来，这是“时”字的教训。倘若过去的光荣只使后来的人增加自满的心，不再求进步，那就像一个辛苦积钱的人成了家私之后天天捧着元宝玩弄，岂不成了一个守钱奴了吗？</li>
+<li>“科学的人生观”有两个意思：第一拿科学做人生观的基础，第二拿科学的态度、精神、方法，做我们生活的态度、生活的方法。</li>
+<li>你知道中国最有名的人是谁？提起此人，人人皆晓，处处闻名。他姓差，名不多，是各省各县各村人氏。你一定见过他，一定听过别人谈起他。差不多先生的名字天天挂在大家的口头，因为他是中国全国人的代表。</li>
+<li>差不多先生的相貌和你和我都差不多。他有一双眼睛，但看得不很清楚；有两只耳朵，但听得不很分明；有鼻子和嘴，但他对于气味和口味都不很讲究。他的脑子也不小，但他的记性却不很精明，他的思想也不很细密。</li>
+<li>我渐渐明白，世间最可厌恶的事莫如一张生气的脸；世间最下流的事莫如把生气的脸摆给旁人看。这比打骂还难受。</li>
+</ul>
+<h2 id="《为什么读书》"><a href="#《为什么读书》" class="headerlink" title="《为什么读书》"></a>《为什么读书》</h2><ul>
+<li>如今的中国人，肚子饿了，还有些施粥的厂把粥给他们吃。只是那些脑子叫饿的人可真没有东西吃了。</li>
+<li>我想这都是现在一班教会学堂出身的英文教习的罪过。这些英文教习，只会用他们先生教过的课本。他们的先生又只会用他们先生的先生教过的课本。所以现在中国学堂所用的英文书籍，大概都是教会先生的太老师或太太老师们教过的课本！怪不得和现在的思想潮流绝无关系了。</li>
+<li>社会所需要的是做事的人才，学堂所造成的是不会做事又不肯做事的人才，这种教育不是亡国的教育吗？</li>
+<li>我们今日也痛骂康有为。但二十年前的中国，骂康有为太新；二十年后的中国，却骂康有为太旧。</li>
+<li>书中自有千钟粟，书中自有黄金屋，书中自有颜如玉。</li>
+<li>为什么要读书？有三点可以讲：第一，因为书是过去已经知道的智识学问和经验的一种记录，我们读书便是要接受这人类的遗产；第二，为要读书而读书，读了书便可以多读书；第三，读书可以帮助我们解决困难、应付环境，并可获得思想材料的来源。</li>
+<li>所以人最大的贡献就是[留下 ]过去的智识和经验，使后人可以节省许多脑力。</li>
+<li>不读书不能读书，要能读书才能多读书。</li>
+<li>读书的目的在于读书，要读书越多才可以读书越多。</li>
+<li>古人说：“开卷有益。”正是此意。读书不是单为文凭功名，只因为书中可以供给学问知识，可以帮助我们解决困难，可以帮助我们思想。</li>
+<li>我可以很诚恳地说，中国旧籍是经不起读的。中国有五千年文化，“四部”的书已是汗牛充栋。究竟有几部书应该读，我也曾经想过。其中有条理有系统的精心结构之作，二千五百年以来恐怕只有半打。“集”是杂货店，“史”和“子”还是杂货店。至于“经”，也只是杂货店，讲到内容，可以说没有一些东西可以给我们改进道德增进智识的帮助的。中国书不够读，我们要另开生路，辟殖民地，这条生路，就是每一个少年人必须至少要精通一种外国文字。读外国语要读到有乐而无苦，能做到这地步，书中便有无穷乐趣。</li>
+<li>在这个值得纪念的仪式完毕之后，你们就被列入少数特权分子之列 ——大学毕业生。今天并不是标示着人生一段时期的结束或完毕，而是一个新生活的开始，一个真正生活和真正充满责任的开端。</li>
+<li>一个头脑受过训练的人在看一件事是用批判和客观的态度，而且也用适当的智识学问为凭依。他不容许偏见和个人的利益来影响他的判断，和左右他的观点。他一直都是好奇的，但是他绝对不会轻易相信人。他并不仓促地下结论，也不轻易地附和他人的意见，他宁愿耽搁一段时间，一直等到他有充分的时间来查考事实和证据后，才下结论。</li>
+<li>总而言之，一个受过训练的头脑，就是对于易陷入偏见、武断和盲目接受传统与权威的陷阱，存有戒心和疑惧。同时，一个受过训练的脑筋绝不是消极或是毁灭性的。他怀疑人并不是喜欢怀疑的缘故；也并不是认为“所有的话都有可疑之处，所有的判断都有虚假之处”。他之所以怀疑是为了想确切相信一件事。为了要根据更坚固的证据和更健全的推理为基础，来建立或重新建立信仰。</li>
+<li>你们是否充分准备来做这件在你们一生中最神圣的行动 ——有责任心的思考？</li>
+<li>我们不看见北京大街的墙上大书着“打倒英日”不要五分钟的热度吗？其实写那些大字的人，写成之后，自己看着很满意，他的“热度”早已消除大半了；他回到家里，坐也坐得下了，睡也睡得着了。所谓“民气”，无论在中国在欧美，都是这样：突然而来，倏然而去。</li>
+<li>救国事业更非短时间所能解决：帝国主义不是赤手空拳打得倒的；“英日强盗”也不是几千万人的喊声咒得死的。救国是一件顶大的事业：排队游街，高喊着“打倒英日强盗”，算不得救国事业；甚至于砍下手指写血书，甚至于蹈海投江，杀身殉国，都算不得救国的事业。救国的事业须要有各色各样的人才；真正的救国的预备在于把自己造成一个有用的人才。</li>
+<li>我们只希望大家知道：在一个扰攘纷乱的时期里跟着人家乱跑乱喊，不能就算是尽了爱国的责任，此外还有更难更可贵的任务：在纷乱的喊声里，能立定脚跟，打定主意，救出你自己，努力把你这块材料铸造成个有用的东西！</li>
+<li>为什么要研究问题呢？因为我们的社会现在正当根本动摇的时候，有许多风俗制度，向来不发生问题的，现在因为不能适应时势的需要，不能使人满意，都渐渐地变成困难的问题，不能不彻底研究，不能不考问旧日的解决法是否错误；如果错了，错在什么地方；错误寻出了，可有什么更好的解决方法；有什么方法可以适应现时的要求。</li>
+<li>凡社会上成为问题的问题，一定是与许多人有密切关系的。这许多人虽然不能提出什么新解决，但是他们平时对于这个问题自然不能不注意。若有人能把这个问题的各方面都细细分析出来，加上评判的研究，指出不满意的所在，提出新鲜的救济方法，自然容易引起许多人的注意。</li>
+<li>研究问题所以能于短时期中发生很大的效力，正因为研究问题有这几种好处：（1）研究社会人生切要的问题最容易引起大家的注意；（2）因为问题关切人生，故最容易引起反对，但反对是该欢迎的，因为反对便是兴趣的表示，况且反对的讨论不但给我们许多不要钱的广告，还可使我们得讨论的益处，使真理格外分明；（3）因为问题是逼人的活问题，故容易使人觉悟，容易得人信从；（4）因为从研究问题里面输入的学理，最容易消除平常人对于学理的抗拒力，最容易使人于不知不觉之中受学理的影响；（5）因为研究问题可以不知不觉地养成一班研究的、评判的、独立思想的革新人才。</li>
+<li>现在有许多人自己不懂得国粹是什么东西，却偏要高谈“保存国粹”。林琴南先生做文章论古文之不当废，他说，“吾知其理而不能言其所以然”！现在许多国粹党，有几个不是这样糊涂懵懂的？这种人如何配谈国粹？若要知道什么是国粹、什么是国渣，先须要用评判的态度、科学的精神，去做一番整理国故的工夫。</li>
+<li>我们今日必须坚决的信仰：五千万失学儿童的救济比五千架飞机的功效至少要大五万倍！</li>
+<li>新生活就是有意思的生活。</li>
+<li>凡是自己说不出“为什么这样做”的事，都是没有意思的生活。反过来说，凡是自己说得出“为什么这样做”的事，都可以说是有意思的生活。</li>
+<li>生活的“为什么”，就是生活的意思。</li>
+<li>说明这个“我”是社会上无数势力所造成的。</li>
+<li>什么是人格？人格只是已养成的行为习惯的总和。什么是信心？信心只是敢于肯定一个不可知的将来的勇气。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/02/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E4%BA%BA%E7%94%9F%E6%9C%89%E4%BD%95%E6%84%8F%E4%B9%89%E3%80%8B_%E8%83%A1%E9%80%82/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/01/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E3%80%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/01/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E3%80%8B/" class="post-title-link" itemprop="url">《架构整洁之道》</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-03-01T00:00:00+08:00">2019-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 22:49:41" itemprop="dateModified" datetime="2020-09-05T22:49:41+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -978,1624 +939,313 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ul>
-<li>做一世莽夫，静待花开。</li>
-<li>习得一身武术，杀尽该杀之人。</li>
-<li>无罪止杀。</li>
-<li>武则安邦，文则治国，文物兼济，千秋万世，达济天下。</li>
-<li>生于此，止于此；死于此，葬于此。此乃吾命。</li>
-<li>少年壮志不言愁。</li>
-<li>上尊苍穹，下抵九幽。</li>
-<li>年轻的心无所畏惧。</li>
-<li>待我云归时，荡尽天下魔。</li>
-<li>天高皇帝远，你奈我何？？</li>
-<li>万般皆求心安。</li>
-<li>哪怕遍体鳞伤，也要去闯一闯。</li>
-<li>苍天无道，人间有情，以凡人之躯扭转这乱世乾坤。</li>
-<li>岂有豪情旧似时。花开花落两由之。何期泪洒江南雨，又为斯民哭健儿。</li>
-<li>现在的一些东西只为存在而活着，没有其意义，何其哀哉！</li>
-<li>生当作人杰，死亦为鬼雄。</li>
-<li>是不是因为太习惯，竟已忘了超越。</li>
-<li>人一生之中，只有死无法抗拒，其余一切皆可争取。在等死中超越。</li>
-<li>人有时候只想静静地呆一会儿，悲伤也成享受。</li>
-<li>时不我待，奋力争先。</li>
-<li>万丈红尘三杯酒，千秋伟业一壶茶。</li>
-<li>远离尘世喧嚣，独享山中恬静。</li>
-<li>泉山泉而居，席卉草而眠。闲居予雅情，独坐思励志。</li>
-<li>风雨止，携道战而归；苍穹怒，拔刀傲相迎。看我少年，征途起——</li>
-<li>蹉跎岁月，少年自励志，峥嵘乱世，壮士平天下。</li>
-<li>君，卿可待乎？</li>
-<li>生当死志，死当生节。</li>
-<li>岁寒不过三月，酷暑亦仅一季，何惜冷热，痛失春秋？</li>
-<li>尘世喧嚣，何得安静之所思壮志？安求沙场杀敌忠报国？</li>
-<li>在其位，不谋其职，何担其位？</li>
-<li>日日行，不怕千万里；常常做，不怕千万事。</li>
-<li>星空如此神秘，岂敢言？唯有畏惧以对。</li>
-<li>崛起于乱世之中，挣扎于纷争之中，安静于喧嚣之中，只为心安。</li>
-<li>这一逆旅之上，笑与泪交加。</li>
-<li>不经意间心灵的绽放，暴露了久违的人。</li>
-<li>梦在未来，活在当下。</li>
-<li>既已脱缰，仍有枷锁加身，这匹马怎能驰骋？</li>
-<li>欲成神，战欲狂！</li>
-<li>有时候，有些路是不会留下记忆的，即使刚刚走过。</li>
-<li>命由天定，境由心造。</li>
-<li>城市有监狱，乡村有春天。</li>
-<li>活在战争中——愿为一卒，死而无憾。。</li>
-<li>刹那永恒，狼将不再是狼。</li>
-<li>风乃万物灵动之源。</li>
-<li>生活往往不尽如自己意，君子当有所为，有所不为。</li>
-<li>彼岸花开，苦渡轮回。</li>
-<li>天下何来良善，世间人人皆魔。</li>
-<li>薄雾丝丝催人醉，细雨蒙蒙惹乡思。</li>
-<li>人生无根蒂，飘若陌上尘。</li>
-<li>雨中轮渡人，万古英雄泪。</li>
-<li>第一步，抬头。第二步，闭眼。这样，眼泪就都流进心里了。</li>
-<li>千万国土未复，三千山河残垣，男儿，你志当何以？护我万万同胞，败尽军军恶敌。</li>
-<li>一世为将，终生为卒。</li>
-<li>山莫大与之，史莫古与之。</li>
-<li>死何以？死以何？何以死？以何死？</li>
-<li>人，永远不会实现最初的梦想。</li>
-<li>习武游江湖，赋诗行天下。</li>
-<li>这天意在哪里？不在别处，就在人心！就在当事者的强毅胆略就在百折不挠的坚韧！威胁在哪里？不在别处，就在自己的心里。</li>
-<li>众生棋局我为卒，天地琴乐吾作弦。</li>
-<li>人生得意须尽欢，莫使金樽空对月。</li>
-<li>脚踏地，头顶天，手缚苍穹，环视乾坤，宇宙洪荒，举世皆可敌。</li>
-<li>岁月极美，在于它必然的流逝，春花、秋月、夏日、冬雪，你若盛开，清风自来。</li>
-<li>天若有情天亦老，月弱无恨月长圆。</li>
-<li>前尘多少事，都付笑谈中。</li>
-<li>一寸山河一寸金，十万青年十万兵。</li>
-<li>人之一生，年幼时如尊风，年少时如狂风，年轻时如飓风，壮年时如龙卷。古稀之年，仿若罡风！古稀之后便是落日黄花，如秋叶般死去。</li>
-<li>少年哀乐过于人，消息都妨父老惊，一事避君君匿笑，欲求缥缈反幽深。</li>
-<li>迟缓的步履之间，自觉很弱，而弱中有一种不可言说的愉快。</li>
-<li>恨不踊身千载上，驱古人未说吾先说。</li>
-<li>晴朗之日，海不扬波，我抱膝沙上，悠然看潮落星生，风雨之日，我倚窗观涛，听浪花怒撼崖石。我闭门读书，以海洋为师，以星月为友。</li>
-<li>大漠残阳，一种辉煌绽放，天涯路，风和着马蹄声响……</li>
-<li>四海无闲田，农夫犹饿死。</li>
-<li>莫欺少年穷。</li>
-<li>水淹大佛膝，火烧凌云窟。</li>
-<li>寂寥浮生，苍老一段年华。</li>
-<li>人到穷时方见节，岁当寒后始为春。</li>
-<li>知足知不足，有为有弗为。</li>
-<li>穷达尽为身外事，升沉不改故人情。</li>
-<li>梦里不知舟在水，满床星梦压星河。</li>
-<li>精兵百万平天下，铁骑万乘定乾坤。</li>
-<li>残阳破，碎云志。</li>
-<li>一世人劳苦奔波有何益，到头来终究须把眼儿闭。</li>
-<li>心节微凉碎天问。</li>
-<li>一缕红尘，怎能缚我一生？</li>
-<li>不为无益之事，何以遣有涯之生。</li>
-<li>千里不单行，万里君莫忧。</li>
-<li>羽翼虽非，初巢永难忘。</li>
-<li>往事如烟俱忘却，心底无私天地宽。</li>
-<li>大丈夫行事，论是非，不论利害；论顺逆，不论成败；论万世，不论一生。</li>
-<li>尘酒，封了万年，殊不知当年葬酒之人，悲痛欲绝。</li>
-<li>万古长青藤，千秋功业名。</li>
-<li>夏日的如水清风，停留在记忆里悲歌。</li>
-<li>时光的剪影里，暖了多少相遇，又惆怅了多少离别。往事穿越时光，打湿了谁的眼角？</li>
-<li>此生——那些已成追忆的人和事，而今还有谁念及？</li>
-<li>怅然若失，是少年皈依真理的时刻 。</li>
-<li>没有人是上天的宠儿，人生谁能一路高歌，我用青春来修行，但却无法看到结果。</li>
-<li>知我者谓我心忧，不知我者谓我何求。</li>
-<li>很多人一开始为了理想而活，可到后来忙得忘了理想。</li>
-<li>出发之前永远是梦想，上路之后永远是挑战。</li>
-<li>心若没有栖息的地方，到哪里都是在流浪。</li>
-<li>为何我的脸上还有笑容，最深的痛也只是沉默。</li>
-<li>有些人，原本是生命的过客，却成了记忆的常客。</li>
-<li>冷雨夜无人在我身边，只有自己挣扎抹泪，泪水流遍全身，身上留下了泪中的湿度。</li>
-<li>哭吧！孩子，一个男子汉守不住自己的功业，应该流一点眼泪。</li>
-<li>不经历一番痛彻骨，怎能换来心飞扬？</li>
-<li>不离日用常行内，直到天地未画前。</li>
-<li>当有一天，我一觉不醒时，世人有谁还记得我，世界会为我停下几秒？或者说，我值得世界的几秒钟？</li>
-<li>当全世界都排斥我喜欢的东西时，我还怎么办？</li>
-<li>当被世界误解时，需要的也仅使把自己也误解，世界就平静了，那我呢？</li>
-<li>心中有座活人墓，墓中葬着未亡人。</li>
-<li>我赌上一切，却败给命运。</li>
-<li>记住了并不代表是永恒，忘记了并不等于没发生，缘起了与你携手望苍穹，缘灭了桃花依旧笑春风。</li>
-<li>故乡对我们很多人来说只剩下了冬天，已经没有了春夏秋!送给那些为了家在外拼搏的朋友……</li>
-<li>苦海翻起爱恨，在这世间难逃避命运。</li>
-<li>不要轻易言佛，佛会怒的；也不要轻易言神，神会怕的。</li>
-<li>连自己的善恶都不能左右，真是莫大的可悲啊！</li>
-<li>心中有王，哪里不是我的领土！</li>
-<li>我的世界不需要我，等待世界陨落。</li>
-<li>我的世界没有我。</li>
-<li>你死了，消失在世间，从人们的记忆中淡化，某个深夜，又是谁？身着华丽的黑暗，试图拯救被阳光灼烧的人们。</li>
-<li>醉一场，抹除了信仰，无惧！枕一夜黑。——醉了？还是睡了？</li>
-<li>信仰——一个人的屈服。</li>
-<li>个人行为与思想无关，思想不应该为行为负责，但行为为思想负责。</li>
-<li>不知梦始，不知梦终，不为梦因，不求梦果，只缘梦中。</li>
-<li>对于过去，重要的不是你做了什么，而是你想做什么，对于未来，重要的不是你想做什么，而是你做了什么。</li>
-<li>不管你信不信，时间总是按照他自己的方式改变一切。</li>
-<li>历史不是让你相信的，他是一种事实。</li>
-<li>一生致力随云散，千古余生空浩叹。</li>
-<li>一个人完美，两个人幸福，一群人快乐。</li>
-<li>天为坟，地为冢，浮命于空。</li>
-<li>不要问我为何如此眷恋，我不再与世界争辩。</li>
-<li>高尚是通向地狱的墓志铭。</li>
-<li>武有蒙恬安天下，文有李斯御九州。</li>
-<li>野渡横舟风雨阻，闲来放酒云留醉。</li>
-<li>醉知酒浓，醒知梦空，忆往昔，最难忘寂寂深夜与伊舞剑抚琴。</li>
-<li>域外天地长飘血，无数骸骨长埋于此，此战之罪？亦是人之醉。</li>
-<li>人生路漫长，指不定谁辉煌。</li>
-<li>彼苍天者，尔独何泣。</li>
-<li>当时光偷走初衷，留下的知识苦衷。于是我总是呆在一段时光里怀念另一段时光。</li>
-<li>祈祷永远停留在等待之中。</li>
-<li>以为蒙上眼睛就可以看不见这个世界，以为捂上耳朵，就可以听不见所有的烦恼，以为脚步停下来，心就可以不再远行，以为需要的爱情只是一个拥抱。很多人，因为寂寞而错爱了一人，但更多的人，因为错爱一人而寂寞一生。</li>
-<li>我的命运贴地而行。</li>
-<li>真心爱你，惹你掉泪。</li>
-<li>红尘乱，黑发扬，手中长刀动霄汉。眸绽冷电，心比铁坚。刀锋所向万里颤。</li>
-<li>天风起，大地颤，胸藏天兵千百万。气吞山河，志压日月，一怒敢让天地乱。</li>
-<li>无聊望见了犹豫，达到理想不太易，即使有信心，斗志却抑制，谁人定我去和留，定我心中的宇宙。</li>
-<li>我曾经豪情万丈，归来却空空的行囊。</li>
-<li>立足故乡虽不思，志存高远论天险。北辰梦回初方近，大步流星登云颠。</li>
-<li>万载一梦今朝醒，抛却三千忆海，忘却诸世情仇，从此不回首。</li>
-<li>江山多娇，英雄多悲。</li>
-<li>当骄阳渐渐远去半月高悬，当霓虹点点闪起昏夜降临，我们拿什么证明自己在这个城市的存在？</li>
-<li>一直执着于可能永远也不会属于我的东西。</li>
-<li>给我一片江湖，我必还天下朗朗乾坤。</li>
-<li>昨日的追逐黯淡了这片时空，昨日的黄昏燃尽了心中热血。</li>
-<li>若有朝一日我忘了一切，请不要怪我，我早已身不由己。</li>
-<li>诸天星辰，那颗为我长明？</li>
-<li>半夜魂归，方知己为他乡客。</li>
-<li>生命中的每次回眸，不知谁在我梦中微笑。</li>
-<li>我一直在想，我到底是喜欢你，还是只是需要一个影子，放在心里让我喜欢。</li>
-<li>掬一帘清泉，映一席幽梦。听一曲琴音，思一人年华。</li>
-<li>你有什么资格去染指别人的生活呢？</li>
-<li>心若累了，天便塌了。</li>
-<li>可怜人何必为难可怜人。</li>
-<li>是谁让我们开心了，又是谁惹我们伤心？</li>
-<li>既然错了，何必再错！</li>
-<li>为何来得如此突然，当我察觉时，早已措手不及。</li>
-<li>不屈！不惧！不畏！不苦！不哭！</li>
-<li>我不可能没有目的的或者，更不会没有目的的去做一件事。</li>
-<li>我不勇敢，谁替我坚强？</li>
-<li>找不到想要的伞，我宁愿坚强！</li>
-<li>年少一段痴狂，成为了今天挥不去的梦。</li>
-<li>或许是不知梦的缘故，流离之人追逐幻影。</li>
-<li>命运撕扯着岁月的年轮，洋装不可一世的成熟。</li>
-<li>是谁动了苍天的眼泪，给世界降下如此大难。</li>
-<li>别以为有如果，就真的会不一样了。</li>
-<li>所有的人和事，自己问心无愧就好，不是你的也别强求，反正离去的的都是风景，留下的才是人生。</li>
-<li>关于明天的事，后天我就知道了，关于后天的事今天的我还不想知道。</li>
-<li>既已看淡一切，为何仍被世间诸事纷扰？</li>
-<li>生活的无奈就在于你相信了生活。</li>
-<li>他紧闭双眼想把记忆聚拢得更近。</li>
-<li>天堂到地狱，我路过人间。</li>
-<li>无所欲，方能无所求。</li>
-<li>一切只是想象，诸多都是幻觉。</li>
-<li>世间匆匆袭来，忘记了昨日的痛。</li>
-<li>理解你生命里的一切，让你的生命得到诠释，你一生寻觅的正是这份宁静。</li>
-<li>是谁匆匆流过，什么也没有带走，为何觉得失去了所有？</li>
-<li>世界越大，人的心越小，就越相信奇迹。</li>
-<li>慢慢地，我们忘记了所有，终于明白了世界的无奈。</li>
-<li>究竟是生活欺骗了我们？还是我们辜负了生活？</li>
-<li>生活给了我们放肆的理由。</li>
-<li>昨天到明天的距离。</li>
-<li>强力世界</li>
-<li>出去转一圈，把梦打碎，再回到这微缩的世界中蜷缩。</li>
-<li>我们憎恨这个世界，又在这个世界中沉沦。</li>
-<li>有故事的人寡言，心却有一片海。</li>
-<li>看不穿世事沧桑，理不尽人性纠缠。</li>
-<li>这一天早已注定，只是来得有点儿出乎意料。</li>
-<li>错过是最美的缘分。</li>
-<li>愿时光停驻，青春如你。</li>
-<li>事有轻重缓急，人有先来后到。</li>
-<li>再炙热的温度也融化不了早已僵化的身躯。</li>
-<li>时光悄悄溜走，一切早已急不可耐。</li>
-<li>难过时吃一颗糖，告诉自己生活是甜的。</li>
-<li>当我们忘记了当初的若言，零落记忆，便是人生。</li>
-<li>夫天地者，万物之逆旅；光阴者，百代之过客。</li>
-<li>传说里，有一种真灵，其名夜，它闭上眼睛时，世界就是它的梦，它睁开眼睛时，梦就苏醒，天地一片苍茫……</li>
-<li>我已在此留恋了很久……</li>
-<li>总有一样事物，当你看到后，会想起一个人。</li>
-<li>我黯淡了神，却永生不忘情。</li>
-<li>问仙一句，为何断凡尘？</li>
-<li>山本无忧，因雪白头；水本无愁，因风起皱。</li>
-<li>前尘若痴，有奈何，回首往事。</li>
+          <p>《架构整洁之道》的阅读摘录</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/01/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E3%80%8B/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/02/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E7%BB%93%E6%9E%84%E6%80%9D%E8%80%83%E5%8A%9B%E3%80%8B_%E6%9D%8E%E5%BF%A0%E7%A7%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/02/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E7%BB%93%E6%9E%84%E6%80%9D%E8%80%83%E5%8A%9B%E3%80%8B_%E6%9D%8E%E5%BF%A0%E7%A7%8B/" class="post-title-link" itemprop="url">《结构思考力》_李忠秋</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-02-28 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-28T00:00:00+08:00">2019-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 22:49:51" itemprop="dateModified" datetime="2020-09-05T22:49:51+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>《结构思考力》的阅读摘录</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/02/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E6%8A%80%E6%9C%AF/%E3%80%8A%E7%BB%93%E6%9E%84%E6%80%9D%E8%80%83%E5%8A%9B%E3%80%8B_%E6%9D%8E%E5%BF%A0%E7%A7%8B/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/02/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%95%85%E4%B9%A1%E5%A4%A9%E4%B8%8B%E9%BB%84%E8%8A%B1%E3%80%8B_%E5%88%98%E9%9C%87%E4%BA%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/02/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%95%85%E4%B9%A1%E5%A4%A9%E4%B8%8B%E9%BB%84%E8%8A%B1%E3%80%8B_%E5%88%98%E9%9C%87%E4%BA%91/" class="post-title-link" itemprop="url">《故乡天下黄花》_刘震云</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-02-28 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-28T00:00:00+08:00">2019-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 22:59:32" itemprop="dateModified" datetime="2020-09-05T22:59:32+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>927</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>《故乡天下黄花》的阅读摘录</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/02/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%95%85%E4%B9%A1%E5%A4%A9%E4%B8%8B%E9%BB%84%E8%8A%B1%E3%80%8B_%E5%88%98%E9%9C%87%E4%BA%91/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/02/23/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E4%B8%AD%E5%9B%BD%E5%A4%AA%E9%98%B3%E3%80%8B_%E5%88%98%E6%85%88%E6%AC%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/02/23/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E4%B8%AD%E5%9B%BD%E5%A4%AA%E9%98%B3%E3%80%8B_%E5%88%98%E6%85%88%E6%AC%A3/" class="post-title-link" itemprop="url">《中国太阳》_刘慈欣</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-02-23 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-23T00:00:00+08:00">2019-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 23:23:37" itemprop="dateModified" datetime="2020-09-05T23:23:37+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>204</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><ul>
+<li>这条路，将通向一个他做梦都想不到的地方。</li>
+<li>这个时代的伟大之处就在于其捉摸不定，谁也不知道奇迹会在谁身上发生。</li>
+<li>第一眼看到首都时，水娃明白了一件事：有些东西你只能在看见后才知道是什么样儿，凭想象是绝对想不出来的。</li>
+<li>事情得从高处才能看清楚。如果你淹没于这座大都市之中，周围的一切是那么纷繁复杂，城市仿佛是一个无边无际的迷宫，但从这高处一看，整座城市不过是一个有一千多万人的大蚂蚁窝罢了，而它周围的世界又是那么广阔。</li>
 </ul>
 
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E7%A7%81%E6%9C%89%E7%AF%87/%E6%AD%A6%E4%BE%A0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%B8%85%E5%8D%95%E7%AF%87/%E7%94%B5%E5%BD%B1%E6%B8%85%E5%8D%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/01/%E6%B8%85%E5%8D%95%E7%AF%87/%E7%94%B5%E5%BD%B1%E6%B8%85%E5%8D%95/" class="post-title-link" itemprop="url">电影清单</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B8%85%E5%8D%95%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">清单篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B8%85%E5%8D%95%E7%AF%87/%E6%B1%87%E6%80%BB/" itemprop="url" rel="index"><span itemprop="name">汇总</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <table>
-<thead>
-<tr>
-<th align="center">序号</th>
-<th align="center">日期</th>
-<th align="center">国家</th>
-<th align="center">电影</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">0001</td>
-<td align="center">2018/01/01</td>
-<td align="center">中国</td>
-<td align="center">《大护法》</td>
-</tr>
-<tr>
-<td align="center">0002</td>
-<td align="center">2018/02/24</td>
-<td align="center">中国</td>
-<td align="center">《红海行动》</td>
-</tr>
-<tr>
-<td align="center">0003</td>
-<td align="center">2018/02/24</td>
-<td align="center">中国</td>
-<td align="center">《捉妖记2》</td>
-</tr>
-<tr>
-<td align="center">0004</td>
-<td align="center">2018/02/24</td>
-<td align="center">中国</td>
-<td align="center">《芳华》</td>
-</tr>
-<tr>
-<td align="center">0005</td>
-<td align="center">2018/02/24</td>
-<td align="center">中国</td>
-<td align="center">《东邪西毒》</td>
-</tr>
-<tr>
-<td align="center">0006</td>
-<td align="center">2018/03/03</td>
-<td align="center">中国</td>
-<td align="center">《奇门遁甲》</td>
-</tr>
-<tr>
-<td align="center">0007</td>
-<td align="center">2018/03/03</td>
-<td align="center">中国</td>
-<td align="center">《妖猫传》</td>
-</tr>
-<tr>
-<td align="center">0008</td>
-<td align="center">2018/03/03</td>
-<td align="center">中国</td>
-<td align="center">《万箭穿心》</td>
-</tr>
-<tr>
-<td align="center">0009</td>
-<td align="center">2018/03/03</td>
-<td align="center">中国</td>
-<td align="center">《十二公民》</td>
-</tr>
-<tr>
-<td align="center">0010</td>
-<td align="center">2018/03/03</td>
-<td align="center">中国</td>
-<td align="center">《百鸟朝凤》</td>
-</tr>
-<tr>
-<td align="center">0011</td>
-<td align="center">2018/03/10</td>
-<td align="center">美国</td>
-<td align="center">《爱乐之城》</td>
-</tr>
-<tr>
-<td align="center">0012</td>
-<td align="center">2018/03/10</td>
-<td align="center">法国</td>
-<td align="center">《放牛班的春天》</td>
-</tr>
-<tr>
-<td align="center">0013</td>
-<td align="center">2018/03/10</td>
-<td align="center">中国</td>
-<td align="center">《风声》</td>
-</tr>
-<tr>
-<td align="center">0014</td>
-<td align="center">2018/03/10</td>
-<td align="center">中国</td>
-<td align="center">《大明劫》</td>
-</tr>
-<tr>
-<td align="center">0015</td>
-<td align="center">2018/03/10</td>
-<td align="center">中国</td>
-<td align="center">《一九四二》</td>
-</tr>
-<tr>
-<td align="center">0016</td>
-<td align="center">2018/03/10</td>
-<td align="center">中国</td>
-<td align="center">《高考1977》</td>
-</tr>
-<tr>
-<td align="center">0017</td>
-<td align="center">2018/03/10</td>
-<td align="center">美国</td>
-<td align="center">《忠犬八公的故事》</td>
-</tr>
-<tr>
-<td align="center">0018</td>
-<td align="center">2018/03/17</td>
-<td align="center">美国</td>
-<td align="center">《与恐龙同行》</td>
-</tr>
-<tr>
-<td align="center">0019</td>
-<td align="center">2018/03/17</td>
-<td align="center">德国</td>
-<td align="center">《窃听风暴》</td>
-</tr>
-<tr>
-<td align="center">0020</td>
-<td align="center">2018/03/17</td>
-<td align="center">美国</td>
-<td align="center">《怦然心动》</td>
-</tr>
-<tr>
-<td align="center">0021</td>
-<td align="center">2018/03/17</td>
-<td align="center">美国</td>
-<td align="center">《超脱》</td>
-</tr>
-<tr>
-<td align="center">0022</td>
-<td align="center">2018/04/05</td>
-<td align="center">意大利</td>
-<td align="center">《天堂电影院》</td>
-</tr>
-<tr>
-<td align="center">0023</td>
-<td align="center">2018/04/05</td>
-<td align="center">美国</td>
-<td align="center">《美国的故事》</td>
-</tr>
-<tr>
-<td align="center">0024</td>
-<td align="center">2018/04/05</td>
-<td align="center">美国</td>
-<td align="center">《搏击俱乐部》</td>
-</tr>
-<tr>
-<td align="center">0025</td>
-<td align="center">2018/04/06</td>
-<td align="center">中国</td>
-<td align="center">《饮食男女》</td>
-</tr>
-<tr>
-<td align="center">0026</td>
-<td align="center">2018/04/06</td>
-<td align="center">丹麦</td>
-<td align="center">《狩猎》</td>
-</tr>
-<tr>
-<td align="center">0027</td>
-<td align="center">2018/04/06</td>
-<td align="center">法国</td>
-<td align="center">《刺猬的优雅》</td>
-</tr>
-<tr>
-<td align="center">0028</td>
-<td align="center">2018/04/15</td>
-<td align="center">美国</td>
-<td align="center">《两杆大烟枪》</td>
-</tr>
-<tr>
-<td align="center">0029</td>
-<td align="center">2018/04/15</td>
-<td align="center">美国</td>
-<td align="center">《触不可及》</td>
-</tr>
-<tr>
-<td align="center">0030</td>
-<td align="center">2018/04/21</td>
-<td align="center">中国</td>
-<td align="center">《心迷宫》</td>
-</tr>
-<tr>
-<td align="center">0031</td>
-<td align="center">2018/04/21</td>
-<td align="center">中国</td>
-<td align="center">《驴得水》</td>
-</tr>
-<tr>
-<td align="center">0032</td>
-<td align="center">2018/04/22</td>
-<td align="center">美国</td>
-<td align="center">《美国美人》</td>
-</tr>
-<tr>
-<td align="center">0033</td>
-<td align="center">2018/04/22</td>
-<td align="center">德国</td>
-<td align="center">《香水：一个谋杀犯的故事》</td>
-</tr>
-<tr>
-<td align="center">0034</td>
-<td align="center">2018/04/29</td>
-<td align="center">美国</td>
-<td align="center">《朗读者》</td>
-</tr>
-<tr>
-<td align="center">0035</td>
-<td align="center">2018/04/29</td>
-<td align="center">中国</td>
-<td align="center">《唐人街探案2》</td>
-</tr>
-<tr>
-<td align="center">0036</td>
-<td align="center">2018/05/06</td>
-<td align="center">意大利</td>
-<td align="center">《请以你的名字呼唤我》</td>
-</tr>
-<tr>
-<td align="center">0037</td>
-<td align="center">2018/07/07</td>
-<td align="center">中国</td>
-<td align="center">《我不是药神》</td>
-</tr>
-<tr>
-<td align="center">0038</td>
-<td align="center">2018/07/28</td>
-<td align="center">中国</td>
-<td align="center">《西虹市首富》</td>
-</tr>
-<tr>
-<td align="center">0039</td>
-<td align="center">2018/09/01</td>
-<td align="center">中国</td>
-<td align="center">《狄仁杰之四大天王》</td>
-</tr>
-<tr>
-<td align="center">0040</td>
-<td align="center">2018/09/01</td>
-<td align="center">美国</td>
-<td align="center">《蚁人2：黄蜂女现身》</td>
-</tr>
-<tr>
-<td align="center">0041</td>
-<td align="center">2018/09/01</td>
-<td align="center">美国</td>
-<td align="center">《瞒天过海：美人计》</td>
-</tr>
-<tr>
-<td align="center">0042</td>
-<td align="center">2018/09/02</td>
-<td align="center">中国</td>
-<td align="center">《一出好戏》</td>
-</tr>
-<tr>
-<td align="center">0043</td>
-<td align="center">2018/09/08</td>
-<td align="center">美国</td>
-<td align="center">《死侍2》</td>
-</tr>
-<tr>
-<td align="center">0044</td>
-<td align="center">2018/09/25</td>
-<td align="center">中国</td>
-<td align="center">《江湖儿女》</td>
-</tr>
-<tr>
-<td align="center">0045</td>
-<td align="center">2018/10/03</td>
-<td align="center">中国</td>
-<td align="center">《影》</td>
-</tr>
-<tr>
-<td align="center">0046</td>
-<td align="center">2018/10/03</td>
-<td align="center">中国</td>
-<td align="center">《追龙》</td>
-</tr>
-<tr>
-<td align="center">0047</td>
-<td align="center">2018/10/04</td>
-<td align="center">中国</td>
-<td align="center">《无双》</td>
-</tr>
-<tr>
-<td align="center">0048</td>
-<td align="center">2018/10/26</td>
-<td align="center">美国</td>
-<td align="center">《铁血战士3》</td>
-</tr>
-<tr>
-<td align="center">0049</td>
-<td align="center">2018/11/24</td>
-<td align="center">美国</td>
-<td align="center">《毒液》</td>
-</tr>
-<tr>
-<td align="center">0050</td>
-<td align="center">2018/12/16</td>
-<td align="center">中国</td>
-<td align="center">《李茶的姑妈》</td>
-</tr>
-<tr>
-<td align="center">0051</td>
-<td align="center">2018/12/20</td>
-<td align="center">中国</td>
-<td align="center">《山河故人》</td>
-</tr>
-<tr>
-<td align="center">0052</td>
-<td align="center">2018/12/22</td>
-<td align="center">美国</td>
-<td align="center">《夜魔侠》</td>
-</tr>
-<tr>
-<td align="center">0053</td>
-<td align="center">2018/12/22</td>
-<td align="center">中国</td>
-<td align="center">《大佛普拉斯》</td>
-</tr>
-<tr>
-<td align="center">0054</td>
-<td align="center">2018/12/22</td>
-<td align="center">中国</td>
-<td align="center">《无问西东》</td>
-</tr>
-<tr>
-<td align="center">0055</td>
-<td align="center">2018/12/23</td>
-<td align="center">日本</td>
-<td align="center">《昼颜》</td>
-</tr>
-<tr>
-<td align="center">0056</td>
-<td align="center">2018/12/30</td>
-<td align="center">中国</td>
-<td align="center">《蜘蛛侠：平行宇宙》</td>
-</tr>
-<tr>
-<td align="center">0057</td>
-<td align="center">2019/01/06</td>
-<td align="center">中国</td>
-<td align="center">《无名之辈》</td>
-</tr>
-<tr>
-<td align="center">0058</td>
-<td align="center">2019/01/12</td>
-<td align="center">中国</td>
-<td align="center">《狗十三》</td>
-</tr>
-<tr>
-<td align="center">0059</td>
-<td align="center">2019/01/13</td>
-<td align="center">美国</td>
-<td align="center">《海王》</td>
-</tr>
-<tr>
-<td align="center">0060</td>
-<td align="center">2019/01/13</td>
-<td align="center">美国</td>
-<td align="center">《无敌破坏王2：大闹互联网》</td>
-</tr>
-<tr>
-<td align="center">0061</td>
-<td align="center">2019/01/13</td>
-<td align="center">中国</td>
-<td align="center">《遥望南方的童年》</td>
-</tr>
-<tr>
-<td align="center">0062</td>
-<td align="center">2019/01/19</td>
-<td align="center">美国</td>
-<td align="center">《大黄蜂》</td>
-</tr>
-<tr>
-<td align="center">0063</td>
-<td align="center">2019/01/20</td>
-<td align="center">美国</td>
-<td align="center">《超人王朝》</td>
-</tr>
-<tr>
-<td align="center">0064</td>
-<td align="center">2019/01/20</td>
-<td align="center">中国</td>
-<td align="center">《白蛇：缘起》</td>
-</tr>
-<tr>
-<td align="center">0065</td>
-<td align="center">2019/02/11</td>
-<td align="center">中国</td>
-<td align="center">《叶问外传：张天志》</td>
-</tr>
-<tr>
-<td align="center">0066</td>
-<td align="center">2019/02/12</td>
-<td align="center">中国</td>
-<td align="center">《邪不压正》</td>
-</tr>
-<tr>
-<td align="center">0067</td>
-<td align="center">2019/02/13</td>
-<td align="center">印度</td>
-<td align="center">《调琴师》</td>
-</tr>
-<tr>
-<td align="center">0068</td>
-<td align="center">2019/02/14</td>
-<td align="center">台湾</td>
-<td align="center">《谁先爱上他的》</td>
-</tr>
-<tr>
-<td align="center">0069</td>
-<td align="center">2019/02/15</td>
-<td align="center">台湾</td>
-<td align="center">《血观音》</td>
-</tr>
-<tr>
-<td align="center">0070</td>
-<td align="center">2019/02/17</td>
-<td align="center">中国</td>
-<td align="center">《流浪地球》</td>
-</tr>
-<tr>
-<td align="center">0071</td>
-<td align="center">2019/02/17</td>
-<td align="center">中国</td>
-<td align="center">《暴裂无声》</td>
-</tr>
-<tr>
-<td align="center">0072</td>
-<td align="center">2019/02/17</td>
-<td align="center">美国</td>
-<td align="center">《神奇动物2：格林德沃之罪》</td>
-</tr>
-<tr>
-<td align="center">0073</td>
-<td align="center">2019/02/21</td>
-<td align="center">荷兰</td>
-<td align="center">《女孩》</td>
-</tr>
-<tr>
-<td align="center">0074</td>
-<td align="center">2019/02/24</td>
-<td align="center">中国</td>
-<td align="center">《四个春天》</td>
-</tr>
-<tr>
-<td align="center">0075</td>
-<td align="center">2019/03/03</td>
-<td align="center">美国</td>
-<td align="center">《阿丽塔：战斗天使》</td>
-</tr>
-<tr>
-<td align="center">0076</td>
-<td align="center">2019/03/09</td>
-<td align="center">美国</td>
-<td align="center">《神奇队长》</td>
-</tr>
-<tr>
-<td align="center">0077</td>
-<td align="center">2019/03/10</td>
-<td align="center">中国</td>
-<td align="center">《七剑下天山之修罗眼》</td>
-</tr>
-<tr>
-<td align="center">0078</td>
-<td align="center">2019/03/15</td>
-<td align="center">中国</td>
-<td align="center">《大人物》</td>
-</tr>
-<tr>
-<td align="center">0079</td>
-<td align="center">2019/03/16</td>
-<td align="center">美国</td>
-<td align="center">《徒手攀岩》</td>
-</tr>
-<tr>
-<td align="center">0080</td>
-<td align="center">2019/03/30</td>
-<td align="center">中国</td>
-<td align="center">《寒战》</td>
-</tr>
-<tr>
-<td align="center">0081</td>
-<td align="center">2019/03/31</td>
-<td align="center">中国</td>
-<td align="center">《廉政风云》</td>
-</tr>
-<tr>
-<td align="center">0082</td>
-<td align="center">2019/04/01</td>
-<td align="center">西班牙</td>
-<td align="center">《海市蜃楼》</td>
-</tr>
-<tr>
-<td align="center">0083</td>
-<td align="center">2019/04/02</td>
-<td align="center">中国</td>
-<td align="center">《寒战2》</td>
-</tr>
-<tr>
-<td align="center">0084</td>
-<td align="center">2019/04/02</td>
-<td align="center">中国</td>
-<td align="center">《反贪风暴》</td>
-</tr>
-<tr>
-<td align="center">0085</td>
-<td align="center">2019/04/03</td>
-<td align="center">中国</td>
-<td align="center">《反贪风暴2》</td>
-</tr>
-<tr>
-<td align="center">0086</td>
-<td align="center">2019/04/04</td>
-<td align="center">中国</td>
-<td align="center">《疯狂的外星人》</td>
-</tr>
-<tr>
-<td align="center">0087</td>
-<td align="center">2019/04/05</td>
-<td align="center">中国</td>
-<td align="center">《飞驰人生》</td>
-</tr>
-<tr>
-<td align="center">0088</td>
-<td align="center">2019/04/05</td>
-<td align="center">中国</td>
-<td align="center">《窃听风云》</td>
-</tr>
-<tr>
-<td align="center">0089</td>
-<td align="center">2019/04/05</td>
-<td align="center">中国</td>
-<td align="center">《窃听风云2》</td>
-</tr>
-<tr>
-<td align="center">0090</td>
-<td align="center">2019/04/06</td>
-<td align="center">中国</td>
-<td align="center">《窃听风云3》</td>
-</tr>
-<tr>
-<td align="center">0091</td>
-<td align="center">2019/04/13</td>
-<td align="center">美国</td>
-<td align="center">《黑镜：潘达斯奈基》</td>
-</tr>
-<tr>
-<td align="center">0092</td>
-<td align="center">2019/04/14</td>
-<td align="center">法国</td>
-<td align="center">《盗梦特攻队》</td>
-</tr>
-<tr>
-<td align="center">0093</td>
-<td align="center">2019/04/14</td>
-<td align="center">美国</td>
-<td align="center">《骡子》</td>
-</tr>
-<tr>
-<td align="center">0094</td>
-<td align="center">2019/04/15</td>
-<td align="center">中国</td>
-<td align="center">《新喜剧之王》</td>
-</tr>
-<tr>
-<td align="center">0095</td>
-<td align="center">2019/04/16</td>
-<td align="center">德国</td>
-<td align="center">《无主之作》</td>
-</tr>
-<tr>
-<td align="center">0096</td>
-<td align="center">2019/05/01</td>
-<td align="center">美国</td>
-<td align="center">《复仇者联盟4:终局之战》</td>
-</tr>
-<tr>
-<td align="center">0097</td>
-<td align="center">2019/05/05</td>
-<td align="center">日本</td>
-<td align="center">《千与千寻》</td>
-</tr>
-<tr>
-<td align="center">0098</td>
-<td align="center">2019/05/05</td>
-<td align="center">印度</td>
-<td align="center">《摔跤吧爸爸》</td>
-</tr>
-<tr>
-<td align="center">0099</td>
-<td align="center">2019/05/06</td>
-<td align="center">中国</td>
-<td align="center">《人间·喜剧》</td>
-</tr>
-<tr>
-<td align="center">0100</td>
-<td align="center">2019/05/07</td>
-<td align="center">中国</td>
-<td align="center">《老师·好》</td>
-</tr>
-<tr>
-<td align="center">0101</td>
-<td align="center">2019/05/07</td>
-<td align="center">日本</td>
-<td align="center">《你的名字》</td>
-</tr>
-<tr>
-<td align="center">0102</td>
-<td align="center">2019/05/12</td>
-<td align="center">意大利</td>
-<td align="center">《灿烂人生》</td>
-</tr>
-<tr>
-<td align="center">0103</td>
-<td align="center">2019/05/12</td>
-<td align="center">印度</td>
-<td align="center">《三傻大闹宝莱坞》</td>
-</tr>
-<tr>
-<td align="center">0104</td>
-<td align="center">2019/05/17</td>
-<td align="center">印度</td>
-<td align="center">《小萝莉的猴神大叔》</td>
-</tr>
-<tr>
-<td align="center">0105</td>
-<td align="center">2019/05/18</td>
-<td align="center">中国</td>
-<td align="center">《三毛流浪记》</td>
-</tr>
-<tr>
-<td align="center">0106</td>
-<td align="center">2019/05/26</td>
-<td align="center">德国</td>
-<td align="center">《我是谁：，没有绝对安全的系统》</td>
-</tr>
-<tr>
-<td align="center">0107</td>
-<td align="center">2019/06/01</td>
-<td align="center">美国</td>
-<td align="center">《大鱼》</td>
-</tr>
-<tr>
-<td align="center">0108</td>
-<td align="center">2019/06/02</td>
-<td align="center">美国</td>
-<td align="center">《极速追杀》</td>
-</tr>
-<tr>
-<td align="center">0109</td>
-<td align="center">2019/06/09</td>
-<td align="center">中国</td>
-<td align="center">《下一任：前任》</td>
-</tr>
-<tr>
-<td align="center">0110</td>
-<td align="center">2019/06/09</td>
-<td align="center">中国</td>
-<td align="center">《反贪风暴4》</td>
-</tr>
-<tr>
-<td align="center">0111</td>
-<td align="center">2019/06/09</td>
-<td align="center">中国</td>
-<td align="center">《毒战》</td>
-</tr>
-<tr>
-<td align="center">0112</td>
-<td align="center">2019/06/09</td>
-<td align="center">美国</td>
-<td align="center">《驯龙高手1》</td>
-</tr>
-<tr>
-<td align="center">0113</td>
-<td align="center">2019/06/09</td>
-<td align="center">美国</td>
-<td align="center">《驯龙高手2》</td>
-</tr>
-<tr>
-<td align="center">0114</td>
-<td align="center">2019/06/10</td>
-<td align="center">美国</td>
-<td align="center">《驯龙高手3》</td>
-</tr>
-<tr>
-<td align="center">0115</td>
-<td align="center">2019/06/15</td>
-<td align="center">中国</td>
-<td align="center">《雪暴》</td>
-</tr>
-<tr>
-<td align="center">0116</td>
-<td align="center">2019/06/15</td>
-<td align="center">美国</td>
-<td align="center">《战犬瑞克斯》</td>
-</tr>
-<tr>
-<td align="center">0117</td>
-<td align="center">2019/06/16</td>
-<td align="center">法国</td>
-<td align="center">《天使爱美丽》</td>
-</tr>
-<tr>
-<td align="center">0118</td>
-<td align="center">2019/06/16</td>
-<td align="center">美国</td>
-<td align="center">《穿条纹睡衣的男孩》</td>
-</tr>
-<tr>
-<td align="center">0119</td>
-<td align="center">2019/06/23</td>
-<td align="center">美国</td>
-<td align="center">《危情十日》</td>
-</tr>
-<tr>
-<td align="center">0120</td>
-<td align="center">2019/06/23</td>
-<td align="center">印度</td>
-<td align="center">《一个母亲的复仇》</td>
-</tr>
-<tr>
-<td align="center">0121</td>
-<td align="center">2019/06/29</td>
-<td align="center">美国</td>
-<td align="center">《蜘蛛侠：英雄远征》</td>
-</tr>
-<tr>
-<td align="center">0121</td>
-<td align="center">2019/06/30</td>
-<td align="center">黎巴嫩</td>
-<td align="center">《何以为家》</td>
-</tr>
-<tr>
-<td align="center">0123</td>
-<td align="center">2019/06/30</td>
-<td align="center">美国</td>
-<td align="center">《撞车》</td>
-</tr>
-<tr>
-<td align="center">0124</td>
-<td align="center">2019/07/28</td>
-<td align="center">中国</td>
-<td align="center">《追龙2》</td>
-</tr>
-<tr>
-<td align="center">0125</td>
-<td align="center">2019/07/30</td>
-<td align="center">中国</td>
-<td align="center">《大鱼海棠》</td>
-</tr>
-<tr>
-<td align="center">0126</td>
-<td align="center">2019/07/31</td>
-<td align="center">中国</td>
-<td align="center">《万万没想到》</td>
-</tr>
-<tr>
-<td align="center">0127</td>
-<td align="center">2019/08/02</td>
-<td align="center">中国</td>
-<td align="center">《风语咒》</td>
-</tr>
-<tr>
-<td align="center">0128</td>
-<td align="center">2019/08/18</td>
-<td align="center">中国</td>
-<td align="center">《欧洲攻略》</td>
-</tr>
-<tr>
-<td align="center">0129</td>
-<td align="center">2019/08/18</td>
-<td align="center">中国</td>
-<td align="center">《哪吒之魔童降世》</td>
-</tr>
-<tr>
-<td align="center">0130</td>
-<td align="center">2019/09/08</td>
-<td align="center">中国</td>
-<td align="center">《北少林》</td>
-</tr>
-<tr>
-<td align="center">0131</td>
-<td align="center">2019/09/08</td>
-<td align="center">中国</td>
-<td align="center">《大醉侠》</td>
-</tr>
-<tr>
-<td align="center">0132</td>
-<td align="center">2019/09/08</td>
-<td align="center">中国</td>
-<td align="center">《杂家小子》</td>
-</tr>
-<tr>
-<td align="center">0133</td>
-<td align="center">2019/09/09</td>
-<td align="center">中国</td>
-<td align="center">《龙拳》</td>
-</tr>
-<tr>
-<td align="center">0134</td>
-<td align="center">2019/09/09</td>
-<td align="center">中国</td>
-<td align="center">《七省拳王》</td>
-</tr>
-<tr>
-<td align="center">0135</td>
-<td align="center">2019/09/09</td>
-<td align="center">中国</td>
-<td align="center">《拳精》</td>
-</tr>
-<tr>
-<td align="center">0136</td>
-<td align="center">2019/09/09</td>
-<td align="center">中国</td>
-<td align="center">《虎辫子》</td>
-</tr>
-<tr>
-<td align="center">0137</td>
-<td align="center">2019/09/10</td>
-<td align="center">中国</td>
-<td align="center">《醉拳》</td>
-</tr>
-<tr>
-<td align="center">0138</td>
-<td align="center">2019/09/10</td>
-<td align="center">中国</td>
-<td align="center">《笑拳怪招》</td>
-</tr>
-<tr>
-<td align="center">0139</td>
-<td align="center">2019/09/11</td>
-<td align="center">中国</td>
-<td align="center">《地道战》</td>
-</tr>
-<tr>
-<td align="center">0140</td>
-<td align="center">2019/09/11</td>
-<td align="center">中国</td>
-<td align="center">《精武门》</td>
-</tr>
-<tr>
-<td align="center">0141</td>
-<td align="center">2019/09/11</td>
-<td align="center">中国</td>
-<td align="center">《蛇鹤八步》</td>
-</tr>
-<tr>
-<td align="center">0142</td>
-<td align="center">2019/09/12</td>
-<td align="center">中国</td>
-<td align="center">《水浒传》</td>
-</tr>
-<tr>
-<td align="center">0143</td>
-<td align="center">2019/09/12</td>
-<td align="center">中国</td>
-<td align="center">《四大门派》</td>
-</tr>
-<tr>
-<td align="center">0144</td>
-<td align="center">2019/09/12</td>
-<td align="center">中国</td>
-<td align="center">《猛龙过江》</td>
-</tr>
-<tr>
-<td align="center">0145</td>
-<td align="center">2019/09/13</td>
-<td align="center">中国</td>
-<td align="center">《少林木人巷》</td>
-</tr>
-<tr>
-<td align="center">0146</td>
-<td align="center">2019/09/13</td>
-<td align="center">中国</td>
-<td align="center">《铁娃》</td>
-</tr>
-<tr>
-<td align="center">0147</td>
-<td align="center">2019/09/13</td>
-<td align="center">中国</td>
-<td align="center">《独臂刀》</td>
-</tr>
-<tr>
-<td align="center">0148</td>
-<td align="center">2019/09/13</td>
-<td align="center">中国</td>
-<td align="center">《少林英雄榜》</td>
-</tr>
-<tr>
-<td align="center">0149</td>
-<td align="center">2019/09/13</td>
-<td align="center">中国</td>
-<td align="center">《女儿国》</td>
-</tr>
-<tr>
-<td align="center">0150</td>
-<td align="center">2019/09/14</td>
-<td align="center">中国</td>
-<td align="center">《酒仙十八跌》</td>
-</tr>
-<tr>
-<td align="center">0151</td>
-<td align="center">2019/09/15</td>
-<td align="center">中国</td>
-<td align="center">《鼠胆英雄》</td>
-</tr>
-<tr>
-<td align="center">0152</td>
-<td align="center">2019/09/15</td>
-<td align="center">中国</td>
-<td align="center">《金蝉脱壳3:恶魔车站》</td>
-</tr>
-<tr>
-<td align="center">0153</td>
-<td align="center">2019/09/15</td>
-<td align="center">中国</td>
-<td align="center">《铁甲战神》</td>
-</tr>
-<tr>
-<td align="center">0154</td>
-<td align="center">2019/09/15</td>
-<td align="center">中国</td>
-<td align="center">《逗爱熊仁镇》</td>
-</tr>
-<tr>
-<td align="center">0155</td>
-<td align="center">2019/09/15</td>
-<td align="center">中国</td>
-<td align="center">《东方秃鹫》</td>
-</tr>
-<tr>
-<td align="center">0156</td>
-<td align="center">2019/09/15</td>
-<td align="center">中国</td>
-<td align="center">《龙虎风云》</td>
-</tr>
-<tr>
-<td align="center">0157</td>
-<td align="center">2019/09/15</td>
-<td align="center">中国</td>
-<td align="center">《喋血双雄》</td>
-</tr>
-<tr>
-<td align="center">0158</td>
-<td align="center">2019/09/17</td>
-<td align="center">中国</td>
-<td align="center">《英雄本色1》</td>
-</tr>
-<tr>
-<td align="center">0159</td>
-<td align="center">2019/09/17</td>
-<td align="center">中国</td>
-<td align="center">《英雄本色2》</td>
-</tr>
-<tr>
-<td align="center">0160</td>
-<td align="center">2019/09/18</td>
-<td align="center">中国</td>
-<td align="center">《英雄本色3》</td>
-</tr>
-<tr>
-<td align="center">0161</td>
-<td align="center">2019/09/20</td>
-<td align="center">中国</td>
-<td align="center">《封神传奇》</td>
-</tr>
-<tr>
-<td align="center">0162</td>
-<td align="center">2019/09/20</td>
-<td align="center">中国</td>
-<td align="center">《蜀山传》</td>
-</tr>
-<tr>
-<td align="center">0163</td>
-<td align="center">2019/09/20</td>
-<td align="center">中国</td>
-<td align="center">《笑功震武林》</td>
-</tr>
-<tr>
-<td align="center">0164</td>
-<td align="center">2019/09/21</td>
-<td align="center">中国</td>
-<td align="center">《使徒行者》</td>
-</tr>
-<tr>
-<td align="center">0165</td>
-<td align="center">2019/09/21</td>
-<td align="center">中国</td>
-<td align="center">《画壁》</td>
-</tr>
-<tr>
-<td align="center">0166</td>
-<td align="center">2019/09/21</td>
-<td align="center">中国</td>
-<td align="center">《大追捕》</td>
-</tr>
-<tr>
-<td align="center">0167</td>
-<td align="center">2019/09/21</td>
-<td align="center">中国</td>
-<td align="center">《侠圣》</td>
-</tr>
-<tr>
-<td align="center">0168</td>
-<td align="center">2019/09/21</td>
-<td align="center">中国</td>
-<td align="center">《天下无贼》</td>
-</tr>
-<tr>
-<td align="center">0169</td>
-<td align="center">2019/09/22</td>
-<td align="center">中国</td>
-<td align="center">《国产零零漆》</td>
-</tr>
-<tr>
-<td align="center">0170</td>
-<td align="center">2019/09/22</td>
-<td align="center">中国</td>
-<td align="center">《宝贝计划》</td>
-</tr>
-<tr>
-<td align="center">0171</td>
-<td align="center">2019/09/22</td>
-<td align="center">中国</td>
-<td align="center">《使徒行者2》</td>
-</tr>
-<tr>
-<td align="center">0172</td>
-<td align="center">2019/09/27</td>
-<td align="center">中国</td>
-<td align="center">《龙牌之谜》</td>
-</tr>
-<tr>
-<td align="center">0173</td>
-<td align="center">2019/10/04</td>
-<td align="center">中国</td>
-<td align="center">《一步之遥》</td>
-</tr>
-<tr>
-<td align="center">0174</td>
-<td align="center">2019/10/04</td>
-<td align="center">美国</td>
-<td align="center">《天生一对》</td>
-</tr>
-<tr>
-<td align="center">0175</td>
-<td align="center">2019/10/29</td>
-<td align="center">中国</td>
-<td align="center">《银河补习班》</td>
-</tr>
-<tr>
-<td align="center">0176</td>
-<td align="center">2019/11/02</td>
-<td align="center">美国</td>
-<td align="center">《终结者6：黑暗命运》</td>
-</tr>
-<tr>
-<td align="center">0177</td>
-<td align="center">2019/11/16</td>
-<td align="center">美国</td>
-<td align="center">《X战警：黑凤凰》</td>
-</tr>
-<tr>
-<td align="center">0178</td>
-<td align="center">2019/11/17</td>
-<td align="center">美国</td>
-<td align="center">《全球风暴》</td>
-</tr>
-<tr>
-<td align="center">0179</td>
-<td align="center">2019/11/17</td>
-<td align="center">印度</td>
-<td align="center">《宝莱坞机器人2.0:重生归来》</td>
-</tr>
-<tr>
-<td align="center">0180</td>
-<td align="center">2019/11/17</td>
-<td align="center">中国</td>
-<td align="center">《犯罪现场》</td>
-</tr>
-<tr>
-<td align="center">0181</td>
-<td align="center">2019/12/15</td>
-<td align="center">中国</td>
-<td align="center">《厉害了，我的国》</td>
-</tr>
-<tr>
-<td align="center">0182</td>
-<td align="center">2019/12/15</td>
-<td align="center">中国</td>
-<td align="center">《我和我的祖国》</td>
-</tr>
-<tr>
-<td align="center">0183</td>
-<td align="center">2019/12/15</td>
-<td align="center">中国</td>
-<td align="center">《攀登者》</td>
-</tr>
-<tr>
-<td align="center">0184</td>
-<td align="center">2019/12/15</td>
-<td align="center">中国</td>
-<td align="center">《催眠·裁决》</td>
-</tr>
-<tr>
-<td align="center">0185</td>
-<td align="center">2019/12/16</td>
-<td align="center">中国</td>
-<td align="center">《古田军号》</td>
-</tr>
-<tr>
-<td align="center">0186</td>
-<td align="center">2019/12/17</td>
-<td align="center">美国</td>
-<td align="center">《生死狙击》</td>
-</tr>
-<tr>
-<td align="center">0187</td>
-<td align="center">2019/12/20</td>
-<td align="center">中国</td>
-<td align="center">《激战》</td>
-</tr>
-<tr>
-<td align="center">0188</td>
-<td align="center">2019/12/21</td>
-<td align="center">美国</td>
-<td align="center">《源代码》</td>
-</tr>
-<tr>
-<td align="center">0189</td>
-<td align="center">2019/12/21</td>
-<td align="center">美国</td>
-<td align="center">《超人集中营》</td>
-</tr>
-<tr>
-<td align="center">0190</td>
-<td align="center">2019/12/21</td>
-<td align="center">美国</td>
-<td align="center">《超凡战队》</td>
-</tr>
-<tr>
-<td align="center">0191</td>
-<td align="center">2019/12/27</td>
-<td align="center">中国</td>
-<td align="center">《中国机长》</td>
-</tr>
-<tr>
-<td align="center">0192</td>
-<td align="center">2019/12/28</td>
-<td align="center">美国</td>
-<td align="center">《双子杀手》</td>
-</tr>
-<tr>
-<td align="center">0193</td>
-<td align="center">2019/12/29</td>
-<td align="center">中国</td>
-<td align="center">《你是凶手》</td>
-</tr>
-<tr>
-<td align="center">0194</td>
-<td align="center">2019/12/29</td>
-<td align="center">美国</td>
-<td align="center">《神奇燕尾服》</td>
-</tr>
-<tr>
-<td align="center">0195</td>
-<td align="center">2019/12/29</td>
-<td align="center">中国</td>
-<td align="center">《误杀》</td>
-</tr>
-<tr>
-<td align="center">0196</td>
-<td align="center">2019/12/30</td>
-<td align="center">中国</td>
-<td align="center">《龙拳小子》</td>
-</tr>
-<tr>
-<td align="center">0197</td>
-<td align="center">2019/12/31</td>
-<td align="center">中国</td>
-<td align="center">《来电狂响》</td>
-</tr>
-<tr>
-<td align="center">0198</td>
-<td align="center">2019/01/04</td>
-<td align="center">意大利</td>
-<td align="center">《美丽人生》</td>
-</tr>
-</tbody></table>
-<p>二凤</p>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E6%B8%85%E5%8D%95%E7%AF%87/%E7%94%B5%E5%BD%B1%E6%B8%85%E5%8D%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%B8%85%E5%8D%95%E7%AF%87/2018/2018%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/01/%E6%B8%85%E5%8D%95%E7%AF%87/2018/2018%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">2018年终总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B8%85%E5%8D%95%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">清单篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B8%85%E5%8D%95%E7%AF%87/2018/" itemprop="url" rel="index"><span itemprop="name">2018</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="2018-我有故事，也有酒"><a href="#2018-我有故事，也有酒" class="headerlink" title="2018 我有故事，也有酒"></a>2018 我有故事，也有酒</h1><hr>
-<p><strong>你以后读书的时候,不要时时刻刻都去咬文嚼字,若是遇到了瓶颈,不妨先退一步,再登高数步,尽量往高处走一走,不登山峰,不显平地。</strong></p>
-<hr>
-<p>还是第一次自发的写这类总结类的东西，总感觉怪怪的，开始写的时候无从下手，写完之后又是改了又改，最终还是个四不像……当然了，现在做的总结肯定是站在上帝角度去看待那些已经发生的事情，不过就得这样去反思2018一整年。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E6%B8%85%E5%8D%95%E7%AF%87/2018/2018%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/#more" rel="contents">
+              <a class="btn" href="/2019/02/23/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E4%B8%AD%E5%9B%BD%E5%A4%AA%E9%98%B3%E3%80%8B_%E5%88%98%E6%85%88%E6%AC%A3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2618,7 +1268,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/21/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/23/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2684,20 +1334,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">331</span>
+          <span class="site-state-item-count">359</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">68</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -2738,12 +1388,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">711k</span>
+    <span title="站点总字数">734k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10:47</span>
+    <span title="站点阅读时长">11:07</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
