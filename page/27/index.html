@@ -192,6 +192,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/String/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/String/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">String、StringBuffer、StringBuilder的区别</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/String/" itemprop="url" rel="index"><span itemprop="name">String</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>614</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="String、StringBuffer、StringBuilder的区别："><a href="#String、StringBuffer、StringBuilder的区别：" class="headerlink" title="String、StringBuffer、StringBuilder的区别："></a>String、StringBuffer、StringBuilder的区别：</h1><p><strong>运行速度：StringBuiler&gt;StringBuffer&gt;String</strong><br>String最慢的原因是String是字符串常量，而StringBuffer和StringBuilder是字符串变量，即String对象一旦创建之后该对象时不可更改的，但后两者的对象时变量，是可以更改的。对变量的操作其实就是对对象的修改，而不用创建和回收的操作，所以速度比String快。</p>
+<ul>
+<li>String是字符串常量，StringBuffer和StringBuilder都是字符串变量，后两者的字符内容可变，而前者创建后的内容不可变</li>
+<li>String不可变的原因是在JDK中String类被声明为一个final类</li>
+<li>StringBuffer是线程安全的，而StringBuilder是非线程安全的</li>
+<li>线程安全会带来额外的系统开销，所以StringBuilder的效率是最高的。如果对系统中的线程是否安全无法掌握，可以使用StringBuffer，在线程不安全的地方加上关键字Synchronized。</li>
+<li>String、StringBuilder、StringBuffer的实际区别可以通过对字符串的值进行修改，然后观察hashCode的值判断，String的hashCode在值发生变化之后的hashCode也发生变化。而StringBuilder和StringBuffer则不回发生变化。</li>
+</ul>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/String/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%A4%9A%E7%BA%BF%E7%A8%8B/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1178,126 +1289,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E3%80%81%E6%8E%A5%E5%8F%A3%E3%80%81%E6%99%AE%E9%80%9A%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E3%80%81%E6%8E%A5%E5%8F%A3%E3%80%81%E6%99%AE%E9%80%9A%E7%B1%BB/" class="post-title-link" itemprop="url">抽象类、接口、普通类</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>抽象类就像是一个模版，各个子类按照抽象类进行实现，可以抽象类的方法，也可以添加自己的方法。</li>
-<li>抽象类使用来捕捉子类的抽象方法，它不能被实例化。只能作为子类地超类，抽象类是被用来创建继承层级里子类的模版。</li>
-<li>接口是抽象方法的集合。如果一个类实现了某个接口，那么他就继承了这个接口的抽象方法，这就像契约模式，如果实现了这个接口，就必须确保诗这些方法。接口只是一种形式，接口本身不能实现任何事情。</li>
-</ul>
-<h1 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h1><ul>
-<li>抽象方法：抽象方法只有声明，没有具体的实现。接口中的方法都是抽象方法。抽象方法必须要有abstract方法进行修饰。如果一个类含有抽象方法，则称这个类为抽象类，抽象类前必须也要用abstract进行修饰。由于抽象类中含有无具体实现的方法（抽象方法）。所以抽象类不能通过new方法来创建对象，也不能利用java反射进行创建对象。</li>
-<li>抽象类的定义是包含抽象方法的类，但是抽象类不一定必须包含抽象方法。</li>
-<li>抽象类是为了继承存在的，因为抽象类不能自己去创建对象。所以通过子类去继承抽象类的方法来使用抽象类。</li>
-<li>对于一个父类，如果一个方法在父类中实现没有任何意义，必须根据子类的实际需求来进行不同的实现，那么就可以将这个方法声明为抽象方法，这个类也即抽象类。</li>
-<li>包含抽象方法的类是抽象类，但是抽象类不只包含抽象方法，同样也可以拥有成员变量和普通的成员方法。</li>
-</ul>
-<h1 id="接口："><a href="#接口：" class="headerlink" title="接口："></a>接口：</h1><ul>
-<li>借口泛指供别人调用的方法或函数。接口是对行为的抽象。</li>
-<li>接口类中可以含有自己的变量和方法，但是需要注意，接口中的变量会被隐式的指定为public static final变量（并且只能是public static final变量，用private修饰会报编译错误），接口中的方法会被隐式的指定为public abstract方法（其他关键字，植入private，protected、static final等修饰都会报编译错误）。并且接口中的方法都不能有具体的实现。接口中的所有方法都必须是抽象方法。</li>
-<li>接口是一种极度的抽象，比抽象类更抽象的类。一般情况下也不在接口中定义变量。</li>
-<li>一个类允许实现多个接口，如果一个类实现了某个接口，就必须实现这个接口中的所有方法，对于遵循某个接口的抽象类，可以不实现接口中的抽象方法。在子类继承抽象类的时候自然会实现该方法。</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E3%80%81%E6%8E%A5%E5%8F%A3%E3%80%81%E6%99%AE%E9%80%9A%E7%B1%BB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1367,7 +1358,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">359</span>
+          <span class="site-state-item-count">360</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
