@@ -192,6 +192,216 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/java%E5%9F%BA%E7%A1%80(%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/java%E5%9F%BA%E7%A1%80(%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0)/" class="post-title-link" itemprop="url">java基础（为知笔记）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>35k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>31 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<h4 id="1-面向对象的特征"><a href="#1-面向对象的特征" class="headerlink" title="1. 面向对象的特征"></a>1. 面向对象的特征</h4><hr>
+<ul>
+<li>抽象<br>抽象就是忽略一个主题中与当前目标无关的那些方面，以便能够更充分地注意与当前目标有关的方面，抽象并不打算了解全部问题，而只是先泽其中的一部分，暂时不用部分细节。抽象包括两个方面，一个是过程抽象，一个是数据抽象。</li>
+<li>继承<br>继承是一种连结类的层次模型，并且允许和鼓励类的重用，他提供了一个明确表述共性的方法。对象的一个新类可以从现有的类中派生，这个过程叫做类继承。新类继承类了原始类的特性，新类称为原始类的派生类或子类，而原始类则称为新类的基类或父类。派生类可以从他的基类那里继承方法和实例变量，并且类可以修改或增加信的方法使之更适合特殊的需要。</li>
+<li>封装<br>封装把过程和数据包围起来，对数据的访问只能通过已定义的界面。面向对象计算适于这个基本概念，即显示世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象。</li>
+<li>多态<br>多态性是指允许不通类的对象对同一消息作出响应。多态性包括参数化多态性和包含多态性。多态性语言具有灵活、抽象、行为共享、代码共享的优势，很好的解决了应用程序函数同名问题。</li>
+</ul>
+<hr>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/java%E5%9F%BA%E7%A1%80(%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0)/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2018/12/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%9B%9B%E4%B8%96%E5%90%8C%E5%A0%82%E3%80%8B_%E8%80%81%E8%88%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%9B%9B%E4%B8%96%E5%90%8C%E5%A0%82%E3%80%8B_%E8%80%81%E8%88%8D/" class="post-title-link" itemprop="url">《四世同堂》_老舍</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-28 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-28T00:00:00+08:00">2018-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 23:37:21" itemprop="dateModified" datetime="2020-09-05T23:37:21+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>《四世同堂》的阅读摘录</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/28/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%9B%9B%E4%B8%96%E5%90%8C%E5%A0%82%E3%80%8B_%E8%80%81%E8%88%8D/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2018/12/27/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E4%BD%A0%E7%9A%84%E5%96%84%E8%89%AF%E5%BF%85%E9%A1%BB%E6%9C%89%E7%82%B9%E9%94%8B%E8%8A%92%E3%80%8B_%E6%85%95%E8%A8%80%E6%AD%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -980,208 +1190,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2018/10/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%9F%A5%E6%8B%89%E5%9B%BE%E6%96%AF%E7%89%B9%E6%8B%89%E5%A6%82%E6%98%AF%E8%AF%B4%E3%80%8B_%E5%B0%BC%E9%87%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/10/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%9F%A5%E6%8B%89%E5%9B%BE%E6%96%AF%E7%89%B9%E6%8B%89%E5%A6%82%E6%98%AF%E8%AF%B4%E3%80%8B_%E5%B0%BC%E9%87%87/" class="post-title-link" itemprop="url">《查拉图斯特拉如是说》_尼采</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-10-14 00:00:00" itemprop="dateCreated datePublished" datetime="2018-10-14T00:00:00+08:00">2018-10-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 22:53:55" itemprop="dateModified" datetime="2020-09-05T22:53:55+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>8.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>《查拉图斯特拉如是说》的阅读摘录</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/10/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E6%9F%A5%E6%8B%89%E5%9B%BE%E6%96%AF%E7%89%B9%E6%8B%89%E5%A6%82%E6%98%AF%E8%AF%B4%E3%80%8B_%E5%B0%BC%E9%87%87/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2018/10/13/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%9C%A8%E8%AF%BB/%E3%80%8A%E8%8D%80%E5%AD%90%E5%85%A8%E9%89%B4%E3%80%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/10/13/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%9C%A8%E8%AF%BB/%E3%80%8A%E8%8D%80%E5%AD%90%E5%85%A8%E9%89%B4%E3%80%8B/" class="post-title-link" itemprop="url">《荀子全鉴》</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-10-13 00:00:00" itemprop="dateCreated datePublished" datetime="2018-10-13T00:00:00+08:00">2018-10-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 23:36:45" itemprop="dateModified" datetime="2020-09-05T23:36:45+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>69k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1:03</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>《荀子全鉴》的阅读摘录</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/10/13/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%9C%A8%E8%AF%BB/%E3%80%8A%E8%8D%80%E5%AD%90%E5%85%A8%E9%89%B4%E3%80%8B/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/30/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><span class="page-number current">31</span><a class="page-number" href="/page/32/">32</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/32/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/30/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><span class="page-number current">31</span><a class="page-number" href="/page/32/">32</a><span class="space">&hellip;</span><a class="page-number" href="/page/37/">37</a><a class="extend next" rel="next" href="/page/32/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1247,7 +1259,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">360</span>
+          <span class="site-state-item-count">362</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1301,12 +1313,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">738k</span>
+    <span title="站点总字数">739k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:11</span>
+    <span title="站点阅读时长">11:12</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
