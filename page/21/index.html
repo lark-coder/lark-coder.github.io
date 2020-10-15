@@ -192,6 +192,268 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">mysql特殊语法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-18 14:59:01" itemprop="dateCreated datePublished" datetime="2019-03-18T14:59:01+08:00">2019-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-查询mysql空间"><a href="#1-查询mysql空间" class="headerlink" title="1. 查询mysql空间"></a>1. 查询mysql空间</h1><ul>
+<li>数据库空间大小<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROUND</span>(<span class="keyword">SUM</span>(DATA_LENGTH/<span class="number">1024</span>/<span class="number">1024</span>),<span class="number">2</span>) <span class="keyword">FROM</span> INFORMATION_SCHEMA.TABLES <span class="keyword">WHERE</span> TABLE_SCHEMA=<span class="string">&#x27;SINO_DXP&#x27;</span> </span><br></pre></td></tr></table></figure></li>
+<li>数据表空间大小<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROUND</span>(<span class="keyword">SUM</span>(DATA_LENGTH/<span class="number">1024</span>/<span class="number">1024</span>),<span class="number">2</span>) <span class="keyword">FROM</span> INFORMATION_SCHEMA.TABLES <span class="keyword">WHERE</span> TABLE_SCHEMA=<span class="string">&#x27;SINO_DXP&#x27;</span> <span class="keyword">AND</span> TABLE_NAME=<span class="string">&#x27;DXP_INTERFACE_FIELD&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="2-mysql备份数据库"><a href="#2-mysql备份数据库" class="headerlink" title="2. mysql备份数据库"></a>2. mysql备份数据库</h1><ul>
+<li>全库备份<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -ppassword database &gt; /usr/backup/20180621/database.sql</span><br></pre></td></tr></table></figure></li>
+<li>单表备份<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u用户名 -p密码 数据库名 表名 <span class="comment">--where=&quot;筛选条件&quot; &gt; 导出文件路径</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="3-查询数据库中的表"><a href="#3-查询数据库中的表" class="headerlink" title="3. 查询数据库中的表"></a>3. 查询数据库中的表</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-title-link" itemprop="url">数据库的概念</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-18 14:59:01" itemprop="dateCreated datePublished" datetime="2019-03-18T14:59:01+08:00">2019-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>861</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="数据库是什么"><a href="#数据库是什么" class="headerlink" title="数据库是什么?"></a>数据库是什么?</h3><p>数据库（Database）是按照数据结构来组织、存储和管理数据的建立在计算机存储设备上的仓库。<br>    简单来说就是本身可视为电子化的文件柜——存储电子文件的处所，用户可以对文件中的数据进行新增、截取、更新、删除等操作。<br>    严格来说，数据库是长期存储在计算机内、可组织的、可共享的数据集合。数据库中的数据指的是以一定的数据模型组织、描述和存储在一起、尽可能小的冗余度、较高的数据独立性和易扩展性的特点并可在一定范围内为多个用户共享。这样的数据集合具有以下特点：尽可能不重复、以最优方式为某个特定组织的多种应用服务，其数据结构独立语使用他的应用程序，对数据的增删改查由统一软件进行管理和控制。<br>数据库是数据管理的高级阶段，它是由文件管理系统发展起来的。</p>
+<ol>
+<li><p>本质特征<br> 永久存储、有组织、可共享</p>
+</li>
+<li><p>目标特征<br> 较小的冗余度、较高的独立性、较好的扩展性</p>
+</li>
+<li><p>主要功能<br> 数据定义功能（DDL）、数据操纵功能（DML）、数据控制功能</p>
+</li>
+<li><p>数据模型的三要素</p>
+<ul>
+<li>数据结构、数据操作、数据完整性规则</li>
+</ul>
+</li>
+<li><p>数据类型<br> 层次模型、网状模型、关系模型</p>
+</li>
+<li><p>三级模式<br> 模式（逻辑模式）、外模式（子模式）、内模式（物理模式、存储模式）</p>
+</li>
+<li><p>二级映像<br> 模式到外模式的映像、内模式到模式的映像</p>
+</li>
+<li><p>关系操作语言<br> 关系代数、SQL、关系演算</p>
+</li>
+<li><p>关系的完整性<br> 实体完整性、参照完整性、用户自定义完整性</p>
+</li>
+<li><p>关系代数中传统的集合运算包括：并、交、差、积。</p>
+</li>
+<li><p>关系代数中专门的关系运算包括：选择、投影、连接、除。</p>
+</li>
+<li><p>两个实体之间的联系类型<br>一对一、一对多、多对多。</p>
+</li>
+<li><p>封锁的类型有：<br>排他锁（X锁）、共享锁（S锁）。</p>
+</li>
+<li><p>意向锁的种类<br>意向共享锁（IS）、意向排他锁（IX）。共享意向排他锁（SIX）。</p>
+</li>
+<li><p>数据依赖的类型有<br>函数依赖、多值依赖、连接依赖。</p>
+</li>
+<li><p>“不好”的关系模式存在的主要问题包括<br>插入异常、删除异常、较大的冗余。</p>
+</li>
+<li><p>在E-R图设计时，常用的三种抽象是：<br>分类、概括、聚集。</p>
+</li>
+<li><p>E-R图合并时，常见的三种冲突是：<br>属性冲突、命名冲突、结构冲突</p>
+</li>
+<li><p>数据库的存储控制包括：<br>自助存储控制、强制存储控制。</p>
+</li>
+<li><p>数据库的SQL语言中，授予权限的命令是：grant；</p>
+</li>
+<li><p>回收权限的命令是：revoke。 </p>
+</li>
+</ol>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%BE%BE%E6%A2%A6%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1056,217 +1318,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/String%E7%9A%84subString()%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/String%E7%9A%84subString()%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">String的substring()方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-16 21:37:01" itemprop="dateCreated datePublished" datetime="2019-03-16T21:37:01+08:00">2019-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/" itemprop="url" rel="index"><span itemprop="name">工具类</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>248</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//任意长度的字符串，截取前1024个字符</span></span><br><span class="line">String str = <span class="string">&quot;abcdefg&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 错误处理，可能会报异常</span></span><br><span class="line"><span class="comment"> * java.lang.StringIndexOutOfBoundsException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">str.substring(<span class="number">0</span>,<span class="number">1024</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//正确处理</span></span><br><span class="line"><span class="keyword">if</span>(str.length()&gt;<span class="number">1024</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> str.substring(<span class="number">0</span>,<span class="number">1024</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/String%E7%9A%84subString()%E6%96%B9%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E5%88%86%E6%A8%A1%E5%9D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E5%88%86%E6%A8%A1%E5%9D%97/" class="post-title-link" itemprop="url">springboot分模块</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-16 21:37:01" itemprop="dateCreated datePublished" datetime="2019-03-16T21:37:01+08:00">2019-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/" itemprop="url" rel="index"><span itemprop="name">springboot</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="配置流程"><a href="#配置流程" class="headerlink" title="配置流程"></a>配置流程</h1><h2 id="1-首先新建一个springboot项目，只保留这个项目中的pom-xml文件即可"><a href="#1-首先新建一个springboot项目，只保留这个项目中的pom-xml文件即可" class="headerlink" title="1.首先新建一个springboot项目，只保留这个项目中的pom.xml文件即可"></a>1.首先新建一个springboot项目，只保留这个项目中的pom.xml文件即可</h2><h2 id="2-配置父项目的pom文件"><a href="#2-配置父项目的pom文件" class="headerlink" title="2.配置父项目的pom文件"></a>2.配置父项目的pom文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 基本信息 --&gt;</span><br><span class="line">&lt;description&gt;muyu&#39;s springboot&lt;&#x2F;description&gt;</span><br><span class="line">&lt;modelVersion&gt;4.0.0&lt;&#x2F;modelVersion&gt;</span><br><span class="line">&lt;name&gt;cavalry&lt;&#x2F;name&gt;</span><br><span class="line">&lt;packaging&gt;pom&lt;&#x2F;packaging&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 项目说明：这里作为聚合工程的父工程 --&gt;</span><br><span class="line">&lt;groupId&gt;com.muyu&lt;&#x2F;groupId&gt;</span><br><span class="line">&lt;artifactId&gt;cavalry&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;version&gt;0.0.1-SNAPSHOT&lt;&#x2F;version&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 继承说明：这里继承SpringBoot提供的父工程 --&gt;</span><br><span class="line">&lt;parent&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-parent&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.5.4.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;relativePath&#x2F;&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">&lt;&#x2F;parent&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 模块说明：这里声明多个子模块 --&gt;</span><br><span class="line">&lt;modules&gt;</span><br><span class="line">    &lt;module&gt;leetcode&lt;&#x2F;module&gt;</span><br><span class="line">    &lt;module&gt;design-attern&lt;&#x2F;module&gt;</span><br><span class="line">    &lt;module&gt;mvc-platform&lt;&#x2F;module&gt;</span><br><span class="line">    &lt;module&gt;sharding-sphere-platform&lt;&#x2F;module&gt;</span><br><span class="line">&lt;&#x2F;modules&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 配置各个子模块的依赖--&gt;</span><br><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.cavalry.coder&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;coder-web&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;project.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.cavalry.coder&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;coder-service&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;project.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.cavalry.coder&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;coder-repository&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;project.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.cavalry.coder&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;coder-entity&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;project.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.cavalry.coder&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;coder-common&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;project.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">    &lt;&#x2F;dependencies&gt;</span><br><span class="line">&lt;&#x2F;dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="3-点击父项目，新建module"><a href="#3-点击父项目，新建module" class="headerlink" title="3.点击父项目，新建module"></a>3.点击父项目，新建module</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/16/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/springboot/springboot%E5%88%86%E6%A8%A1%E5%9D%97/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1336,7 +1387,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">364</span>
+          <span class="site-state-item-count">366</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1390,12 +1441,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">742k</span>
+    <span title="站点总字数">745k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:15</span>
+    <span title="站点阅读时长">11:17</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>

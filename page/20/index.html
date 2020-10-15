@@ -192,6 +192,212 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/JAVA%E8%8E%B7%E5%8F%96%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/JAVA%E8%8E%B7%E5%8F%96%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/" class="post-title-link" itemprop="url">Java获取操作系统信息</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-18 15:24:01" itemprop="dateCreated datePublished" datetime="2019-03-18T15:24:01+08:00">2019-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/" itemprop="url" rel="index"><span itemprop="name">工具类</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;  </span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;  </span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;  </span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;  </span><br><span class="line"><span class="keyword">import</span> java.net.NetworkInterface;  </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;  </span><br><span class="line"><span class="keyword">import</span> java.util.Formatter;  </span><br><span class="line"><span class="keyword">import</span> java.util.List;  </span><br><span class="line"><span class="keyword">import</span> java.util.Locale;  </span><br><span class="line"><span class="keyword">import</span> java.util.Map;  </span><br><span class="line"><span class="keyword">import</span> java.util.Properties;  </span><br><span class="line">publicclass getComputer &#123;  </span><br><span class="line"><span class="comment">//通过截取cmd流方式得到计算机的配置信息(不好)</span></span><br><span class="line"><span class="function">publicstatic List <span class="title">getIpAddress</span><span class="params">()</span></span>&#123;  </span><br><span class="line">        Process p = <span class="keyword">null</span>;  </span><br><span class="line">        List address  = <span class="keyword">new</span> ArrayList();  </span><br><span class="line"><span class="keyword">try</span>&#123;  </span><br><span class="line">            p = <span class="keyword">new</span> ProcessBuilder(<span class="string">&quot;ipconfig&quot;</span>,<span class="string">&quot;/all&quot;</span>).start();  </span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;  </span><br><span class="line"><span class="keyword">return</span> address;  </span><br><span class="line">        &#125;  </span><br><span class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer();  </span><br><span class="line"><span class="comment">//读取进程输出值</span></span><br><span class="line">        InputStream inputStream = p.getInputStream();  </span><br><span class="line">        BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(inputStream));  </span><br><span class="line">        String s = <span class="string">&quot;&quot;</span>;  </span><br><span class="line"><span class="keyword">try</span>&#123;  </span><br><span class="line"><span class="keyword">while</span>((s=br.readLine())!=<span class="keyword">null</span>)&#123;  </span><br><span class="line">                sb.append(s+<span class="string">&quot;\n&quot;</span>);  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;  </span><br><span class="line"><span class="keyword">try</span>&#123;  </span><br><span class="line">                inputStream.close();  </span><br><span class="line">            &#125;<span class="keyword">catch</span>(Exception e)&#123;  </span><br><span class="line">                e.printStackTrace();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        System.out.println(sb);  </span><br><span class="line"><span class="keyword">return</span> address;  </span><br><span class="line">    &#125;  </span><br><span class="line"><span class="function">publicstaticvoid <span class="title">getIpconfig</span><span class="params">()</span></span>&#123;  </span><br><span class="line">        Map map = System.getenv();  </span><br><span class="line">        System.out.println(map.get(<span class="string">&quot;USERNAME&quot;</span>));<span class="comment">//获取用户名</span></span><br><span class="line">        System.out.println(map.get(<span class="string">&quot;COMPUTERNAME&quot;</span>));<span class="comment">//获取计算机名</span></span><br><span class="line">        System.out.println(map.get(<span class="string">&quot;USERDOMAIN&quot;</span>));<span class="comment">//获取计算机域名</span></span><br><span class="line">    &#125;  </span><br><span class="line"><span class="comment">//得到计算机的ip地址和mac地址</span></span><br><span class="line"><span class="function">publicstaticvoid <span class="title">getConfig</span><span class="params">()</span></span>&#123;  </span><br><span class="line"><span class="keyword">try</span>&#123;  </span><br><span class="line">            InetAddress address = InetAddress.getLocalHost();  </span><br><span class="line">            NetworkInterface ni = NetworkInterface.getByInetAddress(address);  </span><br><span class="line"><span class="comment">//ni.getInetAddresses().nextElement().getAddress();</span></span><br><span class="line"><span class="keyword">byte</span>[] mac = ni.getHardwareAddress();  </span><br><span class="line">            String sIP = address.getHostAddress();  </span><br><span class="line">            String sMAC = <span class="string">&quot;&quot;</span>;  </span><br><span class="line">            Formatter formatter = <span class="keyword">new</span> Formatter();  </span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mac.length; i++) &#123;  </span><br><span class="line">                sMAC = formatter.format(Locale.getDefault(), <span class="string">&quot;%02X%s&quot;</span>, mac[i],  </span><br><span class="line">                        (i &lt; mac.length - <span class="number">1</span>) ? <span class="string">&quot;-&quot;</span> : <span class="string">&quot;&quot;</span>).toString();  </span><br><span class="line">            &#125;  </span><br><span class="line">            System.out.println(<span class="string">&quot;IP：&quot;</span> + sIP);  </span><br><span class="line">            System.out.println(<span class="string">&quot;MAC：&quot;</span> + sMAC);  </span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line"><span class="comment">//得到计算机的ip,名称,操作系统名称,操作系统版本</span></span><br><span class="line"><span class="function">publicstaticvoid <span class="title">Config</span><span class="params">()</span></span>&#123;  </span><br><span class="line"><span class="keyword">try</span>&#123;  </span><br><span class="line">            InetAddress addr = InetAddress.getLocalHost();   </span><br><span class="line">            String ip=addr.getHostAddress().toString(); <span class="comment">//获取本机ip</span></span><br><span class="line">            String hostName=addr.getHostName().toString(); <span class="comment">//获取本机计算机名称</span></span><br><span class="line">            System.out.println(<span class="string">&quot;本机IP：&quot;</span>+ip+<span class="string">&quot;\n本机名称:&quot;</span>+hostName);  </span><br><span class="line">            Properties props=System.getProperties();  </span><br><span class="line">            System.out.println(<span class="string">&quot;操作系统的名称：&quot;</span>+props.getProperty(<span class="string">&quot;os.name&quot;</span>));  </span><br><span class="line">            System.out.println(<span class="string">&quot;操作系统的版本：&quot;</span>+props.getProperty(<span class="string">&quot;os.version&quot;</span>));   </span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line"><span class="comment">//java环境</span></span><br><span class="line"><span class="function">publicstaticvoid <span class="title">all</span><span class="params">()</span></span>&#123;  </span><br><span class="line">        Properties props=System.getProperties();  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java的运行环境版本：&quot;</span>+props.getProperty(<span class="string">&quot;java.version&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java的运行环境供应商：&quot;</span>+props.getProperty(<span class="string">&quot;java.vendor&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java供应商的URL：&quot;</span>+props.getProperty(<span class="string">&quot;java.vendor.url&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java的安装路径：&quot;</span>+props.getProperty(<span class="string">&quot;java.home&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java的虚拟机规范版本：&quot;</span>+props.getProperty(<span class="string">&quot;java.vm.specification.version&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java的虚拟机规范供应商：&quot;</span>+props.getProperty(<span class="string">&quot;java.vm.specification.vendor&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java的虚拟机规范名称：&quot;</span>+props.getProperty(<span class="string">&quot;java.vm.specification.name&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java的虚拟机实现版本：&quot;</span>+props.getProperty(<span class="string">&quot;java.vm.version&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java的虚拟机实现供应商：&quot;</span>+props.getProperty(<span class="string">&quot;java.vm.vendor&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java的虚拟机实现名称：&quot;</span>+props.getProperty(<span class="string">&quot;java.vm.name&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java运行时环境规范版本：&quot;</span>+props.getProperty(<span class="string">&quot;java.specification.version&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java运行时环境规范供应商：&quot;</span>+props.getProperty(<span class="string">&quot;java.specification.vender&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java运行时环境规范名称：&quot;</span>+props.getProperty(<span class="string">&quot;java.specification.name&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java的类格式版本号：&quot;</span>+props.getProperty(<span class="string">&quot;java.class.version&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;Java的类路径：&quot;</span>+props.getProperty(<span class="string">&quot;java.class.path&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;加载库时搜索的路径列表：&quot;</span>+props.getProperty(<span class="string">&quot;java.library.path&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;默认的临时文件路径：&quot;</span>+props.getProperty(<span class="string">&quot;java.io.tmpdir&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;一个或多个扩展目录的路径：&quot;</span>+props.getProperty(<span class="string">&quot;java.ext.dirs&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;操作系统的名称：&quot;</span>+props.getProperty(<span class="string">&quot;os.name&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;操作系统的构架：&quot;</span>+props.getProperty(<span class="string">&quot;os.arch&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;操作系统的版本：&quot;</span>+props.getProperty(<span class="string">&quot;os.version&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;文件分隔符：&quot;</span>+props.getProperty(<span class="string">&quot;file.separator&quot;</span>));<span class="comment">//在 unix 系统中是＂／＂ System.out.println(&quot;路径分隔符：&quot;+props.getProperty(&quot;path.separator&quot;));//在 unix 系统中是＂:＂ System.out.println(&quot;行分隔符：&quot;+props.getProperty(&quot;line.separator&quot;));//在 unix 系统中是＂/n＂ System.out.println(&quot;用户的账户名称：&quot;+props.getProperty(&quot;user.name&quot;));</span></span><br><span class="line">        System.out.println(<span class="string">&quot;用户的主目录：&quot;</span>+props.getProperty(<span class="string">&quot;user.home&quot;</span>));  </span><br><span class="line">        System.out.println(<span class="string">&quot;用户的当前工作目录：&quot;</span>+props.getProperty(<span class="string">&quot;user.dir&quot;</span>));  </span><br><span class="line">    &#125;  </span><br><span class="line"><span class="function">publicstaticvoid <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        all();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/JAVA%E8%8E%B7%E5%8F%96%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/RSA%E5%8A%A0%E5%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/RSA%E5%8A%A0%E5%AF%86/" class="post-title-link" itemprop="url">RSA加密</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-18 15:24:01" itemprop="dateCreated datePublished" datetime="2019-03-18T15:24:01+08:00">2019-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/" itemprop="url" rel="index"><span itemprop="name">工具类</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyFactory;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyPair;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyPairGenerator;</span><br><span class="line"><span class="keyword">import</span> java.security.PrivateKey;</span><br><span class="line"><span class="keyword">import</span> java.security.PublicKey;</span><br><span class="line"><span class="keyword">import</span> java.security.SecureRandom;</span><br><span class="line"><span class="keyword">import</span> java.security.Signature;</span><br><span class="line"><span class="keyword">import</span> java.security.spec.PKCS8EncodedKeySpec;</span><br><span class="line"><span class="keyword">import</span> java.security.spec.X509EncodedKeySpec;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.crypto.Cipher;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> net.sf.json.JSONObject;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.codec.binary.Base64;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecureMngr</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 数字签名，密钥算法</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String RSA_KEY_ALGORITHM = <span class="string">&quot;RSA&quot;</span>;</span><br><span class="line">	<span class="comment">// 数字签名签名/验证算法</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SIGNATURE_ALGORITHM = <span class="string">&quot;MD5withRSA&quot;</span>;</span><br><span class="line">	<span class="comment">//公钥，加密实际的密钥</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> String PUBLIC_KEY = PropertyLoader.getPropertyValue(<span class="string">&quot;secure.properties&quot;</span>, <span class="string">&quot;system.public.key&quot;</span>).trim();</span><br><span class="line">	<span class="comment">//私钥，解密实际的密钥</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> String PRIVATE_KEY = PropertyLoader.getPropertyValue(<span class="string">&quot;secure.properties&quot;</span>, <span class="string">&quot;system.private.key&quot;</span>).trim();</span><br><span class="line">	<span class="comment">//分段加密大小</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> MAX_ENCRYPT_BLOCK  = <span class="number">117</span>;</span><br><span class="line">	<span class="comment">//分段解密大小</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> MAX_DECRYPT_BLOCK = <span class="number">128</span>;</span><br><span class="line">	<span class="comment">//密钥大小</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> KEY_SIZE = <span class="number">1024</span>;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 初始化RSA密钥对</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@SuppressWarnings(&quot;unused&quot;)</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Map&lt;String, String&gt; <span class="title">initKey</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		KeyPairGenerator keygen = KeyPairGenerator.getInstance(RSA_KEY_ALGORITHM);</span><br><span class="line">		SecureRandom secrand = <span class="keyword">new</span> SecureRandom();</span><br><span class="line">		secrand.setSeed(<span class="string">&quot;gjlsj&quot;</span>.getBytes());<span class="comment">// 初始化随机产生器</span></span><br><span class="line">		keygen.initialize(KEY_SIZE, secrand); <span class="comment">// 初始化密钥生成器</span></span><br><span class="line">		KeyPair keys = keygen.genKeyPair();</span><br><span class="line">		String pub_key = <span class="keyword">new</span> String(Base64.encodeBase64(keys.getPublic().getEncoded()),<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">		String pri_key = <span class="keyword">new</span> String(Base64.encodeBase64(keys.getPrivate().getEncoded()),<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">		Map&lt;String, String&gt; keyMap = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</span><br><span class="line">		keyMap.put(PUBLIC_KEY, pub_key);</span><br><span class="line">		keyMap.put(PRIVATE_KEY, pri_key);</span><br><span class="line">		System.out.println(<span class="string">&quot;公钥：&quot;</span> + pub_key);</span><br><span class="line">		System.out.println(<span class="string">&quot;私钥：&quot;</span> + pri_key);</span><br><span class="line">		<span class="keyword">return</span> keyMap;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 数字签名</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">sign</span><span class="params">(<span class="keyword">byte</span>[] data, String pri_key)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">// 取得私钥</span></span><br><span class="line">		<span class="keyword">byte</span>[] pri_key_bytes = Base64.decodeBase64(pri_key.getBytes());</span><br><span class="line">		PKCS8EncodedKeySpec pkcs8KeySpec = <span class="keyword">new</span> PKCS8EncodedKeySpec(pri_key_bytes);</span><br><span class="line">		KeyFactory keyFactory = KeyFactory.getInstance(RSA_KEY_ALGORITHM);</span><br><span class="line">		<span class="comment">// 生成私钥</span></span><br><span class="line">		PrivateKey priKey = keyFactory.generatePrivate(pkcs8KeySpec);</span><br><span class="line">		<span class="comment">// 实例化Signature</span></span><br><span class="line">		Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);</span><br><span class="line">		<span class="comment">// 初始化Signature</span></span><br><span class="line">		signature.initSign(priKey);</span><br><span class="line">		<span class="comment">// 更新</span></span><br><span class="line">		signature.update(data);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> String(Base64.encodeBase64(signature.sign()),<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * RSA校验数字签名</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">verify</span><span class="params">(<span class="keyword">byte</span>[] data, <span class="keyword">byte</span>[] sign, String pub_key)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">// 转换公钥材料</span></span><br><span class="line">		<span class="comment">// 实例化密钥工厂</span></span><br><span class="line">		<span class="keyword">byte</span>[] pub_key_bytes = Base64.decodeBase64(pub_key.getBytes());</span><br><span class="line">		KeyFactory keyFactory = KeyFactory.getInstance(RSA_KEY_ALGORITHM);</span><br><span class="line">		<span class="comment">// 初始化公钥</span></span><br><span class="line">		<span class="comment">// 密钥材料转换</span></span><br><span class="line">		X509EncodedKeySpec x509KeySpec = <span class="keyword">new</span> X509EncodedKeySpec(pub_key_bytes);</span><br><span class="line">		<span class="comment">// 产生公钥</span></span><br><span class="line">		PublicKey pubKey = keyFactory.generatePublic(x509KeySpec);</span><br><span class="line">		<span class="comment">// 实例化Signature</span></span><br><span class="line">		Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);</span><br><span class="line">		<span class="comment">// 初始化Signature</span></span><br><span class="line">		signature.initVerify(pubKey);</span><br><span class="line">		<span class="comment">// 更新</span></span><br><span class="line">		signature.update(data);</span><br><span class="line">		<span class="comment">// 验证</span></span><br><span class="line">		<span class="keyword">return</span> signature.verify(sign);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 公钥加密</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> data 待加密数据</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> pub_key 公钥</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 密文</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception 抛出异常</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] encryptByPubKey(<span class="keyword">byte</span>[] data, <span class="keyword">byte</span>[] pub_key) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">		<span class="comment">// 取得公钥</span></span><br><span class="line">		X509EncodedKeySpec x509KeySpec = <span class="keyword">new</span> X509EncodedKeySpec(pub_key);</span><br><span class="line">		KeyFactory keyFactory = KeyFactory.getInstance(RSA_KEY_ALGORITHM);</span><br><span class="line">		PublicKey publicKey = keyFactory.generatePublic(x509KeySpec);</span><br><span class="line">		<span class="comment">// 对数据加密</span></span><br><span class="line">		Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());</span><br><span class="line">		cipher.init(Cipher.ENCRYPT_MODE, publicKey);</span><br><span class="line"><span class="comment">//		return cipher.doFinal(data);</span></span><br><span class="line">		</span><br><span class="line">        <span class="keyword">int</span> inputLen = data.length;</span><br><span class="line">        ByteArrayOutputStream out = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        <span class="keyword">int</span> offSet = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">byte</span>[] cache;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 对数据分段加密</span></span><br><span class="line">        <span class="keyword">while</span> (inputLen - offSet &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (inputLen - offSet &gt; MAX_ENCRYPT_BLOCK) &#123;</span><br><span class="line">                cache = cipher.doFinal(data, offSet, MAX_ENCRYPT_BLOCK);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cache = cipher.doFinal(data, offSet, inputLen - offSet);</span><br><span class="line">            &#125;</span><br><span class="line">            out.write(cache, <span class="number">0</span>, cache.length);</span><br><span class="line">            i++;</span><br><span class="line">            offSet = i * MAX_ENCRYPT_BLOCK;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">byte</span>[] encryptedData = out.toByteArray();</span><br><span class="line">        out.close();</span><br><span class="line">        <span class="keyword">return</span> encryptedData;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 公钥加密</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> data 待加密数据</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> pub_key 公钥</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 密文</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception 抛出异常</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encryptByPubKey</span><span class="params">(String data, String pub_key)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">// 私匙加密</span></span><br><span class="line">		<span class="keyword">byte</span>[] pub_key_bytes = Base64.decodeBase64(pub_key.getBytes());</span><br><span class="line">		<span class="keyword">byte</span>[] enSign = encryptByPubKey(data.getBytes(), pub_key_bytes);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> String(Base64.encodeBase64(enSign),<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 私钥解密</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> data 待解密数据</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> pri_key 私钥</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 明文</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception 抛出异常</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] decryptByPriKey(<span class="keyword">byte</span>[] data, <span class="keyword">byte</span>[] pri_key) <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">		<span class="comment">// 取得私钥</span></span><br><span class="line">		PKCS8EncodedKeySpec pkcs8KeySpec = <span class="keyword">new</span> PKCS8EncodedKeySpec(pri_key);</span><br><span class="line">		KeyFactory keyFactory = KeyFactory.getInstance(RSA_KEY_ALGORITHM);</span><br><span class="line">		PrivateKey privateKey = keyFactory.generatePrivate(pkcs8KeySpec);</span><br><span class="line">		<span class="comment">// 对数据解密</span></span><br><span class="line">		Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());</span><br><span class="line">		cipher.init(Cipher.DECRYPT_MODE, privateKey);</span><br><span class="line"><span class="comment">//		return cipher.doFinal(data);</span></span><br><span class="line">		 <span class="keyword">int</span> inputLen = data.length;</span><br><span class="line">        ByteArrayOutputStream out = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        <span class="keyword">int</span> offSet = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">byte</span>[] cache;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 对数据分段解密</span></span><br><span class="line">        <span class="keyword">while</span> (inputLen - offSet &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (inputLen - offSet &gt; MAX_DECRYPT_BLOCK) &#123;</span><br><span class="line">                cache = cipher.doFinal(data, offSet, MAX_DECRYPT_BLOCK);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cache = cipher.doFinal(data, offSet, inputLen - offSet);</span><br><span class="line">            &#125;</span><br><span class="line">            out.write(cache, <span class="number">0</span>, cache.length);</span><br><span class="line">            i++;</span><br><span class="line">            offSet = i * MAX_DECRYPT_BLOCK;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">byte</span>[] decryptedData = out.toByteArray();</span><br><span class="line">        out.close();</span><br><span class="line">        <span class="keyword">return</span> decryptedData;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 私钥解密</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> data 待解密数据</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> pri_key 私钥</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 明文</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception 抛出异常</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">decryptByPriKey</span><span class="params">(String data, String pri_key)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="comment">// 私匙解密</span></span><br><span class="line">		<span class="keyword">byte</span>[] pri_key_bytes = Base64.decodeBase64(pri_key.getBytes());</span><br><span class="line">		<span class="keyword">byte</span>[] design = decryptByPriKey(Base64.decodeBase64(data.getBytes()), pri_key_bytes);</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> String(design);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">    	<span class="comment">//106.3.145.72:49870</span></span><br><span class="line">    	String PUBLIC_KEY = PropertyLoader.getPropertyValue(<span class="string">&quot;secure.properties&quot;</span>, <span class="string">&quot;system.public.key&quot;</span>).trim();</span><br><span class="line">    	String PRIVATE_KEY = PropertyLoader.getPropertyValue(<span class="string">&quot;secure.properties&quot;</span>, <span class="string">&quot;system.private.key&quot;</span>).trim();</span><br><span class="line">    	String s1 = <span class="keyword">null</span>;</span><br><span class="line">    	String s2 = <span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    	<span class="keyword">try</span> &#123;</span><br><span class="line">			s1 = encryptByPubKey(<span class="string">&quot;测试数据&quot;</span>,PUBLIC_KEY);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">&quot;原始的明文数据为：&quot;</span>+<span class="string">&quot;测试数据&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;公钥加密后数据为：&quot;</span>+s1);</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			s2 = decryptByPriKey(s1,PRIVATE_KEY);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">&quot;私钥解密后数据为：&quot;</span>+s2);</span><br><span class="line">		String name = <span class="string">&quot;name&quot;</span>;</span><br><span class="line">		String y1 = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">boolean</span> y2 = <span class="keyword">true</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			y1 = sign(name.getBytes(),PRIVATE_KEY);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">&quot;私钥签名为：&quot;</span>+y1);</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			y2 = verify(name.getBytes(),Base64.decodeBase64(y1.getBytes()),PUBLIC_KEY);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">&quot;公钥验签为：&quot;</span>+y2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%B7%A5%E5%85%B7%E7%B1%BB/RSA%E5%8A%A0%E5%AF%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E9%9B%86%E5%90%88/Collection.sort%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1048,268 +1254,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">mysql特殊语法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-18 14:59:01" itemprop="dateCreated datePublished" datetime="2019-03-18T14:59:01+08:00">2019-03-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-查询mysql空间"><a href="#1-查询mysql空间" class="headerlink" title="1. 查询mysql空间"></a>1. 查询mysql空间</h1><ul>
-<li>数据库空间大小<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROUND</span>(<span class="keyword">SUM</span>(DATA_LENGTH/<span class="number">1024</span>/<span class="number">1024</span>),<span class="number">2</span>) <span class="keyword">FROM</span> INFORMATION_SCHEMA.TABLES <span class="keyword">WHERE</span> TABLE_SCHEMA=<span class="string">&#x27;SINO_DXP&#x27;</span> </span><br></pre></td></tr></table></figure></li>
-<li>数据表空间大小<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROUND</span>(<span class="keyword">SUM</span>(DATA_LENGTH/<span class="number">1024</span>/<span class="number">1024</span>),<span class="number">2</span>) <span class="keyword">FROM</span> INFORMATION_SCHEMA.TABLES <span class="keyword">WHERE</span> TABLE_SCHEMA=<span class="string">&#x27;SINO_DXP&#x27;</span> <span class="keyword">AND</span> TABLE_NAME=<span class="string">&#x27;DXP_INTERFACE_FIELD&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="2-mysql备份数据库"><a href="#2-mysql备份数据库" class="headerlink" title="2. mysql备份数据库"></a>2. mysql备份数据库</h1><ul>
-<li>全库备份<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -ppassword database &gt; /usr/backup/20180621/database.sql</span><br></pre></td></tr></table></figure></li>
-<li>单表备份<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u用户名 -p密码 数据库名 表名 <span class="comment">--where=&quot;筛选条件&quot; &gt; 导出文件路径</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="3-查询数据库中的表"><a href="#3-查询数据库中的表" class="headerlink" title="3. 查询数据库中的表"></a>3. 查询数据库中的表</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E7%89%B9%E6%AE%8A%E8%AF%AD%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-title-link" itemprop="url">数据库的概念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-18 14:59:01" itemprop="dateCreated datePublished" datetime="2019-03-18T14:59:01+08:00">2019-03-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>861</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="数据库是什么"><a href="#数据库是什么" class="headerlink" title="数据库是什么?"></a>数据库是什么?</h3><p>数据库（Database）是按照数据结构来组织、存储和管理数据的建立在计算机存储设备上的仓库。<br>    简单来说就是本身可视为电子化的文件柜——存储电子文件的处所，用户可以对文件中的数据进行新增、截取、更新、删除等操作。<br>    严格来说，数据库是长期存储在计算机内、可组织的、可共享的数据集合。数据库中的数据指的是以一定的数据模型组织、描述和存储在一起、尽可能小的冗余度、较高的数据独立性和易扩展性的特点并可在一定范围内为多个用户共享。这样的数据集合具有以下特点：尽可能不重复、以最优方式为某个特定组织的多种应用服务，其数据结构独立语使用他的应用程序，对数据的增删改查由统一软件进行管理和控制。<br>数据库是数据管理的高级阶段，它是由文件管理系统发展起来的。</p>
-<ol>
-<li><p>本质特征<br> 永久存储、有组织、可共享</p>
-</li>
-<li><p>目标特征<br> 较小的冗余度、较高的独立性、较好的扩展性</p>
-</li>
-<li><p>主要功能<br> 数据定义功能（DDL）、数据操纵功能（DML）、数据控制功能</p>
-</li>
-<li><p>数据模型的三要素</p>
-<ul>
-<li>数据结构、数据操作、数据完整性规则</li>
-</ul>
-</li>
-<li><p>数据类型<br> 层次模型、网状模型、关系模型</p>
-</li>
-<li><p>三级模式<br> 模式（逻辑模式）、外模式（子模式）、内模式（物理模式、存储模式）</p>
-</li>
-<li><p>二级映像<br> 模式到外模式的映像、内模式到模式的映像</p>
-</li>
-<li><p>关系操作语言<br> 关系代数、SQL、关系演算</p>
-</li>
-<li><p>关系的完整性<br> 实体完整性、参照完整性、用户自定义完整性</p>
-</li>
-<li><p>关系代数中传统的集合运算包括：并、交、差、积。</p>
-</li>
-<li><p>关系代数中专门的关系运算包括：选择、投影、连接、除。</p>
-</li>
-<li><p>两个实体之间的联系类型<br>一对一、一对多、多对多。</p>
-</li>
-<li><p>封锁的类型有：<br>排他锁（X锁）、共享锁（S锁）。</p>
-</li>
-<li><p>意向锁的种类<br>意向共享锁（IS）、意向排他锁（IX）。共享意向排他锁（SIX）。</p>
-</li>
-<li><p>数据依赖的类型有<br>函数依赖、多值依赖、连接依赖。</p>
-</li>
-<li><p>“不好”的关系模式存在的主要问题包括<br>插入异常、删除异常、较大的冗余。</p>
-</li>
-<li><p>在E-R图设计时，常用的三种抽象是：<br>分类、概括、聚集。</p>
-</li>
-<li><p>E-R图合并时，常见的三种冲突是：<br>属性冲突、命名冲突、结构冲突</p>
-</li>
-<li><p>数据库的存储控制包括：<br>自助存储控制、强制存储控制。</p>
-</li>
-<li><p>数据库的SQL语言中，授予权限的命令是：grant；</p>
-</li>
-<li><p>回收权限的命令是：revoke。 </p>
-</li>
-</ol>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/18/%E6%8A%80%E8%83%BD%E7%AF%87/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1379,7 +1323,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">364</span>
+          <span class="site-state-item-count">366</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1433,12 +1377,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">742k</span>
+    <span title="站点总字数">745k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:15</span>
+    <span title="站点阅读时长">11:17</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
