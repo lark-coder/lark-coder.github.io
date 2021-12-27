@@ -192,6 +192,220 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/06/17/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/J2EE%E5%9F%BA%E7%A1%80(github%E6%95%B4%E7%90%86)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/17/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/J2EE%E5%9F%BA%E7%A1%80(github%E6%95%B4%E7%90%86)/" class="post-title-link" itemprop="url">J2EE基础（github整理）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-17 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-17T00:00:00+08:00">2019-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Servlet总结"><a href="#Servlet总结" class="headerlink" title="Servlet总结"></a>Servlet总结</h1><p>在Java Web程序中，Servlet主要负责接收用户请求HttpServletRequest,在doGet(),doPost()中做相应的处理，并将回应HttpServletResponse反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用init()方法，销毁时调用destroy()方法。Servlet需要在web.xml中配置（MyEclipse中创建Servlet会自动配置），一个Servlet可以设置多个URL访问。Servlet不是线程安全，因此要谨慎使用类变量。</p>
+<h1 id="Servlet的优点"><a href="#Servlet的优点" class="headerlink" title="Servlet的优点:"></a>Servlet的优点:</h1><ol>
+<li>只需要启动一个操作系统进程以及加载一个JVM，大大降低了系统的开销</li>
+<li>如果多个请求需要做同样处理的时候，这时候只需要加载一个类，这也大大降低了开销</li>
+<li>所有动态加载的类可以实现对网络协议以及请求解码的共享，大大降低了工作量。</li>
+<li>Servlet能直接和Web服务器交互，而普通的CGI程序不能。Servlet还能在各个程序之间共享数据，使数据库连接池之类的功能很容易实现。</li>
+</ol>
+<h1 id="Servlet接口中有哪些方法及Servlet生命周期探秘"><a href="#Servlet接口中有哪些方法及Servlet生命周期探秘" class="headerlink" title="Servlet接口中有哪些方法及Servlet生命周期探秘"></a>Servlet接口中有哪些方法及Servlet生命周期探秘</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/06/17/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/J2EE%E5%9F%BA%E7%A1%80(github%E6%95%B4%E7%90%86)/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/06/17/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/%E5%87%A0%E7%A7%8D%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/17/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/%E5%87%A0%E7%A7%8D%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" class="post-title-link" itemprop="url">几种编程思想</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-17 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-17T00:00:00+08:00">2019-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="编程思想"><a href="#编程思想" class="headerlink" title="编程思想"></a>编程思想</h1><h2 id="面向过程：procedure-oriented-programming-POP"><a href="#面向过程：procedure-oriented-programming-POP" class="headerlink" title="面向过程：procedure oriented programming POP"></a>面向过程：procedure oriented programming POP</h2><p>面向过程（POP）是分析解决问题的步骤，然后用函数把这些步骤一步一步的实现，然后在使用的时候一一调用则可。</p>
+<h2 id="面向对象：object-oriented-programming-OOP"><a href="#面向对象：object-oriented-programming-OOP" class="headerlink" title="面向对象：object oriented programming OOP"></a>面向对象：object oriented programming OOP</h2><p>面向对象（OOP）是把构成问题的事务分解成各个对象，而建立对象的目的也不是为了完成一个个步骤，而是为了描述某个事物在解决整个问题的过程中所发生的行为。下面举一例说明面向过程和面向对象编程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/06/17/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/%E5%87%A0%E7%A7%8D%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/06/14/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E8%A5%BF%E6%96%B9%E5%93%B2%E5%AD%A6%E5%8F%B2%EF%BC%88%E5%8F%A4%E4%BB%A3%E5%93%B2%E5%AD%A6%EF%BC%89%E3%80%8B_%E4%BC%AF%E5%85%B0%E7%89%B9%E3%83%BB%E7%BD%97%E7%B4%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -978,248 +1192,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/06/01/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%BD%93%E5%B0%BC%E9%87%87%E5%93%AD%E6%B3%A3%E3%80%8B_%E6%AC%A7%E6%96%87%C2%B7%E4%BA%9A%E9%9A%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/01/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%BD%93%E5%B0%BC%E9%87%87%E5%93%AD%E6%B3%A3%E3%80%8B_%E6%AC%A7%E6%96%87%C2%B7%E4%BA%9A%E9%9A%86/" class="post-title-link" itemprop="url">《当尼采哭泣》_欧文·亚隆</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-01T00:00:00+08:00">2019-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 22:55:51" itemprop="dateModified" datetime="2020-09-05T22:55:51+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">阅读篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%98%85%E8%AF%BB%E7%AF%87/%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">阅读</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>《当尼采哭泣》的阅读摘录</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/06/01/%E9%98%85%E8%AF%BB%E7%AF%87/%E5%B7%B2%E8%AF%BB/%E3%80%8A%E5%BD%93%E5%B0%BC%E9%87%87%E5%93%AD%E6%B3%A3%E3%80%8B_%E6%AC%A7%E6%96%87%C2%B7%E4%BA%9A%E9%9A%86/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/05/30/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/spring%E6%A1%86%E6%9E%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/30/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/spring%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">spring框架</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-30 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-30T00:00:00+08:00">2019-05-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/" itemprop="url" rel="index"><span itemprop="name">spring</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Spring框架"><a href="#Spring框架" class="headerlink" title="Spring框架"></a>Spring框架</h1><h2 id="Spring的模块"><a href="#Spring的模块" class="headerlink" title="Spring的模块"></a>Spring的模块</h2><table>
-<thead>
-<tr>
-<th align="center">模块</th>
-<th align="left">功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Spring Core</td>
-<td align="left">Spring的核心，Spring的其他模块都依赖这个模块，主要提供IOC依赖注入功能</td>
-</tr>
-<tr>
-<td align="center">Spring Aspects</td>
-<td align="left">这个模块为AspectJ提供支撑</td>
-</tr>
-<tr>
-<td align="center">Spring AOP</td>
-<td align="left">提供了面向切面编程实现</td>
-</tr>
-<tr>
-<td align="center">Spring JDBC</td>
-<td align="left">java数据库链接</td>
-</tr>
-<tr>
-<td align="center">Spring JMS</td>
-<td align="left">java消息服务</td>
-</tr>
-<tr>
-<td align="center">Spring ORM</td>
-<td align="left">用于支持Hibernate等ORM工具</td>
-</tr>
-<tr>
-<td align="center">Spring Web</td>
-<td align="left">为创建Web应用程序提供支持</td>
-</tr>
-<tr>
-<td align="center">Spring Test</td>
-<td align="left">提供了Junit和TestNG测试的支持</td>
-</tr>
-</tbody></table>
-<h2 id="Spring-IOC和AOP的理解"><a href="#Spring-IOC和AOP的理解" class="headerlink" title="Spring IOC和AOP的理解"></a>Spring IOC和AOP的理解</h2><h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/05/30/%E6%8A%80%E8%83%BD%E7%AF%87/java/spring/spring%E6%A1%86%E6%9E%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1289,7 +1261,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">374</span>
+          <span class="site-state-item-count">376</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1343,12 +1315,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">779k</span>
+    <span title="站点总字数">782k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:48</span>
+    <span title="站点阅读时长">11:51</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>

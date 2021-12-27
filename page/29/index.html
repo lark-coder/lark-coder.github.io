@@ -192,6 +192,234 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%BC%82%E5%B8%B8/Error%20%E5%92%8C%20Exception/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%BC%82%E5%B8%B8/Error%20%E5%92%8C%20Exception/" class="post-title-link" itemprop="url">Error和Exception</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%BC%82%E5%B8%B8/" itemprop="url" rel="index"><span itemprop="name">异常</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-Error-和-Exception-区别是什么"><a href="#1-Error-和-Exception-区别是什么" class="headerlink" title="1. Error 和 Exception 区别是什么?"></a>1. Error 和 Exception 区别是什么?</h2><ul>
+<li>Error 类型的错误通常为虚拟机相关错误，如系统崩溃，内存不足，堆栈溢出等，编译器不会对这类错误进行检测，JAVA 应用程序也不应对这类错误进行捕获，一旦这类错误发生，通常应用程序会被终止，仅靠应用程序本身无法恢复；</li>
+<li>Exception 类的错误是可以在应用程序中进行捕获并处理的，通常遇到这种错误，应对其进行处理，使应用程序可以继续正常运行。</li>
+</ul>
+<h2 id="2-运行时异常和一般异常区别是什么？"><a href="#2-运行时异常和一般异常区别是什么？" class="headerlink" title="2. 运行时异常和一般异常区别是什么？"></a>2. 运行时异常和一般异常区别是什么？</h2><ul>
+<li>编译器不会对运行时异常进行检测，没有 try-catch，方法签名中也没有 throws 关键字声明，编译依然可以通过。如果出现了 RuntimeException, 那一定是程序员的错误。</li>
+<li>一般一场如果没有 try-catch，且方法签名中也没有用 throws 关键字声明可能抛出的异常，则编译无法通过。这类异常通常为应用环境中的错误，即外部错误，非应用程序本身错误，如文件找不到等。</li>
+</ul>
+<h2 id="3-NoClassDefFoundError-和-ClassNotFoundException-区别是什么？"><a href="#3-NoClassDefFoundError-和-ClassNotFoundException-区别是什么？" class="headerlink" title="3. NoClassDefFoundError 和 ClassNotFoundException 区别是什么？"></a>3. NoClassDefFoundError 和 ClassNotFoundException 区别是什么？</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E5%BC%82%E5%B8%B8/Error%20%E5%92%8C%20Exception/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/JDK%E5%90%84%E7%89%88%E6%9C%AC%E7%9A%84%E7%89%B9%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/JDK%E5%90%84%E7%89%88%E6%9C%AC%E7%9A%84%E7%89%B9%E6%80%A7/" class="post-title-link" itemprop="url">JDK各版本的特性</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="jdk1-5特性"><a href="#jdk1-5特性" class="headerlink" title="jdk1.5特性"></a>jdk1.5特性</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1、支持泛型</span></span><br><span class="line">    ArrayList list=<span class="keyword">new</span> ArrayList()------&gt;ArrayList&lt;Integer&gt;list=<span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line"><span class="comment">//2、自动装箱/拆箱</span></span><br><span class="line">    <span class="keyword">int</span> i=list.get(<span class="number">0</span>).parseInt();--------&gt;<span class="keyword">int</span> i=list.get(<span class="number">0</span>);原始类型与对应的包装类不用显式转换</span><br><span class="line"><span class="comment">//3、for-each</span></span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;i&lt;a.length;i++------------&gt;<span class="keyword">for</span>(<span class="keyword">int</span> i:a)&#123;......&#125;</span><br><span class="line"><span class="comment">//4、static import</span></span><br><span class="line">    Math.sqrt();---------------&gt;sqrt();</span><br><span class="line"><span class="comment">//5、变长参数</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> ...intlist)</span>有任意个参数,把他看作数组</span></span><br><span class="line"><span class="function"><span class="comment">//6、支持枚举</span></span></span><br><span class="line"><span class="function"><span class="comment">//7、注解</span></span></span><br><span class="line"><span class="function"><span class="comment">//协变返回类型：实际返回类型可以是要求的返回类型的一个子类型</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="jdk1-6特性"><a href="#jdk1-6特性" class="headerlink" title="jdk1.6特性"></a>jdk1.6特性</h1><ol>
+<li>AWT新增加了两个类:Desktop和SystemTray，其中前者用来通过系统默认程序来执行一个操作，如使用默认浏览器浏览指定的URL,用默认邮件客户端给指定的邮箱发邮件,用默认应用程序打开或编辑文件(比如,用记事本打开以txt为后缀名的文件),用系统默认的打印机打印文档等。后者可以用来在系统托盘区创建一个托盘程序</li>
+<li>使用JAXB2来实现对象与XML之间的映射，可以将一个Java对象转变成为XML格式，反之亦然</li>
+<li>StAX，一种利用拉模式解析(pull-parsing)XML文档的API。类似于SAX，也基于事件驱动模型。之所以将StAX加入到JAXP家族，是因为JDK6中的JAXB2和JAX-WS 2.0中都会用StAX。</li>
+<li>使用Compiler API，动态编译Java源文件，如JSP编译引擎就是动态的，所以修改后无需重启服务器。</li>
+<li>轻量级Http Server API，据此可以构建自己的嵌入式HttpServer,它支持Http和Https协议。</li>
+<li>插入式注解处理API(PluggableAnnotation Processing API)</li>
+<li>提供了Console类用以开发控制台程序，位于java.io包中。据此可方便与Windows下的cmd或Linux下的Terminal等交互。</li>
+<li>对脚本语言的支持如: ruby,groovy, javascript</li>
+<li>Common Annotations，原是J2EE 5.0规范的一部分，现在把它的一部分放到了J2SE 6.0中</li>
+<li>嵌入式数据库 Derby</li>
+</ol>
+<h1 id="jdk1-7特性"><a href="#jdk1-7特性" class="headerlink" title="jdk1.7特性"></a>jdk1.7特性</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/JDK%E5%90%84%E7%89%88%E6%9C%AC%E7%9A%84%E7%89%B9%E6%80%A7/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/instanceof/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1074,268 +1302,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E9%9B%86%E5%90%88/java%E9%9B%86%E5%90%88%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E9%9B%86%E5%90%88/java%E9%9B%86%E5%90%88%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Java集合相关问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E9%9B%86%E5%90%88/" itemprop="url" rel="index"><span itemprop="name">集合</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Set的底层："><a href="#Set的底层：" class="headerlink" title="Set的底层："></a>Set的底层：</h1><ol>
-<li>HashSet的性能总是比TreeSet好(特别是最常用的添加、查询元素等操作)，因为TreeSet需要额外的红黑树算法来维护集合元素的次序。只有当需要一个保持排序的Set时，才应该使用TreeSet，否则都应该使用HashSet</li>
-<li>对于普通的插入、删除操作，LinkedHashSet比HashSet要略慢一点，这是由维护链表所带来的开销造成的。不过，因为有了链表的存在，遍历LinkedHashSet会更快</li>
-<li>EnumSet是所有Set实现类中性能最好的，但它只能保存同一个枚举类的枚举值作为集合元素</li>
-<li>HashSet、TreeSet、EnumSet都是”线程不安全”的，通常可以通过Collections工具类的synchronizedSortedSet方法来”包装”该Set集合。<br>SortedSet s = Collections.synchronizedSortedSet(new TreeSet(…));</li>
-</ol>
-<h1 id="java基本的数据类型"><a href="#java基本的数据类型" class="headerlink" title="java基本的数据类型"></a>java基本的数据类型</h1><table>
-<thead>
-<tr>
-<th align="center">分类</th>
-<th align="center">基本类型</th>
-<th align="center">包装类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">字符型</td>
-<td align="center">char</td>
-<td align="center">Character</td>
-</tr>
-<tr>
-<td align="center">数值型</td>
-<td align="center">byte</td>
-<td align="center">Byte</td>
-</tr>
-<tr>
-<td align="center">数值型</td>
-<td align="center">short</td>
-<td align="center">Short</td>
-</tr>
-<tr>
-<td align="center">数值型</td>
-<td align="center">int</td>
-<td align="center">Integer</td>
-</tr>
-<tr>
-<td align="center">数值型</td>
-<td align="center">long</td>
-<td align="center">Long</td>
-</tr>
-<tr>
-<td align="center">数值型</td>
-<td align="center">float</td>
-<td align="center">Float</td>
-</tr>
-<tr>
-<td align="center">数值型</td>
-<td align="center">double</td>
-<td align="center">Double</td>
-</tr>
-<tr>
-<td align="center">布尔型</td>
-<td align="center">boolean</td>
-<td align="center">Boolean</td>
-</tr>
-</tbody></table>
-<h1 id="hashcode和equals"><a href="#hashcode和equals" class="headerlink" title="hashcode和equals"></a>hashcode和equals</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E9%9B%86%E5%90%88/java%E9%9B%86%E5%90%88%E9%97%AE%E9%A2%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/web/jquery/IE8%E4%B8%8BJquery%E7%94%9F%E6%88%90html%E6%8E%A7%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/web/jquery/IE8%E4%B8%8BJquery%E7%94%9F%E6%88%90html%E6%8E%A7%E4%BB%B6/" class="post-title-link" itemprop="url">IE8下Jquery生成html控件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/web/jquery/" itemprop="url" rel="index"><span itemprop="name">jquery</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>143</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="IE8下Jquery生成html控件"><a href="#IE8下Jquery生成html控件" class="headerlink" title="IE8下Jquery生成html控件"></a>IE8下Jquery生成html控件</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如果要支持IE8，必须这样写,不能合并到一起</span></span><br><span class="line"><span class="keyword">var</span> modalInfo=$(<span class="string">&quot;&lt;h4&gt;&quot;</span>);</span><br><span class="line">modalInfo.attr(<span class="string">&quot;style&quot;</span>,<span class="string">&quot;color:green;&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/web/jquery/IE8%E4%B8%8BJquery%E7%94%9F%E6%88%90html%E6%8E%A7%E4%BB%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1405,7 +1371,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">374</span>
+          <span class="site-state-item-count">376</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1459,12 +1425,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">779k</span>
+    <span title="站点总字数">782k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:48</span>
+    <span title="站点阅读时长">11:51</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
