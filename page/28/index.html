@@ -192,6 +192,109 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/Tomcat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/Tomcat/" class="post-title-link" itemprop="url">《荀子全鉴》</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:17" itemprop="dateModified" datetime="2020-09-05T17:10:17+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">工具篇</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>322</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="查看Tomcat的JVM内存"><a href="#查看Tomcat的JVM内存" class="headerlink" title="查看Tomcat的JVM内存"></a>查看Tomcat的JVM内存</h1><ol>
+<li><p>Tomcat6中没有设置任何默认用户，因而需要手动往Tomcat6的conf文件夹下的tomcat-users.xml文件中添加用户。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">&quot;manager&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">user</span> <span class="attr">username</span>=<span class="string">&quot;tomcat&quot;</span> <span class="attr">password</span>=<span class="string">&quot;tomcat&quot;</span> <span class="attr">roles</span>=<span class="string">&quot;manager&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 注：添加完需要重启Tomcat6。 --&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>访问<a target="_blank" rel="noopener" href="http://localhost:8080/manager/status%EF%BC%8C%E8%BE%93%E5%85%A5%E4%B8%8A%E9%9D%A2%E6%B7%BB%E5%8A%A0%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E5%AF%86%E7%A0%81%E3%80%82">http://localhost:8080/manager/status，输入上面添加的用户名和密码。</a></p>
+</li>
+<li><p>然后在下面的JVM下可以看到内存的使用情况。</p>
+</li>
+</ol>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/Tomcat/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E5%B7%A5%E5%85%B7%E7%AF%87/VScode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2469,457 +2572,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%B8%85%E5%8D%95%E7%AF%87/2018/2018%E7%94%B5%E5%BD%B1%E6%B8%85%E5%8D%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/01/%E6%B8%85%E5%8D%95%E7%AF%87/2018/2018%E7%94%B5%E5%BD%B1%E6%B8%85%E5%8D%95/" class="post-title-link" itemprop="url">2018电影清单</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B8%85%E5%8D%95%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">清单篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B8%85%E5%8D%95%E7%AF%87/2018/" itemprop="url" rel="index"><span itemprop="name">2018</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <table>
-<thead>
-<tr>
-<th align="center">序号</th>
-<th align="center">日期</th>
-<th align="center">国家</th>
-<th align="center">电影</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">01</td>
-<td align="center"></td>
-<td align="center">中国</td>
-<td align="center">《大护法》</td>
-</tr>
-<tr>
-<td align="center">02</td>
-<td align="center">2018/02/24</td>
-<td align="center">中国</td>
-<td align="center">《红海行动》</td>
-</tr>
-<tr>
-<td align="center">03</td>
-<td align="center">2018/02/24</td>
-<td align="center">中国</td>
-<td align="center">《捉妖记2》</td>
-</tr>
-<tr>
-<td align="center">04</td>
-<td align="center">2018/02/24</td>
-<td align="center">中国</td>
-<td align="center">《芳华》</td>
-</tr>
-<tr>
-<td align="center">05</td>
-<td align="center">2018/02/24</td>
-<td align="center">中国</td>
-<td align="center">《东邪西毒》</td>
-</tr>
-<tr>
-<td align="center">06</td>
-<td align="center">2018/03/03</td>
-<td align="center">中国</td>
-<td align="center">《奇门遁甲》</td>
-</tr>
-<tr>
-<td align="center">07</td>
-<td align="center">2018/03/03</td>
-<td align="center">中国</td>
-<td align="center">《妖猫传》</td>
-</tr>
-<tr>
-<td align="center">08</td>
-<td align="center">2018/03/03</td>
-<td align="center">中国</td>
-<td align="center">《万箭穿心》</td>
-</tr>
-<tr>
-<td align="center">09</td>
-<td align="center">2018/03/03</td>
-<td align="center">中国</td>
-<td align="center">《十二公民》</td>
-</tr>
-<tr>
-<td align="center">10</td>
-<td align="center">2018/03/03</td>
-<td align="center">中国</td>
-<td align="center">《百鸟朝凤》</td>
-</tr>
-<tr>
-<td align="center">11</td>
-<td align="center">2018/03/10</td>
-<td align="center">美国</td>
-<td align="center">《爱乐之城》</td>
-</tr>
-<tr>
-<td align="center">12</td>
-<td align="center">2018/03/10</td>
-<td align="center">法国</td>
-<td align="center">《放牛班的春天》</td>
-</tr>
-<tr>
-<td align="center">13</td>
-<td align="center">2018/03/10</td>
-<td align="center">中国</td>
-<td align="center">《风声》</td>
-</tr>
-<tr>
-<td align="center">14</td>
-<td align="center">2018/03/10</td>
-<td align="center">中国</td>
-<td align="center">《大明劫》</td>
-</tr>
-<tr>
-<td align="center">15</td>
-<td align="center">2018/03/10</td>
-<td align="center">中国</td>
-<td align="center">《一九四二》</td>
-</tr>
-<tr>
-<td align="center">16</td>
-<td align="center">2018/03/10</td>
-<td align="center">中国</td>
-<td align="center">《高考1977》</td>
-</tr>
-<tr>
-<td align="center">17</td>
-<td align="center">2018/03/10</td>
-<td align="center">美国</td>
-<td align="center">《忠犬八公的故事》</td>
-</tr>
-<tr>
-<td align="center">18</td>
-<td align="center">2018/03/17</td>
-<td align="center">美国</td>
-<td align="center">《与恐龙同行》</td>
-</tr>
-<tr>
-<td align="center">19</td>
-<td align="center">2018/03/17</td>
-<td align="center">德国</td>
-<td align="center">《窃听风暴》</td>
-</tr>
-<tr>
-<td align="center">20</td>
-<td align="center">2018/03/17</td>
-<td align="center">美国</td>
-<td align="center">《怦然心动》</td>
-</tr>
-<tr>
-<td align="center">21</td>
-<td align="center">2018/03/17</td>
-<td align="center">美国</td>
-<td align="center">《超脱》</td>
-</tr>
-<tr>
-<td align="center">22</td>
-<td align="center">2018/04/05</td>
-<td align="center">意大利</td>
-<td align="center">《天堂电影院》</td>
-</tr>
-<tr>
-<td align="center">23</td>
-<td align="center">2018/04/05</td>
-<td align="center">美国</td>
-<td align="center">《美国的故事》</td>
-</tr>
-<tr>
-<td align="center">24</td>
-<td align="center">2018/04/05</td>
-<td align="center">美国</td>
-<td align="center">《搏击俱乐部》</td>
-</tr>
-<tr>
-<td align="center">25</td>
-<td align="center">2018/04/06</td>
-<td align="center">中国</td>
-<td align="center">《饮食男女》</td>
-</tr>
-<tr>
-<td align="center">26</td>
-<td align="center">2018/04/06</td>
-<td align="center">丹麦</td>
-<td align="center">《狩猎》</td>
-</tr>
-<tr>
-<td align="center">27</td>
-<td align="center">2018/04/06</td>
-<td align="center">法国</td>
-<td align="center">《刺猬的优雅》</td>
-</tr>
-<tr>
-<td align="center">28</td>
-<td align="center">2018/04/15</td>
-<td align="center">美国</td>
-<td align="center">《两杆大烟枪》</td>
-</tr>
-<tr>
-<td align="center">29</td>
-<td align="center">2018/04/15</td>
-<td align="center">美国</td>
-<td align="center">《触不可及》</td>
-</tr>
-<tr>
-<td align="center">30</td>
-<td align="center">2018/04/21</td>
-<td align="center">中国</td>
-<td align="center">《心迷宫》</td>
-</tr>
-<tr>
-<td align="center">31</td>
-<td align="center">2018/04/21</td>
-<td align="center">中国</td>
-<td align="center">《驴得水》</td>
-</tr>
-<tr>
-<td align="center">32</td>
-<td align="center">2018/04/22</td>
-<td align="center">美国</td>
-<td align="center">《美国美人》</td>
-</tr>
-<tr>
-<td align="center">33</td>
-<td align="center">2018/04/22</td>
-<td align="center">德国</td>
-<td align="center">《香水：一个谋杀犯的故事》</td>
-</tr>
-<tr>
-<td align="center">34</td>
-<td align="center">2018/04/29</td>
-<td align="center">美国</td>
-<td align="center">《朗读者》</td>
-</tr>
-<tr>
-<td align="center">35</td>
-<td align="center">2018/04/29</td>
-<td align="center">中国</td>
-<td align="center">《唐人街探案2》</td>
-</tr>
-<tr>
-<td align="center">36</td>
-<td align="center">2018/05/06</td>
-<td align="center">意大利</td>
-<td align="center">《请以你的名字呼唤我》</td>
-</tr>
-<tr>
-<td align="center">37</td>
-<td align="center">2018/07/07</td>
-<td align="center">中国</td>
-<td align="center">《我不是药神》</td>
-</tr>
-<tr>
-<td align="center">38</td>
-<td align="center">2018/07/28</td>
-<td align="center">中国</td>
-<td align="center">《西虹市首富》</td>
-</tr>
-<tr>
-<td align="center">39</td>
-<td align="center">2018/09/01</td>
-<td align="center">中国</td>
-<td align="center">《狄仁杰之四大天王》</td>
-</tr>
-<tr>
-<td align="center">40</td>
-<td align="center">2018/09/01</td>
-<td align="center">美国</td>
-<td align="center">《蚁人2：黄蜂女现身》</td>
-</tr>
-<tr>
-<td align="center">41</td>
-<td align="center">2018/09/01</td>
-<td align="center">美国</td>
-<td align="center">《瞒天过海：美人计》</td>
-</tr>
-<tr>
-<td align="center">42</td>
-<td align="center">2018/09/02</td>
-<td align="center">中国</td>
-<td align="center">《一出好戏》</td>
-</tr>
-<tr>
-<td align="center">43</td>
-<td align="center">2018/09/08</td>
-<td align="center">美国</td>
-<td align="center">《死侍2》</td>
-</tr>
-<tr>
-<td align="center">44</td>
-<td align="center">2018/09/25</td>
-<td align="center">中国</td>
-<td align="center">《江湖儿女》</td>
-</tr>
-<tr>
-<td align="center">45</td>
-<td align="center">2018/10/03</td>
-<td align="center">中国</td>
-<td align="center">《影》</td>
-</tr>
-<tr>
-<td align="center">46</td>
-<td align="center">2018/10/03</td>
-<td align="center">中国</td>
-<td align="center">《追龙》</td>
-</tr>
-<tr>
-<td align="center">47</td>
-<td align="center">2018/10/04</td>
-<td align="center">中国</td>
-<td align="center">《无双》</td>
-</tr>
-<tr>
-<td align="center">48</td>
-<td align="center">2018/10/26</td>
-<td align="center">美国</td>
-<td align="center">《铁血战士3》</td>
-</tr>
-<tr>
-<td align="center">49</td>
-<td align="center">2018/11/24</td>
-<td align="center">美国</td>
-<td align="center">《毒液》</td>
-</tr>
-<tr>
-<td align="center">50</td>
-<td align="center">2018/12/16</td>
-<td align="center">中国</td>
-<td align="center">《李茶的姑妈》</td>
-</tr>
-<tr>
-<td align="center">51</td>
-<td align="center">2018/12/20</td>
-<td align="center">中国</td>
-<td align="center">《山河故人》</td>
-</tr>
-<tr>
-<td align="center">52</td>
-<td align="center">2018/12/22</td>
-<td align="center">美国</td>
-<td align="center">《夜魔侠》</td>
-</tr>
-<tr>
-<td align="center">53</td>
-<td align="center">2018/12/22</td>
-<td align="center">中国</td>
-<td align="center">《大佛普拉斯》</td>
-</tr>
-<tr>
-<td align="center">54</td>
-<td align="center">2018/12/22</td>
-<td align="center">中国</td>
-<td align="center">《无问西东》</td>
-</tr>
-<tr>
-<td align="center">55</td>
-<td align="center">2018/12/30</td>
-<td align="center">中国</td>
-<td align="center">《蜘蛛侠：平行宇宙》</td>
-</tr>
-<tr>
-<td align="center">56</td>
-<td align="center">2018/12/23</td>
-<td align="center">美国</td>
-<td align="center">《海王》</td>
-</tr>
-<tr>
-<td align="center">57</td>
-<td align="center">2018/12/23</td>
-<td align="center">日臻</td>
-<td align="center">《昼颜》</td>
-</tr>
-</tbody></table>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E6%B8%85%E5%8D%95%E7%AF%87/2018/2018%E7%94%B5%E5%BD%B1%E6%B8%85%E5%8D%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2989,7 +2641,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">388</span>
+          <span class="site-state-item-count">389</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -3043,12 +2695,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">803k</span>
+    <span title="站点总字数">804k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:10</span>
+    <span title="站点阅读时长">12:11</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
