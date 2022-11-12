@@ -192,6 +192,122 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/%E5%AF%B9Java%20%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="不登山峰，不显平地">
+      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="木刻的鱼儿的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/%E5%AF%B9Java%20%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">对Java 平台的理解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="经典回答"><a href="#经典回答" class="headerlink" title="经典回答"></a>经典回答</h1><ul>
+<li>Java语言是一种面向对象的高级语言，它最显著的有两个特性，一是通过平台中立的class文件格式和屏蔽底层硬件差异的jvm实现‘一次编写，到处运行’；二是通过‘垃圾收集器’管理内存的分配和回收。</li>
+<li>Java 是一种简单、严谨并且适合编写的语言，它不像C/C++ 那样有很多晦涩难懂的内容，如头文件、指针、结构等等。我们编写java 会接触到 JRE（Java Runtime Environment）或者 JDK（Java Development Kit）。 JRE，也就是 Java 运行环境，包含了JVM 和丰富的 Java 类库，比如集合，泛型，反射，并发，网络，IO/NIO等。而 JDK 可以作是 JRE 的一个超集，提供了更多工具，比如编译器、各种诊断工具等，让java 语言更加安全、健壮。还有更多第三方类库的支持，如spring、springmvc、mybatis等让java 非常适合开发。</li>
+<li>很多对Java 的影响是它很慢，因为它是解释执行。其实不是这样的，Java 是解释执行+编译执行混合型。一般JVM 是直接解释执行.class文件，当出现高频代码时JVM 会通过JIT 即时编译器把经常运行的代码作为”热点代码”编译与本地平台相关的机器码，并进行各种层次的优化。</li>
+</ul>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><ul>
+<li>Java是纯面向对象的语言。《Java编程思想》中提到Java语言是一种“Everything is object”的语言，它能够直接反映现实生活中的对象，例如车、动物等，因此通过它编写程序更容易。</li>
+<li>平台无关性。Java语言可以“一次编译，到处执行”。无论是在Windows平台还是在Linux、MacOS等其他平台上对Java程序进行编译，编译后的程序在其他平台上都可以运行。由于Java是解释性语言，编译器会将Java代码变成“中间代码”，然后在Java虚拟机（Java Virtual Machine，JVM）上解释执行。由于中间代码与平台无关，因此Java语言可以很好的跨平台执行，具有很好的可移植性。</li>
+<li>Java提供了很多内置的类库，通过这些类库，简化了开发人员的程序设计工作，同时缩短了项目的开发时间，例如，Java语言提供了对多线程的支持，提供了对网络通信的支持，最主要的是提供了垃圾回收器，这使得开发人员从内存的管理中解脱出来。</li>
+<li>提供了对Web应用开发的支持。例如，Applet、Servlet和JSP可以用来开发Web应用程序；Socket、RMI可以用来开发分布式应用程序。</li>
+<li>具有较好的安全性和健壮性。Java语言经常被用在网络环境中，为了增强程序的安全性，Java语言提供了一个防止恶意代码攻击的安全机制（数组边界检测和Bytecode校验等）。Java的强类型机制、垃圾回收器、异常处理和安全检查机制使得用Java语言编写的程序具有很好的健壮性。</li>
+<li>去除了C++语言中难以理解、容易混淆的特性，如头文件、指针、结构、单元、运算符重载、虚拟基础类、多重继承等，使得程序更加严谨简洁。</li>
+</ul>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/%E5%AF%B9Java%20%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%90%86%E8%A7%A3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/java/%E6%A6%82%E5%BF%B5/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1191,109 +1307,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.hudi.tech/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/web/jquery/%E6%9B%B4%E6%94%B9%E6%9F%90%E4%B8%AA%E7%B1%BB%E7%9A%84%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0%E7%9A%84%E5%80%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="不登山峰，不显平地">
-      <meta itemprop="description" content="木鱼者，相传云，鱼昼夜常醒，刻木像形击之，所以警昏情也。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="木刻的鱼儿的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/web/jquery/%E6%9B%B4%E6%94%B9%E6%9F%90%E4%B8%AA%E7%B1%BB%E7%9A%84%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0%E7%9A%84%E5%80%BC/" class="post-title-link" itemprop="url">更改某个类的所有元素的值</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-09-05 17:10:18" itemprop="dateModified" datetime="2020-09-05T17:10:18+08:00">2020-09-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/" itemprop="url" rel="index"><span itemprop="name">技能篇</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/web/" itemprop="url" rel="index"><span itemprop="name">web</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E8%83%BD%E7%AF%87/web/jquery/" itemprop="url" rel="index"><span itemprop="name">jquery</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>87</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="更改某个类的所有元素的值"><a href="#更改某个类的所有元素的值" class="headerlink" title="更改某个类的所有元素的值"></a>更改某个类的所有元素的值</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;.cwrq&#x27;</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     $(<span class="built_in">this</span>).html(“要改成的值”);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/%E6%8A%80%E8%83%BD%E7%AF%87/web/jquery/%E6%9B%B4%E6%94%B9%E6%9F%90%E4%B8%AA%E7%B1%BB%E7%9A%84%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0%E7%9A%84%E5%80%BC/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1363,7 +1376,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">389</span>
+          <span class="site-state-item-count">390</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1417,12 +1430,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">804k</span>
+    <span title="站点总字数">806k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:11</span>
+    <span title="站点阅读时长">12:13</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
